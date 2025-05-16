@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head> 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>MBTI测试 - 智能导航</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+
+  <!-- 头部导航 -->
+  <header class="fixed w-full bg-white bg-opacity-95 shadow z-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <a href="index.html" class="flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="16" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12.01" y2="8" />
+          </svg>
+          <span class="ml-2 text-xl font-bold text-gray-900">智能MBTI</span>
+        </a>
+        <div class="hidden md:flex space-x-8">
+          <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
+          <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600">小问答</a>
+          <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600">冷知识</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每日启发</a>
+          <a href="pricing.html" class="text-blue-600 font-semibold" aria-current="page">套餐价格</a></li>
+          <a href="aboutus.html" class="text-gray-600 hover:text-blue-600">关于我们</a>
+          <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">开始测试</a>
+        </div>
+        <button id="mobile-menu-button" class="md:hidden text-gray-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+      <div class="md:hidden hidden pb-4" id="mobile-menu">
+        <nav class="flex flex-col space-y-2">
+          <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
+          <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600">小问答</a>
+          <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600">冷知识</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每日启发</a>
+          <a href="pricing.html" class="text-blue-600 font-semibold" aria-current="page">套餐价格</a></li>
+          <a href="aboutus.html" class="text-gray-600 hover:text-blue-600">关于我们</a>
+          <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">开始测试</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- 套餐价格内容 -->
+ <main id="pricing" class="pt-32 pb-20 bg-gray-50">
+  <div class="container mx-auto px-4 max-w-7xl">
+    <h2 class="text-3xl font-bold text-center text-gray-900 mb-4">探索你的性格密码 🔍</h2>
+    <p class="text-center text-gray-600 mb-10 max-w-2xl mx-auto text-lg">
+      我们的MBTI测试采用国际权威模型，分为多个层级，适配不同需求。基础版为您提供免费的初步探索，进阶和专业版则包含更丰富的问题、更准确的算法匹配和更深度的报告解读。为了维持平台的运行与持续优化，我们为高阶服务设置了象征性收费。
+    </p>
+
+    <div class="grid gap-8 md:grid-cols-3">
+      <!-- 基础套餐 -->
+      <div class="bg-white rounded-lg shadow p-6 border border-gray-200">
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">基础体验</h3>
+        <p class="text-gray-600 mb-4">快速了解自己的MBTI类型，适合初学者。</p>
+        <div class="text-3xl font-bold text-green-500 mb-2">免费</div>
+        <p class="text-sm text-gray-500 mb-6">共 40 道问题</p>
+        <ul class="text-gray-600 space-y-2 mb-6">
+          <li>✓ 简洁版 MBTI 测试</li>
+          <li>✓ 初步类型识别</li>
+          <li>✓ 快速结果展示</li>
+          <li>✗ 个性分析报告</li>
+          <li>✗ 情感与职涯建议</li>
+        </ul>
+        <a href="test.html" class="block bg-green-500 text-white text-center py-2 rounded hover:bg-green-600">开始免费测试</a>
+      </div>
+
+      <!-- 高级套餐 -->
+      <!-- 进阶洞察（添加最受欢迎） -->
+      <div class="bg-white rounded-lg shadow-lg border-2 border-blue-600 p-6 transform scale-105 relative">
+        <!-- 最受欢迎标签 -->
+        <div class="absolute top-4 right-4 bg-blue-600 text-white text-sm sm:text-base font-bold px-3 py-1 rounded-full shadow-lg z-10">
+          🌟 最受欢迎
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">进阶洞察</h3>
+        <p class="text-gray-600 mb-4">深入探索你的行为模式与社交风格。</p>
+        <div class="text-3xl font-bold text-blue-600 mb-2">¥25</div>
+        <p class="text-sm text-gray-500 mb-6">共 70 道问题</p>
+        <ul class="text-gray-600 space-y-2 mb-6">
+          <li>✓ 完整 MBTI 测试流程</li>
+          <li>✓ 类型维度剖析</li>
+          <li>✓ 情感、沟通、社交建议</li>
+          <li>✓ 专属成长报告</li>
+        </ul>
+        <a href="test.html" class="block bg-blue-600 text-white text-center py-2 rounded hover:bg-blue-700">购买测试</a>
+      </div>
+
+
+      <!-- 全面套餐 -->
+      <div class="bg-white rounded-lg shadow p-6 border border-gray-200">
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">专业定制</h3>
+        <p class="text-gray-600 mb-4">精准识别潜能与成长方向，适合重度探索者。</p>
+        <div class="text-3xl font-bold text-blue-600 mb-2">¥60</div>
+        <p class="text-sm text-gray-500 mb-6">共 100 道问题</p>
+        <ul class="text-gray-600 space-y-2 mb-6">
+          <li>✓ 高精度 MBTI 测试系统</li>
+          <li>✓ 全方位性格分析报告</li>
+          <li>✓ 个性化成长建议</li>
+          <li>✓ 职业、人际、情感配对推荐</li>
+        </ul>
+        <a href="test.html" class="block bg-blue-600 text-white text-center py-2 rounded hover:bg-blue-700">购买测试</a>
+      </div>
+    </div>
+
+    <!-- 加强可信度说明 -->
+    <div class="mt-16 max-w-4xl mx-auto text-center">
+      <h3 class="text-2xl font-semibold text-gray-900 mb-4">为什么我们的MBTI值得信赖？</h3>
+      <p class="text-gray-600 text-lg mb-4">
+        MBTI（Myers-Briggs Type Indicator）被全球数千家公司、心理学家、教育机构广泛应用。本平台结合了经典理论与现代算法，覆盖16种性格类型，并提供个性化建议，帮助你在情感、职场与成长中找到真正适合你的路径。
+      </p>
+      <p class="text-gray-500 text-sm">
+        收费用于支持平台算法优化、内容研发和服务器运行，感谢每一位支持我们的人。
+      </p>
+    </div>
+  </div>
+</main>
+
+
+  <!-- 页脚简化版 Footer -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <div class="flex items-center justify-center mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span class="ml-2 text-lg font-bold">智能导航</span>
+      </div>
+      <p class="text-gray-400 mb-4">
+        探索自我，发现潜能，引领未来方向。
+      </p>
+      <div class="border-t border-gray-800 pt-4">
+        <div class="text-gray-400">
+          &copy; 2025 智能导航 - 专业MBTI测试. 保留所有权利.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="src/js/main.js"></script>
+  <script src="src/js/test.js"></script>
+  <script src="src/js/share.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</body>
+</html>
