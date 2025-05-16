@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>智能MBTI - 专业MBTI人格测试</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+
+  <!-- 头部导航 -->
+  <header class="fixed w-full bg-white bg-opacity-95 shadow-sm z-50 transition duration-300">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center">
+          <a href="index.html" class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span class="ml-2 text-xl font-bold text-gray-900">智能MBTI</span>
+          </a>
+        </div>
+        <div class="md:hidden">
+          <button type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none" id="mobile-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+        <nav class="hidden md:flex justify-center items-center space-x-8">
+          <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
+          <a href="mbtiqa.html" class="text-blue-600 font-semibold transition-colors">小问答</a>
+          <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600 transition-colors">冷知识</a>
+          <a href="dailytips" class="text-gray-600 hover:text-blue-600 transition-colors">每日启发</a>
+          <a href="price.html" class="text-gray-600 hover:text-blue-600 transition-colors">套餐价格</a>
+          <a href="aboutus.html" class="text-gray-600 hover:text-blue-600 transition-colors">关于我们</a>
+          <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">开始测试</a>
+        </nav>
+      </div>
+
+      <div class="md:hidden hidden bg-white pb-4" id="mobile-menu">
+        <nav class="flex flex-col space-y-4">
+          <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
+          <a href="mbtiqa.html" class="text-blue-600 font-semibold transition-colors">小问答</a>
+          <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600 transition-colors">冷知识</a>
+          <a href="dailytips" class="text-gray-600 hover:text-blue-600 transition-colors">每日启发</a>
+          <a href="price.html" class="text-gray-600 hover:text-blue-600 transition-colors">套餐价格</a>
+          <a href="#aboutus.html" class="text-gray-600 hover:text-blue-600 transition-colors">关于我们</a>
+          <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-center">开始测试</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- mbtiCard内容 -->
+
+<main class="pt-32 flex flex-col items-center min-h-screen px-4">
+  <!-- Mojo风格笑脸带小手 -->
+  <div class="mb-4">
+    <svg class="w-24 h-24 text-yellow-400" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- 脸部圆形 -->
+      <circle cx="32" cy="32" r="30" fill="#FFEB3B" stroke="#FBC02D" stroke-width="2" />
+      <!-- 眼睛 -->
+      <circle cx="22" cy="24" r="3" fill="#333" />
+      <circle cx="42" cy="24" r="3" fill="#333" />
+      <!-- 微笑 -->
+      <path d="M20 38 C28 48, 36 48, 44 38" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <!-- 小手 -->
+      <circle cx="10" cy="44" r="5" fill="#FFEB3B" stroke="#FBC02D" stroke-width="2"/>
+      <circle cx="54" cy="44" r="5" fill="#FFEB3B" stroke="#FBC02D" stroke-width="2"/>
+    </svg>
+  </div>
+
+  <!-- 提示语 -->
+  <div class="text-xl text-blue-700 font-semibold mb-6 text-center">
+    总有一款让你开怀大笑的哦！笑一笑，少烦恼！
+  </div>
+
+  <!-- MBTI 趣味卡片 -->
+  <div class="bg-blue-50 border border-blue-100 rounded-2xl shadow-lg p-8 w-full max-w-xl min-h-[360px] text-center">
+    <div class="text-base text-blue-700 font-medium mb-3" id="tag">INTJ | N型 | T型</div>
+    <div class="text-2xl font-bold text-gray-800 mb-4" id="title">你以为 INTJ 都是冷酷的机器人？</div>
+    <div class="text-lg text-gray-700 mb-4" id="description">其实他们只是在思考如何统治世界，顺便忘了回复你的消息。</div>
+    <div class="text-sm text-gray-600 italic mb-6" id="extra">📌 趣味补充：他们的表情包只有一个，就是“冷漠脸”。</div>
+    <button onclick="nextCard()" class="bg-blue-600 text-white px-5 py-2 text-base rounded hover:bg-blue-700 transition">
+      再来一个笑话吧！
+    </button>
+  </div>
+</main>
+
+
+  <script>
+    const cards = [
+      {
+        tag: "INTJ | N型 | T型",
+        title: "你以为 INTJ 都不讲人情吗？",
+        description: "其实他们只是更愿意通过行动表达关心，不喜欢空口承诺。",
+        extra: "📌 趣味补充：据说他们的“冷静脸”后面，其实藏着100种关心你的方式。",
+              },
+      {
+        tag: "ISTJ | S型 | T型",
+        title: "你以为 ISTJ 都墨守成规？",
+        description: "其实他们喜欢在秩序中挑战效率极限，流程狂魔上线！",
+        extra: "📌 趣味补充：“效率强迫症”是他们的超能力，自动排队系统可能就是他们提案的！",
+              },
+      {
+        tag: "ENFP | N型 | F型",
+        title: "你觉得 ENFP 总是三分钟热度？",
+        description: "其实当他们认定一件事，就会用 100 种创意坚持到底！",
+        extra: "📌 趣味补充：他们的桌面可能一团乱，但脑袋里常有惊艳的火花！",
+      },
+{
+  tag: "INFP | N型 | F型",
+  title: "你觉得 INFP 太感性？",
+  description: "其实他们很多时候比谁都清楚现实，只是选择了温柔以待。",
+  extra: "📌 趣味补充：内心像一座图书馆，温柔与思辨并存。",
+},
+{
+  tag: "ENTJ | N型 | T型",
+  title: "你以为 ENTJ 都只想掌控？",
+  description: "其实他们更想让每个人都发挥最大潜能，一起进步。",
+  extra: "📌 趣味补充：他们是天然的“时间管理大师”和任务拆解狂。",
+},
+{
+  tag: "ESFP | S型 | F型",
+  title: "你以为 ESFP 只是爱玩？",
+  description: "其实他们是情绪高手，总能读懂房间的氛围带动气氛。",
+  extra: "📌 趣味补充：他们比你更知道如何缓解社交冷场。",
+},
+{
+  tag: "ISTP | S型 | T型",
+  title: "你觉得 ISTP 不爱说话？",
+  description: "其实他们在用手解决世界的问题，从修灯到改代码。",
+  extra: "📌 趣味补充：用沉默写代码，用行动拆机器。",
+},
+{
+  tag: "ENFJ | N型 | F型",
+  title: "你以为 ENFJ 只是“好好先生”？",
+  description: "其实他们常是关键推动者，把理想变为现实。",
+  extra: "📌 趣味补充：总是“刚柔并济”，最擅长团结异类。",
+},
+{
+  tag: "ISFP | S型 | F型",
+  title: "你以为 ISFP 害羞寡言？",
+  description: "其实他们在艺术中表达情感，一笔一色都藏着心事。",
+  extra: "📌 趣味补充：他们是“视觉情感家”，灵魂藏在色彩和旋律中。",
+},
+{
+  tag: "ESTJ | S型 | T型",
+  title: "你觉得 ESTJ 都是“规则控”？",
+  description: "其实他们是秩序创造者，让混乱变清晰、让效率成习惯。",
+  extra: "📌 趣味补充：Excel 是他们的语言，会议是他们的战场。",
+}
+    ];
+
+    let index = 0;
+
+    function nextCard() {
+      index = (index + 1) % cards.length;
+      const card = cards[index];
+      document.getElementById("tag").textContent = card.tag;
+      document.getElementById("title").textContent = card.title;
+      document.getElementById("description").textContent = card.description;
+      document.getElementById("extra").textContent = card.extra;
+      document.getElementById("image").src = card.image;
+    }
+  </script>
+
+<footer class="bg-gray-900 text-white py-8">
+  <div class="container mx-auto px-4 text-center">
+    <div class="flex items-center justify-center mb-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="16" x2="12" y2="12"></line>
+        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+      </svg>
+      <span class="ml-2 text-lg font-bold">智能导航</span>
+    </div>
+    <p class="text-gray-400 mb-4">
+      探索自我，发现潜能，引领未来方向。
+    </p>
+    <div class="border-t border-gray-800 pt-4">
+      <div class="text-gray-400">
+        &copy; 2025 智能导航 - 专业MBTI测试. 保留所有权利.
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>

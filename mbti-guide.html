@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>MBTI指南 - 智能MBTI</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+  <!-- 头部导航 -->
+  <header class="fixed w-full bg-white bg-opacity-95 shadow-sm z-50 transition duration-300">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center">
+          <a href="index.html" class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span class="ml-2 text-xl font-bold text-gray-900">智能MBTI</span>
+          </a>
+        </div>
+        
+        <nav class="hidden md:flex space-x-8">
+          <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
+          <a href="test.html" class="text-gray-600 hover:text-blue-600 transition-colors">开始测试</a>
+          <a href="career-development.html" class="text-gray-600 hover:text-blue-600 transition-colors">职业发展</a>
+          <a href="personality-types.html" class="text-gray-600 hover:text-blue-600 transition-colors">性格类型详解</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主要内容 -->
+  <main class="pt-24 pb-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-8">MBTI指南</h1>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- 左侧导航 -->
+        <div class="md:col-span-1">
+          <div class="bg-white rounded-lg shadow-md p-6 sticky top-24">
+            <h2 class="text-xl font-semibold mb-4">目录</h2>
+            <nav class="space-y-2">
+              <a href="#introduction" class="block text-gray-600 hover:text-blue-600">MBTI简介</a>
+              <a href="#history" class="block text-gray-600 hover:text-blue-600">历史发展</a>
+              <a href="#theory" class="block text-gray-600 hover:text-blue-600">理论基础</a>
+              <a href="#dimensions" class="block text-gray-600 hover:text-blue-600">四个维度</a>
+              <a href="#applications" class="block text-gray-600 hover:text-blue-600">应用领域</a>
+              <a href="#research" class="block text-gray-600 hover:text-blue-600">研究发现</a>
+            </nav>
+          </div>
+        </div>
+        
+        <!-- 主要内容 -->
+        <div class="md:col-span-2">
+          <div class="space-y-12">
+            <section id="introduction">
+              <h2 class="text-2xl font-bold text-gray-900 mb-4">MBTI简介</h2>
+              <div class="prose max-w-none">
+                <p class="text-gray-600 leading-relaxed mb-4">
+                  MBTI（迈尔斯-布里格斯类型指标）是一个基于荣格类型学理论的性格评估工具。它帮助人们更好地理解自己和他人的性格特点，从而改善沟通、提高工作效率和增进人际关系。
+                </p>
+                <p class="text-gray-600 leading-relaxed">
+                  通过评估个人在四个维度上的偏好，MBTI可以识别出16种不同的性格类型，每种类型都有其独特的特点和发展潜力。
+                </p>
+              </div>
+            </section>
+            
+            <section id="history">
+              <h2 class="text-2xl font-bold text-gray-900 mb-4">历史发展</h2>
+              <div class="prose max-w-none">
+                <p class="text-gray-600 leading-relaxed mb-4">
+                  MBTI由凯瑟琳·库克·布里格斯和伊莎贝尔·布里格斯·迈尔斯母女在二战期间开发。她们的工作基于卡尔·荣格的心理类型理论，旨在帮助人们更好地理解自己和他人。
+                </p>
+                <p class="text-gray-600 leading-relaxed">
+                  自1940年代首次发布以来，MBTI已经经过多次修订和完善，成为全球最广泛使用的性格评估工具之一。
+                </p>
+              </div>
+            </section>
+            
+            <section id="theory">
+              <h2 class="text-2xl font-bold text-gray-900 mb-4">理论基础</h2>
+              <div class="prose max-w-none">
+                <p class="text-gray-600 leading-relaxed mb-4">
+                  MBTI的核心理念是人们的行为看似随机，实际上是有规律可循的。每个人都有自己偏好的感知和判断方式，这些偏好形成了相对稳定的性格模式。
+                </p>
+                <p class="text-gray-600 leading-relaxed">
+                  MBTI不是用来评判好坏，而是帮助人们认识到每个人都有其独特的优势和发展空间。
+                </p>
+              </div>
+            </section>
+            
+            <section id="dimensions">
+              <h2 class="text-2xl font-bold text-gray-900 mb-4">四个维度</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                  <h3 class="text-xl font-semibold mb-3">外向 (E) vs 内向 (I)</h3>
+                  <p class="text-gray-600">关注能量的来源和方向。外向者从外部世界获取能量，内向者从内心世界获取能量。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                  <h3 class="text-xl font-semibold mb-3">感觉 (S) vs 直觉 (N)</h3>
+                  <p class="text-gray-600">信息收集的方式。感觉型关注具体细节和现实，直觉型关注可能性和未来。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                  <h3 class="text-xl font-semibold mb-3">思考 (T) vs 情感 (F)</h3>
+                  <p class="text-gray-600">决策的依据。思考型基于逻辑和客观分析，情感型考虑人际关系和价值观。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                  <h3 class="text-xl font-semibold mb-3">判断 (J) vs 感知 (P)</h3>
+                  <p class="text-gray-600">生活方式的偏好。判断型喜欢计划和组织，感知型偏好灵活和适应。</p>
+                </div>
+              </div>
+            </section>
+            
+            <section id="applications">
+              <h2 class="text-2xl font-bold text-gray-900 mb-4">应用领域</h2>
+              <div class="prose max-w-none">
+                <ul class="space-y-4 text-gray-600">
+                  <li>
+                    <strong class="text-gray-900">职业发展：</strong>
+                    帮助个人找到适合的职业方向和工作环境。
+                  </li>
+                  <li>
+                    <strong class="text-gray-900">团队建设：</strong>
+                    提高团队成员间的理解和协作。
+                  </li>
+                  <li>
+                    <strong class="text-gray-900">教育指导：</strong>
+                    帮助学生了解自己的学习风格和发展方向。
+                  </li>
+                  <li>
+                    <strong class="text-gray-900">人际关系：</strong>
+                    改善沟通和理解，建立更好的人际关系。
+                  </li>
+                  <li>
+                    <strong class="text-gray-900">个人成长：</strong>
+                    认识自己的优势和潜在发展空间。
+                  </li>
+                </ul>
+              </div>
+            </section>
+            
+            <section id="research">
+              <h2 class="text-2xl font-bold text-gray-900 mb-4">研究发现</h2>
+              <div class="prose max-w-none">
+                <p class="text-gray-600 leading-relaxed mb-4">
+                  近年来的研究表明，MBTI类型与职业成功、团队效能和个人满意度等多个方面都有显著相关。研究发现不同性格类型在特定领域往往表现出独特的优势。
+                </p>
+                <div class="bg-blue-50 p-6 rounded-lg">
+                  <h3 class="text-lg font-semibold text-gray-900 mb-3">主要研究发现：</h3>
+                  <ul class="space-y-2 text-gray-600">
+                    <li>• 性格类型与职业选择的相关性达到70%以上</li>
+                    <li>• 团队多样性对创新和问题解决能力有积极影响</li>
+                    <li>• 了解自己的性格类型有助于提高工作满意度</li>
+                    <li>• 不同性格类型的沟通方式差异显著</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-gray-400">
+        &copy; 2025 智能MBTI - 专业MBTI测试. 保留所有权利.
+      </p>
+    </div>
+  </footer>
+
+  <script src="src/js/main.js"></script>
+</body>
+</html>

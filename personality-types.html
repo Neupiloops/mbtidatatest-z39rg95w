@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>性格类型详解 - 智能MBTI</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+  <!-- 头部导航 -->
+  <header class="fixed w-full bg-white bg-opacity-95 shadow-sm z-50 transition duration-300">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center">
+          <a href="index.html" class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span class="ml-2 text-xl font-bold text-gray-900">智能MBTI</span>
+          </a>
+        </div>
+        
+        <nav class="hidden md:flex space-x-8">
+          <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
+          <a href="test.html" class="text-gray-600 hover:text-blue-600 transition-colors">开始测试</a>
+          <a href="mbti-guide.html" class="text-gray-600 hover:text-blue-600 transition-colors">MBTI指南</a>
+          <a href="career-development.html" class="text-gray-600 hover:text-blue-600 transition-colors">职业发展</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主要内容 -->
+  <main class="pt-24 pb-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-8">16种性格类型详解</h1>
+      
+      <!-- 性格类型分类 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <!-- 分析家型 (NT) -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h2 class="text-xl font-bold text-gray-900 mb-4">分析家型 (NT)</h2>
+          <ul class="space-y-3">
+            <li>
+              <a href="#INTJ" class="text-blue-600 hover:text-blue-800">
+                INTJ - 建筑师
+              </a>
+            </li>
+            <li>
+              <a href="#INTP" class="text-blue-600 hover:text-blue-800">
+                INTP - 逻辑学家
+              </a>
+            </li>
+            <li>
+              <a href="#ENTJ" class="text-blue-600 hover:text-blue-800">
+                ENTJ - 指挥官
+              </a>
+            </li>
+            <li>
+              <a href="#ENTP" class="text-blue-600 hover:text-blue-800">
+                ENTP - 辩论家
+              </a>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- 外交家型 (NF) -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h2 class="text-xl font-bold text-gray-900 mb-4">外交家型 (NF)</h2>
+          <ul class="space-y-3">
+            <li>
+              <a href="#INFJ" class="text-blue-600 hover:text-blue-800">
+                INFJ - 提倡者
+              </a>
+            </li>
+            <li>
+              <a href="#INFP" class="text-blue-600 hover:text-blue-800">
+                INFP - 调停者
+              </a>
+            </li>
+            <li>
+              <a href="#ENFJ" class="text-blue-600 hover:text-blue-800">
+                ENFJ - 主人公
+              </a>
+            </li>
+            <li>
+              <a href="#ENFP" class="text-blue-600 hover:text-blue-800">
+                ENFP - 竞选者
+              </a>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- 守卫者型 (SJ) -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h2 class="text-xl font-bold text-gray-900 mb-4">守卫者型 (SJ)</h2>
+          <ul class="space-y-3">
+            <li>
+              <a href="#ISTJ" class="text-blue-600 hover:text-blue-800">
+                ISTJ - 物流师
+              </a>
+            </li>
+            <li>
+              <a href="#ISFJ" class="text-blue-600 hover:text-blue-800">
+                ISFJ - 守卫者
+              </a>
+            </li>
+            <li>
+              <a href="#ESTJ" class="text-blue-600 hover:text-blue-800">
+                ESTJ - 总经理
+              </a>
+            </li>
+            <li>
+              <a href="#ESFJ" class="text-blue-600 hover:text-blue-800">
+                ESFJ - 执政官
+              </a>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- 探索者型 (SP) -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h2 class="text-xl font-bold text-gray-900 mb-4">探索者型 (SP)</h2>
+          <ul class="space-y-3">
+            <li>
+              <a href="#ISTP" class="text-blue-600 hover:text-blue-800">
+                ISTP - 鉴赏家
+              </a>
+            </li>
+            <li>
+              <a href="#ISFP" class="text-blue-600 hover:text-blue-800">
+                ISFP - 探险家
+              </a>
+            </li>
+            <li>
+              <a href="#ESTP" class="text-blue-600 hover:text-blue-800">
+                ESTP - 企业家
+              </a>
+            </li>
+            <li>
+              <a href="#ESFP" class="text-blue-600 hover:text-blue-800">
+                ESFP - 表演者
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- 详细类型描述 -->
+      <div class="space-y-12">
+        <!-- INTJ -->
+        <section id="INTJ" class="bg-white p-8 rounded-lg shadow-md">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">INTJ - 建筑师型人格</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-xl font-semibold mb-4">性格特点</h3>
+              <ul class="space-y-2 text-gray-600">
+                <li>• 战略性思考者</li>
+                <li>• 独立自主</li>
+                <li>• 高标准</li>
+                <li>• 创新导向</li>
+                <li>• 重视效率</li>
+              </ul>
+              
+              <h3 class="text-xl font-semibold mt-6 mb-4">职业方向</h3>
+              <ul class="space-y-2 text-gray-600">
+                <li>• 战略规划师</li>
+                <li>• 科学研究员</li>
+                <li>• 系统架构师</li>
+                <li>• 投资分析师</li>
+                <li>• 企业管理者</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 class="text-xl font-semibold mb-4">发展建议</h3>
+              <div class="prose text-gray-600">
+                <p>
+                  INTJ型人格的人应该注意：
+                </p>
+                <ul class="list-disc list-inside mt-2">
+                  <li>培养情商和人际交往能力</li>
+                  <li>学会接受不完美</li>
+                  <li>提高团队协作能力</li>
+                  <li>保持开放和包容的心态</li>
+                </ul>
+              </div>
+              
+              <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                <h4 class="font-semibold text-gray-900 mb-2">成功案例</h4>
+                <p class="text-gray-600">
+                  许多成功的企业家和科学家都属于INTJ类型，如特斯拉创始人埃隆·马斯克。他们通过战略性思维和创新精神，在各自领域取得了显著成就。
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- 其他类型描述（类似结构） -->
+        <!-- INTP, ENTJ, ENTP... -->
+        
+      </div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-gray-400">
+        &copy; 2025 智能MBTI - 专业MBTI测试. 保留所有权利.
+      </p>
+    </div>
+  </footer>
+
+  <script src="src/js/main.js"></script>
+</body>
+</html>
