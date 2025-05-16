@@ -1,35 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <title>智能MBTI - 专业MBTI人格测试</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>MBTI 冷知识百科</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Tailwind CSS CDN for quick styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body class="font-sans text-gray-800 bg-gray-50">
   <!-- 顶部导航栏 -->
   <header class="fixed w-full bg-white bg-opacity-95 shadow-sm z-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center py-4">
-        <a href="index.html" class="flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <line x1="12" y1="16" x2="12" y2="12" />
-            <line x1="12" y1="8" x2="12.01" y2="8" />
-          </svg>
-          <span class="ml-2 text-xl font-bold text-gray-900">智能MBTI</span>
-        </a>
-        <nav class="hidden md:flex space-x-6 items-center">
-          <a href="index.html"  class="text-gray-600 hover:text-blue-600">首页</a>
-          <a href="mbtiqa.html"  class="text-gray-600 hover:text-blue-600">小问答</a>
-          <a href="mbtifacts.html" class="text-blue-600 font-semibold">冷知识</a>
-          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每日启发</a>
-          <a href="price.html"    class="text-gray-600 hover:text-blue-600">套餐价格</a>
-          <a href="aboutus.html"  class="text-gray-600 hover:text-blue-600">关于我们</a>
-          <a href="test.html"     class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">开始测试</a>
-        </nav>
+        <nav class="hidden md:flex space-x-6 items-center"></nav>
       </div>
     </div>
   </header>
@@ -60,8 +43,6 @@
         <button class="mbti-type-btn text-blue-600 hover:bg-blue-100 px-4 py-2 border border-gray-300 bg-white rounded" data-type="ESFP">ESFP</button>
       </div>
 
-
-
       <!-- Popup 简要说明 -->
       <div id="popup" class="w-full max-w-5xl h-64 border border-gray-300 bg-white rounded p-6 shadow-md transition-all duration-300 overflow-y-auto mx-auto">
         <h2 class="text-xl font-bold text-blue-600 mb-2">欢迎！</h2>
@@ -71,125 +52,102 @@
   </main>
 
   <!-- 模态弹窗 -->
-<div id="modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
-  <div class="bg-white rounded-none w-full h-full max-w-none max-h-none p-0 shadow-none relative flex flex-col overflow-y-auto">
-    <button ...>&times;</button>
-    <div class="flex-1 flex flex-col items-center justify-center px-4 py-10 sm:px-12 overflow-y-auto">
-      <h3 id="modal-title" ...></h3>
-      <div id="modal-content" class="text-gray-700 space-y-4 max-w-3xl w-full mx-auto"></div>
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg w-full max-w-5xl max-h-[90vh] p-8 shadow-xl relative flex flex-col">
+      <button onclick="closeModal()" class="absolute top-4 right-6 text-gray-500 hover:text-gray-700 text-3xl leading-none z-10">&times;</button>
+      <h3 id="modal-title" class="text-2xl font-bold mb-8 text-center"></h3>
+      <div id="modal-content" class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full overflow-y-auto" style="flex:1; min-height:0;"></div>
     </div>
   </div>
-</div>
 
   <!-- 统一 JavaScript -->
   <script>
-  /* ===== ① 16 种 MBTI 简要描述 ===== */
-  const descriptions = {
-    INTJ:{title:"INTJ - 战略规划者",content:`• 喜欢独立思考，不喜欢被过度干扰或管理。<br>• 在恋爱中常隐藏情感，唯有内心认可的人才可一窥真实。<br>• 在决策时追求系统逻辑，会为未来10年设想方案。<br>• 擅长看到大局，不善应付琐碎社交。`},
-    INTP:{title:"INTP - 逻辑建筑师",content:`• 对知识的渴求近乎无限，常因研究冷门话题熬夜。<br>• 情绪表达间歇性“宕机”，喜欢用比喻说明情感。<br>• 喜欢“脑内模拟实验”，能一人自嗨数小时。<br>• 常因思维跳跃而被误解，但其实超有深度。`},
-    INFJ:{title:"INFJ - 洞察预言者",content:`• 是最稀有的MBTI类型之一（不到1%）。<br>• 表面温和，内心坚定；对“意义”有执着追求。<br>• 预感极强，经常能“读懂”别人没说出口的话。<br>• 为了和平氛围，有时会选择沉默与自我消化。`},
-    INFP:{title:"INFP - 理想主义者",content:`• 常因共情力太强而情绪受影响。<br>• 喜欢幻想世界，沉迷于小说、音乐或创作中。<br>• 会默默为朋友做很多事，但不太主动表达。<br>• 对违背内心信仰的事极其排斥，忠于价值观。`},
-    ENFP:{title:"ENFP - 灵感火花",content:`• 思维如烟花般绚烂，经常灵感爆棚。<br>• 喜欢结识新朋友，但内心仍渴望深度连接。<br>• 是热情的鼓励者，也容易因太多方向而分神。<br>• 喜欢用幽默打破尴尬，是社交圈的“调味剂”。`},
-    ENFJ:{title:"ENFJ - 灵魂引导者",content:`• 有天生的领导魅力，擅长鼓舞团队。<br>• 会为朋友制定成长计划，是天生的“人生教练”。<br>• 对他人感受极为敏感，有时容易情绪负担过重。<br>• 做事常以“我们”为出发点，注重集体和谐。`},
-    ENTJ:{title:"ENTJ - 战斗将军",content:`• 喜欢效率，对“浪费时间”的事毫无耐心。<br>• 喜欢构建目标、制定计划、调配资源。<br>• 在群体中自然担任领导角色，有强烈使命感。<br>• 有时显得强势，实则希望身边人也成长。`},
-    ENTP:{title:"ENTP - 创意挑衅者",content:`• 极爱辩论，即使对方观点相同也能“玩出花”。<br>• 常被称为“脑洞王”，点子无限，执行力看心情。<br>• 擅长快速适应变化环境，但容易厌倦常规。<br>• 爱搞怪也爱深度，是理性与疯魔的结合体。`},
-    ISTJ:{title:"ISTJ - 物流管理员",content:`• 现实、务实，注重细节与秩序。<br>• 喜欢按照既定计划行事，不喜欢不确定性。<br>• 对责任心有强烈的要求，履行承诺。<br>• 喜欢独立工作，避免社交场合的复杂。`},
-    ISTP:{title:"ISTP - 工匠型人物",content:`• 喜欢实践，善于解决实际问题。<br>• 独立、自信，喜欢独处和深度思考。<br>• 具有创新精神，擅长发掘工具和技术的潜力。<br>• 喜欢动手操作，往往选择行动而非言语。`},
-    ISFJ:{title:"ISFJ - 守护者",content:`• 具备强烈的责任感和同情心，注重他人感受。<br>• 喜欢帮助他人，能够从他人需求中获取满足感。<br>• 讲究稳定与安全，擅长关注细节。<br>• 在团体中通常扮演支持者角色。`},
-    ISFP:{title:"ISFP - 艺术家",content:`• 喜欢沉浸在美丽的世界中，富有艺术天赋。<br>• 倾向于独立并避免冲突，注重个人自由。<br>• 非常敏感，喜欢与自然和他人建立深刻的联系。<br>• 在创造中寻找满足，享受平和、宁静的时光。`},
-    ESTJ:{title:"ESTJ - 高效执行者",content:`• 喜欢把事情做得尽善尽美，关注执行力和成果。<br>• 热衷于组织和管理事务，不喜欢混乱和不规范。<br>• 喜欢采取标准化的做法，强调实用性。<br>• 是天生的领导者，能快速做出决策并推动团队。`},
-    ESTP:{title:"ESTP - 活力冒险者",content:`• 爱冒险，喜欢尝试新鲜事物，追求刺激和乐趣。<br>• 善于迅速做出决策，充满活力且喜欢面对挑战。<br>• 在压力下表现尤为突出，乐于解决复杂问题。<br>• 喜欢实际操作和动手解决问题。`},
-    ESFJ:{title:"ESFJ - 社交协调者",content:`• 非常重视他人的情感，乐于为他人提供帮助。<br>• 喜欢组织活动，帮助他人融入群体。<br>• 对外部环境非常敏感，时刻关注他人需求。<br>• 注重传统和文化，喜欢维护社会和谐。`},
-    ESFP:{title:"ESFP - 享乐主义者",content:`• 热爱社交和娱乐，享受当下的乐趣。<br>• 喜欢在群体中引起注意，活跃气氛。<br>• 非常感性和直觉，情绪变化较快。<br>• 善于与他人沟通，关心朋友和家人。`}
-  };
+    // 示例数据结构（请根据实际需求补充完整）
+    const facts = {
+      ESFP: {
+        childhood: { fact: "童年时期：ESFP 喜欢参与各种游戏和活动，是班级里的小太阳。", example: "比如在运动会上总是最活跃的那一个。" },
+        student: { fact: "学生时期：他们善于交朋友，课堂气氛活跃分子。", example: "经常组织同学聚会或班级活动。" },
+        career: { fact: "职场冷知识：ESFP 适合需要与人互动的职业。", example: "如销售、表演、客户服务等。" },
+        relationship: { fact: "情感关系：他们表达情感直接热烈，喜欢浪漫和惊喜。", example: "会为伴侣精心准备生日派对。" },
+        retirement: { fact: "退休时期：ESFP 依然热爱生活，喜欢参与社区活动。", example: "常常是社区志愿者或活动组织者。" },
+        cosmic: { fact: "宇宙级冷知识：ESFP 的能量能点亮整个房间。", example: "他们的乐观常常感染身边每一个人。" },
+        summary: {
+          self: "如果你是ESFP：这些冷知识是不是让你忍不住想马上拉个群组织活动？",
+          others: "如果你认识ESFP：现在你懂他们为什么总能让身边充满欢笑和活力了。"
+        }
+      },
+      // 你可以为其他类型补充类似结构的数据
+    };
 
-  /* ===== ② DOM 引用 ===== */
-  const buttons      = document.querySelectorAll(".mbti-type-btn");
-  const popup        = document.getElementById("popup");
-  const modal        = document.getElementById("modal");
-  const modalTitle   = document.getElementById("modal-title");
-  const modalContent = document.getElementById("modal-content");
-
-  /* ===== ③ 点击 MBTI 类型按钮 ===== */
-  buttons.forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      const type = btn.dataset.type;
-      const desc = descriptions[type];
-      popup.innerHTML = `
-        <h2 class="text-xl font-bold text-blue-600 mb-2">${desc.title}</h2>
-        <p class="text-gray-700 mb-4">${desc.content}</p>
-        <button class="show-more bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-                data-type="${type}">
-          点击了解更多
-        </button>`;
-    });
-  });
-
-  /* ===== ④ 事件委托：点击『了解更多』 ===== */
-  popup.addEventListener("click",(e)=>{
-    if(e.target.classList.contains("show-more")){
-      showMore(e.target.dataset.type);
-    }
-  });
-
-  /* ===== ⑤ 拉取 JSON 并生成内容 ===== */
-  function showMore(type){
-    fetch("./mbtifactsmore.json")
-      .then(r=>r.json())
-      .then(data=>{
-        const d = data[type];
-        if(!d){throw new Error("未找到该类型");}
-        modalTitle.textContent = `${type} - 深入解读`;
-        modalContent.innerHTML = buildDetailHTML(d);
-        modal.classList.remove("hidden");
-      })
-      .catch(err=>{
-        console.error(err);
-        modalTitle.textContent = "加载失败";
-        modalContent.textContent = "无法获取详细数据，请稍后重试。";
-        modal.classList.remove("hidden");
+    // 绑定按钮事件
+    document.querySelectorAll('.mbti-type-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const type = this.getAttribute('data-type');
+        showModal(type);
       });
-  }
-
-  /* ===== ⑥ 根据嵌套结构拼接 HTML ===== */
-  function buildDetailHTML(d){
-    const names = {childhood:"童年时期",student:"学生时期",career:"职场冷知识",
-                   relationship:"情感关系",retirement:"退休时期",cosmic:"宇宙级冷知识"};
-    let html = "";
-    Object.keys(names).forEach(k=>{
-      if(d[k]){
-        html += `<h4 class="font-semibold text-blue-600 mt-4">${names[k]}</h4>
-                 <p class="mt-1">${d[k].fact}</p>
-                 <p class="text-sm text-gray-500">${d[k].example}</p>`;
-      }
     });
-    if(d.summary){
-      html += `<p class="mt-4 font-semibold">${d.summary.self}</p>
-               <p>${d.summary.others}</p>`;
+
+    function showModal(type) {
+      const data = facts[type];
+      if (!data) {
+        document.getElementById('modal-title').textContent = type + " 暂无详细数据";
+        document.getElementById('modal-content').innerHTML = "<div class='col-span-1 md:col-span-3 text-center text-gray-500'>敬请期待更多内容！</div>";
+      } else {
+        document.getElementById('modal-title').textContent = type + " 详细冷知识";
+        document.getElementById('modal-content').innerHTML = buildDetailHTML(data);
+      }
+      document.getElementById('modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden'; // 防止背景滚动
     }
-    return html;
-  }
 
-  /* ===== ⑦ 关闭弹窗 ===== */
-  function closeModal(){ modal.classList.add("hidden"); }
+    function closeModal() {
+      document.getElementById('modal').classList.add('hidden');
+      document.body.style.overflow = ''; // 恢复背景滚动
+    }
+
+    // 构建卡片网格内容
+    function buildDetailHTML(d) {
+      const keys = [
+        {key: "childhood", label: "童年时期"},
+        {key: "student", label: "学生时期"},
+        {key: "career", label: "职场冷知识"},
+        {key: "relationship", label: "情感关系"},
+        {key: "retirement", label: "退休时期"},
+        {key: "cosmic", label: "宇宙级冷知识"}
+      ];
+      let cards = [];
+      keys.forEach(({key, label}) => {
+        if (d[key]) {
+          cards.push(`
+            <div class="bg-white border rounded-lg shadow p-4 flex flex-col">
+              <h4 class="font-semibold text-blue-600 mb-2">${label}</h4>
+              <p class="flex-1 mb-2">${d[key].fact}</p>
+              <p class="text-sm text-gray-500">${d[key].example}</p>
+            </div>
+          `);
+        } else {
+          cards.push(`<div></div>`);
+        }
+      });
+
+      // Summary card (spans all columns)
+      let summary = "";
+      if (d.summary) {
+        summary = `
+          <div class="bg-blue-50 border border-blue-200 rounded-lg shadow p-6 col-span-1 md:col-span-3 mt-2">
+            <p class="font-semibold mb-2">${d.summary.self}</p>
+            <p>${d.summary.others}</p>
+          </div>
+        `;
+      }
+
+      // Arrange cards in 2 rows of 3, then summary full width
+      return `
+        ${cards.slice(0,3).join("")}
+        ${cards.slice(3,6).join("")}
+        ${summary}
+      `;
+    }
   </script>
-
-  <!-- 页脚 -->
-  <footer class="bg-gray-900 text-white py-8">
-    <div class="container mx-auto px-4 text-center">
-      <div class="flex items-center justify-center mb-4">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="16" x2="12" y2="12"></line>
-          <line x1="12" y1="8" x2="12.01" y2="8"></line>
-        </svg>
-        <span class="ml-2 text-lg font-bold">智能导航</span>
-      </div>
-      <p class="text-gray-400 mb-4">探索自我，发现潜能，引领未来方向。</p>
-      <div class="border-t border-gray-800 pt-4">
-        <div class="text-gray-400">&copy; 2025 智能导航 - 专业MBTI测试. 保留所有权利.</div>
-      </div>
-    </div>
-  </footer>
 </body>
 </html>
