@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh">
-<html lang="zh">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -70,10 +69,10 @@
   </main>
 
   <!-- 模态弹窗 -->
-  <div id="modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center hidden">
-    <div class="bg-white w-full max-w-5xl max-h-[90vh] rounded-lg p-6 relative shadow-lg overflow-hidden">
-      <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl text-gray-700 hover:text-red-500">&times;</button>
-      <div class="overflow-y-auto h-full pr-4">
+<div id="modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center hidden">
+    <div class="bg-white w-full max-w-5xl rounded-lg relative shadow-lg">
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl text-gray-700 hover:text-red-500 z-10">&times;</button>
+      <div class="max-h-[90vh] overflow-y-auto p-6">
         <h3 id="modal-title" class="text-2xl font-bold text-blue-700 mb-6 text-center"></h3>
         <div id="modal-content" class="space-y-8"></div>
         <div id="summary-card" class="bg-blue-50 border-l-4 border-blue-400 p-4 my-8 rounded text-center"></div>
@@ -113,7 +112,7 @@
 
 
   /* ===== ③ 点击 MBTI 类型按钮 ===== */
-    buttons.forEach(btn => {
+  buttons.forEach(btn => {
       btn.addEventListener("click", () => {
         const type = btn.dataset.type;
         const desc = descriptions[type];
@@ -127,7 +126,7 @@
     });
 
   /* ===== ④ 事件委托：点击『了解更多』 ===== */
-  popup.addEventListener("click", (e) => {
+ popup.addEventListener("click", (e) => {
       if (e.target.classList.contains("show-more")) {
         showMore(e.target.dataset.type);
       }
@@ -135,7 +134,7 @@
 
 
   /* ===== ⑤ 拉取 JSON 并生成内容 ===== */
-  function showMore(type) {
+ function showMore(type) {
       fetch("./mbtifactsmore.json")
         .then(res => res.json())
         .then(data => {
@@ -168,7 +167,6 @@
         retirement: "退休时期",
         cosmic: "宇宙级冷知识"
       };
-    
 
       return Object.entries(names)
         .filter(([k]) => data[k])
@@ -182,7 +180,6 @@
             </div>`;
         }).join('');
     }
-
 
   /* ===== ⑦ 关闭弹窗 ===== */
     function closeModal() {
