@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="zh">
 <head>
   <meta charset="UTF-8" />
@@ -69,14 +69,12 @@
   </main>
 
   <!-- 模态弹窗 -->
-<div id="modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center hidden">
-    <div class="bg-white w-full max-w-5xl rounded-lg relative shadow-lg">
-      <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl text-gray-700 hover:text-red-500 z-10">&times;</button>
-      <div class="max-h-[90vh] overflow-y-auto p-6">
-        <h3 id="modal-title" class="text-2xl font-bold text-blue-700 mb-6 text-center"></h3>
-        <div id="modal-content" class="space-y-8"></div>
-        <div id="summary-card" class="bg-blue-50 border-l-4 border-blue-400 p-4 my-8 rounded text-center"></div>
-      </div>
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
+    <div class="bg-white w-full max-w-6xl h-auto max-h-[90vh] overflow-y-auto rounded-lg p-6 relative">
+      <button onclick="closeModal()" class="absolute top-2 right-4 text-2xl text-gray-700 hover:text-red-500">×</button>
+      <h3 id="modal-title" class="text-2xl font-bold text-blue-700 mb-6 text-center"></h3>
+      <div id="modal-content"></div>
+      <div id="summary-card" class="bg-blue-50 border border-blue-200 rounded-lg p-4 shadow-md mt-6 text-center"></div>
     </div>
   </div>
 
@@ -110,9 +108,8 @@
     const modalContent = document.getElementById("modal-content");
     const summaryCard = document.getElementById("summary-card");
 
-
   /* ===== ③ 点击 MBTI 类型按钮 ===== */
-  buttons.forEach(btn => {
+    buttons.forEach(btn => {
       btn.addEventListener("click", () => {
         const type = btn.dataset.type;
         const desc = descriptions[type];
@@ -126,39 +123,21 @@
     });
 
   /* ===== ④ 事件委托：点击『了解更多』 ===== */
- popup.addEventListener("click", (e) => {
+    popup.addEventListener("click", (e) => {
       if (e.target.classList.contains("show-more")) {
         showMore(e.target.dataset.type);
       }
     });
 
-
   /* ===== ⑤ 拉取 JSON 并生成内容 ===== */
- function showMore(type) {
-      fetch("./mbtifactsmore.json")
-        .then(res => res.json())
-        .then(data => {
-          const d = data[type];
-          if (!d) throw new Error("数据不存在");
-          modalTitle.textContent = `${type} - 深入解读`;
-          modalContent.innerHTML = buildSections(d);
-          summaryCard.innerHTML = d.summary ?
-            `<h4 class='text-lg font-semibold text-blue-700 mb-2'>总结</h4>
-             <p class='text-gray-700'>${d.summary.self}</p>
-             <p class='text-sm text-gray-500 mt-2'>${d.summary.others}</p>` : "";
-          modal.classList.remove("hidden");
-        })
-        .catch(err => {
-          modalTitle.textContent = "加载失败";
-          modalContent.innerHTML = `<p class='text-red-500'>无法加载内容，请稍后再试。</p>`;
-          summaryCard.innerHTML = "";
-          modal.classList.remove("hidden");
-        });
+    function showMore(type) {
+      const width = Math.min(window.screen.width * 0.9, 1200);
+      const height = Math.min(window.screen.height * 0.9, 800);
+      window.open(`mbti-details.html?type=${type}`, 'mbtiDetails', `width=${width},height=${height},scrollbars=yes,resizable=yes`);
     }
 
-
   /* ===== ⑥ 根据嵌套结构拼接 HTML ===== */
-  function buildSections(data) {
+    function buildCards(data) {
       const names = {
         childhood: "童年时期",
         student: "学生时期",
@@ -171,12 +150,16 @@
       return Object.entries(names)
         .filter(([k]) => data[k])
         .map(([key, label]) => {
-          const content = data[key];
           return `
-            <div>
-              <h4 class="text-xl font-semibold text-blue-600 mb-2">${label}</h4>
-              <p class="text-gray-800 leading-relaxed whitespace-pre-line">${content.fact}</p>
-              <p class="text-sm text-gray-500 mt-2">${content.example}</p>
+            <div class="mb-6">
+              <h4 class="text-lg font-semibold text-blue-600 mb-2">${label}</h4>
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                ${data[key].map(card => `
+                  <div class="bg-white border border-gray-200 rounded-lg p-4 shadow">
+                    <p class="text-sm text-gray-800 mb-2">${card.fact}</p>
+                    <p class="text-xs text-gray-500">${card.example}</p>
+                  </div>`).join('')}
+              </div>
             </div>`;
         }).join('');
     }
@@ -200,7 +183,7 @@
       </div>
       <p class="text-gray-400 mb-4">探索自我，发现潜能，引领未来方向。</p>
       <div class="border-t border-gray-800 pt-4">
-        <div class="text-gray-400">&copy; 2025 智能导航 - 专业MBTI测试. 保留所有权利.</div>
+        <div class="text-gray-400">© 2025 智能导航 - 专业MBTI测试. 保留所有权利.</div>
       </div>
     </div>
   </footer>
