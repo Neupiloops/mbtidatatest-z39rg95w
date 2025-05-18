@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MBTI 详细信息</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="font-sans text-gray-800 bg-gray-50 min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-white shadow-sm py-4">
+    <div class="max-w-4xl mx-auto px-4 flex justify-center items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <line x1="12" y1="16" x2="12" y2="12" />
+        <line x1="12" y1="8" x2="12.01" y2="8" />
+      </svg>
+      <span class="ml-2 text-xl font-bold text-gray-900">智能MBTI</span>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow max-w-4xl mx-auto px-4 py-12">
+    <div class="flex justify-between items-center mb-8">
+      <h2 id="title" class="text-3xl font-bold text-blue-700">加载中...</h2>
+      <button onclick="window.close()" class="text-2xl text-gray-600 hover:text-red-500 transition-colors">×</button>
+    </div>
+    <div id="content" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+    <div id="summary-card" class="mt-10 bg-blue-50 border border-blue-200 rounded-lg p-6 shadow-md"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-4">
+    <div class="max-w-4xl mx-auto px-4 text-center text-gray-400">
+      © 2025 智能导航 - 专业MBTI测试. 保留所有权利.
+    </div>
+  </footer>
+
+  <script>
+    // Build cards for sections
+    function buildCards(data) {
+      const names = {
+        childhood: "童年时期",
+        student: "学生时期",
+        career: "职场冷知识",
+        relationship: "情感关系",
+        retirement: "退休时期",
+        cosmic: "宇宙级冷知识"
+      };
+
+      return Object.entries(names)
+        .filter(([k]) => data[k])
+        .map(([key, label]) => {
+          const card = data[key];
+          return `
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+              <div class="bg-gradient-to-r from-blue-50 to-blue-100 px-5 py-3 rounded-t-lg">
+                <h4 class="text-lg font-semibold text-blue-600">${label}</h4>
+              </div>
+              <div class="p-5">
+                <p class="text-base text-gray-800 mb-3">${card.fact}</p>
+                <p class="text-sm text-gray-600 pl-4 border-l-2 border-blue-200">${card.example}</p>
+              </div>
+            </div>`;
+        }).join('');
+    }
+
+    // Fallback data
+    const fallbackData = {
+      ESTP: {
+        childhood: {
+          fact: "ESTP小孩是“幼儿园的开心果”，总能带动全班气氛，喜欢组织游戏、表演节目。",
+          example: "某ESTP小朋友自编“寻宝行动”，让全班加入，老师称他为“小太阳”。"
+        },
+        student: {
+          fact: "ESTP在学生时代是“班级气氛组”，擅长组织活动和调解矛盾。",
+          example: "某ESTP学生即兴策划班级游戏，带动全班嗨翻天。"
+        },
+        career: {
+          fact: "ESTP在职场是“团队氛围制造机”，擅长销售和活动策划。",
+          example: "某ESTP员工在年会主持，带动全场气氛，连老板都笑开怀。"
+        },
+        relationship: {
+          fact: "ESTP在感情中热情浪漫，喜欢用惊喜表达爱意。",
+          example: "某ESTP女友带男友体验热气球，记录vlog，生活像综艺。"
+        },
+        retirement: {
+          fact: "退休ESTP活跃在社区，组织活动让生活像“快乐俱乐部”。",
+          example: "某ESTP大爷组织广场舞大赛，社区变成嘉年华。"
+        },
+        cosmic: {
+          fact: "ESTP是“人类版快乐发电机”，用热情点燃平凡日子。",
+          example: "某ESTP提议即兴才艺秀，全场嗨到停不下来。"
+        },
+        summary: {
+          self: "ESTP：这些冷知识是不是让你想拉群组织活动？",
+          others: "认识ESTP：他们总能让身边充满欢笑和活力。"
+        }
+      },
+      INTJ: {
+        childhood: { fact: "喜欢独自玩策略游戏", example: "设计复杂游戏规则" },
+        student: { fact: "偏好自学深奥科目", example: "自学编程或哲学" },
+        career: { fact: "擅长制定长期计划", example: "设计五年战略" },
+        relationship: { fact: "情感表达谨慎", example: "只对亲密人敞心扉" },
+        retirement: { fact: "规划财务自由", example: "提前投资理财" },
+        cosmic: { fact: "思考宇宙意义", example: "研究哲学或天文" },
+        summary: { self: "INTJ是战略家，追求效率和深度思考。", others: "他们可能显得冷漠，但内心充满热情。" }
+      }
+    };
+
+    // Get MBTI type
+    const urlParams = new URLSearchParams(window.location.search);
+    const type = urlParams.get('type');
+
+    if (!type) {
+      document.getElementById('title').textContent = '错误';
+      document.getElementById('content').innerHTML = '<p class="text-red-500 text-center text-base">未提供 MBTI 类型</p>';
+      return;
+    }
+
+    // Render data
+    function renderData(data) {
+      const d = data[type];
+      if (!d) {
+        throw new Error('数据不存在');
+      }
+      document.getElementById('title').textContent = `${type} - 深入解读`;
+      document.getElementById('content').innerHTML = buildCards(d);
+      document.getElementById('summary-card').innerHTML = d.summary ?
+        `<h4 class="text-lg font-semibold text-blue-700 mb-3">总结</h4>
+         <p class="text-base text-gray-700 mb-2">${d.summary.self}</p>
+         <p class="text-sm text-gray-600">${d.summary.others}</p>` : '';
+    }
+
+    // Fetch JSON
+    const possiblePaths = [
+      './mbtifactsmore.json',
+      '/mbtifactsmore.json'
+    ];
+
+    async function tryFetch(paths) {
+      for (const path of paths) {
+        console.log(`Fetching: ${path}`);
+        try {
+          const res = await fetch(path);
+          console.log(`Status: ${res.status} ${res.statusText}`);
+          if (!res.ok) {
+            throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+          }
+          const data = await res.json();
+          console.log(`Success: ${path}`);
+          return data;
+        } catch (err) {
+          console.error(`Failed: ${path} - ${err.message}`);
+        }
+      }
+      throw new Error('无法加载 JSON 文件');
+    }
+
+    tryFetch(possiblePaths)
+      .then(data => renderData(data))
+      .catch(err => {
+        console.error('Fetch error:', err);
+        document.getElementById('title').textContent = '加载失败';
+        document.getElementById('content').innerHTML = `
+          <p class="text-red-500 text-center text-base">无法加载内容: ${err.message}</p>
+          <p class="text-gray-600 text-center text-sm mt-2">使用备用数据展示示例内容。</p>`;
+        const d = fallbackData[type] || fallbackData['INTJ'];
+        document.getElementById('content').innerHTML += buildCards(d);
+        document.getElementById('summary-card').innerHTML = d.summary ?
+          `<h4 class="text-lg font-semibold text-blue-700 mb-3">总结</h4>
+           <p class="text-base text-gray-700 mb-2">${d.summary.self}</p>
+           <p class="text-sm text-gray-600">${d.summary.others}</p>` : '';
+      });
+  </script>
+</body>
+</html>
