@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh">
 <head>
   <meta charset="UTF-8" />
@@ -131,9 +131,11 @@
 
   /* ===== ⑤ 拉取 JSON 并生成内容 ===== */
     function showMore(type) {
+      console.log(`Opening mbti-details.html for type: ${type}`);
+      sessionStorage.setItem('mbtiType', type); // Store type as fallback
       const width = Math.min(window.screen.width * 0.9, 1200);
       const height = Math.min(window.screen.height * 0.9, 800);
-      window.open(`mbti-details.html?type=${type}`, 'mbtiDetails', `width=${width},height=${height},scrollbars=yes,resizable=yes`);
+      window.open(`./mbti-details.html?type=${type}`, 'mbtiDetails', `width=${width},height=${height},scrollbars=yes,resizable=yes`);
     }
 
   /* ===== ⑥ 根据嵌套结构拼接 HTML ===== */
