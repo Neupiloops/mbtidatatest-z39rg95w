@@ -3,142 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <title>智能MBTI - 专业MBTI测试</title>
+  <title>MBTI 详细信息</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="font-sans text-gray-800 bg-gray-50 scroll-smooth">
-
-  <!-- 顶部导航栏 -->
-  <header class="fixed w-full bg-white bg-opacity-95 shadow-sm z-50">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center py-4">
-        <a href="index.html" class="flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <line x1="12" y1="16" x2="12" y2="12" />
-            <line x1="12" y1="8" x2="12.01" y2="8" />
-          </svg>
-          <span class="ml-2 text-xl font-bold text-gray-900">智能MBTI</span>
-        </a>
-        <nav class="hidden md:flex space-x-6 items-center">
-          <a href="index.html"  class="text-gray-600 hover:text-blue-600">首页</a>
-          <a href="mbtiqa.html"  class="text-gray-600 hover:text-blue-600">小问答</a>
-          <a href="mbtifacts.html" class="text-blue-600 font-semibold">冷知识</a>
-          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每日启发</a>
-          <a href="price.html"    class="text-gray-600 hover:text-blue-600">套餐价格</a>
-          <a href="aboutus.html"  class="text-gray-600 hover:text-blue-600">关于我们</a>
-          <a href="test.html"     class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">开始测试</a>
-        </nav>
-      </div>
+<body class="font-sans text-gray-800 bg-gray-50 min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-white shadow-sm py-4">
+    <div class="max-w-4xl mx-auto px-4 flex justify-center items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <line x1="12" y1="16" x2="12" y2="12" />
+        <line x1="12" y1="8" x2="12.01" y2="8" />
+      </svg>
+      <span class="ml-2 text-xl font-bold text-gray-900">智能MBTI</span>
     </div>
   </header>
 
-  <!-- 页面主体 -->
-  <main class="pt-28 pb-20">
-    <section id="mbti-facts" class="mt-20 px-4 max-w-5xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-gray-900 mb-6">MBTI 冷知识百科</h2>
-      <p class="text-gray-600 mb-6">选择或搜索一种人格类型，发现你不知道的有趣事实。</p>
-
-      <!-- MBTI 类型按钮 -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-        <button class="mbti-type-btn text-blue-600 hover:bg-blue-100 px-4 py-2 border border-gray-300 bg-white rounded" data-type="INTJ">INTJ</button>
-        <button class="mbti-type-btn text-blue-600 hover:bg-blue-100 px-4 py-2 border border-gray-300 bg-white rounded" data-type="INTP">INTP</button>
-        <button class="mbti-type-btn text-blue-600 hover:bg-blue-100 px-4 py-2 border border-gray-300 bg-white rounded" data-type="INFJ">INFJ</button>
-        <button class="mbti-type-btn text-blue-600 hover:bg-blue-100 px-4 py-2 border border-gray-300 bg-white rounded" data-type="INFP">INFP</button>
-        <button class="mbti-type-btn text-blue-600 hover:bg-blue-100 px-4 py-2 border border-gray-300 bg-white rounded" data-type="ENTJ">ENTJ</button>
-        <button class="mbti-type-btn text-blue-600 hover:bg-blue-100 px-4 py-2 border border-gray-300 bg-white rounded" data-type="ENTP">ENTP</button>
-        <button class="mbti-type-btn text-blue-600 hover:bg-blue-100 px-4 py-2 border border-gray-300 bg-white rounded" data-type="ENFJ">ENFJ</button>
-        <button class="mbti-type-btn text-blue-600 hover:bg-blue-100 px-4 py-2 border border-gray-300 bg-white rounded" data-type="ENFP">ENFP</button>
-        <button class="mbti-type-btn text-blue-600 hover:bg-blue-100 px-4 py-2 border border-gray-300 bg-white rounded" data-type="ISTJ">ISTJ</button>
-        <button class="mbti-type-btn text-blue-600 hover:bg-blue-100 px-4 py-2 border border-gray-300 bg-white rounded" data-type="ISTP">ISTP</button>
-        <button class="mbti-type-btn text-blue-600 hover:bg-blue-100 px-4 py-2 border border-gray-300 bg-white rounded" data-type="ISFJ">ISFJ</button>
-        <button class="mbti-type-btn text-blue-600 hover:bg-blue-100 px-4 py-2 border border-gray-300 bg-white rounded" data-type="ISFP">ISFP</button>
-        <button class="mbti-type-btn text-blue-600 hover:bg-blue-100 px-4 py-2 border border-gray-300 bg-white rounded" data-type="ESTJ">ESTJ</button>
-        <button class="mbti-type-btn text-blue-600 hover:bg-blue-100 px-4 py-2 border border-gray-300 bg-white rounded" data-type="ESTP">ESTP</button>
-        <button class="mbti-type-btn text-blue-600 hover:bg-blue-100 px-4 py-2 border border-gray-300 bg-white rounded" data-type="ESFJ">ESFJ</button>
-        <button class="mbti-type-btn text-blue-600 hover:bg-blue-100 px-4 py-2 border border-gray-300 bg-white rounded" data-type="ESFP">ESFP</button>
-      </div>
-
-      <!-- Popup 简要说明 -->
-      <div id="popup" class="w-full max-w-5xl h-64 border border-gray-300 bg-white rounded p-6 shadow-md transition-all duration-300 overflow-y-auto mx-auto">
-        <h2 class="text-xl font-bold text-blue-600 mb-2">欢迎！</h2>
-        <p class="text-gray-600">请点击上方任意一个 MBTI 类型按钮，以查看该性格的详细说明与推荐建议。</p>
-      </div>
-    </section>
+  <!-- Main Content -->
+  <main class="flex-grow max-w-4xl mx-auto px-4 py-12">
+    <div class="flex justify-center items-center mb-8">
+      <h2 id="title" class="text-3xl font-bold text-blue-700">加载中...</h2>
+    </div>
+    <div id="content" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+    <div id="summary-card" class="mt-10 bg-blue-50 border border-blue-200 rounded-lg p-6 shadow-md"></div>
   </main>
 
-  <!-- 模态弹窗 -->
-  <div id="modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
-    <div class="bg-white w-full max-w-6xl h-auto max-h-[90vh] overflow-y-auto rounded-lg p-6 relative">
-      <button onclick="closeModal()" class="absolute top-2 right-4 text-2xl text-gray-700 hover:text-red-500">×</button>
-      <h3 id="modal-title" class="text-2xl font-bold text-blue-700 mb-6 text-center"></h3>
-      <div id="modal-content"></div>
-      <div id="summary-card" class="bg-blue-50 border border-blue-200 rounded-lg p-4 shadow-md mt-6 text-center"></div>
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-4">
+    <div class="max-w-4xl mx-auto px-4 text-center text-gray-400">
+      © 2025 智能导航 - 专业MBTI测试. 保留所有权利.
     </div>
-  </div>
+  </footer>
 
-  <!-- 统一 JavaScript -->
   <script>
-  /* ===== ① 16 种 MBTI 简要描述 ===== */
-  const descriptions = {
-    INTJ:{title:"INTJ - 战略规划者",content:`• 喜欢独立思考，不喜欢被过度干扰或管理。<br>• 在恋爱中常隐藏情感，唯有内心认可的人才可一窥真实。<br>• 在决策时追求系统逻辑，会为未来10年设想方案。<br>• 擅长看到大局，不善应付琐碎社交。`},
-    INTP:{title:"INTP - 逻辑建筑师",content:`• 对知识的渴求近乎无限，常因研究冷门话题熬夜。<br>• 情绪表达间歇性“宕机”，喜欢用比喻说明情感。<br>• 喜欢“脑内模拟实验”，能一人自嗨数小时。<br>• 常因思维跳跃而被误解，但其实超有深度。`},
-    INFJ:{title:"INFJ - 洞察预言者",content:`• 是最稀有的MBTI类型之一（不到1%）。<br>• 表面温和，内心坚定；对“意义”有执着追求。<br>• 预感极强，经常能“读懂”别人没说出口的话。<br>• 为了和平氛围，有时会选择沉默与自我消化。`},
-    INFP:{title:"INFP - 理想主义者",content:`• 常因共情力太强而情绪受影响。<br>• 喜欢幻想世界，沉迷于小说、音乐或创作中。<br>• 会默默为朋友做很多事，但不太主动表达。<br>• 对违背内心信仰的事极其排斥，忠于价值观。`},
-    ENFP:{title:"ENFP - 灵感火花",content:`• 思维如烟花般绚烂，经常灵感爆棚。<br>• 喜欢结识新朋友，但内心仍渴望深度连接。<br>• 是热情的鼓励者，也容易因太多方向而分神。<br>• 喜欢用幽默打破尴尬，是社交圈的“调味剂”。`},
-    ENFJ:{title:"ENFJ - 灵魂引导者",content:`• 有天生的领导魅力，擅长鼓舞团队。<br>• 会为朋友制定成长计划，是天生的“人生教练”。<br>• 对他人感受极为敏感，有时容易情绪负担过重。<br>• 做事常以“我们”为出发点，注重集体和谐。`},
-    ENTJ:{title:"ENTJ - 战斗将军",content:`• 喜欢效率，对“浪费时间”的事毫无耐心。<br>• 喜欢构建目标、制定计划、调配资源。<br>• 在群体中自然担任领导角色，有强烈使命感。<br>• 有时显得强势，实则希望身边人也成长。`},
-    ENTP:{title:"ENTP - 创意挑衅者",content:`• 极爱辩论，即使对方观点相同也能“玩出花”。<br>• 常被称为“脑洞王”，点子无限，执行力看心情。<br>• 擅长快速适应变化环境，但容易厌倦常规。<br>• 爱搞怪也爱深度，是理性与疯魔的结合体。`},
-    ISTJ:{title:"ISTJ - 物流管理员",content:`• 现实、务实，注重细节与秩序。<br>• 喜欢按照既定计划行事，不喜欢不确定性。<br>• 对责任心有强烈的要求，履行承诺。<br>• 喜欢独立工作，避免社交场合的复杂。`},
-    ISTP:{title:"ISTP - 工匠型人物",content:`• 喜欢实践，善于解决实际问题。<br>• 独立、自信，喜欢独处和深度思考。<br>• 具有创新精神，擅长发掘工具和技术的潜力。<br>• 喜欢动手操作，往往选择行动而非言语。`},
-    ISFJ:{title:"ISFJ - 守护者",content:`• 具备强烈的责任感和同情心，注重他人感受。<br>• 喜欢帮助他人，能够从他人需求中获取满足感。<br>• 讲究稳定与安全，擅长关注细节。<br>• 在团体中通常扮演支持者角色。`},
-    ISFP:{title:"ISFP - 艺术家",content:`• 喜欢沉浸在美丽的世界中，富有艺术天赋。<br>• 倾向于独立并避免冲突，注重个人自由。<br>• 非常敏感，喜欢与自然和他人建立深刻的联系。<br>• 在创造中寻找满足，享受平和、宁静的时光。`},
-    ESTJ:{title:"ESTJ - 高效执行者",content:`• 喜欢把事情做得尽善尽美，关注执行力和成果。<br>• 热衷于组织和管理事务，不喜欢混乱和不规范。<br>• 喜欢采取标准化的做法，强调实用性。<br>• 是天生的领导者，能快速做出决策并推动团队。`},
-    ESTP:{title:"ESTP - 活力冒险者",content:`• 爱冒险，喜欢尝试新鲜事物，追求刺激和乐趣。<br>• 善于迅速做出决策，充满活力且喜欢面对挑战。<br>• 在压力下表现尤为突出，乐于解决复杂问题。<br>• 喜欢实际操作和动手解决问题。`},
-    ESFJ:{title:"ESFJ - 社交协调者",content:`• 非常重视他人的情感，乐于为他人提供帮助。<br>• 喜欢组织活动，帮助他人融入群体。<br>• 对外部环境非常敏感，时刻关注他人需求。<br>• 注重传统和文化，喜欢维护社会和谐。`},
-    ESFP:{title:"ESFP - 享乐主义者",content:`• 热爱社交和娱乐，享受当下的乐趣。<br>• 喜欢在群体中引起注意，活跃气氛。<br>• 非常感性和直觉，情绪变化较快。<br>• 善于与他人沟通，关心朋友和家人。`}
-  };
-
-  /* ===== ② DOM 引用 ===== */
-    const buttons = document.querySelectorAll(".mbti-type-btn");
-    const popup = document.getElementById("popup");
-    const modal = document.getElementById("modal");
-    const modalTitle = document.getElementById("modal-title");
-    const modalContent = document.getElementById("modal-content");
-    const summaryCard = document.getElementById("summary-card");
-
-  /* ===== ③ 点击 MBTI 类型按钮 ===== */
-    buttons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const type = btn.dataset.type;
-        const desc = descriptions[type];
-        popup.innerHTML = `
-          <h2 class="text-xl font-bold text-blue-600 mb-2">${desc.title}</h2>
-          <p class="text-gray-700 mb-4">${desc.content}</p>
-          <button class="show-more bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" data-type="${type}">
-            点击了解更多
-          </button>`;
-      });
-    });
-
-  /* ===== ④ 事件委托：点击『了解更多』 ===== */
-    popup.addEventListener("click", (e) => {
-      if (e.target.classList.contains("show-more")) {
-        showMore(e.target.dataset.type);
-      }
-    });
-
-  /* ===== ⑤ 拉取 JSON 并生成内容 ===== */
-    function showMore(type) {
-      console.log(`Opening mbti-details.html for type: ${type}`);
-      sessionStorage.setItem('mbtiType', type); // Store type as fallback
-      const width = Math.min(window.screen.width * 0.9, 1200);
-      const height = Math.min(window.screen.height * 0.9, 800);
-      window.open(`./mbti-details.html?type=${type}`, 'mbtiDetails', `width=${width},height=${height},scrollbars=yes,resizable=yes`);
-    }
-
-  /* ===== ⑥ 根据嵌套结构拼接 HTML ===== */
+    // Build cards for sections
     function buildCards(data) {
       const names = {
         childhood: "童年时期",
@@ -152,42 +50,164 @@
       return Object.entries(names)
         .filter(([k]) => data[k])
         .map(([key, label]) => {
+          const card = data[key];
           return `
-            <div class="mb-6">
-              <h4 class="text-lg font-semibold text-blue-600 mb-2">${label}</h4>
-              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                ${data[key].map(card => `
-                  <div class="bg-white border border-gray-200 rounded-lg p-4 shadow">
-                    <p class="text-sm text-gray-800 mb-2">${card.fact}</p>
-                    <p class="text-xs text-gray-500">${card.example}</p>
-                  </div>`).join('')}
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+              <div class="bg-gradient-to-r from-blue-50 to-blue-100 px-5 py-3 rounded-t-lg">
+                <h4 class="text-lg font-semibold text-blue-600">${label}</h4>
+              </div>
+              <div class="p-5">
+                <p class="text-base text-gray-800 mb-3">${card.fact}</p>
+                <p class="text-sm text-gray-600 pl-4 border-l-2 border-blue-200">${card.example}</p>
               </div>
             </div>`;
         }).join('');
     }
 
-  /* ===== ⑦ 关闭弹窗 ===== */
-    function closeModal() {
-      modal.classList.add("hidden");
-    }
-  </script>
+    // Fallback data
+    const fallbackData = {
+      ESTP: {
+        childhood: {
+          fact: "ESTP小孩是“幼儿园的开心果”，总能带动全班气氛，喜欢组织游戏、表演节目，是小伙伴们的社交中心。他们对身边人的情绪极为敏感，看到谁不开心会立刻想办法逗笑对方。遇到冲突时，往往选择用幽默化解，而不是正面硬刚。",
+          example: "有个ESTP小朋友看到同桌因为玩具丢了闷闷不乐，立刻自编自演一段“玩具侦探剧”，不仅让同桌破涕为笑，还带动全班加入“寻宝行动”，老师说：“他就是班里的小太阳。”"
+        },
+        student: {
+          fact: "ESTP在学生时代是“班级气氛组”，擅长组织活动、表演节目和调解同学矛盾。他们善于察言观色，能迅速发现同学的情绪变化，并用实际行动提供帮助。对枯燥理论课兴趣有限，但在艺术、体育和社交活动中如鱼得水。",
+          example: "某ESTP学生在班级文艺汇演前一天发现节目单太单调，现场即兴策划“互动小游戏”，带动全班嗨翻天，老师感叹：“有他在，活动永远不冷场。”"
+        },
+        career: {
+          fact: "ESTP在职场中是“团队氛围制造机”，以高超的社交能力和适应力著称，善于用魅力和幽默化解尴尬和压力。他们喜欢自由、变化多的工作环境，讨厌一成不变和过度条条框框的岗位。ESTP在销售、活动策划、客户服务等需要人际互动的岗位表现尤为突出。",
+          example: "某ESTP员工在公司年会自告奋勇当主持，现场即兴连线、带动气氛，连平时最严肃的老板都被逗笑，大家说：“有他在，连加班都能变成派对。”"
+        },
+        relationship: {
+          fact: "ESTP在感情中极度热情和浪漫，喜欢用惊喜和实际行动表达爱意。他们擅长制造浪漫氛围，喜欢和伴侣一起体验新鲜事物。遇到矛盾时倾向于回避冲突，更愿意用温柔和幽默化解尴尬。",
+          example: "某ESTP女友不会写长篇情书，但会在纪念日当天突然带男友去体验热气球，结束后还自制一段vlog记录全程，男友感叹：“和她在一起，每天都像综艺节目。”"
+        },
+        retirement: {
+          fact: "退休后的ESTP依然活跃在社交圈，喜欢参与社区活动、志愿服务或带动邻里娱乐。他们会把退休生活过成“快乐俱乐部”，用自己的热情感染身边每一个人。",
+          example: "有位退休ESTP大爷在小区组织“广场舞大赛”，自己带头编舞、拉赞助，最后全社区都加入，大家说：“他让退休生活变成了嘉年华。”"
+        },
+        cosmic: {
+          fact: "ESTP的本质是“人类版快乐发电机”--用Se（外倾感觉）捕捉生活的每一份美好，用Fi（内倾情感）真诚表达自我，用Te（外倾思考）偶尔高效解决实际问题，再用Ni（内倾直觉）……偶尔灵光一现。他们总能在最平凡的日子里点燃快乐，被称为“现实世界的气氛担当”。",
+          example: "有个ESTP朋友聚会时突然提议“即兴才艺秀”，自己带头唱跳，最后全场嗨到停不下来，朋友们都说：“他在的地方永远不会无聊。”"
+        },
+        summary: {
+          self: "如果你是ESTP：这些冷知识是不是让你忍不住想马上拉个群组织活动？",
+          others: "如果你认识ESTP：现在你懂他们为什么总能让身边充满欢笑和活力了。"
+        }
+      },
+      INTJ: {
+        childhood: {
+          fact: "INTJ小孩喜欢独自玩策略游戏，热衷于设计复杂规则和计划。",
+          example: "某INTJ小孩为玩伴设计了一套‘太空冒险’游戏规则，连大人都惊叹其逻辑性。"
+        },
+        student: {
+          fact: "INTJ学生偏好自学深奥科目，对理论研究充满热情。",
+          example: "某INTJ学生自学编程，开发了一个简单的应用，老师推荐他参加科技竞赛。"
+        },
+        career: {
+          fact: "INTJ在职场擅长制定长期战略计划，追求效率和目标实现。",
+          example: "某INTJ员工为公司设计五年发展计划，赢得高层一致认可。"
+        },
+        relationship: {
+          fact: "INTJ在感情中谨慎表达情感，只对亲密的人敞开心扉。",
+          example: "某INTJ在纪念日为伴侣写了一封深情但简洁的信，感动对方。"
+        },
+        retirement: {
+          fact: "退休后的INTJ专注于财务自由和个人兴趣，如研究或写作。",
+          example: "某INTJ退休后出版了一本关于战略规划的书，广受好评。"
+        },
+        cosmic: {
+          fact: "INTJ热衷于思考宇宙和存在的意义，常研究哲学或天文学。",
+          example: "某INTJ朋友在聚会中分享宇宙膨胀理论，引发大家深思。"
+        },
+        summary: {
+          self: "如果你是INTJ：这些冷知识是否让你想规划更宏大的目标？",
+          others: "如果你认识INTJ：他们看似冷漠，但内心充满深思和热情。"
+        }
+      }
+    };
 
-  <!-- 页脚 -->
-  <footer class="bg-gray-900 text-white py-8">
-    <div class="container mx-auto px-4 text-center">
-      <div class="flex items-center justify-center mb-4">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="16" x2="12" y2="12"></line>
-          <line x1="12" y1="8" x2="12.01" y2="8"></line>
-        </svg>
-        <span class="ml-2 text-lg font-bold">智能导航</span>
-      </div>
-      <p class="text-gray-400 mb-4">探索自我，发现潜能，引领未来方向。</p>
-      <div class="border-t border-gray-800 pt-4">
-        <div class="text-gray-400">© 2025 智能导航 - 专业MBTI测试. 保留所有权利.</div>
-      </div>
-    </div>
-  </footer>
+    // Fetch JSON
+    async function tryFetch(paths) {
+      for (const path of paths) {
+        console.log(`Fetching: ${path}`);
+        try {
+          const res = await fetch(path);
+          console.log(`Status: ${res.status} ${res.statusText}`);
+          if (!res.ok) {
+            throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+          }
+          const data = await res.json();
+          console.log(`Success: ${path}`);
+          return data;
+        } catch (err) {
+          console.error(`Failed: ${path} - ${err.message}`);
+        }
+      }
+      throw new Error('无法加载 JSON 文件');
+    }
+
+    // Render data
+    function renderData(data, type) {
+      console.log('Rendering data for type:', type);
+      const d = data[type];
+      if (!d) {
+        throw new Error(`数据不存在: ${type}`);
+      }
+      document.getElementById('title').textContent = `${type} - 深入解读`;
+      document.getElementById('content').innerHTML = buildCards(d);
+      document.getElementById('summary-card').innerHTML = d.summary ?
+        `<h4 class="text-lg font-semibold text-blue-700 mb-3">总结</h4>
+         <p class="text-base text-gray-700 mb-2">${d.summary.self}</p>
+         <p class="text-sm text-gray-600">${d.summary.others}</p>` : '';
+    }
+
+    // Main function
+    async function main() {
+      console.log('Starting main function');
+      const urlParams = new URLSearchParams(window.location.search);
+      let type = urlParams.get('type');
+
+      // Fallback to sessionStorage if URL parameter is missing
+      if (!type) {
+        console.warn('No MBTI type in URL, checking sessionStorage');
+        type = sessionStorage.getItem('mbtiType');
+      }
+
+      console.log('MBTI type:', type || 'none');
+
+      if (!type) {
+        console.error('No MBTI type provided');
+        document.getElementById('title').textContent = '错误';
+        document.getElementById('content').innerHTML = '<p class="text-red-500 text-center text-base">未提供 MBTI 类型</p>';
+        return;
+      }
+
+      // Normalize type to uppercase to handle case sensitivity
+      type = type.toUpperCase();
+
+      const possiblePaths = [
+        './mbtifactsmore.json',
+        '/mbtifactsmore.json'
+      ];
+
+      try {
+        const data = await tryFetch(possiblePaths);
+        renderData(data, type);
+      } catch (err) {
+        console.error('Fetch error:', err.message);
+        document.getElementById('title').textContent = '加载失败';
+        document.getElementById('content').innerHTML = `
+          <p class="text-red-500 text-center text-base">无法加载内容: ${err.message}</p>
+          <p class="text-gray-600 text-center text-sm mt-2">使用备用数据展示示例内容。</p>`;
+        const d = fallbackData[type] || fallbackData['INTJ'];
+        renderData(fallbackData, type);
+      }
+    }
+
+    // Run main function
+    main();
+  </script>
 </body>
 </html>
