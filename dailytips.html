@@ -9,46 +9,133 @@
 <style>
     /* 自定义样式 */
     #inspirationCard {
-        width: 40%;
-        padding: 4rem;
+        width: 100%;
+        max-width: 500px; /* Narrower width */
+        padding: 2.5rem;
+        background: linear-gradient(135deg, #ffffff, #f8fafc);
+        border-radius: 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        min-height: 450px; /* Increased length for longer content */
+    }
+
+    #inspirationCard:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
     }
 
     #inspirationCard h1 {
-        font-size: 2.5rem;
+        font-size: 1.875rem;
+        font-weight: 700;
+        color: #1f2937;
         margin-bottom: 1rem;
+        letter-spacing: -0.025em;
     }
 
     #inspirationCard p#dailytips {
-        font-size: 1.5rem;
-        line-height: 1.7;
+        font-size: 1.125rem;
+        line-height: 1.75;
+        color: #374151;
         margin-bottom: 1.5rem;
     }
 
     #refreshBtn {
-        background-color: #86efac;
-        color: blue;
+        background: linear-gradient(to right, #3b82f6, #60a5fa);
+        color: white;
         padding: 0.75rem 1.5rem;
         font-size: 1rem;
-        display: inline-block; /* 使按钮可以设置宽度 */
-        width: 180px; /* 设置一个固定的宽度，你可以根据需要调整 */
-        text-align: center; /* 使文字在按钮内居中 */
+        font-weight: 500;
+        border-radius: 9999px;
+        display: inline-block;
+        width: 200px;
+        text-align: center;
+        transition: background 0.3s ease, transform 0.2s ease;
     }
 
     #refreshBtn:hover {
-        background-color: #a7f3d0;
+        background: linear-gradient(to right, #2563eb, #3b82f6);
+        transform: scale(1.05);
     }
 
     .donate-button {
-        color: blue !important;
+        background: linear-gradient(to right, #f472b6, #fb7185);
+        color: white !important;
         padding: 0.75rem 1.5rem !important;
         font-size: 1rem !important;
-        display: inline-block !important; /* 使按钮可以设置宽度 */
-        width: 180px !important; /* 设置与换一个启示按钮相同的固定宽度，!important 确保覆盖 */
-        text-align: center !important; /* 使文字在按钮内居中 */
+        font-weight: 500 !important;
+        border-radius: 9999px !important;
+        display: inline-block !important;
+        width: 200px !important;
+        text-align: center !important;
+        transition: background 0.3s ease, transform 0.2s ease !important;
+    }
+
+    .donate-button:hover {
+        background: linear-gradient(to right, #ec4899, #f472b6) !important;
+        transform: scale(1.05) !important;
     }
 
     .header-spacing {
-        margin-top: 6rem;
+        margin-top: 4.5rem; /* Reduced from 6rem to move content up by approximately one line */
+    }
+
+    .intro-text {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #1f2937;
+        font-family: 'Noto Serif SC', serif;
+        letter-spacing: 0.025em;
+        line-height: 1.6;
+    }
+
+    /* Adjust content sections for approximate line counts */
+    .content-section {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .content-section div:nth-child(1) { /* 生活贴士: ~2 lines */
+        min-height: 3.2rem;
+    }
+
+    .content-section div:nth-child(2) { /* 寓言例子: ~4 lines */
+        min-height: 6.4rem;
+    }
+
+    .content-section div:nth-child(3) { /* MBTI 建议: ~2 lines */
+        min-height: 3.2rem;
+    }
+
+    @media (max-width: 640px) {
+        #inspirationCard {
+            padding: 1.5rem;
+            min-height: 400px;
+        }
+
+        #inspirationCard h1 {
+            font-size: 1.5rem;
+        }
+
+        #inspirationCard p#dailytips {
+            font-size: 1rem;
+        }
+
+        #refreshBtn, .donate-button {
+            width: 100%;
+            max-width: 180px;
+        }
+
+        .intro-text {
+            font-size: 1rem;
+        }
+
+        .content-section {
+            font-size: 0.875rem;
+        }
+
+        .header-spacing {
+            margin-top: 3.5rem; /* Adjusted for mobile to maintain proportional shift */
+        }
     }
 </style>
 </head>
@@ -113,7 +200,7 @@
                         <path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z" />
                     </svg>
                 </div>
-                <p class="text-gray-600">用一句话点亮你的一天 · 智慧与能量，从此刻开始</p>
+                <p class="intro-text">用一句话点亮你的一天 · 智慧与能量，从此刻开始</p>
             </div>
 
             <div id="inspirationCard" class="bg-white shadow-2xl rounded-2xl text-center fade-in transition">
@@ -121,7 +208,7 @@
                 <h1 class="text-2xl font-bold text-gray-800 mb-2">今日启示</h1>
                 <p id="dailytips" class="text-gray-900 text-lg leading-relaxed mb-4"></p>
 
-                <div class="text-left text-sm text-gray-700 space-y-3 mt-6">
+                <div class="content-section text-left text-sm text-gray-700 space-y-3 mt-6">
                     <div>
                         <span class="font-semibold text-blue-700">▪ 生活贴士：</span>
                         <span id="tip"></span>
@@ -143,7 +230,7 @@
 
             <div class="text-center mt-8">
                 <p class="text-gray-700 mb-4">可以打赏我哦，感谢你的友情赞助！</p>
-                <a href="https://buymeacoffee" target="_blank" class="inline-block bg-blue-300 text-blue-800 px-6 py-2 rounded-full hover:bg-blue-400 transition">
+                <a href="https://buymeacoffee" target="_blank" class="donate-button">
                     ☕ 打赏我一杯咖啡
                 </a>
             </div>
@@ -189,7 +276,6 @@
 
     </main>
 
-
     <footer class="bg-gray-900 text-white py-8 mt-16">
         <div class="container mx-auto px-4 text-center">
             <div class="flex items-center justify-center mb-4">
@@ -205,7 +291,7 @@
             </p>
             <div class="border-t border-gray-800 pt-4">
                 <div class="text-gray-400">
-                    &copy; 2025 智能MBTI - 专业MBTI测试. 保留所有权利.
+                    © 2025 智能MBTI - 专业MBTI测试. 保留所有权利.
                 </div>
             </div>
         </div>
