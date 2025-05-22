@@ -10,7 +10,7 @@
     /* 自定义样式 */
     #inspirationCard {
         width: 100%;
-        max-width: 500px; /* Narrower width */
+        max-width: 640px; /* Increased from 500px to ~640px, approximating 2 columns (assuming ~70px per column in a 12-column grid) */
         padding: 2.5rem;
         background: linear-gradient(135deg, #ffffff, #f8fafc);
         border-radius: 1rem;
@@ -76,22 +76,41 @@
     }
 
     .header-spacing {
-        margin-top: 4.5rem; /* Reduced from 6rem to move content up by approximately one line */
+        margin-top: 4.5rem; /* From previous update */
     }
 
     .intro-text {
         font-size: 1.125rem;
         font-weight: 600;
-        color: #1f2937;
+        color: #4b5563; /* Changed to a softer gray-blue for a different, professional look */
         font-family: 'Noto Serif SC', serif;
         letter-spacing: 0.025em;
         line-height: 1.6;
+        display: block; /* Ensure block display for line break */
     }
 
-    /* Adjust content sections for approximate line counts */
+    .intro-text span {
+        display: block; /* Split into two lines */
+    }
+
+    /* Adjust content sections for approximate line counts and alignment */
     .content-section {
         font-size: 0.95rem;
         line-height: 1.6;
+    }
+
+    .content-section div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content-section div span:first-child {
+        font-weight: 600;
+    }
+
+    .content-section div span:last-child {
+        margin-top: 0.25rem; /* Small gap to place content on next line */
+        margin-left: 1.25rem; /* Align with first character of heading (after ▪) */
     }
 
     .content-section div:nth-child(1) { /* 生活贴士: ~2 lines */
@@ -108,6 +127,7 @@
 
     @media (max-width: 640px) {
         #inspirationCard {
+            max-width: 90%; /* Adjusted for mobile to maintain proportionality */
             padding: 1.5rem;
             min-height: 400px;
         }
@@ -133,8 +153,12 @@
             font-size: 0.875rem;
         }
 
+        .content-section div span:last-child {
+            margin-left: 1rem; /* Slightly adjusted for mobile alignment */
+        }
+
         .header-spacing {
-            margin-top: 3.5rem; /* Adjusted for mobile to maintain proportional shift */
+            margin-top: 3.5rem;
         }
     }
 </style>
@@ -195,30 +219,28 @@
     <main class="pt-14 px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col items-center justify-center min-h-[calc(100vh-12rem)]">
             <div class="max-w-3xl mx-auto text-center mb-8 header-spacing">
-                <div class="mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10 text-yellow-500 mx-auto">
-                        <path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z" />
-                    </svg>
-                </div>
-                <p class="intro-text">用一句话点亮你的一天 · 智慧与能量，从此刻开始</p>
+                <p class="intro-text">
+                    <span>用一句话点亮你的一天</span>
+                    <span>智慧与能量，从此刻开始</span>
+                </p>
             </div>
 
             <div id="inspirationCard" class="bg-white shadow-2xl rounded-2xl text-center fade-in transition">
                 <div id="emoji" class="text-4xl mb-4">🌟</div>
-                <h1 class="text-2xl font-bold text-gray-800 mb-2">今日启示</h1>
+                <h1 class="text-2xl font-bold text-gray-800 mb-2">今日一悟</h1>
                 <p id="dailytips" class="text-gray-900 text-lg leading-relaxed mb-4"></p>
 
                 <div class="content-section text-left text-sm text-gray-700 space-y-3 mt-6">
                     <div>
-                        <span class="font-semibold text-blue-700">▪ 生活贴士：</span>
+                        <span class="font-semibold text-blue-700">▪ 生活贴士</span>
                         <span id="tip"></span>
                     </div>
                     <div>
-                        <span class="font-semibold text-purple-700">▪ 寓言例子：</span>
+                        <span class="font-semibold text-purple-700">▪ 寓言例子</span>
                         <span id="fable"></span>
                     </div>
                     <div>
-                        <span class="font-semibold text-pink-700">▪ MBTI 建议：</span>
+                        <span class="font-semibold text-pink-700">▪ MBTI 建议</span>
                         <span id="mbti"></span>
                     </div>
                 </div>
