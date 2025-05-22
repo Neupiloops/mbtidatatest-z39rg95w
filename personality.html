@@ -1,33 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>INFJ - MBTI 性格类型详解</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>MBTI 性格类型详解 - 智能MBTI</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/styles.css">
   <style>
-    body {
-      font-family: 'Noto Sans', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-
-    header {
-      background-color: #ffffff;
-      color: #3182ce;
-      padding: 2rem;
-      text-align: center;
-      border-bottom: 2px solid #3182ce;
-    }
-
-    .container {
-      max-width: 960px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-
     .type-switcher {
       display: grid;
       grid-template-columns: repeat(8, 1fr);
@@ -47,7 +27,7 @@
       transition: background-color 0.3s ease;
     }
 
-    .type-switcher a[href*="infj"] {
+    .type-switcher a.active {
       background-color: #2c5282;
     }
 
@@ -61,11 +41,6 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
       padding: 2rem;
       margin-bottom: 2rem;
-    }
-
-    h2 {
-      color: #2d3748;
-      margin-bottom: 1rem;
     }
 
     .traits {
@@ -101,110 +76,256 @@
       padding: 1rem 1.25rem;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     }
-
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
-      color: #aaa;
-    }
   </style>
 </head>
-<body>
-  <header>
-    <h1>MBTI 性格类型详解</h1>
-    <p>探索16种人格类型的特质、优势、挑战与成长路径</p>
+<body class="font-sans text-gray-800 bg-gray-50">
+  <!-- 头部导航 -->
+  <header class="fixed w-full bg-white bg-opacity-95 shadow-sm z-50 transition duration-300">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center">
+          <a href="index.html" class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span class="ml-2 text-xl font-bold text-gray-900">智能MBTI</span>
+          </a>
+        </div>
+        
+        <!-- 移动端菜单按钮 -->
+        <div class="md:hidden">
+          <button type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none" id="mobile-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+        
+        <!-- 桌面端导航 -->
+        <nav class="hidden md:flex justify-center items-center space-x-8">
+          <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a> 
+          <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600 transition-colors">小问答</a>
+          <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600 transition-colors">冷知识</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600 transition-colors">每天一悟</a>
+          <a href="booksblog.html" class="text-gray-600 hover:text-blue-600 transition-colors">读书推荐</a>
+          <a href="price.html" class="text-gray-600 hover:text-blue-600 transition-colors">套餐价格</a>
+          <a href="aboutus.html" class="text-gray-600 hover:text-blue-600 transition-colors">关于我们</a>
+          <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">开始测试</a>
+        </nav>
+      </div>
+      
+      <!-- 移动端菜单 -->
+      <div class="md:hidden hidden bg-white pb-4" id="mobile-menu">
+        <nav class="flex flex-col space-y-4">
+          <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
+          <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600 transition-colors">小问答</a>
+          <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600 transition-colors">冷知识</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600 transition-colors">每天一悟</a>
+          <a href="booksblog.html" class="text-gray-600 hover:text-blue-600 transition-colors">读书推荐</a>
+          <a href="price.html" class="text-gray-600 hover:text-blue-600 transition-colors">套餐价格</a>
+          <a href="aboutus.html" class="text-gray-600 hover:text-blue-600 transition-colors">关于我们</a>
+          <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-center">开始测试</a>
+        </nav>
+      </div>
+    </div>
   </header>
 
-  <div class="container">
-    <section class="card">
-      <h2>选择 MBTI 类型</h2>
-      <div class="type-switcher">
-        <a href="mbti-infj.html">INFJ</a>
-        <a href="mbti-infp.html">INFP</a>
-        <a href="mbti-intj.html">INTJ</a>
-        <a href="mbti-intp.html">INTP</a>
-        <a href="mbti-enfj.html">ENFJ</a>
-        <a href="mbti-enfp.html">ENFP</a>
-        <a href="mbti-entj.html">ENTJ</a>
-        <a href="mbti-entp.html">ENTP</a>
-        <a href="mbti-isfj.html">ISFJ</a>
-        <a href="mbti-isfp.html">ISFP</a>
-        <a href="mbti-istj.html">ISTJ</a>
-        <a href="mbti-istp.html">ISTP</a>
-        <a href="mbti-esfj.html">ESFJ</a>
-        <a href="mbti-esfp.html">ESFP</a>
-        <a href="mbti-estj.html">ESTJ</a>
-        <a href="mbti-estp.html">ESTP</a>
-      </div>
-    </section>
+  <!-- 主要内容 -->
+  <main class="pt-24 pb-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl font-bold text-gray-900 mb-8">MBTI 性格类型详解</h1>
+        <p class="text-xl text-gray-600 mb-8">探索16种人格类型的特质、优势、挑战与成长路径</p>
+        
+        <section class="card">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">选择 MBTI 类型</h2>
+          <div class="type-switcher" id="type-switcher">
+            <!-- 类型选择按钮将通过JavaScript动态生成 -->
+          </div>
+        </section>
 
-    <section class="card">
-      <h2>基本信息</h2>
-      <div style="text-align: center; margin-bottom: 1rem; font-weight: bold; color: #2b6cb0;">
-        INFJ - 提倡者：理想主义的洞察者，致力于实现更美好的世界。
-      </div>
-      <ul class="traits">
-        <li>I - 内向</li>
-        <li>N - 直觉</li>
-        <li>F - 情感</li>
-        <li>J - 计划</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>优势与挑战</h2>
-      <div class="pros-cons">
-        <div class="pros">
-          <h3>✅ 优势</h3>
-          <ul>
-            <li>极富同理心</li>
-            <li>深思熟虑</li>
-            <li>忠诚理想主义</li>
-            <li>擅长倾听与引导</li>
+        <section class="card" id="basic-info">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">基本信息</h2>
+          <div id="type-description" style="text-align: center; margin-bottom: 1rem; font-weight: bold; color: #2b6cb0;">
+            <!-- 动态加载的类型描述 -->
+          </div>
+          <ul class="traits" id="traits-list">
+            <!-- 动态加载的特质列表 -->
           </ul>
-        </div>
-        <div class="cons">
-          <h3>⚠️ 挑战</h3>
-          <ul>
-            <li>容易感到疲惫</li>
-            <li>难以拒绝他人</li>
-            <li>过度理想化</li>
-            <li>容易自我怀疑</li>
+        </section>
+
+        <section class="card">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">优势与挑战</h2>
+          <div class="pros-cons">
+            <div class="pros">
+              <h3 class="text-xl font-semibold mb-3">✅ 优势</h3>
+              <ul id="advantages-list">
+                <!-- 动态加载的优势列表 -->
+              </ul>
+            </div>
+            <div class="cons">
+              <h3 class="text-xl font-semibold mb-3">⚠️ 挑战</h3>
+              <ul id="challenges-list">
+                <!-- 动态加载的挑战列表 -->
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">人际关系</h2>
+          <p id="relations-text"><!-- 动态加载的人际关系描述 --></p>
+        </section>
+
+        <section class="card">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">职业倾向</h2>
+          <ul id="careers-list">
+            <!-- 动态加载的职业列表 -->
           </ul>
-        </div>
+        </section>
+
+        <section class="card">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">成长建议</h2>
+          <p id="advice-text"><!-- 动态加载的成长建议 --></p>
+        </section>
       </div>
-    </section>
+    </div>
+  </main>
 
-    <section class="card">
-      <h2>人际关系</h2>
-      <p>INFJ 在亲密关系中富有责任心和同理心，但可能过于敏感。他们倾向于寻找深度连接而非浅层交往。</p>
-    </section>
-
-    <section class="card">
-      <h2>职业倾向</h2>
-      <ul>
-        <li>心理咨询师</li>
-        <li>作家 / 编辑</li>
-        <li>教育工作者</li>
-        <li>人力资源专家</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>与其他类型的关系</h2>
-      <p>INFJ 与 ENFP、INFP 等类型较易建立深度交流，与 ESTP 类型则可能存在挑战。</p>
-    </section>
-
-    <section class="card">
-      <h2>成长建议</h2>
-      <p>学会设立界限、尊重现实限制、表达真实感受，是 INFJ 保持身心健康的关键。</p>
-    </section>
-  </div>
-
-  <footer>
-    MBTI 类型信息仅供参考，版权所有 © 智能MBTI 2025
+  <!-- 页脚 -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <div class="flex items-center justify-center mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span class="ml-2 text-xl font-bold">智能MBTI</span>
+      </div>
+      <p class="text-gray-400">© 2023 智能MBTI. 保留所有权利。</p>
+    </div>
   </footer>
+
+  <script>
+    // 移动端菜单切换
+    document.getElementById('mobile-menu-button').addEventListener('click', function() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // 加载MBTI类型数据
+    async function loadPersonalityData() {
+      try {
+        const response = await fetch('personality.json');
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error('加载数据失败:', error);
+        return {};
+      }
+    }
+
+    // 生成类型选择器
+    function generateTypeSwitcher(data) {
+      const typeSwitcher = document.getElementById('type-switcher');
+      const types = Object.keys(data);
+      
+      types.forEach(type => {
+        const typeLink = document.createElement('a');
+        typeLink.href = '#';
+        typeLink.textContent = type;
+        typeLink.dataset.type = type;
+        typeLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          // 移除所有active类
+          document.querySelectorAll('#type-switcher a').forEach(link => {
+            link.classList.remove('active');
+          });
+          // 添加active类到当前选中项
+          this.classList.add('active');
+          // 更新页面内容
+          updatePersonalityContent(data[type]);
+        });
+        typeSwitcher.appendChild(typeLink);
+      });
+
+      // 默认选中第一个类型
+      if (types.length > 0) {
+        const firstType = types[0];
+        const firstLink = typeSwitcher.querySelector(`a[data-type="${firstType}"]`);
+        if (firstLink) {
+          firstLink.classList.add('active');
+          updatePersonalityContent(data[firstType]);
+        }
+      }
+    }
+
+
+    // 更新页面内容
+    function updatePersonalityContent(typeData) {
+      // 更新标题
+      document.title = `${typeData.title} - 智能MBTI`;
+      
+      // 更新基本信息
+      document.getElementById('type-description').textContent = typeData.description;
+      
+      // 更新特质列表
+      const traitsList = document.getElementById('traits-list');
+      traitsList.innerHTML = '';
+      typeData.traits.forEach(trait => {
+        const li = document.createElement('li');
+        li.textContent = trait;
+        traitsList.appendChild(li);
+      });
+      
+      // 更新优势列表
+      const advantagesList = document.getElementById('advantages-list');
+      advantagesList.innerHTML = '';
+      typeData.advantages.forEach(advantage => {
+        const li = document.createElement('li');
+        li.textContent = advantage;
+        advantagesList.appendChild(li);
+      });
+      
+      // 更新挑战列表
+      const challengesList = document.getElementById('challenges-list');
+      challengesList.innerHTML = '';
+      typeData.challenges.forEach(challenge => {
+        const li = document.createElement('li');
+        li.textContent = challenge;
+        challengesList.appendChild(li);
+      });
+  
+      // 更新人际关系描述
+      document.getElementById('relations-text').textContent = typeData.relations;
+      
+      // 更新职业列表
+      const careersList = document.getElementById('careers-list');
+      careersList.innerHTML = '';
+      typeData.careers.forEach(career => {
+        const li = document.createElement('li');
+        li.textContent = career;
+        careersList.appendChild(li);
+      });
+      
+      // 更新成长建议
+      document.getElementById('advice-text').textContent = typeData.advice;
+    }
+
+    // 页面加载完成后初始化
+    document.addEventListener('DOMContentLoaded', async function() {
+      const personalityData = await loadPersonalityData();
+      if (Object.keys(personalityData).length > 0) {
+        generateTypeSwitcher(personalityData);
+      } else {
+        document.getElementById('type-switcher').innerHTML = '<p class="text-red-500">无法加载MBTI类型数据</p>';
+      }
+    });
+  </script>
+  
 </body>
 </html>
 
