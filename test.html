@@ -10,47 +10,58 @@
 </head>
 <body class="font-sans text-gray-800 bg-gray-50">
   <!-- 头部导航 -->
-<body class="bg-gray-50 text-gray-800 font-sans">
-
-    <header class="fixed w-full bg-white bg-opacity-95 shadow z-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <a href="index.html" class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10" />
-                        <line x1="12" y1="16" x2="12" y2="12" />
-                        <line x1="12" y1="8" x2="12.01" y2="8" />
-                    </svg>
-                    <span class="ml-2 text-xl font-bold text-gray-900">智能MBTI</span>
-                </a>
-                <div class="hidden md:flex space-x-8">
-                    <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
-                    <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600">小问答</a>
-                    <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600">冷知识</a>
-                    <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每日启发</a>
-                    <a href="price.html" class="text-gray-600 hover:text-blue-600">套餐价格</a>
-                    <a href="aboutus.html" class="text-gray-600 hover:text-blue-600">关于我们</a>
-                    <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">开始测试</a>
-                </div>
-                <button id="mobile-menu-button" class="md:hidden text-gray-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-            </div>
-            <div class="md:hidden hidden pb-4" id="mobile-menu">
-                <nav class="flex flex-col space-y-2">
-                    <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
-                    <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600">小问答</a>
-                    <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600">冷知识</a>
-                    <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每日启发</a>
-                    <a href="price.html" class="text-gray-600 hover:text-blue-600">套餐价格</a>
-                    <a href="aboutus.html" class="text-gray-600 hover:text-blue-600">关于我们</a>
-                    <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">开始测试</a>
-                </nav>
-            </div>
+<body class="font-sans text-gray-800 bg-gray-50">
+  <header class="fixed w-full bg-white bg-opacity-95 shadow-sm z-50 transition duration-300">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center">
+          <a href="index.html" class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span class="ml-2 text-xl font-bold text-gray-900">智能MBTI</span>
+          </a>
         </div>
-    </header>
+        
+        <!-- 移动端菜单按钮 -->
+        <div class="md:hidden">
+          <button type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none" id="mobile-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+        
+        <!-- 桌面端导航 -->
+        <nav class="hidden md:flex justify-center items-center space-x-8">
+          <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a> 
+          <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600 transition-colors">小问答</a>
+          <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600 transition-colors">冷知识</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600 transition-colors">每天一悟</a>
+          <a href="blog.html" class="text-gray-600 hover:text-blue-600 transition-colors">读书推荐</a>
+          <a href="price.html" class="text-gray-600 hover:text-blue-600 transition-colors">套餐价格</a>
+          <a href="aboutus.html" class="text-gray-600 hover:text-blue-600 transition-colors">关于我们</a>
+          <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">开始测试</a>
+        </nav>
+      </div>
+      
+      <!-- 移动端菜单 -->
+      <div class="md:hidden hidden bg-white pb-4" id="mobile-menu">
+        <nav class="flex flex-col space-y-4">
+          <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
+          <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600 transition-colors">小问答</a>
+          <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600 transition-colors">冷知识</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600 transition-colors">每天一悟</a>
+          <a href="blog.html" class="text-gray-600 hover:text-blue-600 transition-colors">读书推荐</a>
+          <a href="price.html" class="text-gray-600 hover:text-blue-600 transition-colors">套餐价格</a>
+          <a href="aboutus.html" class="text-gray-600 hover:text-blue-600 transition-colors">关于我们</a>
+          <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-center">开始测试</a>
+        </nav>
+      </div>
+    </div>
+  </header>
 
   <!-- 测试页面主要内容 -->
   <main class="pt-28 md:pt-32">
@@ -447,3 +458,4 @@ document.addEventListener("DOMContentLoaded", rotateQuotes);
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
+               
