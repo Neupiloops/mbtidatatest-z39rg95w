@@ -98,7 +98,7 @@
 
   <!-- 模态弹窗 -->
   <div id="modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
-    <div class="bg-white w-full max-w-6xl h-auto max-h-[90vh] overflow-y-auto rounded-lg p-6 relative">
+    <div class="bg-white w-full max-w-4xl h-auto max-h-[80vh] overflow-y-auto rounded-lg p-6 relative mx-4">
       <button onclick="closeModal()" class="absolute top-2 right-4 text-2xl text-gray-700 hover:text-red-500">×</button>
       <h3 id="modal-title" class="text-2xl font-bold text-blue-700 mb-6 text-center"></h3>
       <div id="modal-content"></div>
@@ -129,75 +129,106 @@
   };
 
   /* ===== ② DOM 引用 ===== */
-    const buttons = document.querySelectorAll(".mbti-type-btn");
-    const popup = document.getElementById("popup");
-    const modal = document.getElementById("modal");
-    const modalTitle = document.getElementById("modal-title");
-    const modalContent = document.getElementById("modal-content");
-    const summaryCard = document.getElementById("summary-card");
+  const buttons = document.querySelectorAll(".mbti-type-btn");
+  const popup = document.getElementById("popup");
+  const modal = document.getElementById("modal");
+  const modalTitle = document.getElementById("modal-title");
+  const modalContent = document.getElementById("modal-content");
+  const summaryCard = document.getElementById("summary-card");
 
   /* ===== ③ 点击 MBTI 类型按钮 ===== */
-    buttons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const type = btn.dataset.type;
-        const desc = descriptions[type];
-        popup.innerHTML = `
-          <h2 class="text-xl font-bold text-blue-600 mb-2">${desc.title}</h2>
-          <p class="text-gray-700 mb-4">${desc.content}</p>
-          <button class="show-more bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" data-type="${type}">
-            点击了解更多
-          </button>`;
-      });
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const type = btn.dataset.type;
+      const desc = descriptions[type];
+      popup.innerHTML = `
+        <h2 class="text-xl font-bold text-blue-600 mb-2">${desc.title}</h2>
+        <p class="text-gray-700 mb-4">${desc.content}</p>
+        <button class="show-more bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" data-type="${type}">
+          点击了解更多
+        </button>`;
     });
+  });
 
   /* ===== ④ 事件委托：点击『了解更多』 ===== */
-    popup.addEventListener("click", (e) => {
-      if (e.target.classList.contains("show-more")) {
-        showMore(e.target.dataset.type);
-      }
-    });
-
-  /* ===== ⑤ 拉取 JSON 并生成内容 ===== */
-    function showMore(type) {
-      console.log(`Opening mbti-details.html for type: ${type}`);
-      sessionStorage.setItem('mbtiType', type); // Store type as fallback
-      const width = Math.min(window.screen.width * 0.9, 1200);
-      const height = Math.min(window.screen.height * 0.9, 800);
-      window.open(`./mbti-details.html?type=${type}`, 'mbtiDetails', `width=${width},height=${height},scrollbars=yes,resizable=yes`);
+  popup.addEventListener("click", (e) => {
+    if (e.target.classList.contains("show-more")) {
+      showMore(e.target.dataset.type);
     }
+  });
+
+  /* ===== ⑤ 显示模态弹窗 ===== */
+  function showMore(type) {
+    const desc = descriptions[type];
+    modalTitle.textContent = desc.title;
+    
+    // Simulate fetching JSON data (since mbti-details.html is not provided)
+    const sampleData = {
+      childhood: [
+        { fact: `${type} 在童年时通常表现出独立思考的特点。`, example: `例如，可能会独自研究某件事物数小时。` },
+      ],
+      student: [
+        { fact: `${type} 在学生时期擅长分析复杂问题。`, example: `例如，喜欢解构数学或科学问题。` },
+      ],
+      career: [
+        { fact: `${type} 在职场中注重效率和目标导向。`, example: `例如，善于制定长期战略计划。` },
+      ],
+      relationship: [
+        { fact: `${type} 在关系中重视深度连接。`, example: `例如，更倾向于深入交流而非泛泛之谈。` },
+      ],
+      retirement: [
+        { fact: `${type} 在退休后可能追求个人兴趣。`, example: `例如，投入时间研究哲学或艺术。` },
+      ],
+      cosmic: [
+        { fact: `${type} 对宇宙的思考充满好奇。`, example: `例如，可能会对星际探索充满兴趣。` },
+      ]
+    };
+
+    modalContent.innerHTML = buildCards(sampleData);
+    summaryCard.innerHTML = `
+      <p class="text-gray-700 mb-2">总结：${desc.title} 是一个充满独特特质的性格类型，适合追求深度和意义的生活方式。</p>
+      <a href="test.html" class="text-blue-600 hover:underline">进行MBTI测试以了解更多</a>
+    `;
+    modal.classList.remove("hidden");
+  }
 
   /* ===== ⑥ 根据嵌套结构拼接 HTML ===== */
-    function buildCards(data) {
-      const names = {
-        childhood: "儿童时期",
-        student: "学生时期",
-        career: "职场冷知识",
-        relationship: "情感关系",
-        retirement: "退休时期",
-        cosmic: "宇宙级冷知识"
-      };
+  function buildCards(data) {
+    const names = {
+      childhood: "儿童时期",
+      student: "学生时期",
+      career: "职场冷知识",
+      relationship: "情感关系",
+      retirement: "退休时期",
+      cosmic: "宇宙级冷知识"
+    };
 
-      return Object.entries(names)
-        .filter(([k]) => data[k])
-        .map(([key, label]) => {
-          return `
-            <div class="mb-6">
-              <h4 class="text-lg font-semibold text-blue-600 mb-2">${label}</h4>
-              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                ${data[key].map(card => `
-                  <div class="bg-white border border-gray-200 rounded-lg p-4 shadow">
-                    <p class="text-sm text-gray-800 mb-2">${card.fact}</p>
-                    <p class="text-xs text-gray-500">${card.example}</p>
-                  </div>`).join('')}
-              </div>
-            </div>`;
-        }).join('');
-    }
+    return Object.entries(names)
+      .filter(([k]) => data[k])
+      .map(([key, label]) => {
+        return `
+          <div class="mb-6">
+            <h4 class="text-lg font-semibold text-blue-600 mb-2">${label}</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              ${data[key].map(card => `
+                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow">
+                  <p class="text-sm text-gray-800 mb-2">${card.fact}</p>
+                  <p class="text-xs text-gray-500">${card.example}</p>
+                </div>`).join('')}
+            </div>
+          </div>`;
+      }).join('');
+  }
 
   /* ===== ⑦ 关闭弹窗 ===== */
-    function closeModal() {
-      modal.classList.add("hidden");
-    }
+  function closeModal() {
+    modal.classList.add("hidden");
+  }
+
+  /* ===== ⑧ 移动端菜单切换 ===== */
+  document.getElementById("mobile-menu-button").addEventListener("click", () => {
+    document.getElementById("mobile-menu").classList.toggle("hidden");
+  });
   </script>
 
   <!-- 页脚 -->
@@ -216,7 +247,7 @@
       </p>
       <div class="border-t border-gray-800 pt-4">
         <div class="text-gray-400">
-          &copy; 2025 智能MBTI - 专业MBTI测试. 保留所有权利.
+          © 2025 智能MBTI - 专业MBTI测试. 保留所有权利.
         </div>
       </div>
     </div>
