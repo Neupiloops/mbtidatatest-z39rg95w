@@ -559,4 +559,44 @@
         "title": "即兴戏剧的艺术",
         "author": "基斯·约翰斯通",
         "isbn": "0878301178",
-        "amazonUrl": "https://www.amazon.com/Impro-Improvisation-Theatre-Keith-Johnstone/dp/
+        "amazonUrl": "https://www.amazon.com/Impro-Improvisation-Theatre-Keith-Johnstone/dp/0878301178/",
+        "description": "深入探索即兴表演的魅力，极大地激发ESFP的创造力与表现力。",
+        "rating": 4.8,
+        "reasons": [
+          "提升表演技巧，契合ESFP的外向性格",
+          "激发创意思维，增强即兴反应能力",
+          "适合团体互动，满足ESFP的社交需求",
+          "通过戏剧锻炼自我表达力，强化ESFP天赋"
+        ]
+      },
+      {
+        "title": "活出生命的意义",
+        "author": "维克多·弗兰克尔",
+        "isbn": "080701429X",
+        "amazonUrl": "https://www.amazon.com/Mans-Search-Meaning-Viktor-Frankl/dp/080701429X/",
+        "description": "从心理学角度探讨人生价值，对ESFP的人文关怀具有深远启发。",
+        "rating": 4.9,
+        "reasons": [
+          "激发对人生意义的思考，增强内在动力",
+          "鼓励真实表达与情感共鸣，符合ESFP倾向",
+          "帮助ESFP在娱乐与意义之间找到平衡",
+          "提供深度反思，提升情感深度与认知"
+        ]
+      },
+      {
+        "title": "旅行的艺术",
+        "author": "阿兰·德波顿",
+        "isbn": "0375725342",
+        "amazonUrl": "https://www.amazon.com/Art-Travel-Alain-Botton/dp/0375725342/",
+        "description": "将旅行与哲学结合，适合ESFP喜好探索世界的个性。",
+        "rating": 4.6,
+        "reasons": [
+          "激发探索欲望，契合ESFP爱冒险的精神",
+          "通过旅行体验提升生活美感",
+          "满足ESFP对感官体验的需求",
+          "将日常体验提升为哲思之旅"
+        ]
+      }
+    ]
+  }
+}
