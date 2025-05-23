@@ -8,181 +8,6 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="src/css/styles.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      // 全局变量存储书籍数据
-      window.booksData = null;
-      window.mbtiTypeData = null;
-      
-      // Function to fetch book details from Google Books API
-      window.fetchBookCover = function(isbn, bookElement) {
-        const query = isbn ? `isbn:${isbn}` : '';
-        const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=1`;
-
-        $.ajax({
-          url: apiUrl,
-          method: 'GET',
-          success: function(data) {
-            if (data.items && data.items.length > 0) {
-              const book = data.items[0].volumeInfo;
-              const coverUrl = book.imageLinks?.thumbnail || $(bookElement).find('.book-cover').attr('src');
-              $(bookElement).find('.book-cover').attr('src', coverUrl.replace('http://', 'https://'));
-            } else {
-              console.warn(`No cover found for ISBN: ${isbn}`);
-            }
-          },
-          error: function() {
-            console.error(`Error fetching cover for ISBN: ${isbn}`);
-          }
-        });
-      };
-
-      // 加载特定MBTI类型的描述数据
-      window.loadMbtiTypeDescription = function(mbtiType) {
-        if (!window.mbtiTypeData) return;
-        
-        const mbti = mbtiType.toUpperCase();
-        // 在数组中查找匹配的类型
-        const typeInfo = window.mbtiTypeData.find(item => item.type === mbti);
-        
-        if (!typeInfo) {
-          console.warn(`No type data found for ${mbti}`);
-          return;
-        }
-        
-        const section = $(`#${mbtiType.toLowerCase()}`);
-        const titleElement = section.find('h2');
-        const descriptionElement = section.find('p.text-gray-600.mb-4');
-        
-        // 更新MBTI类型描述
-        if (titleElement.length) {
-          titleElement.text(`${typeInfo.name}推荐书籍`);
-        }
-        
-        if (descriptionElement.length) {
-          descriptionElement.text(typeInfo.description + ' ' + typeInfo.recommendation);
-        }
-      };
-
-      // 加载特定MBTI类型的书籍数据
-      window.loadBooksForType = function(mbtiType) {
-        if (!window.booksData) return;
-        
-        // 如果是ESTJ，它已经有硬编码的卡片，不需要加载书籍数据
-        if (mbtiType.toLowerCase() === 'estj') return;
-        
-        const mbti = mbtiType.toUpperCase();
-        if (!window.booksData[mbti]) {
-          console.warn(`No book data found for ${mbti}`);
-          return;
-        }
-        
-        const books = window.booksData[mbti].books;
-        const section = $(`#${mbtiType.toLowerCase()}`);
-        const grid = section.find('.book-grid');
-        
-        // 清空现有内容
-        grid.empty();
-        
-        // 添加新书籍卡片
-        books.forEach(book => {
-          const card = `
-            <div class="book-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row min-h-[450px]" data-isbn="${book.isbn || ''}">
-              <div class="md:w-1/3 bg-gray-200">
-                <img class="book-cover w-full h-full object-cover" src="https://via.placeholder.com/128x192.png?text=Loading..." alt="${book.title}">
-              </div>
-              <div class="md:w-2/3 p-6">
-                <h3 class="book-title text-xl font-bold text-gray-900 mb-2">${book.title}</h3>
-                <p class="book-author text-sm text-gray-500 mb-2">作者: ${book.author}</p>
-                <div class="mb-4">
-                  <span class="text-yellow-500">${'★'.repeat(Math.floor(book.rating))}${'☆'.repeat(5 - Math.floor(book.rating))}</span>
-                  <span class="text-sm text-gray-500 ml-1">${book.rating}/5分</span>
-                </div>
-                <p class="text-gray-600 mb-4 text-sm">${book.description}</p>
-                <div class="mb-4">
-                  <h4 class="font-semibold text-gray-900 mb-1">为什么适合${mbti}:</h4>
-                  <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
-                    ${book.reasons.map(reason => `<li>${reason}</li>`).join('')}
-                  </ul>
-                </div>
-                <div class="mt-auto">
-                  <a href="${book.amazonUrl}" target="_blank" class="buy-button inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">直接购买</a>
-                </div>
-              </div>
-            </div>`;
-          grid.append(card);
-          
-          // 获取书籍封面
-          const cardElement = grid.find('.book-card').last();
-          if (book.isbn) {
-            window.fetchBookCover(book.isbn, cardElement);
-          }
-        });
-      };
-
-      // 获取MBTI类型数据
-      $.ajax({
-        url: 'booktop.json',
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-          // 保存数据到全局变量
-          window.mbtiTypeData = data;
-          
-          // 获取当前活动的标签
-          const activeTab = $('.mbti-tab.bg-blue-600').data('target');
-          if (activeTab) {
-            window.loadMbtiTypeDescription(activeTab);
-          }
-          
-          // 预加载所有MBTI类型的描述数据
-          $('.mbti-tab').each(function() {
-            const mbtiType = $(this).data('target');
-            window.loadMbtiTypeDescription(mbtiType);
-          });
-        },
-        error: function() {
-          console.error('Error fetching booktop.json');
-        }
-      });
-
-      // 获取所有书籍数据
-      $.ajax({
-        url: 'books.json',
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-          // 保存数据到全局变量
-          window.booksData = data;
-          
-          // 获取当前活动的标签
-          const activeTab = $('.mbti-tab.bg-blue-600').data('target');
-          if (activeTab) {
-            window.loadBooksForType(activeTab);
-          }
-          
-          // 预加载所有MBTI类型的数据，以便在切换标签时能立即显示
-          $('.mbti-tab').each(function() {
-            const mbtiType = $(this).data('target');
-            if (mbtiType && mbtiType.toLowerCase() !== 'estj') {
-              window.loadBooksForType(mbtiType);
-            }
-          });
-        },
-        error: function() {
-          console.error('Error fetching books.json');
-        }
-      });
-
-      // 获取ESTJ硬编码卡片的封面
-      $('#estj .book-card').each(function() {
-        const isbn = $(this).data('isbn');
-        if (isbn) {
-          window.fetchBookCover(isbn, this);
-        }
-      });
-    });
-  </script>
 </head>
 <body class="font-sans text-gray-800 bg-gray-50">
   <!-- 头部导航 -->
@@ -238,403 +63,57 @@
     </div>
   </header>
 
-  <!-- 博客内容区域 -->
+  <!-- 主要内容区域 -->
   <main class="pt-28 pb-16 bg-gray-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <!-- 页面标题 -->
-      <div class="text-center mb-12">
+      <div class="text-center mb-12 max-w-3xl mx-auto">
         <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">MBTI人格类型读书推荐</h1>
-        <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+        <p class="text-lg text-gray-600">
           每种MBTI人格类型都有其独特的思维方式和学习偏好。我们精心挑选了适合各种人格类型的书籍，帮助您更好地发挥潜能。
         </p>
       </div>
 
-      
-      <!-- 分类导航 -->
-      <div class="flex flex-wrap justify-center gap-2 mb-12">
-        <div class="w-full flex justify-center gap-1.5 flex-wrap">
-          <a href="#istj" class="mbti-tab bg-white text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:scale-105 transition-all duration-200" data-target="istj">ISTJ</a>
-          <a href="#isfj" class="mbti-tab bg-white text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:scale-105 transition-all duration-200" data-target="isfj">ISFJ</a>
-          <a href="#infj" class="mbti-tab bg-white text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:scale-105 transition-all duration-200" data-target="infj">INFJ</a>
-          <a href="#intj" class="mbti-tab bg-white text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:scale-105 transition-all duration-200" data-target="intj">INTJ</a>
-          <a href="#istp" class="mbti-tab bg-white text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:scale-105 transition-all duration-200" data-target="istp">ISTP</a>
-          <a href="#isfp" class="mbti-tab bg-white text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:scale-105 transition-all duration-200" data-target="isfp">ISFP</a>
-          <a href="#infp" class="mbti-tab bg-white text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:scale-105 transition-all duration-200" data-target="infp">INFP</a>
-          <a href="#intp" class="mbti-tab bg-white text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:scale-105 transition-all duration-200" data-target="intp">INTP</a>
-          <a href="#estp" class="mbti-tab bg-white text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:scale-105 transition-all duration-200" data-target="estp">ESTP</a>
-          <a href="#esfp" class="mbti-tab bg-white text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:scale-105 transition-all duration-200" data-target="esfp">ESFP</a>
-          <a href="#enfp" class="mbti-tab bg-white text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:scale-105 transition-all duration-200" data-target="enfp">ENFP</a>
-          <a href="#entp" class="mbti-tab bg-white text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:scale-105 transition-all duration-200" data-target="entp">ENTP</a>
-          <a href="#estj" class="mbti-tab bg-blue-600 text-white px-3 py-1.5 rounded-md text-sm font-medium border border-blue-600 hover:bg-blue-700 hover:border-blue-700 hover:scale-105 transition-all duration-200" data-target="estj">ESTJ</a>
-          <a href="#esfj" class="mbti-tab bg-white text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:scale-105 transition-all duration-200" data-target="esfj">ESFJ</a>
-          <a href="#enfj" class="mbti-tab bg-white text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:scale-105 transition-all duration-200" data-target="enfj">ENFJ</a>
-          <a href="#entj" class="mbti-tab bg-white text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:scale-105 transition-all duration-200" data-target="entj">ENTJ</a>
-        </div>
-      </div>
-
-      <!-- MBTI Sections -->
-      <section id="istj" class="mb-16 hidden mbti-content">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-          <div class="p-6 md:p-8">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">ISTJ</span>
-              <h2 class="text-2xl font-bold text-gray-900">检查员型人格推荐书籍</h2>
-            </div>
-            <p class="text-gray-600 mb-4">
-              ISTJ型人格（检查员型）的人通常可靠、注重细节、尊重传统，喜欢结构化的环境。以下是我们为ISTJ人格类型精心挑选的四本精选书籍推荐。
-            </p>
-          </div>
-        </div>
-        <div class="book-grid grid grid-cols-1 md:grid-cols-2 gap-8"></div>
-      </section>
-
-      <section id="isfj" class="mb-16 hidden mbti-content">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-          <div class="p-6 md:p-8">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">ISFJ</span>
-              <h2 class="text-2xl font-bold text-gray-900">保护者型人格推荐书籍</h2>
-            </div>
-            <p class="text-gray-600 mb-4">
-              ISFJ型人格（保护者型）的人通常温暖、关怀他人、诚实，喜欢为他人提供支持。以下是我们为ISFJ人格类型精心挑选的四本精选书籍推荐。
-            </p>
-          </div>
-        </div>
-        <div class="book-grid grid grid-cols-1 md:grid-cols-2 gap-8"></div>
-      </section>
-
-      <section id="infj" class="mb-16 hidden mbti-content">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-          <div class="p-6 md:p-8">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">INFJ</span>
-              <h2 class="text-2xl font-bold text-gray-900">提倡者型人格推荐书籍</h2>
-            </div>
-            <p class="text-gray-600 mb-4">
-              INFJ型人格（提倡者型）的人通常有理想主义、洞察力强、重视深度关系，追求意义和真实性。以下是我们为INFJ人格类型精心挑选的四本精选书籍推荐。
-            </p>
-          </div>
-        </div>
-        <div class="book-grid grid grid-cols-1 md:grid-cols-2 gap-8"></div>
-      </section>
-
-      <section id="intj" class="mb-16 hidden mbti-content">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-          <div class="p-6 md:p-8">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">INTJ</span>
-              <h2 class="text-2xl font-bold text-gray-900">建筑师型人格推荐书籍</h2>
-            </div>
-            <p class="text-gray-600 mb-4">
-              INTJ型人格（建筑师型）的人通常有战略眼光、创新思维，追求效率和长期目标。以下是我们为INTJ人格类型精心挑选的四本精选书籍推荐。
-            </p>
-          </div>
-        </div>
-        <div class="book-grid grid grid-cols-1 md:grid-cols-2 gap-8"></div>
-      </section>
-
-      <section id="istp" class="mb-16 hidden mbti-content">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-          <div class="p-6 md:p-8">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">ISTP</span>
-              <h2 class="text-2xl font-bold text-gray-900">工匠型人格推荐书籍</h2>
-            </div>
-            <p class="text-gray-600 mb-4">
-              ISTP型人格（工匠型）的人通常独立、善于解决问题，喜欢动手实践和探索。以下是我们为ISTP人格类型精心挑选的四本精选书籍推荐。
-            </p>
-          </div>
-        </div>
-        <div class="book-grid grid grid-cols-1 md:grid-cols-2 gap-8"></div>
-      </section>
-
-      <section id="isfp" class="mb-16 hidden mbti-content">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-          <div class="p-6 md:p-8">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">ISFP</span>
-              <h2 class="text-2xl font-bold text-gray-900">艺术家型人格推荐书籍</h2>
-            </div>
-            <p class="text-gray-600 mb-4">
-              ISFP型人格（艺术家型）的人通常敏感、有创造力、欣赏美感，喜欢自由和真实表达。以下是我们为ISFP人格类型精心挑选的四本精选书籍推荐。
-            </p>
-          </div>
-        </div>
-        <div class="book-grid grid grid-cols-1 md:grid-cols-2 gap-8"></div>
-      </section>
-
-      <section id="infp" class="mb-16 hidden mbti-content">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-          <div class="p-6 md:p-8">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">INFP</span>
-              <h2 class="text-2xl font-bold text-gray-900">调解者型人格推荐书籍</h2>
-            </div>
-            <p class="text-gray-600 mb-4">
-              INFP型人格（调解者型）的人通常理想主义、富有同理心，追求个人价值和意义。以下是我们为INFP人格类型精心挑选的四本精选书籍推荐。
-            </p>
-          </div>
-        </div>
-        <div class="book-grid grid grid-cols-1 md:grid-cols-2 gap-8"></div>
-      </section>
-
-      <section id="intp" class="mb-16 hidden mbti-content">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-          <div class="p-6 md:p-8">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">INTP</span>
-              <h2 class="text-2xl font-bold text-gray-900">思考者型人格推荐书籍</h2>
-            </div>
-            <p class="text-gray-600 mb-4">
-              INTP型人格（思考者型）的人通常好奇、逻辑严密，喜欢探索抽象概念和理论。以下是我们为INTP人格类型精心挑选的四本精选书籍推荐。
-            </p>
-          </div>
-        </div>
-        <div class="book-grid grid grid-cols-1 md:grid-cols-2 gap-8"></div>
-      </section>
-
-      <section id="estp" class="mb-16 hidden mbti-content">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-          <div class="p-6 md:p-8">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">ESTP</span>
-              <h2 class="text-2xl font-bold text-gray-900">企业家型人格推荐书籍</h2>
-            </div>
-            <p class="text-gray-600 mb-4">
-              ESTP型人格（企业家型）的人通常大胆、行动导向，喜欢冒险和即时决策。以下是我们为ESTP人格类型精心挑选的四本精选书籍推荐。
-            </p>
-          </div>
-        </div>
-        <div class="book-grid grid grid-cols-1 md:grid-cols-2 gap-8"></div>
-      </section>
-
-      <section id="esfp" class="mb-16 hidden mbti-content">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-          <div class="p-6 md:p-8">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">ESFP</span>
-              <h2 class="text-2xl font-bold text-gray-900">表演者型人格推荐书籍</h2>
-            </div>
-            <p class="text-gray-600 mb-4">
-              ESFP型人格（表演者型）的人通常热情、善于交际，喜欢享受当下和与人互动。以下是我们为ESFP人格类型精心挑选的四本精选书籍推荐。
-            </p>
-          </div>
-        </div>
-        <div class="book-grid grid grid-cols-1 md:grid-cols-2 gap-8"></div>
-      </section>
-
-      <section id="enfp" class="mb-16 hidden mbti-content">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-          <div class="p-6 md:p-8">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">ENFP</span>
-              <h2 class="text-2xl font-bold text-gray-900">竞选者型人格推荐书籍</h2>
-            </div>
-            <p class="text-gray-600 mb-4">
-              ENFP型人格（竞选者型）的人通常充满热情、富有创造力，喜欢探索可能性和激励他人。以下是我们为ENFP人格类型精心挑选的四本精选书籍推荐。
-            </p>
-          </div>
-        </div>
-        <div class="book-grid grid grid-cols-1 md:grid-cols-2 gap-8"></div>
-      </section>
-
-      <section id="entp" class="mb-16 hidden mbti-content">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-          <div class="p-6 md:p-8">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">ENTP</span>
-              <h2 class="text-2xl font-bold text-gray-900">辩论者型人格推荐书籍</h2>
-            </div>
-            <p class="text-gray-600 mb-4">
-              ENTP型人格（辩论者型）的人通常机智、善于创新，喜欢挑战现状和探索新想法。以下是我们为ENTP人格类型精心挑选的四本精选书籍推荐。
-            </p>
-          </div>
-        </div>
-        <div class="book-grid grid grid-cols-1 md:grid-cols-2 gap-8"></div>
-      </section>
-
-      <section id="estj" class="mb-16 mbti-content">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-          <div class="p-6 md:p-8">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">ESTJ</span>
-              <h2 class="text-2xl font-bold text-gray-900">管理者型人格推荐书籍</h2>
-            </div>
-            <p class="text-gray-600 mb-4">
-              ESTJ型人格（管理者型）的人通常务实、注重细节、有组织能力，喜欢明确的规则和结构。以下是我们为ESTJ人格类型精心挑选的四本精选书籍推荐。
-            </p>
-          </div>
-        </div>
-        <div class="book-grid grid grid-cols-1 md:grid-cols-2 gap-8">
-          <!-- 书籍1 -->
-          <div class="book-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row min-h-[450px]" data-isbn="9781982137274">
-            <div class="md:w-1/3 bg-gray-200">
-              <img class="book-cover w-full h-full object-cover" src="https://via.placeholder.com/128x192.png?text=Loading..." alt="高效能人士的七个习惯">
-            </div>
-            <div class="md:w-2/3 p-6">
-              <h3 class="book-title text-xl font-bold text-gray-900 mb-2">高效能人士的七个习惯</h3>
-              <p class="book-author text-sm text-gray-500 mb-2">作者: 史蒂芬·柯维</p>
-              <div class="mb-4">
-                <span class="text-yellow-500">★★★★★</span>
-                <span class="text-sm text-gray-500 ml-1">4.8/5分</span>
-              </div>
-              <p class="text-gray-600 mb-4 text-sm">
-                这本书提供了系统化的方法来提高个人和职业效率，非常适合注重结构和效率的ESTJ。书中的七个习惯提供了明确的框架，帮助你建立有效的工作和生活系统。
-              </p>
-              <div class="mb-4">
-                <h4 class="font-semibold text-gray-900 mb-1">为什么适合ESTJ:</h4>
-                <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
-                  <li>提供清晰的行动步骤和框架</li>
-                  <li>强调责任感和高效执行</li>
-                  <li>帮助建立有序的生活和工作系统</li>
-                  <li>培养主动积极的领导思维</li>
-                </ul>
-              </div>
-              <div class="mt-auto">
-                <a href="https://www.amazon.com/Habits-Highly-Effective-People-Anniversary/dp/1982137274/" target="_blank" class="buy-button inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">直接购买</a>
-              </div>
-            </div>
-          </div>
-          <!-- 书籍2 -->
-          <div class="book-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row min-h-[450px]" data-isbn="9781501124020">
-            <div class="md:w-1/3 bg-gray-200">
-              <img class="book-cover w-full h-full object-cover" src="https://via.placeholder.com/128x192.png?text=Loading..." alt="原则：生活和工作">
-            </div>
-            <div class="md:w-2/3 p-6">
-              <h3 class="book-title text-xl font-bold text-gray-900 mb-2">原则：生活和工作</h3>
-              <p class="book-author text-sm text-gray-500 mb-2">作者: 雷·达里奥</p>
-              <div class="mb-4">
-                <span class="text-yellow-500">★★★★★</span>
-                <span class="text-sm text-gray-500 ml-1">4.7/5分</span>
-              </div>
-              <p class="text-gray-600 mb-4 text-sm">
-                桥水基金创始人雷·达里奥分享了他的成功原则，这本书提供了一套系统化的决策和管理方法，非常适合喜欢遵循规则和结构的ESTJ人格。
-              </p>
-              <div class="mb-4">
-                <h4 class="font-semibold text-gray-900 mb-1">为什么适合ESTJ:</h4>
-                <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
-                  <li>提供明确的决策框架</li>
-                  <li>强调基于事实的思考方式</li>
-                  <li>包含实用的管理和领导技巧</li>
-                  <li>培养系统化解决问题的能力</li>
-                </ul>
-              </div>
-              <div class="mt-auto">
-                <a href="https://www.amazon.com/Principles-Life-Work-Ray-Dalio/dp/1501124021/" target="_blank" class="buy-button inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">直接购买</a>
-              </div>
-            </div>
-          </div>
-          <!-- 书籍3 -->
-          <div class="book-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row min-h-[450px]" data-isbn="9780615648223">
-            <div class="md:w-1/3 bg-gray-200">
-              <img class="book-cover w-full h-full object-cover" src="https://via.placeholder.com/128x192.png?text=Loading..." alt="极简主义：活出生命的本质">
-            </div>
-            <div class="md:w-2/3 p-6">
-              <h3 class="book-title text-xl font-bold text-gray-900 mb-2">极简主义：活出生命的本质</h3>
-              <p class="book-author text-sm text-gray-500 mb-2">作者: 乔舒亚·贝克尔</p>
-              <div class="mb-4">
-                <span class="text-yellow-500">★★★★☆</span>
-                <span class="text-sm text-gray-500 ml-1">4.5/5分</span>
-              </div>
-              <p class="text-gray-600 mb-4 text-sm">
-                这本书教导如何通过减少干扰和聚焦于重要事物来提高生活质量，对于喜欢高效和条理的ESTJ来说，这是一本能帮助简化决策和优化生活的实用指南。
-              </p>
-              <div class="mb-4">
-                <h4 class="font-semibold text-gray-900 mb-1">为什么适合ESTJ:</h4>
-                <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
-                  <li>提供实用的简化生活方法</li>
-                  <li>帮助建立更高效的系统</li>
-                  <li>强调专注于真正重要的事物</li>
-                  <li>提升决策效率和执行力</li>
-                </ul>
-              </div>
-              <div class="mt-auto">
-                <a href="https://www.amazon.com/Minimalism-Live-Meaningful-Life-Millburn/dp/0615648223/" target="_blank" class="buy-button inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">直接购买</a>
-              </div>
-            </div>
-          </div>
-          <!-- 书籍4 -->
-          <div class="book-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row min-h-[450px]" data-isbn="9780544456235">
-            <div class="md:w-1/3 bg-gray-200">
-              <img class="book-cover w-full h-full object-cover" src="https://via.placeholder.com/128x192.png?text=Loading..." alt="刻意练习：如何从新手到大师">
-            </div>
-            <div class="md:w-2/3 p-6">
-              <h3 class="book-title text-xl font-bold text-gray-900 mb-2">刻意练习：如何从新手到大师</h3>
-              <p class="book-author text-sm text-gray-500 mb-2">作者: 安德斯·艾利克森</p>
-              <div class="mb-4">
-                <span class="text-yellow-500">★★★★★</span>
-                <span class="text-sm text-gray-500 ml-1">4.6/5分</span>
-              </div>
-              <p class="text-gray-600 mb-4 text-sm">
-                这本书揭示了如何通过有目的、有系统的练习达到卓越水平。对于注重效率和结果的ESTJ来说，这本书提供了清晰的方法来不断提升自己的技能和能力。
-              </p>
-              <div class="mb-4">
-                <h4 class="font-semibold text-gray-900 mb-1">为什么适合ESTJ:</h4>
-                <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
-                  <li>提供系统化的技能提升方法</li>
-                  <li>强调持续改进和可衡量的进步</li>
-                  <li>适合目标导向的学习风格</li>
-                  <li>培养结构化的自我提升能力</li>
-                </ul>
-              </div>
-              <div class="mt-auto">
-                <a href="https://www.amazon.com/Peak-Secrets-New-Science-Expertise/dp/0544456238/" target="_blank" class="buy-button inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">直接购买</a>
-              </div>
-            </div>
+      <!-- 卡片部分 -->
+      <!-- 1. 类型选择器 -->
+      <section class="card mb-12 bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="p-6 md:p-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">选择您的MBTI类型</h2>
+          <p class="text-gray-600 mb-6">点击下方按钮查看适合您人格类型的书籍推荐</p>
+          <div id="type-switcher" class="grid grid-cols-4 sm:grid-cols-8 md:grid-cols-8 gap-2">
+            <!-- 类型按钮将通过JavaScript动态生成 -->
           </div>
         </div>
       </section>
 
-      <section id="esfj" class="mb-16 hidden mbti-content">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-          <div class="p-6 md:p-8">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">ESFJ</span>
-              <h2 class="text-2xl font-bold text-gray-900">领事型人格推荐书籍</h2>
-            </div>
-            <p class="text-gray-600 mb-4">
-              ESFJ型人格（领事型）的人通常友好、注重和谐，喜欢组织和帮助他人。以下是我们为ESFJ人格类型精心挑选的四本精选书籍推荐。
-            </p>
+      <!-- 2. 基本信息 -->
+      <section class="card mb-12 bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="p-6 md:p-8">
+          <div class="flex items-center mb-4">
+            <span id="type-badge" class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">ESTJ</span>
+            <h2 id="type-title" class="text-2xl font-bold text-gray-900">管理者型人格推荐书籍</h2>
           </div>
+          <p id="type-description" class="text-gray-600 mb-4">
+            ESTJ型人格（管理者型）的人通常务实、注重细节、有组织能力，喜欢明确的规则和结构。以下是我们为ESTJ人格类型精心挑选的四本精选书籍推荐。
+          </p>
         </div>
-        <div class="book-grid grid grid-cols-1 md:grid-cols-2 gap-8"></div>
       </section>
 
-      <section id="enfj" class="mb-16 hidden mbti-content">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-          <div class="p-6 md:p-8">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">ENFJ</span>
-              <h2 class="text-2xl font-bold text-gray-900">主人公型人格推荐书籍</h2>
-            </div>
-            <p class="text-gray-600 mb-4">
-              ENFJ型人格（主人公型）的人通常有领导力、富有同理心，喜欢激励和帮助他人成长。以下是我们为ENFJ人格类型精心挑选的四本精选书籍推荐。
-            </p>
-          </div>
+      <!-- 3. 书籍推荐 -->
+      <section class="card mb-12">
+        <div id="book-list" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- 书籍卡片将通过JavaScript动态生成 -->
         </div>
-        <div class="book-grid grid grid-cols-1 md:grid-cols-2 gap-8"></div>
       </section>
 
-      <section id="entj" class="mb-16 hidden mbti-content">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-          <div class="p-6 md:p-8">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">ENTJ</span>
-              <h2 class="text-2xl font-bold text-gray-900">指挥官型人格推荐书籍</h2>
-            </div>
-            <p class="text-gray-600 mb-4">
-              ENTJ型人格（指挥官型）的人通常有领导才能、果断、战略性思考，追求效率和成就。以下是我们为ENTJ人格类型精心挑选的四本精选书籍推荐。
-            </p>
-          </div>
+      <!-- 4. 更多内容预告 -->
+      <section class="card mb-12 bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+        <div class="p-6 md:p-8 text-center">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">更多MBTI类型的书籍推荐</h2>
+          <p class="text-gray-600 mb-6">我们还有更多精彩的书籍推荐，适合各种MBTI人格类型的读者。</p>
+          <button id="show-more-btn" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">显示更多</button>
         </div>
-        <div class="book-grid grid grid-cols-1 md:grid-cols-2 gap-8"></div>
       </section>
-
-      <!-- 更多内容提示 -->
-      <div class="text-center py-8 border-t border-gray-200">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">更多MBTI类型的书籍推荐即将推出</h3>
-        <p class="text-gray-600 mb-6">我们正在为其他MBTI人格类型准备更多精彩的书籍推荐，敬请期待！</p>
-      </div>
     </div>
   </main>
 
@@ -662,67 +141,183 @@
 
   <script src="src/js/main.js"></script>
   <script>
-    // 处理MBTI类型标签切换
-    document.addEventListener('DOMContentLoaded', function() {
-      // 获取所有标签和内容区域
-      const tabs = document.querySelectorAll('.mbti-tab');
-      const contents = document.querySelectorAll('.mbti-content');
-      const pageTitle = document.querySelector('.text-center.mb-12');
-      const typeSelection = document.querySelector('.flex.flex-wrap.justify-center.gap-2.mb-12');
-      
-      // 默认显示ESTJ内容，隐藏其他内容，并高亮ESTJ标签
-      contents.forEach(content => {
-        content.classList.add('hidden');
+    $(document).ready(function() {
+      // 全局变量存储数据
+      let mbtiData = null;
+      let booksData = null;
+      let currentType = 'ESTJ'; // 默认类型
+
+      // 移动端菜单切换
+      $('#mobile-menu-button').click(function() {
+        $('#mobile-menu').toggleClass('hidden');
       });
-      document.getElementById('estj').classList.remove('hidden');
-      tabs.forEach(tab => {
-        tab.classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
-        tab.classList.add('bg-white', 'text-gray-700', 'border-gray-200');
-      });
-      document.querySelector('.mbti-tab[data-target="estj"]').classList.remove('bg-white', 'text-gray-700', 'border-gray-200');
-      document.querySelector('.mbti-tab[data-target="estj"]').classList.add('bg-blue-600', 'text-white', 'border-blue-600');
-      
-      // 为每个标签添加点击事件
-      tabs.forEach(tab => {
-        tab.addEventListener('click', function(e) {
-          e.preventDefault();
-          
-          // 获取目标内容区域ID
-          const targetId = this.getAttribute('data-target');
-          
-          // 隐藏所有内容区域
-          contents.forEach(content => {
-            content.classList.add('hidden');
-          });
-          
-          // 显示目标内容区域
-          document.getElementById(targetId).classList.remove('hidden');
-          
-          // 确保页面标题和类型选择按钮始终可见
-          pageTitle.classList.remove('hidden');
-          typeSelection.classList.remove('hidden');
-          
-          // 更新标签样式
-          tabs.forEach(t => {
-            t.classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
-            t.classList.add('bg-white', 'text-gray-700', 'border-gray-200');
-          });
-          
-          this.classList.remove('bg-white', 'text-gray-700', 'border-gray-200');
-          this.classList.add('bg-blue-600', 'text-white', 'border-blue-600');
-          
-          // 加载对应MBTI类型的描述和书籍数据
-          if (window.jQuery) {
-            // 如果jQuery已加载，使用jQuery函数
-            if (typeof window.loadMbtiTypeDescription === 'function') {
-              window.loadMbtiTypeDescription(targetId);
-            }
-            if (typeof window.loadBooksForType === 'function') {
-              window.loadBooksForType(targetId);
-            }
+
+      // 获取MBTI类型数据
+      function loadMbtiData() {
+        $.ajax({
+          url: 'booktop.json',
+          method: 'GET',
+          dataType: 'json',
+          success: function(data) {
+            mbtiData = data;
+            createTypeSwitcher(data);
+            updateTypeInfo(currentType);
+          },
+          error: function(error) {
+            console.error('Error loading MBTI data:', error);
+            $('#type-description').text('加载MBTI类型数据时出错，请稍后再试。');
           }
         });
+      }
+
+      // 获取书籍数据
+      function loadBooksData() {
+        $.ajax({
+          url: 'books.json',
+          method: 'GET',
+          dataType: 'json',
+          success: function(data) {
+            booksData = data;
+            updateBookList(currentType);
+          },
+          error: function(error) {
+            console.error('Error loading books data:', error);
+            $('#book-list').html('<p class="text-center text-red-500">加载书籍数据时出错，请稍后再试。</p>');
+          }
+        });
+      }
+
+      // 创建类型选择器
+      function createTypeSwitcher(data) {
+        const switcher = $('#type-switcher');
+        switcher.empty();
+
+        data.forEach(type => {
+          const button = $(`
+            <button class="type-button px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${type.type === currentType ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border border-gray-200 hover:bg-blue-50 hover:border-blue-300'}" 
+              data-type="${type.type}">
+              ${type.type}
+            </button>
+          `);
+
+          button.click(function() {
+            const selectedType = $(this).data('type');
+            switchType(selectedType);
+          });
+
+          switcher.append(button);
+        });
+      }
+
+      // 切换MBTI类型
+      function switchType(type) {
+        currentType = type;
+        
+        // 更新按钮样式
+        $('.type-button').removeClass('bg-blue-600 text-white').addClass('bg-white text-gray-700 border border-gray-200 hover:bg-blue-50 hover:border-blue-300');
+        $(`.type-button[data-type="${type}"]`).addClass('bg-blue-600 text-white').removeClass('bg-white text-gray-700 border border-gray-200 hover:bg-blue-50 hover:border-blue-300');
+        
+        // 更新类型信息和书籍列表
+        updateTypeInfo(type);
+        updateBookList(type);
+      }
+
+      // 更新类型信息
+      function updateTypeInfo(type) {
+        if (!mbtiData) return;
+        
+        const typeInfo = mbtiData.find(item => item.type === type);
+        if (!typeInfo) {
+          console.error(`No data found for type ${type}`);
+          return;
+        }
+        
+        $('#type-badge').text(type);
+        $('#type-title').text(`${typeInfo.name}推荐书籍`);
+        $('#type-description').text(`${typeInfo.description} ${typeInfo.recommendation}`);
+      }
+
+      // 更新书籍列表
+      function updateBookList(type) {
+        if (!booksData) return;
+        
+        const bookList = $('#book-list');
+        bookList.empty();
+        
+        if (!booksData[type] || !booksData[type].books) {
+          bookList.html('<p class="text-center text-gray-500">暂无该类型的书籍推荐</p>');
+          return;
+        }
+        
+        const books = booksData[type].books;
+        books.forEach(book => {
+          const card = $(`
+            <div class="book-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row min-h-[450px]" data-isbn="${book.isbn || ''}">
+              <div class="md:w-1/3 bg-gray-200">
+                <img class="book-cover w-full h-full object-cover" src="https://via.placeholder.com/128x192.png?text=Loading..." alt="${book.title}">
+              </div>
+              <div class="md:w-2/3 p-6">
+                <h3 class="book-title text-xl font-bold text-gray-900 mb-2">${book.title}</h3>
+                <p class="book-author text-sm text-gray-500 mb-2">作者: ${book.author}</p>
+                <div class="mb-4">
+                  <span class="text-yellow-500">${'★'.repeat(Math.floor(book.rating))}${'☆'.repeat(5 - Math.floor(book.rating))}</span>
+                  <span class="text-sm text-gray-500 ml-1">${book.rating}/5分</span>
+                </div>
+                <p class="text-gray-600 mb-4 text-sm">${book.description}</p>
+                <div class="mb-4">
+                  <h4 class="font-semibold text-gray-900 mb-1">为什么适合${type}:</h4>
+                  <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
+                    ${book.reasons.map(reason => `<li>${reason}</li>`).join('')}
+                  </ul>
+                </div>
+                <div class="mt-auto">
+                  <a href="${book.amazonUrl}" target="_blank" class="buy-button inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">直接购买</a>
+                </div>
+              </div>
+            </div>
+          `);
+          
+          bookList.append(card);
+          
+          // 获取书籍封面
+          if (book.isbn) {
+            fetchBookCover(book.isbn, card);
+          }
+        });
+      }
+
+      // 获取书籍封面
+      function fetchBookCover(isbn, bookElement) {
+        const query = isbn ? `isbn:${isbn}` : '';
+        const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=1`;
+
+        $.ajax({
+          url: apiUrl,
+          method: 'GET',
+          success: function(data) {
+            if (data.items && data.items.length > 0) {
+              const book = data.items[0].volumeInfo;
+              const coverUrl = book.imageLinks?.thumbnail || $(bookElement).find('.book-cover').attr('src');
+              $(bookElement).find('.book-cover').attr('src', coverUrl.replace('http://', 'https://'));
+            } else {
+              console.warn(`No cover found for ISBN: ${isbn}`);
+            }
+          },
+          error: function() {
+            console.error(`Error fetching cover for ISBN: ${isbn}`);
+          }
+        });
+      }
+
+      // 显示更多按钮点击事件
+      $('#show-more-btn').click(function() {
+        // 这里可以实现弹出新页面或加载更多内容的逻辑
+        alert('更多书籍推荐即将推出，敬请期待！');
       });
+
+      // 初始化加载数据
+      loadMbtiData();
+      loadBooksData();
     });
   </script>
 </body>
