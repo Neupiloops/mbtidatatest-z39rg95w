@@ -7,6 +7,7 @@
   <title>MBTI测试 - 智能导航</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="src/css/styles.css">
+  <script src="https://www.paypal.com/sdk/js?client-id=test&currency=CNY"></script>
 </head>
 <body class="font-sans text-gray-800 bg-gray-50">
 
@@ -28,7 +29,7 @@
           <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600">冷知识</a>
           <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每天一悟</a>
           <a href="booksblog.html" class="text-gray-600 hover:text-blue-600">读书推荐</a>
-          <a href="pricing.html" class="text-blue-600 font-semibold" aria-current="page">套餐价格</a></li>
+          <a href="price.html" class="text-blue-600 font-semibold" aria-current="page">套餐价格</a>
           <a href="aboutus.html" class="text-gray-600 hover:text-blue-600">关于我们</a>
           <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">开始测试</a>
         </div>
@@ -45,7 +46,7 @@
           <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600">冷知识</a>
           <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每天一悟</a>
           <a href="booksblog.html" class="text-gray-600 hover:text-blue-600">读书推荐</a>
-          <a href="pricing.html" class="text-blue-600 font-semibold" aria-current="page">套餐价格</a></li>
+          <a href="price.html" class="text-blue-600 font-semibold" aria-current="page">套餐价格</a>
           <a href="aboutus.html" class="text-gray-600 hover:text-blue-600">关于我们</a>
           <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">开始测试</a>
         </nav>
@@ -58,7 +59,7 @@
   <div class="container mx-auto px-4 max-w-7xl">
     <h2 class="text-3xl font-bold text-center text-gray-900 mb-4">探索你的性格密码 🔍</h2>
     <p class="text-center text-gray-600 mb-10 max-w-2xl mx-auto text-lg">
-      我们的MBTI测试采用国际权威模型，分为多个层级，适配不同需求。基础版为您提供免费的初步探索，进阶和专业版则包含更丰富的问题、更准确的算法匹配和更深度的报告解读。为了维持平台的运行与持续优化，我们为高阶服务设置了象征性收费。
+      我们的MBTI测试采用国际权威模型，分为多个层级，适配不同需求。基础版为您提供免费的初步探索，专业定制版则包含更丰富的问题、更准确的算法匹配和更深度的报告解读。为了维持平台的运行与持续优化，我们为高阶服务设置了象征性收费。
     </p>
 
     <div class="grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
@@ -71,11 +72,11 @@
         <ul class="text-gray-600 space-y-2 mb-6">
           <li>✓ 简洁版 MBTI 测试</li>
           <li>✓ 初步类型识别</li>
-          <li>✓ 快速结果展示</li>
+          <li>✓ 快速简单的性格结果展示</li>
           <li>✗ 个性分析报告</li>
           <li>✗ 情感与职涯建议</li>
         </ul>
-        <a href="test.html" class="block bg-green-500 text-white text-center py-2 rounded hover:bg-green-600">开始免费测试</a>
+        <a href="test.html?type=basic" class="block bg-green-500 text-white text-center py-2 rounded hover:bg-green-600">开始免费测试</a>
       </div>
 
       <!-- 专业定制套餐 -->
@@ -91,7 +92,17 @@
           <li>✓ 个性化成长、情感、沟通、社交建议</li>
           <li>✓ 职业、人际、情感配对推荐</li>
         </ul>
-        <a href="test.html" class="block bg-blue-600 text-white text-center py-2 rounded hover:bg-blue-700">购买测试</a>
+        <a href="test.html?type=pro" class="block bg-blue-600 text-white text-center py-2 rounded hover:bg-blue-700">开始专业测试</a>
+      </div>
+    </div>
+
+    <!-- 支付弹窗 -->
+    <div id="payment-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+      <div class="bg-white rounded-lg p-8 max-w-md w-full">
+        <h3 class="text-xl font-bold mb-4">解锁您的专业MBTI分析报告</h3>
+        <p class="text-gray-600 mb-6">您已完成专业测试的所有问题！现在只需支付¥50元，即可查看您的详细分析报告。</p>
+        <div id="paypal-button-container" class="mb-4"></div>
+        <button id="close-modal" class="w-full py-2 text-gray-500 hover:text-gray-700">稍后再说</button>
       </div>
     </div>
 
@@ -136,6 +147,43 @@
   <script src="src/js/share.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
+  <script>
+    // 处理PayPal支付
+    document.addEventListener('DOMContentLoaded', function() {
+      // 初始化PayPal按钮
+      if(document.getElementById('paypal-button-container')) {
+        paypal.Buttons({
+          createOrder: function(data, actions) {
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: '50.00'
+                }
+              }]
+            });
+          },
+          onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+              // 支付成功后显示结果页面
+              window.location.href = 'result.html?type=pro&paid=true';
+            });
+          }
+        }).render('#paypal-button-container');
+      }
+
+      // 关闭支付弹窗
+      document.getElementById('close-modal')?.addEventListener('click', function() {
+        document.getElementById('payment-modal').classList.add('hidden');
+      });
+
+      // 检查URL参数，如果是专业测试完成后，显示支付弹窗
+      const urlParams = new URLSearchParams(window.location.search);
+      if(urlParams.get('showPayment') === 'true') {
+        document.getElementById('payment-modal').classList.remove('hidden');
+      }
+    });
+  </script>
 
 </body>
 </html>
