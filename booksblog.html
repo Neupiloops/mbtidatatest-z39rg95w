@@ -10,6 +10,9 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(function() {
+      // 全局变量存储书籍数据
+      let booksData = null;
+      
       // Function to fetch book details from Google Books API
       function fetchBookCover(isbn, bookElement) {
         const query = isbn ? `isbn:${isbn}` : '';
@@ -33,59 +36,83 @@
         });
       }
 
-      // Fetch book data from JSON file for MBTI sections (excluding ESTJ)
+      // 加载特定MBTI类型的书籍数据
+      function loadBooksForType(mbtiType) {
+        if (!booksData) return;
+        
+        // 如果是ESTJ，它已经有硬编码的卡片，不需要加载
+        if (mbtiType.toLowerCase() === 'estj') return;
+        
+        const mbti = mbtiType.toUpperCase();
+        if (!booksData[mbti]) {
+          console.warn(`No book data found for ${mbti}`);
+          return;
+        }
+        
+        const books = booksData[mbti].books;
+        const section = $(`#${mbtiType.toLowerCase()}`);
+        const grid = section.find('.book-grid');
+        
+        // 清空现有内容
+        grid.empty();
+        
+        // 添加新书籍卡片
+        books.forEach(book => {
+          const card = `
+            <div class="book-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row min-h-[450px]" data-isbn="${book.isbn || ''}">
+              <div class="md:w-1/3 bg-gray-200">
+                <img class="book-cover w-full h-full object-cover" src="https://via.placeholder.com/128x192.png?text=Loading..." alt="${book.title}">
+              </div>
+              <div class="md:w-2/3 p-6">
+                <h3 class="book-title text-xl font-bold text-gray-900 mb-2">${book.title}</h3>
+                <p class="book-author text-sm text-gray-500 mb-2">作者: ${book.author}</p>
+                <div class="mb-4">
+                  <span class="text-yellow-500">${'★'.repeat(Math.floor(book.rating))}${'☆'.repeat(5 - Math.floor(book.rating))}</span>
+                  <span class="text-sm text-gray-500 ml-1">${book.rating}/5分</span>
+                </div>
+                <p class="text-gray-600 mb-4 text-sm">${book.description}</p>
+                <div class="mb-4">
+                  <h4 class="font-semibold text-gray-900 mb-1">为什么适合${mbti}:</h4>
+                  <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
+                    ${book.reasons.map(reason => `<li>${reason}</li>`).join('')}
+                  </ul>
+                </div>
+                <div class="mt-auto">
+                  <a href="${book.amazonUrl}" target="_blank" class="buy-button inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">直接购买</a>
+                </div>
+              </div>
+            </div>`;
+          grid.append(card);
+          
+          // 获取书籍封面
+          const cardElement = grid.find('.book-card').last();
+          if (book.isbn) {
+            fetchBookCover(book.isbn, cardElement);
+          }
+        });
+      }
+
+      // 获取所有书籍数据
       $.ajax({
         url: 'books.json',
         method: 'GET',
         dataType: 'json',
         success: function(data) {
-          // Populate book cards for each MBTI type except ESTJ
-          Object.keys(data).forEach(mbti => {
-            if (mbti.toLowerCase() === 'estj') return; // Skip ESTJ as it has hardcoded cards
-            const books = data[mbti].books;
-            const section = $(`#${mbti.toLowerCase()}`);
-            const grid = section.find('.book-grid');
-            
-            books.forEach(book => {
-              const card = `
-                <div class="book-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row min-h-[450px]" data-isbn="${book.isbn || ''}">
-                  <div class="md:w-1/3 bg-gray-200">
-                    <img class="book-cover w-full h-full object-cover" src="https://via.placeholder.com/128x192.png?text=Loading..." alt="${book.title}">
-                  </div>
-                  <div class="md:w-2/3 p-6">
-                    <h3 class="book-title text-xl font-bold text-gray-900 mb-2">${book.title}</h3>
-                    <p class="book-author text-sm text-gray-500 mb-2">作者: ${book.author}</p>
-                    <div class="mb-4">
-                      <span class="text-yellow-500">${'★'.repeat(Math.floor(book.rating))}${'☆'.repeat(5 - Math.floor(book.rating))}</span>
-                      <span class="text-sm text-gray-500 ml-1">${book.rating}/5分</span>
-                    </div>
-                    <p class="text-gray-600 mb-4 text-sm">${book.description}</p>
-                    <div class="mb-4">
-                      <h4 class="font-semibold text-gray-900 mb-1">为什么适合${mbti}:</h4>
-                      <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
-                        ${book.reasons.map(reason => `<li>${reason}</li>`).join('')}
-                      </ul>
-                    </div>
-                    <div class="mt-auto">
-                      <a href="${book.amazonUrl}" target="_blank" class="buy-button inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">直接购买</a>
-                    </div>
-                  </div>
-                </div>`;
-              grid.append(card);
-              // Fetch book cover
-              const cardElement = grid.find('.book-card').last();
-              if (book.isbn) {
-                fetchBookCover(book.isbn, cardElement);
-              }
-            });
-          });
+          // 保存数据到全局变量
+          booksData = data;
+          
+          // 获取当前活动的标签
+          const activeTab = $('.mbti-tab.bg-blue-600').data('target');
+          if (activeTab) {
+            loadBooksForType(activeTab);
+          }
         },
         error: function() {
           console.error('Error fetching books.json');
         }
       });
 
-      // Fetch covers for hardcoded ESTJ book cards
+      // 获取ESTJ硬编码卡片的封面
       $('#estj .book-card').each(function() {
         const isbn = $(this).data('isbn');
         if (isbn) {
@@ -621,9 +648,15 @@
           
           this.classList.remove('bg-white', 'text-gray-700', 'border-gray-200');
           this.classList.add('bg-blue-600', 'text-white', 'border-blue-600');
+          
+          // 加载对应MBTI类型的书籍数据
+          if (typeof loadBooksForType === 'function') {
+            loadBooksForType(targetId);
+          }
         });
       });
     });
+  
   </script>
 </body>
 </html>
