@@ -154,35 +154,105 @@
 
       // 获取MBTI类型数据
       function loadMbtiData() {
+        console.log('开始加载MBTI类型数据...');
         $.ajax({
           url: 'booktop.json',
           method: 'GET',
           dataType: 'json',
+          timeout: 10000, // 增加超时时间
           success: function(data) {
+            console.log('成功加载MBTI类型数据');
+            if (!data || !Array.isArray(data) || data.length === 0) {
+              console.error('MBTI类型数据格式不正确:', data);
+              $('#type-description').text('MBTI类型数据格式不正确，请检查booktop.json文件。');
+              return;
+            }
+            
+            // 验证数据结构
+            let isValid = true;
+            for (const item of data) {
+              if (!item.type || !item.name || !item.description) {
+                isValid = false;
+                break;
+              }
+            }
+            
+            if (!isValid) {
+              console.error('MBTI类型数据结构不完整:', data);
+              $('#type-description').text('MBTI类型数据结构不完整，请检查booktop.json文件。');
+              return;
+            }
+            
             mbtiData = data;
+            console.log(`加载了${data.length}种MBTI类型数据`);
             createTypeSwitcher(data);
             updateTypeInfo(currentType);
           },
-          error: function(error) {
-            console.error('Error loading MBTI data:', error);
-            $('#type-description').text('加载MBTI类型数据时出错，请稍后再试。');
+          error: function(xhr, status, error) {
+            console.error('加载MBTI类型数据时出错:', status, error);
+            let errorMessage = '加载MBTI类型数据时出错，请稍后再试。';
+            
+            if (status === 'parsererror') {
+              errorMessage = 'JSON解析错误，请检查booktop.json文件格式。';
+            } else if (status === 'timeout') {
+              errorMessage = '加载超时，请检查网络连接。';
+            } else if (status === 'error' && xhr.status === 404) {
+              errorMessage = '找不到booktop.json文件，请确认文件存在。';
+            }
+            
+            $('#type-description').text(errorMessage);
           }
         });
       }
 
       // 获取书籍数据
       function loadBooksData() {
+        console.log('开始加载书籍数据...');
         $.ajax({
           url: 'books.json',
           method: 'GET',
           dataType: 'json',
+          timeout: 10000, // 增加超时时间
           success: function(data) {
+            console.log('成功加载书籍数据');
+            if (!data || typeof data !== 'object') {
+              console.error('书籍数据格式不正确:', data);
+              $('#book-list').html('<p class="text-center text-red-500">书籍数据格式不正确，请检查books.json文件。</p>');
+              return;
+            }
+            
+            // 验证数据结构
+            let isValid = false;
+            for (const type in data) {
+              if (data[type] && data[type].books && Array.isArray(data[type].books)) {
+                isValid = true;
+                break;
+              }
+            }
+            
+            if (!isValid) {
+              console.error('书籍数据结构不正确:', data);
+              $('#book-list').html('<p class="text-center text-red-500">书籍数据结构不正确，请检查books.json文件。</p>');
+              return;
+            }
+            
             booksData = data;
+            console.log(`加载了${Object.keys(data).length}种MBTI类型的书籍数据`);
             updateBookList(currentType);
           },
-          error: function(error) {
-            console.error('Error loading books data:', error);
-            $('#book-list').html('<p class="text-center text-red-500">加载书籍数据时出错，请稍后再试。</p>');
+          error: function(xhr, status, error) {
+            console.error('加载书籍数据时出错:', status, error);
+            let errorMessage = '加载书籍数据时出错，请稍后再试。';
+            
+            if (status === 'parsererror') {
+              errorMessage = 'JSON解析错误，请检查books.json文件格式。';
+            } else if (status === 'timeout') {
+              errorMessage = '加载超时，请检查网络连接。';
+            } else if (status === 'error' && xhr.status === 404) {
+              errorMessage = '找不到books.json文件，请确认文件存在。';
+            }
+            
+            $('#book-list').html(`<p class="text-center text-red-500">${errorMessage}</p>`);
           }
         });
       }
@@ -239,72 +309,114 @@
 
       // 更新书籍列表
       function updateBookList(type) {
-        if (!booksData) return;
+        if (!booksData) {
+          $('#book-list').html('<p class="text-center text-red-500">加载书籍数据时出错，请稍后再试。</p>');
+          return;
+        }
         
         const bookList = $('#book-list');
         bookList.empty();
         
-        if (!booksData[type] || !booksData[type].books) {
-          bookList.html('<p class="text-center text-gray-500">暂无该类型的书籍推荐</p>');
-          return;
-        }
-        
-        const books = booksData[type].books;
-        books.forEach(book => {
-          const card = $(`
-            <div class="book-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row min-h-[450px]" data-isbn="${book.isbn || ''}">
-              <div class="md:w-1/3 bg-gray-200">
-                <img class="book-cover w-full h-full object-cover" src="https://via.placeholder.com/128x192.png?text=Loading..." alt="${book.title}">
-              </div>
-              <div class="md:w-2/3 p-6">
-                <h3 class="book-title text-xl font-bold text-gray-900 mb-2">${book.title}</h3>
-                <p class="book-author text-sm text-gray-500 mb-2">作者: ${book.author}</p>
-                <div class="mb-4">
-                  <span class="text-yellow-500">${'★'.repeat(Math.floor(book.rating))}${'☆'.repeat(5 - Math.floor(book.rating))}</span>
-                  <span class="text-sm text-gray-500 ml-1">${book.rating}/5分</span>
-                </div>
-                <p class="text-gray-600 mb-4 text-sm">${book.description}</p>
-                <div class="mb-4">
-                  <h4 class="font-semibold text-gray-900 mb-1">为什么适合${type}:</h4>
-                  <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
-                    ${book.reasons.map(reason => `<li>${reason}</li>`).join('')}
-                  </ul>
-                </div>
-                <div class="mt-auto">
-                  <a href="${book.amazonUrl}" target="_blank" class="buy-button inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">直接购买</a>
-                </div>
-              </div>
-            </div>
-          `);
-          
-          bookList.append(card);
-          
-          // 获取书籍封面
-          if (book.isbn) {
-            fetchBookCover(book.isbn, card);
+        try {
+          if (!booksData[type] || !booksData[type].books || !Array.isArray(booksData[type].books) || booksData[type].books.length === 0) {
+            bookList.html('<p class="text-center text-gray-500">暂无该类型的书籍推荐</p>');
+            return;
           }
-        });
+          
+          const books = booksData[type].books;
+          books.forEach((book, index) => {
+            // 确保book对象包含所有必要的属性
+            if (!book || !book.title) {
+              console.error(`Invalid book data at index ${index} for type ${type}`, book);
+              return;
+            }
+            
+            // 创建星级评分显示
+            const rating = book.rating || 0;
+            const fullStars = Math.floor(rating);
+            const emptyStars = 5 - fullStars;
+            const starRating = '★'.repeat(fullStars) + '☆'.repeat(emptyStars);
+            
+            // 创建适合原因列表
+            let reasonsList = '';
+            if (book.reasons && Array.isArray(book.reasons)) {
+              reasonsList = book.reasons.map(reason => `<li>${reason}</li>`).join('');
+            } else {
+              reasonsList = '<li>适合该人格类型的阅读选择</li>';
+            }
+            
+            const card = $(`
+              <div class="book-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row min-h-[450px]" data-isbn="${book.isbn || ''}">
+                <div class="md:w-1/3 bg-gray-200">
+                  <img class="book-cover w-full h-full object-cover" src="https://via.placeholder.com/128x192.png?text=Loading..." alt="${book.title}">
+                </div>
+                <div class="md:w-2/3 p-6">
+                  <h3 class="book-title text-xl font-bold text-gray-900 mb-2">${book.title}</h3>
+                  <p class="book-author text-sm text-gray-500 mb-2">作者: ${book.author || '未知'}</p>
+                  <div class="mb-4">
+                    <span class="text-yellow-500">${starRating}</span>
+                    <span class="text-sm text-gray-500 ml-1">${rating.toFixed(1)}/5分</span>
+                  </div>
+                  <p class="text-gray-600 mb-4 text-sm">${book.description || '暂无描述'}</p>
+                  <div class="mb-4">
+                    <h4 class="font-semibold text-gray-900 mb-1">为什么适合${type}:</h4>
+                    <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
+                      ${reasonsList}
+                    </ul>
+                  </div>
+                  <div class="mt-auto">
+                    <a href="${book.amazonUrl || '#'}" target="_blank" class="buy-button inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">直接购买</a>
+                  </div>
+                </div>
+              </div>
+            `);
+            
+            bookList.append(card);
+            
+            // 获取书籍封面
+            if (book.isbn) {
+              fetchBookCover(book.isbn, card);
+            }
+          });
+        } catch (error) {
+          console.error('Error updating book list:', error);
+          bookList.html('<p class="text-center text-red-500">显示书籍数据时出错，请稍后再试。</p>');
+        }
       }
 
       // 获取书籍封面
       function fetchBookCover(isbn, bookElement) {
-        const query = isbn ? `isbn:${isbn}` : '';
+        if (!isbn) {
+          // 如果没有ISBN，使用默认封面
+          return;
+        }
+        
+        const query = `isbn:${isbn}`;
         const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=1`;
 
         $.ajax({
           url: apiUrl,
           method: 'GET',
+          timeout: 5000, // 添加超时设置
           success: function(data) {
-            if (data.items && data.items.length > 0) {
+            if (data.items && data.items.length > 0 && data.items[0].volumeInfo && data.items[0].volumeInfo.imageLinks) {
               const book = data.items[0].volumeInfo;
-              const coverUrl = book.imageLinks?.thumbnail || $(bookElement).find('.book-cover').attr('src');
-              $(bookElement).find('.book-cover').attr('src', coverUrl.replace('http://', 'https://'));
+              const coverUrl = book.imageLinks.thumbnail || book.imageLinks.smallThumbnail;
+              if (coverUrl) {
+                $(bookElement).find('.book-cover').attr('src', coverUrl.replace('http://', 'https://'));
+              }
             } else {
+              // 使用备用封面
+              const placeholderUrl = `https://via.placeholder.com/128x192.png?text=${encodeURIComponent($(bookElement).find('.book-title').text())}`;
+              $(bookElement).find('.book-cover').attr('src', placeholderUrl);
               console.warn(`No cover found for ISBN: ${isbn}`);
             }
           },
-          error: function() {
-            console.error(`Error fetching cover for ISBN: ${isbn}`);
+          error: function(xhr, status, error) {
+            // 使用备用封面
+            const placeholderUrl = `https://via.placeholder.com/128x192.png?text=${encodeURIComponent($(bookElement).find('.book-title').text())}`;
+            $(bookElement).find('.book-cover').attr('src', placeholderUrl);
+            console.error(`Error fetching cover for ISBN: ${isbn}`, error);
           }
         });
       }
