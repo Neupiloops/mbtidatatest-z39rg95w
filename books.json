@@ -902,6 +902,130 @@
             }
         ]
     },
+  "ESFJ": {
+    "books": [
+      {
+        "title": "非暴力沟通",
+        "author": "马歇尔·卢森堡",
+        "isbn": "7506285606",
+        "amazonUrl": "https://www.amazon.com/Nonviolent-Communication-Language-Life-Changing-Relationships/dp/1892005034/",
+        "description": "帮助 ESFJ 更好地维护人际和谐，建立深层次的同理对话。",
+        "summary": "介绍了一种有意识地表达和倾听的方式，让我们在沟通中不评判、不攻击，而是真诚表达情感与需要，促进关系中的理解与连结。",
+        "rating": 4.8,
+        "reasons": [
+          "贴合 ESFJ 的高共情特质",
+          "提升人际关系的质量",
+          "帮助解决人际冲突",
+          "强化倾听与表达能力"
+        ]
+      },
+      {
+        "title": "被讨厌的勇气",
+        "author": "岸见一郎、古贺史健",
+        "isbn": "9863206827",
+        "amazonUrl": "https://www.amazon.com/Courage-Be-Disliked-Phenomenon-Happiness/dp/1501197274/",
+        "description": "ESFJ 往往追求被喜欢，这本书能帮助他们学会“为自己而活”。",
+        "summary": "以对话体形式介绍阿德勒心理学核心理念，鼓励人们放下他人评价的束缚，走出讨好型思维，活出自由与自信。",
+        "rating": 4.6,
+        "reasons": [
+          "帮助 ESFJ 建立自我边界",
+          "改善过度迎合的倾向",
+          "提供成长与自尊的路径",
+          "适合思考人我关系的人格类型"
+        ]
+      },
+      {
+        "title": "爱的五种语言",
+        "author": "盖瑞·查普曼",
+        "isbn": "7806203899",
+        "amazonUrl": "https://www.amazon.com/Five-Love-Languages-Secret-Lasts/dp/080241270X/",
+        "description": "ESFJ 极重视亲密关系，这本书是关系维护的沟通宝典。",
+        "summary": "揭示人们在表达和接收爱时存在差异，分类为五种‘语言’，帮助伴侣、朋友或家人之间精准表达情感，增强连结。",
+        "rating": 4.9,
+        "reasons": [
+          "非常契合 ESFJ 的感情需求",
+          "提升亲密关系质量",
+          "加强情感表达的精准性",
+          "工具性强，可直接实践"
+        ]
+      },
+      {
+        "title": "亲密关系",
+        "author": "罗兰·米勒",
+        "isbn": "9864793420",
+        "amazonUrl": "https://www.amazon.com/Intimate-Relationships-Roland-Miller/dp/0077861807/",
+        "description": "一本心理学角度分析亲密关系形成、维护与破裂的书，非常适合重情感的 ESFJ。",
+        "summary": "通过科学研究与真实案例剖析亲密关系中的动力机制，包括吸引力、依恋、沟通、冲突和分离过程。",
+        "rating": 4.7,
+        "reasons": [
+          "深入剖析情感关系的运作",
+          "帮助 ESFJ 理性看待感情",
+          "适合在亲密关系中自我成长",
+          "结合科学与实用建议"
+        ]
+      },
+      {
+        "title": "我们为什么总是在一起受伤",
+        "author": "约翰·戈特曼",
+        "isbn": "957327703X",
+        "amazonUrl": "https://www.amazon.com/Seven-Principles-Make-Marriage-Work/dp/0553447718/",
+        "description": "心理大师戈特曼给出如何让关系更持久的方法，对重视和谐的 ESFJ 非常实用。",
+        "summary": "基于多年的婚姻研究，总结出让情侣关系更持久的七大原则，实用且科学，适合用于日常生活中的沟通与解决冲突。",
+        "rating": 4.8,
+        "reasons": [
+          "帮助修复关系中的伤害",
+          "适合 ESFJ 的实用风格",
+          "强调沟通与共情技能",
+          "提升恋爱与婚姻质量"
+        ]
+      },
+      {
+        "title": "关键对话",
+        "author": "克里斯·帕特森等",
+        "isbn": "0071771328",
+        "amazonUrl": "https://www.amazon.com/Crucial-Conversations-Talking-Stakes-Second/dp/0071771328/",
+        "description": "教 ESFJ 在高情绪对话中保持理性与温和，避免冲突激化。",
+        "summary": "提供实用方法来处理工作和生活中的“关键对话”，即那些高风险、意见冲突、情绪浓烈的时刻，帮助有效沟通并达成目标。",
+        "rating": 4.7,
+        "reasons": [
+          "适合 ESFJ 处理冲突时使用",
+          "强化理性与情感的平衡表达",
+          "提升人际沟通效率",
+          "适合家庭、职场、友情全场景"
+        ]
+      },
+      {
+        "title": "你当像鸟飞往你的山",
+        "author": "塔拉·韦斯特弗",
+        "isbn": "7508684033",
+        "amazonUrl": "https://www.amazon.com/Educated-Memoir-Tara-Westover/dp/0399590501/",
+        "description": "关于家庭、信任、成长与重建自我边界的真实故事，引发 ESFJ 深刻共鸣。",
+        "summary": "塔拉出生在极端保守家庭，从小没有上学，但最终凭毅力走进剑桥、哈佛。过程充满情感挣扎与家庭断裂，引导思考‘爱’与‘成长’的平衡。",
+        "rating": 4.9,
+        "reasons": [
+          "适合重情但易受伤的 ESFJ",
+          "鼓励建立健康界限",
+          "富含情感启发与力量",
+          "真实动人、启发性强"
+        ]
+      },
+      {
+        "title": "与神对话",
+        "author": "尼尔·唐纳德·沃尔什",
+        "isbn": "0967734909",
+        "amazonUrl": "https://www.amazon.com/Conversations-God-Uncommon-Dialogue-Book/dp/0399142789/",
+        "description": "温柔的心灵探索之旅，契合 ESFJ 对信念、爱与人生价值的追寻。",
+        "summary": "作者通过与“神”的灵性对话，探讨关于人生、爱、关系、工作等问题，鼓励每个人活出真实、有爱的自我。",
+        "rating": 4.7,
+        "reasons": [
+          "适合温柔而信仰驱动的 ESFJ",
+          "提升内在信念与心理能量",
+          "带来情感治愈与人生启发",
+          "鼓励以爱与责任面对生活"
+         ]
+            }
+        ]
+    },
     "ENTJ": {
         "books": [
             {
