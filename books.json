@@ -1,969 +1,969 @@
 {
-  "ISTJ": {
-    "books": [
-      {
-        "title": "高效能人士的执行力",
-        "author": "克里斯·麦克切斯尼",
-        "isbn": "0062316613",
-        "amazonUrl": "https://www.amazon.com/Disciplines-Execution-Achieving-Wildly-Important/dp/0062316613/",
-        "description": "这本书提供了实现目标的四个执行原则，非常适合注重纪律和结构的ISTJ。",
-        "rating": 4.6,
-        "reasons": [
-          "提供清晰的执行框架，契合ISTJ的结构化思维",
-          "强调目标导向和责任感，符合ISTJ的可靠性",
-          "帮助建立有序的工作流程，适合ISTJ的细节导向",
-          "培养长期坚持的能力，增强ISTJ的纪律性"
+    "ISTJ": {
+        "books": [
+            {
+                "title": "高效能人士的执行力",
+                "author": "克里斯·麦克切斯尼",
+                "isbn": "0062316613",
+                "amazonUrl": "https://www.amazon.com/Disciplines-Execution-Achieving-Wildly-Important/dp/0062316613/",
+                "description": "这本书提供了实现目标的四个执行原则，非常适合注重纪律和结构的ISTJ。",
+                "rating": 4.6,
+                "reasons": [
+                    "提供清晰的执行框架，契合ISTJ的结构化思维",
+                    "强调目标导向和责任感，符合ISTJ的可靠性",
+                    "帮助建立有序的工作流程，适合ISTJ的细节导向",
+                    "培养长期坚持的能力，增强ISTJ的纪律性"
+                ]
+            },
+            {
+                "title": "清单革命",
+                "author": "阿图·葛文德",
+                "isbn": "0805091742",
+                "amazonUrl": "https://www.amazon.com/Checklist-Manifesto-How-Get-Things/dp/0805091742/",
+                "description": "探讨如何通过清单提高效率和减少错误，适合ISTJ的细节导向。",
+                "rating": 4.5,
+                "reasons": [
+                    "提供实用的组织工具，契合ISTJ的系统化偏好",
+                    "减少复杂任务中的错误，符合ISTJ的可靠性",
+                    "适合系统化思维，增强ISTJ的工作效率",
+                    "提升工作可靠性，适合ISTJ的传统价值观"
+                ]
+            },
+            {
+                "title": "整理的艺术",
+                "author": "近藤麻理惠",
+                "isbn": "1607747308",
+                "amazonUrl": "https://www.amazon.com/Life-Changing-Magic-Tidying-Decluttering-Organizing/dp/1607747308/",
+                "description": "提供整理和简化生活的方法，适合ISTJ的有序偏好。",
+                "rating": 4.4,
+                "reasons": [
+                    "提供实用的整理技巧，契合ISTJ的细节关注",
+                    "帮助创建整洁环境，符合ISTJ的结构化需求",
+                    "适合注重细节的特质，增强ISTJ的生活秩序",
+                    "提升生活效率，适合ISTJ的实用主义"
+                ]
+            },
+            {
+                "title": "深度工作",
+                "author": "卡尔·纽波特",
+                "isbn": "1455586692",
+                "amazonUrl": "https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692/",
+                "description": "教导如何专注工作，适合ISTJ的纪律性。",
+                "rating": 4.7,
+                "reasons": [
+                    "提供专注工作的策略，契合ISTJ的纪律性",
+                    "帮助提高生产力，符合ISTJ的高效追求",
+                    "适合结构化环境，增强ISTJ的工作专注力",
+                    "培养高效习惯，适合ISTJ的传统工作方式"
+                ]
+            }
         ]
-      },
-      {
-        "title": "清单革命",
-        "author": "阿图·葛文德",
-        "isbn": "0805091742",
-        "amazonUrl": "https://www.amazon.com/Checklist-Manifesto-How-Get-Things/dp/0805091742/",
-        "description": "探讨如何通过清单提高效率和减少错误，适合ISTJ的细节导向。",
-        "rating": 4.5,
-        "reasons": [
-          "提供实用的组织工具，契合ISTJ的系统化偏好",
-          "减少复杂任务中的错误，符合ISTJ的可靠性",
-          "适合系统化思维，增强ISTJ的工作效率",
-          "提升工作可靠性，适合ISTJ的传统价值观"
+    },
+    "ISFJ": {
+        "books": [
+            {
+                "title": "爱的五种语言",
+                "author": "盖瑞·查普曼",
+                "isbn": "080241270X",
+                "amazonUrl": "https://www.amazon.com/Love-Languages-Secret-that-Lasts/dp/080241270X/",
+                "description": "这本书帮助ISFJ理解如何表达和接受爱，增强人际关系。",
+                "rating": 4.8,
+                "reasons": [
+                    "提升情感沟通能力，契合ISFJ的关怀特质",
+                    "帮助建立更深的关系，符合ISFJ的忠诚性",
+                    "适合关怀他人的特质，增强ISFJ的人际连接",
+                    "提供实用的关系建议，适合ISFJ的支持角色"
+                ]
+            },
+            {
+                "title": "如何赢得朋友与影响他人",
+                "author": "戴尔·卡耐基",
+                "isbn": "0671027034",
+                "amazonUrl": "https://www.amazon.com/How-Win-Friends-Influence-People/dp/0671027034/",
+                "description": "提供人际交往的实用技巧，适合ISFJ的友好和支持性特质。",
+                "rating": 4.7,
+                "reasons": [
+                    "增强社交技巧，契合ISFJ的友好性格",
+                    "帮助建立和谐关系，符合ISFJ的和谐追求",
+                    "提供实用的沟通方法，适合ISFJ的团队合作",
+                    "适合支持性角色，增强ISFJ的人际影响力"
+                ]
+            },
+            {
+                "title": "同理心",
+                "author": "罗曼·克兰兹尼克",
+                "isbn": "0399171398",
+                "amazonUrl": "https://www.amazon.com/Empathy-Why-Matters-How-Get/dp/0399171398/",
+                "description": "探讨如何培养同理心，适合ISFJ的关怀特质。",
+                "rating": 4.5,
+                "reasons": [
+                    "增强对他人的理解，契合ISFJ的同理心",
+                    "提供情感连接技巧，符合ISFJ的温暖特质",
+                    "适合支持性角色，增强ISFJ的信任建立",
+                    "帮助建立信任，适合ISFJ的忠诚性格"
+                ]
+            },
+            {
+                "title": "给予：爱的艺术",
+                "author": "亚当·格兰特",
+                "isbn": "0143124986",
+                "amazonUrl": "https://www.amazon.com/Give-Take-Why-Helping-Others/dp/0143124986/",
+                "description": "探讨给予的力量，适合ISFJ的利他主义。",
+                "rating": 4.6,
+                "reasons": [
+                    "强调帮助他人的价值，契合ISFJ的关怀特质",
+                    "提供平衡给予与接受的方法，符合ISFJ的和谐追求",
+                    "适合关怀型人格，增强ISFJ的团队协作",
+                    "增强团队协作，适合ISFJ的支持角色"
+                ]
+            }
         ]
-      },
-      {
-        "title": "整理的艺术",
-        "author": "近藤麻理惠",
-        "isbn": "1607747308",
-        "amazonUrl": "https://www.amazon.com/Life-Changing-Magic-Tidying-Decluttering-Organizing/dp/1607747308/",
-        "description": "提供整理和简化生活的方法，适合ISTJ的有序偏好。",
-        "rating": 4.4,
-        "reasons": [
-          "提供实用的整理技巧，契合ISTJ的细节关注",
-          "帮助创建整洁环境，符合ISTJ的结构化需求",
-          "适合注重细节的特质，增强ISTJ的生活秩序",
-          "提升生活效率，适合ISTJ的实用主义"
+    },
+    "INFJ": {
+        "books": [
+            {
+                "title": "内向者优势",
+                "author": "苏珊·凯恩",
+                "isbn": "0307352153",
+                "amazonUrl": "https://www.amazon.com/Quiet-Power-Introverts-World-Talking/dp/0307352153/",
+                "description": "探讨内向者的价值，适合INFJ的内省和深度思考。",
+                "rating": 4.6,
+                "reasons": [
+                    "肯定内向特质的价值，契合INFJ的内省性格",
+                    "提供在外向世界中保持真实的策略，符合INFJ的真实性追求",
+                    "帮助理解自己的社交需求，适合INFJ的深度思考",
+                    "展示如何利用内向优势，增强INFJ的自我认知"
+                ]
+            },
+            {
+                "title": "非暴力沟通",
+                "author": "马歇尔·卢森堡",
+                "isbn": "189200528X",
+                "amazonUrl": "https://www.amazon.com/Nonviolent-Communication-Language-Life-3rd/dp/189200528X/",
+                "description": "提供同理心沟通方法，适合INFJ的和谐追求。",
+                "rating": 4.8,
+                "reasons": [
+                    "增强人际关系中的同理心，契合INFJ的关怀特质",
+                    "提供真实表达需求的方法，符合INFJ的真实性追求",
+                    "帮助和平解决冲突，适合INFJ的和谐目标",
+                    "培养更深层次的连接，增强INFJ的人际关系"
+                ]
+            },
+            {
+                "title": "人性的弱点",
+                "author": "戴尔·卡耐基",
+                "isbn": "1439199191",
+                "amazonUrl": "https://www.amazon.com/How-Win-Friends-Influence-People/dp/1439199191/",
+                "description": "提供人际交往技巧，适合INFJ的深度关系追求。",
+                "rating": 4.7,
+                "reasons": [
+                    "增强人际沟通能力，契合INFJ的同理心",
+                    "帮助建立有意义的连接，符合INFJ的深度关系追求",
+                    "适合追求和谐，增强INFJ的社交技巧",
+                    "提供实用社交策略，适合INFJ的理想主义"
+                ]
+            },
+            {
+                "title": "活着为了什么",
+                "author": "维克多·弗兰克尔",
+                "isbn": "080701429X",
+                "amazonUrl": "https://www.amazon.com/Mans-Search-Meaning-Viktor-Frankl/dp/080701429X/",
+                "description": "探讨生命的意义，适合INFJ的理想主义。",
+                "rating": 4.8,
+                "reasons": [
+                    "激发对生命意义的思考，契合INFJ的理想主义",
+                    "提供面对挑战的哲学视角，符合INFJ的深度思考",
+                    "适合追求深层意义，增强INFJ的内在动力",
+                    "增强内在韧性，适合INFJ的自我探索"
+                ]
+            }
         ]
-      },
-      {
-        "title": "深度工作",
-        "author": "卡尔·纽波特",
-        "isbn": "1455586692",
-        "amazonUrl": "https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692/",
-        "description": "教导如何专注工作，适合ISTJ的纪律性。",
-        "rating": 4.7,
-        "reasons": [
-          "提供专注工作的策略，契合ISTJ的纪律性",
-          "帮助提高生产力，符合ISTJ的高效追求",
-          "适合结构化环境，增强ISTJ的工作专注力",
-          "培养高效习惯，适合ISTJ的传统工作方式"
+    },
+    "INTJ": {
+        "books": [
+            {
+                "title": "第五项修炼",
+                "author": "彼得·圣吉",
+                "isbn": "0385517254",
+                "amazonUrl": "https://www.amazon.com/Fifth-Discipline-Practice-Learning-Organization/dp/0385517254/",
+                "description": "探讨学习型组织的战略，适合INTJ的长远规划。",
+                "rating": 4.5,
+                "reasons": [
+                    "提供系统化战略框架，契合INTJ的战略思维",
+                    "强调持续学习和改进，符合INTJ的创新追求",
+                    "适合长期目标导向，增强INTJ的规划能力",
+                    "培养创新思维，适合INTJ的未来视野"
+                ]
+            },
+            {
+                "title": "黑天鹅",
+                "author": "纳西姆·塔勒布",
+                "isbn": "081297381X",
+                "amazonUrl": "https://www.amazon.com/Black-Swan-Improbable-Robustness-Fragility/dp/081297381X/",
+                "description": "分析不确定性对决策的影响，适合INTJ的战略思考。",
+                "rating": 4.4,
+                "reasons": [
+                    "提供应对不确定性的方法，契合INTJ的分析能力",
+                    "增强风险评估能力，符合INTJ的战略规划",
+                    "适合分析复杂问题，增强INTJ的洞察力",
+                    "培养前瞻性思维，适合INTJ的未来导向"
+                ]
+            },
+            {
+                "title": "战略思维",
+                "author": "阿维纳什·迪克西特",
+                "isbn": "0393310353",
+                "amazonUrl": "https://www.amazon.com/Thinking-Strategically-Competitive-Business-Politics/dp/0393310353/",
+                "description": "提供战略博弈论方法，适合INTJ的分析能力。",
+                "rating": 4.6,
+                "reasons": [
+                    "提供战略决策工具，契合INTJ的逻辑思维",
+                    "增强竞争分析能力，符合INTJ的战略追求",
+                    "适合复杂问题解决，增强INTJ的规划能力",
+                    "培养长远规划，适合INTJ的未来视野"
+                ]
+            },
+            {
+                "title": "创新者的基因",
+                "author": "克莱顿·克里斯坦森",
+                "isbn": "1422134814",
+                "amazonUrl": "https://www.amazon.com/Innovators-DNA-Mastering-Skills-Disruptive/dp/1422134814/",
+                "description": "探讨创新能力，适合INTJ的创造性思维。",
+                "rating": 4.5,
+                "reasons": [
+                    "提供创新思维框架，契合INTJ的创造力",
+                    "适合追求突破，符合INTJ的创新追求",
+                    "增强问题解决能力，增强INTJ的战略洞察",
+                    "培养战略眼光，适合INTJ的长期目标"
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "ISFJ": {
-    "books": [
-      {
-        "title": "爱的五种语言",
-        "author": "盖瑞·查普曼",
-        "isbn": "080241270X",
-        "amazonUrl": "https://www.amazon.com/Love-Languages-Secret-that-Lasts/dp/080241270X/",
-        "description": "这本书帮助ISFJ理解如何表达和接受爱，增强人际关系。",
-        "rating": 4.8,
-        "reasons": [
-          "提升情感沟通能力，契合ISFJ的关怀特质",
-          "帮助建立更深的关系，符合ISFJ的忠诚性",
-          "适合关怀他人的特质，增强ISFJ的人际连接",
-          "提供实用的关系建议，适合ISFJ的支持角色"
+    },
+    "ISTP": {
+        "books": [
+            {
+                "title": "禅与摩托车维修艺术",
+                "author": "罗伯特·M·波西格",
+                "isbn": "0060958324",
+                "amazonUrl": "https://www.amazon.com/Zen-Art-Motorcycle-Maintenance-Inquiry/dp/0060958324/",
+                "description": "结合哲学与实践，适合ISTP的动手和探索特质。",
+                "rating": 4.3,
+                "reasons": [
+                    "结合实践与思考，契合ISTP的动手能力",
+                    "鼓励独立探索，符合ISTP的独立性格",
+                    "适合解决问题的心态，增强ISTP的实用技能",
+                    "提供哲学洞见，适合ISTP的逻辑思维"
+                ]
+            },
+            {
+                "title": "如何修理一切",
+                "author": "凯尔·维恩斯",
+                "isbn": "1452119325",
+                "amazonUrl": "https://www.amazon.com/Fix-Everything-Manual-Repair-Revolution/dp/1452119325/",
+                "description": "提供修理技巧，适合ISTP的实用和动手能力。",
+                "rating": 4.2,
+                "reasons": [
+                    "提供实用修理技能，契合ISTP的动手能力",
+                    "鼓励动手解决问题，符合ISTP的独立特质",
+                    "适合独立工作风格，增强ISTP的技术能力",
+                    "提升技术能力，适合ISTP的实用主义"
+                ]
+            },
+            {
+                "title": "极简工程学",
+                "author": "托马斯·斯卡拉",
+                "isbn": "1593279108",
+                "amazonUrl": "https://www.amazon.com/Code-Simplicity-Fundamentals-Max-Kanat-Alexander/dp/1593279108/",
+                "description": "提供简化和优化工程的方法，适合ISTP的实用思维。",
+                "rating": 4.4,
+                "reasons": [
+                    "提供简化的技术方法，契合ISTP的实用主义",
+                    "适合动手实践，符合ISTP的解决问题能力",
+                    "增强问题解决能力，增强ISTP的效率意识",
+                    "培养效率意识，适合ISTP的逻辑思维"
+                ]
+            },
+            {
+                "title": "户外生存指南",
+                "author": "戴夫·坎特伯雷",
+                "isbn": "1440579776",
+                "amazonUrl": "https://www.amazon.com/Bushcraft-101-Field-Guide-Wilderness/dp/1440579776/",
+                "description": "提供户外生存技巧，适合ISTP的冒险精神。",
+                "rating": 4.5,
+                "reasons": [
+                    "提供实用生存技能，契合ISTP的动手能力",
+                    "适合探索和独立，符合ISTP的冒险精神",
+                    "增强应变能力，增强ISTP的解决问题能力",
+                    "培养动手能力，适合ISTP的实用主义"
+                ]
+            }
         ]
-      },
-      {
-        "title": "如何赢得朋友与影响他人",
-        "author": "戴尔·卡耐基",
-        "isbn": "0671027034",
-        "amazonUrl": "https://www.amazon.com/How-Win-Friends-Influence-People/dp/0671027034/",
-        "description": "提供人际交往的实用技巧，适合ISFJ的友好和支持性特质。",
-        "rating": 4.7,
-        "reasons": [
-          "增强社交技巧，契合ISFJ的友好性格",
-          "帮助建立和谐关系，符合ISFJ的和谐追求",
-          "提供实用的沟通方法，适合ISFJ的团队合作",
-          "适合支持性角色，增强ISFJ的人际影响力"
+    },
+    "ISFP": {
+        "books": [
+            {
+                "title": "创意，是一种生活态度",
+                "author": "奥斯汀·克莱恩",
+                "isbn": "0761169253",
+                "amazonUrl": "https://www.amazon.com/Steal-Like-Artist-Things-Creativity/dp/0761169253/",
+                "description": "探讨如何培养创造力，适合ISFP的艺术表达。",
+                "rating": 4.6,
+                "reasons": [
+                    "鼓励个人表达和创造力，契合ISFP的艺术特质",
+                    "提供寻找灵感的实用方法，符合ISFP的自由追求",
+                    "强调创作过程的价值，增强ISFP的创造力",
+                    "帮助克服创作障碍，适合ISFP的敏感性格"
+                ]
+            },
+            {
+                "title": "当下的力量",
+                "author": "埃克哈特·托利",
+                "isbn": "1577314808",
+                "amazonUrl": "https://www.amazon.com/Power-Now-Guide-Spiritual-Enlightenment/dp/1577314808/",
+                "description": "帮助活在当下，适合ISFP的感受力。",
+                "rating": 4.7,
+                "reasons": [
+                    "增强对当下体验的感知，契合ISFP的敏感性",
+                    "提供内心平静的实践方法，符合ISFP的自由追求",
+                    "帮助更真实地表达自我，增强ISFP的真实性",
+                    "培养对生活美感的欣赏，适合ISFP的艺术特质"
+                ]
+            },
+            {
+                "title": "森林里的智慧",
+                "author": "彼得·渥雷本",
+                "isbn": "1771642483",
+                "amazonUrl": "https://www.amazon.com/Hidden-Life-Trees-Communicate-Discoveries/dp/1771642483/",
+                "description": "自然与生命之美的颂歌，唤醒 ISFP 对自然万物细腻的感知。",
+                "summary": "本书揭示了树木之间互相沟通、照料、感知的神奇现象，用科学和情感的语言重塑人类与自然的关系。",
+                "rating": 4.8,
+                "reasons": [
+                    "贴合 ISFP 爱自然的本质",
+                    "以温和语言讲述科学现象",
+                    "引发生态意识与心灵感动",
+                    "将大自然描绘得如艺术一般"
+                ]
+            },
+            {
+                "title": "慢生活",
+                "author": "卡尔·霍诺",
+                "isbn": "0061121479",
+                "amazonUrl": "https://www.amazon.com/Praise-Slowness-Challenging-Cult-Speed/dp/0061121479/",
+                "description": "倡导慢节奏生活，适合ISFP的自由追求。",
+                "rating": 4.4,
+                "reasons": [
+                    "鼓励活在当下，契合ISFP的感受力",
+                    "适合自由的生活方式，符合ISFP的自由追求",
+                    "增强对生活的享受，增强ISFP的敏感性",
+                    "提供平衡方法，适合ISFP的艺术特质"
+                ]
+            }
         ]
-      },
-      {
-        "title": "同理心",
-        "author": "罗曼·克兰兹尼克",
-        "isbn": "0399171398",
-        "amazonUrl": "https://www.amazon.com/Empathy-Why-Matters-How-Get/dp/0399171398/",
-        "description": "探讨如何培养同理心，适合ISFJ的关怀特质。",
-        "rating": 4.5,
-        "reasons": [
-          "增强对他人的理解，契合ISFJ的同理心",
-          "提供情感连接技巧，符合ISFJ的温暖特质",
-          "适合支持性角色，增强ISFJ的信任建立",
-          "帮助建立信任，适合ISFJ的忠诚性格"
+    },
+    "INFP": {
+        "books": [
+            {
+                "title": "小王子",
+                "author": "安东尼·德·圣-埃克苏佩里",
+                "isbn": "0156012197",
+                "amazonUrl": "https://www.amazon.com/Little-Prince-Antoine-Saint-Exup%C3%A9ry/dp/0156012197/",
+                "description": "探讨爱与生命的意义，适合INFP的理想主义。",
+                "rating": 4.8,
+                "reasons": [
+                    "激发情感和哲学思考，契合INFP的理想主义",
+                    "强调内在价值，符合INFP的价值观追求",
+                    "适合追求意义的心态，增强INFP的自我探索",
+                    "提供温暖的启示，适合INFP的同理心"
+                ]
+            },
+            {
+                "title": "追风筝的人",
+                "author": "卡勒德·胡赛尼",
+                "isbn": "1594480001",
+                "amazonUrl": "https://www.amazon.com/Kite-Runner-Khaled-Hosseini/dp/1594480001/",
+                "description": "讲述救赎与人性，适合INFP的同理心。",
+                "rating": 4.7,
+                "reasons": [
+                    "激发深层情感共鸣，契合INFP的同理心",
+                    "探讨人性与道德，符合INFP的理想主义",
+                    "适合关怀他人，增强INFP的情感表达",
+                    "提供意义深远的叙事，适合INFP的自我探索"
+                ]
+            },
+            {
+                "title": "岛上书店",
+                "author": "加布瑞埃拉·泽文",
+                "isbn": "1401341616",
+                "amazonUrl": "https://www.amazon.com/Storied-Life-A-J-Fikry-Novel/dp/1401341616/",
+                "description": "讲述爱与救赎的故事，适合INFP的情感深度。",
+                "rating": 4.6,
+                "reasons": [
+                    "提供情感丰富的叙事，契合INFP的同理心",
+                    "适合追求意义，符合INFP的理想主义",
+                    "激发同理心，增强INFP的情感连接",
+                    "增强对人性的理解，适合INFP的自我探索"
+                ]
+            },
+            {
+                "title": "霍比特人",
+                "author": "J.R.R.托尔金",
+                "isbn": "054792822X",
+                "amazonUrl": "https://www.amazon.com/Hobbit-J-R-Tolkien/dp/054792822X/",
+                "description": "奇幻冒险故事，适合INFP的想象力。",
+                "rating": 4.7,
+                "reasons": [
+                    "激发创造力和想象，契合INFP的创造力",
+                    "提供意义深远的冒险，符合INFP的理想主义",
+                    "适合理想主义，增强INFP的自我表达",
+                    "增强对价值的追求，适合INFP的内在探索"
+                ]
+            }
         ]
-      },
-      {
-        "title": "给予：爱的艺术",
-        "author": "亚当·格兰特",
-        "isbn": "0143124986",
-        "amazonUrl": "https://www.amazon.com/Give-Take-Why-Helping-Others/dp/0143124986/",
-        "description": "探讨给予的力量，适合ISFJ的利他主义。",
-        "rating": 4.6,
-        "reasons": [
-          "强调帮助他人的价值，契合ISFJ的关怀特质",
-          "提供平衡给予与接受的方法，符合ISFJ的和谐追求",
-          "适合关怀型人格，增强ISFJ的团队协作",
-          "增强团队协作，适合ISFJ的支持角色"
+    },
+    "INTP": {
+        "books": [
+            {
+                "title": "哥德尔、艾舍尔、巴赫",
+                "author": "道格拉斯·霍夫施塔特",
+                "isbn": "0465026567",
+                "amazonUrl": "https://www.amazon.com/G%C3%B6del-Escher-Bach-Eternal-Golden/dp/0465026567/",
+                "description": "探索数学、艺术和音乐的交叉，适合INTP的逻辑思维。",
+                "rating": 4.5,
+                "reasons": [
+                    "提供复杂的智力挑战，契合INTP的逻辑思维",
+                    "探索抽象概念，符合INTP的理论兴趣",
+                    "适合逻辑分析，增强INTP的分析能力",
+                    "激发跨学科思考，适合INTP的好奇心"
+                ]
+            },
+            {
+                "title": "时间的秩序",
+                "author": "卡洛·罗韦利",
+                "isbn": "0735216118",
+                "amazonUrl": "https://www.amazon.com/Order-Time-Carlo-Rovelli/dp/0735216118/",
+                "description": "探讨时间本质，适合INTP的理论兴趣。",
+                "rating": 4.4,
+                "reasons": [
+                    "提供深刻的科学洞见，契合INTP的理论兴趣",
+                    "适合抽象思考，符合INTP的逻辑思维",
+                    "激发好奇心，增强INTP的探索精神",
+                    "探索宇宙奥秘，适合INTP的分析能力"
+                ]
+            },
+            {
+                "title": "逻辑的引擎",
+                "author": "马丁·戴维斯",
+                "isbn": "0393322297",
+                "amazonUrl": "https://www.amazon.com/Engines-Logic-Mathematicians-Computer-Revised/dp/0393322297/",
+                "description": "讲述计算理论的历史，适合INTP的逻辑兴趣。",
+                "rating": 4.5,
+                "reasons": [
+                    "提供逻辑和计算洞见，契合INTP的逻辑思维",
+                    "适合分析性思维，符合INTP的理论兴趣",
+                    "激发理论探索，增强INTP的分析能力",
+                    "增强智力挑战，适合INTP的好奇心"
+                ]
+            },
+            {
+                "title": "宇宙的结构",
+                "author": "布莱恩·格林",
+                "isbn": "0393339815",
+                "amazonUrl": "https://www.amazon.com/Fabric-Cosmos-Space-Texture-Reality/dp/0393339815/",
+                "description": "探讨宇宙的物理学，适合INTP的好奇心。",
+                "rating": 4.6,
+                "reasons": [
+                    "提供科学的宇宙视角，契合INTP的理论兴趣",
+                    "适合抽象理论，符合INTP的逻辑思维",
+                    "激发探索精神，增强INTP的好奇心",
+                    "增强逻辑思维，适合INTP的分析能力"
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "INFJ": {
-    "books": [
-      {
-        "title": "内向者优势",
-        "author": "苏珊·凯恩",
-        "isbn": "0307352153",
-        "amazonUrl": "https://www.amazon.com/Quiet-Power-Introverts-World-Talking/dp/0307352153/",
-        "description": "探讨内向者的价值，适合INFJ的内省和深度思考。",
-        "rating": 4.6,
-        "reasons": [
-          "肯定内向特质的价值，契合INFJ的内省性格",
-          "提供在外向世界中保持真实的策略，符合INFJ的真实性追求",
-          "帮助理解自己的社交需求，适合INFJ的深度思考",
-          "展示如何利用内向优势，增强INFJ的自我认知"
+    },
+    "ESTP": {
+        "books": [
+            {
+                "title": "精进：如何成为一个很厉害的人",
+                "author": "采铜",
+                "isbn": "7508684036",
+                "amazonUrl": "https://www.amazon.com/Atomic-Habits-Proven-Build-Break/dp/0735211299/",
+                "description": "提供快速成长的实用方法，适合ESTP的行动导向。",
+                "rating": 4.6,
+                "reasons": [
+                    "提供快速行动的策略，契合ESTP的行动导向",
+                    "适合动态环境，符合ESTP的适应能力",
+                    "增强决策能力，增强ESTP的应变能力",
+                    "激发冒险精神，适合ESTP的果断性格"
+                ]
+            },
+            {
+                "title": "影响力",
+                "author": "罗伯特·西奥迪尼",
+                "isbn": "006124189X",
+                "amazonUrl": "https://www.amazon.com/Influence-Psychology-Persuasion-Robert-Cialdini/dp/006124189X/",
+                "description": "揭示说服的心理学，适合ESTP的社交能力。",
+                "rating": 4.7,
+                "reasons": [
+                    "提供说服技巧，契合ESTP的社交能力",
+                    "适合快速决策，符合ESTP的行动导向",
+                    "增强社交影响力，增强ESTP的应变能力",
+                    "实用于动态场景，适合ESTP的果断性格"
+                ]
+            },
+            {
+                "title": "瞬变：如何引发变革",
+                "author": "奇普·希思",
+                "isbn": "0307593231",
+                "amazonUrl": "https://www.amazon.com/Switch-Change-Things-When-Hard/dp/0307593231/",
+                "description": "提供快速变革的方法，适合ESTP的果断性。",
+                "rating": 4.5,
+                "reasons": [
+                    "提供变革的实用策略，契合ESTP的行动导向",
+                    "适合快速行动，符合ESTP的适应能力",
+                    "增强适应能力，增强ESTP的应变能力",
+                    "激发创新思维，适合ESTP的果断性格"
+                ]
+            },
+            {
+                "title": "谈判的艺术",
+                "author": "克里斯·沃斯",
+                "isbn": "0062407805",
+                "amazonUrl": "https://www.amazon.com/Never-Split-Difference-Negotiating-Depended/dp/0062407805/",
+                "description": "提供谈判技巧，适合ESTP的应变能力。",
+                "rating": 4.8,
+                "reasons": [
+                    "提供高效谈判方法，契合ESTP的社交能力",
+                    "适合动态交互，符合ESTP的行动导向",
+                    "增强说服力，增强ESTP的应变能力",
+                    "激发即时决策，适合ESTP的果断性格"
+                ]
+            }
         ]
-      },
-      {
-        "title": "非暴力沟通",
-        "author": "马歇尔·卢森堡",
-        "isbn": "189200528X",
-        "amazonUrl": "https://www.amazon.com/Nonviolent-Communication-Language-Life-3rd/dp/189200528X/",
-        "description": "提供同理心沟通方法，适合INFJ的和谐追求。",
-        "rating": 4.8,
-        "reasons": [
-          "增强人际关系中的同理心，契合INFJ的关怀特质",
-          "提供真实表达需求的方法，符合INFJ的真实性追求",
-          "帮助和平解决冲突，适合INFJ的和谐目标",
-          "培养更深层次的连接，增强INFJ的人际关系"
+    },
+    "ESFP": {
+        "books": [
+            {
+                "title": "欢乐颂",
+                "author": "阿兰·卡尔",
+                "isbn": "0143126237",
+                "amazonUrl": "https://www.amazon.com/Easy-Way-Stop-Smoking-Allen/dp/0143126237/",
+                "description": "提供享受生活的实用方法，适合ESFP的热情。",
+                "rating": 4.5,
+                "reasons": [
+                    "鼓励享受当下，契合ESFP的热情特质",
+                    "提供积极生活方式，符合ESFP的社交能力",
+                    "适合社交场景，增强ESFP的活力",
+                    "激发热情活力，适合ESFP的表演天赋"
+                ]
+            },
+            {
+                "title": "即兴戏剧的艺术",
+                "author": "基斯·约翰斯通",
+                "isbn": "0878301178",
+                "amazonUrl": "https://www.amazon.com/Impro-Improvisation-Theatre-Keith-Johnstone/dp/0878301178/",
+                "description": "深入探索即兴表演的魅力，极大地激发ESFP的创造力与表现力。",
+                "rating": 4.8,
+                "reasons": [
+                    "提升表演技巧，契合ESFP的外向性格",
+                    "激发创意思维，增强即兴反应能力",
+                    "适合团体互动，满足ESFP的社交需求",
+                    "通过戏剧锻炼自我表达力，强化ESFP天赋"
+                ]
+            },
+            {
+                "title": "活出生命的意义",
+                "author": "维克多·弗兰克尔",
+                "isbn": "080701429X",
+                "amazonUrl": "https://www.amazon.com/Mans-Search-Meaning-Viktor-Frankl/dp/080701429X/",
+                "description": "从心理学角度探讨人生价值，对ESFP的人文关怀具有深远启发。",
+                "rating": 4.9,
+                "reasons": [
+                    "激发对人生意义的思考，增强内在动力",
+                    "鼓励真实表达与情感共鸣，符合ESFP倾向",
+                    "帮助ESFP在娱乐与意义之间找到平衡",
+                    "提供深度反思，提升情感深度与认知"
+                ]
+            },
+            {
+                "title": "给无名指的信",
+                "author": "幾米",
+                "isbn": "9573317242",
+                "amazonUrl": "https://www.amazon.com/Jimmy-Give-Finger-Letter/dp/B001P6WXG8/",
+                "description": "幾米的绘本充满细腻情感和唯美图像，深得 ISFP 的艺术气质与情感世界。",
+                "summary": "这本图文书用意象化的手法讲述成长与爱、孤独与期望之间的微妙联系，每一页都是心灵的画面。",
+                "rating": 4.9,
+                "reasons": [
+                    "图像与诗意完美结合",
+                    "视觉与情绪体验双重满足",
+                    "非常适合富有艺术直觉的 ISFP",
+                    "轻柔但深刻，引导情绪自我疗愈"
+                ]
+            },
+            {
+                "title": "海边的卡夫卡",
+                "author": "村上春树",
+                "isbn": "1400079276",
+                "amazonUrl": "https://www.amazon.com/Kafka-Shore-Haruki-Murakami/dp/1400079276/",
+                "description": "融合梦境、现实、音乐与孤独的奇幻小说，深契 ISFP 对感性与灵魂的探索。",
+                "summary": "卡夫卡少年逃离家庭，踏上一段探索与奇遇并存的旅程，在旅途中交织了哲学思考、音乐诗意与灵魂对话。",
+                "rating": 4.6,
+                "reasons": [
+                    "丰富感官细节与梦幻意象",
+                    "探索孤独、成长与内心冲突",
+                    "适合 ISFP 喜欢的抽象而深邃",
+                    "情感多层次，极具阅读深度"
+                ]
+            }
         ]
-      },
-      {
-        "title": "人性的弱点",
-        "author": "戴尔·卡耐基",
-        "isbn": "1439199191",
-        "amazonUrl": "https://www.amazon.com/How-Win-Friends-Influence-People/dp/1439199191/",
-        "description": "提供人际交往技巧，适合INFJ的深度关系追求。",
-        "rating": 4.7,
-        "reasons": [
-          "增强人际沟通能力，契合INFJ的同理心",
-          "帮助建立有意义的连接，符合INFJ的深度关系追求",
-          "适合追求和谐，增强INFJ的社交技巧",
-          "提供实用社交策略，适合INFJ的理想主义"
+    },
+    "ENFP": {
+        "books": [
+            {
+                "title": "The Comprehensive ENFP Survival Guide",
+                "author": "Heidi Priebe",
+                "isbn": "0692431492",
+                "amazonUrl": "https://www.amazon.com/Comprehensive-ENFP-Survival-Guide/dp/0692431492/",
+                "description": "一本深入探讨 ENFP 性格类型的指南，提供实用建议以帮助 ENFP 更好地理解自己。",
+                "summary": "本书通过幽默而深刻的方式，帮助 ENFP 了解自己的思维模式、情感需求和人际关系，提供应对压力和实现自我成长的策略。",
+                "rating": 4.6,
+                "reasons": [
+                    "深入解析 ENFP 的性格特质，增强自我认知",
+                    "提供实用的生活和职业建议，助力个人发展",
+                    "语言幽默风趣，符合 ENFP 的阅读偏好",
+                    "帮助 ENFP 更好地管理情绪和人际关系"
+                ]
+            },
+            {
+                "title": "The Little Prince",
+                "author": "Antoine de Saint-Exupéry",
+                "isbn": "0156012197",
+                "amazonUrl": "https://www.amazon.com/Little-Prince-Antoine-Saint-Exupery/dp/0156012197/",
+                "description": "一部寓言式的童话故事，探讨人生的意义和人性的本质。",
+                "summary": "通过小王子的星际旅行，揭示成人世界的荒诞与孩子般纯真的价值，鼓励读者保持好奇心和同理心。",
+                "rating": 4.8,
+                "reasons": [
+                    "激发 ENFP 的想象力和探索欲",
+                    "强调情感连接和人际关系的重要性",
+                    "寓意深刻，适合 ENFP 的哲思倾向",
+                    "鼓励保持童心和对世界的好奇"
+                ]
+            },
+            {
+                "title": "Big Magic: Creative Living Beyond Fear",
+                "author": "Elizabeth Gilbert",
+                "isbn": "1594634726",
+                "amazonUrl": "https://www.amazon.com/Big-Magic-Creative-Living-Beyond/dp/1594634726/",
+                "description": "探索创造力的本质，鼓励读者勇敢追求创意生活。",
+                "summary": "作者分享了自己在创作过程中的经验和见解，鼓励读者克服恐惧，释放内在的创造力，过上充满激情和意义的生活。",
+                "rating": 4.5,
+                "reasons": [
+                    "激励 ENFP 追求创意和激情",
+                    "提供实用的创作建议，助力个人表达",
+                    "鼓励面对恐惧，勇敢追梦",
+                    "符合 ENFP 对自由和自我实现的追求"
+                ]
+            },
+            {
+                "title": "Start With Why: How Great Leaders Inspire Everyone to Take Action",
+                "author": "Simon Sinek",
+                "isbn": "1591846447",
+                "amazonUrl": "https://www.amazon.com/Start-Why-Leaders-Inspire-Everyone/dp/1591846447/",
+                "description": "探讨领导力的核心——找到“为什么”，激发他人行动的动力。",
+                "summary": "通过分析成功领导者的案例，作者提出“黄金圈”理论，强调明确目的对于激励团队和实现目标的重要性。",
+                "rating": 4.6,
+                "reasons": [
+                    "帮助 ENFP 明确个人和职业目标",
+                    "提供激励他人的策略，增强领导力",
+                    "强调价值观和使命感，符合 ENFP 的核心驱动力",
+                    "鼓励以意义为导向的生活方式"
+                ]
+            }
         ]
-      },
-      {
-        "title": "活着为了什么",
-        "author": "维克多·弗兰克尔",
-        "isbn": "080701429X",
-        "amazonUrl": "https://www.amazon.com/Mans-Search-Meaning-Viktor-Frankl/dp/080701429X/",
-        "description": "探讨生命的意义，适合INFJ的理想主义。",
-        "rating": 4.8,
-        "reasons": [
-          "激发对生命意义的思考，契合INFJ的理想主义",
-          "提供面对挑战的哲学视角，符合INFJ的深度思考",
-          "适合追求深层意义，增强INFJ的内在动力",
-          "增强内在韧性，适合INFJ的自我探索"
+    },
+    "ENTP": {
+        "books": [
+            {
+                "title": "The Beginning of Infinity",
+                "author": "David Deutsch",
+                "isbn": "014312135X",
+                "amazonUrl": "https://www.amazon.com/Beginning-Infinity-Explanations-Transform-World/dp/014312135X/",
+                "description": "探讨科学解释的力量及其对人类未来的影响。",
+                "summary": "作者提出了科学解释的无限潜力，讨论了知识的增长如何推动人类文明的进步，激发读者对未来的想象。",
+                "rating": 4.7,
+                "reasons": [
+                    "激发 ENTP 的好奇心和探索欲",
+                    "提供跨学科的深度思考，符合 ENTP 的思维方式",
+                    "挑战传统观念，鼓励创新思维",
+                    "拓展视野，启发未来的可能性"
+                ]
+            },
+            {
+                "title": "Influence: The Psychology of Persuasion",
+                "author": "Robert B. Cialdini",
+                "isbn": "006124189X",
+                "amazonUrl": "https://www.amazon.com/Influence-Psychology-Persuasion-Robert-Cialdini/dp/006124189X/",
+                "description": "揭示影响力的六大原则，解析人类行为背后的心理机制。",
+                "summary": "通过实证研究和案例分析，作者总结了影响他人决策的关键因素，提供了在日常生活和商业中应用的策略。",
+                "rating": 4.8,
+                "reasons": [
+                    "满足 ENTP 对人类行为的好奇心",
+                    "提供实用的说服技巧，增强沟通能力",
+                    "适合 ENTP 在社交和职业场合中应用",
+                    "激发对心理学和行为科学的兴趣"
+                ]
+            },
+            {
+                "title": "Impro: Improvisation and the Theatre",
+                "author": "Keith Johnstone",
+                "isbn": "0878301178",
+                "amazonUrl": "https://www.amazon.com/Impro-Improvisation-Theatre-Keith-Johnstone/dp/0878301178/",
+                "description": "探讨即兴表演的艺术，激发创造力和表达力。",
+                "summary": "作者分享了即兴戏剧的技巧和理念，强调在表演中保持开放和真实，提升创造性思维和人际互动能力。",
+                "rating": 4.8,
+                "reasons": [
+                    "激发 ENTP 的创造力和表达欲",
+                    "提供实用的即兴技巧，增强适应能力",
+                    "适合 ENTP 在多变环境中灵活应对",
+                    "鼓励开放思维和团队协作"
+                ]
+            },
+            {
+                "title": "Trust Me, I'm Lying: Confessions of a Media Manipulator",
+                "author": "Ryan Holiday",
+                "isbn": "1591846285",
+                "amazonUrl": "https://www.amazon.com/Trust-Me-Lying-Confessions-Manipulator/dp/1591846285/",
+                "description": "揭示媒体操控的内幕，探讨信息传播的真相。",
+                "summary": "作者以亲身经历揭示了如何操纵媒体和公众舆论，警示读者在信息时代保持批判性思维的重要性。",
+                "rating": 4.5,
+                "reasons": [
+                    "满足 ENTP 对媒体和传播机制的兴趣",
+                    "提供对信息操控的深刻洞察",
+                    "激发对社会现象的批判性思考",
+                    "鼓励 ENTP 成为更有意识的信息消费者"
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "INTJ": {
-    "books": [
-      {
-        "title": "第五项修炼",
-        "author": "彼得·圣吉",
-        "isbn": "0385517254",
-        "amazonUrl": "https://www.amazon.com/Fifth-Discipline-Practice-Learning-Organization/dp/0385517254/",
-        "description": "探讨学习型组织的战略，适合INTJ的长远规划。",
-        "rating": 4.5,
-        "reasons": [
-          "提供系统化战略框架，契合INTJ的战略思维",
-          "强调持续学习和改进，符合INTJ的创新追求",
-          "适合长期目标导向，增强INTJ的规划能力",
-          "培养创新思维，适合INTJ的未来视野"
+    },
+    "ESTJ": {
+        "books": [
+            {
+                "title": "The 7 Habits of Highly Effective People",
+                "author": "Stephen R. Covey",
+                "isbn": "0743269519",
+                "amazonUrl": "https://www.amazon.com/7-Habits-Highly-Effective-People/dp/0743269519/",
+                "description": "提供个人和职业成功的七个习惯，建立高效的生活方式。",
+                "summary": "作者提出了七个习惯，帮助读者在个人成长、时间管理和人际关系中实现卓越，建立以原则为中心的生活。",
+                "rating": 4.7,
+                "reasons": [
+                    "符合 ESTJ 对结构和效率的追求",
+                    "提供实用的时间管理和目标设定方法",
+                    "强调责任感和自律，契合 ESTJ 的价值观",
+                    "帮助建立稳定和高效的生活方式"
+                ]
+            },
+            {
+                "title": "Good to Great: Why Some Companies Make the Leap... and Others Don't",
+                "author": "Jim Collins",
+                "isbn": "0066620996",
+                "amazonUrl": "https://www.amazon.com/Good-Great-Some-Companies-Others/dp/0066620996/",
+                "description": "分析企业从优秀到卓越的转变过程，提供可复制的成功模式。",
+                "summary": "通过对多家公司的深入研究，作者总结了实现卓越的关键因素，如领导力、文化和战略，适用于组织和个人的发展。",
+                "rating": 4.6,
+                "reasons": [
+                    "满足 ESTJ 对组织管理和效率的兴趣",
+                    "提供实证研究支持的成功策略",
+                    "强调纪律和系统性，契合 ESTJ 的思维方式",
+                    "适合在职业发展中应用"
+                ]
+            },
+            {
+                "title": "An Essential Guide for the ESTJ Personality Type",
+                "author": "Nicole Zagorski",
+                "isbn": "153557013X",
+                "amazonUrl": "https://www.amazon.com/Essential-Guide-ESTJ-Personality-Type/dp/153557013X/",
+                "description": "深入了解 ESTJ 的性格特质，提供职业和人际关系的指导。",
+                "summary": "本书帮助 ESTJ 类型的人更好地理解自身的特点，提供在职业选择、人际交往和自我提升方面的实用建议，增强自我认知。",
+                "rating": 3.9,
+                "reasons": [
+                    "提供针对 ESTJ 的实用建议，增强自我认知",
+                    "帮助在职业和人际关系中发挥优势",
+                    "适合希望深入了解自身性格的人士",
+                    "内容简明易懂，便于快速阅读"
+                ]
+            },
+            {
+                "title": "ESTJ: Understanding & Relating with the Guardian",
+                "author": "Clayton Geoffreys",
+                "isbn": "1507727364",
+                "amazonUrl": "https://www.amazon.com/ESTJ-Understanding-Relating-Guardian-Personality/dp/1507727364/",
+                "description": "探索 ESTJ 的思维方式和行为模式，提升人际关系质量。",
+                "summary": "本书通过深入分析 ESTJ 的性格特征，帮助读者理解其决策方式、沟通风格和情感表达，提供改善人际关系的策略。",
+                "rating": 4.2,
+                "reasons": [
+                    "深入剖析 ESTJ 的性格特点",
+                    "提供改善人际关系的实用技巧",
+                    "适合希望与 ESTJ 更好相处的人士",
+                    "语言通俗易懂，适合各类读者"
+                ]
+            },
+            {
+                "title": "The Administrator: Your Guide to the ESTJ Personality Type",
+                "author": "Jaroslaw Jankowski",
+                "isbn": "8379810481",
+                "amazonUrl": "https://www.amazon.com/Administrator-Your-Guide-ESTJ-Personality/dp/8379810481/",
+                "description": "全面解析 ESTJ 的性格特质，提供职业发展和人际交往的指导。",
+                "summary": "本书涵盖 ESTJ 的核心特质、职业倾向、人际关系模式等方面，帮助读者全面了解并发挥 ESTJ 的优势。",
+                "rating": 5,
+                "reasons": [
+                    "内容全面，涵盖 ESTJ 的各个方面",
+                    "提供实际可行的职业和人际关系建议",
+                    "适合希望深入了解 ESTJ 的读者",
+                    "作者经验丰富，分析深入"
+                ]
+            },
+            {
+                "title": "Be Your Best Self: ESTJ Myers Briggs (MBTI) Personality Development Journal",
+                "author": "ISQ Books",
+                "isbn": "9798820164668",
+                "amazonUrl": "https://www.amazon.com/Your-Best-Self-Personality-Relationships/dp/B0B14BCXSQ/",
+                "description": "专为 ESTJ 设计的个性发展日记，助力自我提升。",
+                "summary": "本书结合 MBTI 理论，提供 ESTJ 的性格分析，并设有专属的自我发展记录区，帮助读者设定目标，追踪成长进程。",
+                "rating": 4.5,
+                "reasons": [
+                    "结合理论与实践，促进自我成长",
+                    "提供个性化的成长记录工具",
+                    "适合希望系统提升自我的 ESTJ",
+                    "设计精美，便于日常使用"
+                ]
+            }
         ]
-      },
-      {
-        "title": "黑天鹅",
-        "author": "纳西姆·塔勒布",
-        "isbn": "081297381X",
-        "amazonUrl": "https://www.amazon.com/Black-Swan-Improbable-Robustness-Fragility/dp/081297381X/",
-        "description": "分析不确定性对决策的影响，适合INTJ的战略思考。",
-        "rating": 4.4,
-        "reasons": [
-          "提供应对不确定性的方法，契合INTJ的分析能力",
-          "增强风险评估能力，符合INTJ的战略规划",
-          "适合分析复杂问题，增强INTJ的洞察力",
-          "培养前瞻性思维，适合INTJ的未来导向"
+    },
+    "ENFJ": {
+        "books": [
+            {
+                "title": "ENFJ: Understanding & Relating with the Teacher",
+                "author": "Clayton Geoffreys",
+                "isbn": "1508786594",
+                "amazonUrl": "https://www.amazon.com/ENFJ-Understanding-Relating-Teacher-Personality/dp/1508786594/",
+                "description": "深入了解 ENFJ 的性格、情感与人际关系特征。",
+                "summary": "本书详细描述 ENFJ 的情感动力、领导特质、沟通风格及其在人际互动中的表现，是理解这一人格类型的全面指南。",
+                "rating": 4.4,
+                "reasons": [
+                    "分析 ENFJ 的理想主义与影响力",
+                    "帮助 ENFJ 增强人际关系管理能力",
+                    "适合自我反思与职业发展需求",
+                    "内容清晰实用，适合各年龄段读者"
+                ]
+            },
+            {
+                "title": "The Idealist: Your Guide to the ENFJ Personality Type",
+                "author": "Jaroslaw Jankowski",
+                "isbn": "8379810449",
+                "amazonUrl": "https://www.amazon.com/Idealist-Your-Guide-ENFJ-Personality/dp/8379810449/",
+                "description": "为理想主义的 ENFJ 量身打造的性格指南。",
+                "summary": "本书通过实例与心理模型，探索 ENFJ 的价值观、动机和社交行为，提供如何更好发挥其社会影响力的策略。",
+                "rating": 4.7,
+                "reasons": [
+                    "深入刻画 ENFJ 的理想导向思维",
+                    "提供在职场与家庭中的实际指导",
+                    "语言精炼，适合系统学习与应用",
+                    "结合 MBTI 理论与现实案例"
+                ]
+            },
+            {
+                "title": "An Essential Guide for the ENFJ Personality Type",
+                "author": "Nicole Zagorski",
+                "isbn": "1535566624",
+                "amazonUrl": "https://www.amazon.com/Essential-Guide-ENFJ-Personality-Type/dp/1535566624/",
+                "description": "ENFJ 的入门型格参考，助力发现自身潜力。",
+                "summary": "本书适合想要快速了解 ENFJ 性格的人群，提供简洁明了的特点分析及常见行为模式，帮助 ENFJ 更好理解自我。",
+                "rating": 4,
+                "reasons": [
+                    "内容简洁，适合初学者阅读",
+                    "鼓励 ENFJ 正面表达情感和理想",
+                    "适合青少年和职场新手",
+                    "结构清晰，便于对照查阅"
+                ]
+            },
+            {
+                "title": "The ENFJ Personality Guide: Understand yourself, reach your potential, and become your best you!",
+                "author": "Dan Johnston",
+                "isbn": "1988058329",
+                "amazonUrl": "https://www.amazon.com/ENFJ-Personality-Guide-Understand-yourself/dp/1988058329/",
+                "description": "探索 ENFJ 潜力，实现理想自我。",
+                "summary": "该书旨在帮助 ENFJ 类型的人理解自己的性格动因，并提供实践方法，使他们在人际关系和事业中发挥最大潜力。",
+                "rating": 4.6,
+                "reasons": [
+                    "帮助 ENFJ 发挥天生的引导力和同理心",
+                    "提供可操作的成长路径和练习",
+                    "适合自我成长与心理辅导方向",
+                    "引导 ENFJ 在生活中实现使命感"
+                ]
+            }
         ]
-      },
-      {
-        "title": "战略思维",
-        "author": "阿维纳什·迪克西特",
-        "isbn": "0393310353",
-        "amazonUrl": "https://www.amazon.com/Thinking-Strategically-Competitive-Business-Politics/dp/0393310353/",
-        "description": "提供战略博弈论方法，适合INTJ的分析能力。",
-        "rating": 4.6,
-        "reasons": [
-          "提供战略决策工具，契合INTJ的逻辑思维",
-          "增强竞争分析能力，符合INTJ的战略追求",
-          "适合复杂问题解决，增强INTJ的规划能力",
-          "培养长远规划，适合INTJ的未来视野"
+    },
+    "ENTJ": {
+        "books": [
+            {
+                "title": "Mastermind: Unlocking the Power of the ENTJ Personality Type",
+                "author": "Daniel Pascal",
+                "isbn": "1532918057",
+                "amazonUrl": "https://www.amazon.com/Mastermind-Unlocking-Personality-Daniel-Pascal/dp/1532918057/",
+                "description": "一本深入探索 ENTJ 思维与战略天赋的指南。",
+                "summary": "本书解构 ENTJ 的决策逻辑、领导风格和沟通模式，揭示如何将这种人格的优势转化为事业成功和高效人际互动的利器。",
+                "rating": 4.6,
+                "reasons": [
+                    "强化 ENTJ 的领导优势与规划能力",
+                    "为职业成功提供清晰方向",
+                    "强调战略思维与执行力并重",
+                    "结合心理模型与现实案例，极具参考性"
+                ]
+            },
+            {
+                "title": "ENTJ: Understanding & Relating with the Commander",
+                "author": "Clayton Geoffreys",
+                "isbn": "1514658595",
+                "amazonUrl": "https://www.amazon.com/ENTJ-Understanding-Relating-Commander-Personality/dp/1514658595/",
+                "description": "系统分析 ENTJ 的行为模式和人际关系风格。",
+                "summary": "本书从心理类型出发，帮助读者理解 ENTJ 如何在领导和组织中发挥核心作用，同时也指出他们在亲密关系中的成长机会。",
+                "rating": 4.4,
+                "reasons": [
+                    "提升 ENTJ 对自己行为动因的理解",
+                    "有助于改善沟通与协作",
+                    "适合在管理与领导岗位上的 ENTJ 阅读",
+                    "书风简明，内容实用"
+                ]
+            },
+            {
+                "title": "The ENTJ: Understanding the Strategic Commander",
+                "author": "Jaroslaw Jankowski",
+                "isbn": "8379810260",
+                "amazonUrl": "https://www.amazon.com/ENTJ-Understanding-Strategic-Commander-Personality/dp/8379810260/",
+                "description": "一本从战略角度剖析 ENTJ 内在驱动力的作品。",
+                "summary": "结合认知心理学与人格理论，阐述 ENTJ 的目标导向型思维、如何激励他人以及在压力下保持高效的秘诀。",
+                "rating": 4.7,
+                "reasons": [
+                    "深入探讨 ENTJ 追求成就的核心动机",
+                    "帮助增强对权力和影响力的理解",
+                    "为组织与创业型 ENTJ 提供实操策略",
+                    "理论结合实际，适合长期收藏"
+                ]
+            },
+            {
+                "title": "Personality Hacker: Harness the Power of Your Personality Type to Transform Your Work, Relationships, and Life",
+                "author": "Joel Mark Witt & Antonia Dodge",
+                "isbn": "0062885816",
+                "amazonUrl": "https://www.amazon.com/Personality-Hacker-Personality-Relationships-Life/dp/0062885816/",
+                "description": "全类型指南，特别适合 ENTJ 理性驱动者理解和优化自我。",
+                "summary": "本书不仅涵盖了 ENTJ 的性格特质，还提供认知功能的实践应用，包括如何管理压力、优化决策与人际互动，是提高自我效能的实战手册。",
+                "rating": 4.8,
+                "reasons": [
+                    "全面系统，适合高认知型读者",
+                    "可帮助 ENTJ 在多个人生维度发力",
+                    "内容兼顾理论与实际，非常实用",
+                    "强调认知发展，贴合 ENTJ 成长需求"
+                ]
+            }
         ]
-      },
-      {
-        "title": "创新者的基因",
-        "author": "克莱顿·克里斯坦森",
-        "isbn": "1422134814",
-        "amazonUrl": "https://www.amazon.com/Innovators-DNA-Mastering-Skills-Disruptive/dp/1422134814/",
-        "description": "探讨创新能力，适合INTJ的创造性思维。",
-        "rating": 4.5,
-        "reasons": [
-          "提供创新思维框架，契合INTJ的创造力",
-          "适合追求突破，符合INTJ的创新追求",
-          "增强问题解决能力，增强INTJ的战略洞察",
-          "培养战略眼光，适合INTJ的长期目标"
-        ]
-      }
-    ]
-  },
-  "ISTP": {
-    "books": [
-      {
-        "title": "禅与摩托车维修艺术",
-        "author": "罗伯特·M·波西格",
-        "isbn": "0060958324",
-        "amazonUrl": "https://www.amazon.com/Zen-Art-Motorcycle-Maintenance-Inquiry/dp/0060958324/",
-        "description": "结合哲学与实践，适合ISTP的动手和探索特质。",
-        "rating": 4.3,
-        "reasons": [
-          "结合实践与思考，契合ISTP的动手能力",
-          "鼓励独立探索，符合ISTP的独立性格",
-          "适合解决问题的心态，增强ISTP的实用技能",
-          "提供哲学洞见，适合ISTP的逻辑思维"
-        ]
-      },
-      {
-        "title": "如何修理一切",
-        "author": "凯尔·维恩斯",
-        "isbn": "1452119325",
-        "amazonUrl": "https://www.amazon.com/Fix-Everything-Manual-Repair-Revolution/dp/1452119325/",
-        "description": "提供修理技巧，适合ISTP的实用和动手能力。",
-        "rating": 4.2,
-        "reasons": [
-          "提供实用修理技能，契合ISTP的动手能力",
-          "鼓励动手解决问题，符合ISTP的独立特质",
-          "适合独立工作风格，增强ISTP的技术能力",
-          "提升技术能力，适合ISTP的实用主义"
-        ]
-      },
-      {
-        "title": "极简工程学",
-        "author": "托马斯·斯卡拉",
-        "isbn": "1593279108",
-        "amazonUrl": "https://www.amazon.com/Code-Simplicity-Fundamentals-Max-Kanat-Alexander/dp/1593279108/",
-        "description": "提供简化和优化工程的方法，适合ISTP的实用思维。",
-        "rating": 4.4,
-        "reasons": [
-          "提供简化的技术方法，契合ISTP的实用主义",
-          "适合动手实践，符合ISTP的解决问题能力",
-          "增强问题解决能力，增强ISTP的效率意识",
-          "培养效率意识，适合ISTP的逻辑思维"
-        ]
-      },
-      {
-        "title": "户外生存指南",
-        "author": "戴夫·坎特伯雷",
-        "isbn": "1440579776",
-        "amazonUrl": "https://www.amazon.com/Bushcraft-101-Field-Guide-Wilderness/dp/1440579776/",
-        "description": "提供户外生存技巧，适合ISTP的冒险精神。",
-        "rating": 4.5,
-        "reasons": [
-          "提供实用生存技能，契合ISTP的动手能力",
-          "适合探索和独立，符合ISTP的冒险精神",
-          "增强应变能力，增强ISTP的解决问题能力",
-          "培养动手能力，适合ISTP的实用主义"
-        ]
-      }
-    ]
-  },
-  "ISFP": {
-    "books": [
-      {
-        "title": "创意，是一种生活态度",
-        "author": "奥斯汀·克莱恩",
-        "isbn": "0761169253",
-        "amazonUrl": "https://www.amazon.com/Steal-Like-Artist-Things-Creativity/dp/0761169253/",
-        "description": "探讨如何培养创造力，适合ISFP的艺术表达。",
-        "rating": 4.6,
-        "reasons": [
-          "鼓励个人表达和创造力，契合ISFP的艺术特质",
-          "提供寻找灵感的实用方法，符合ISFP的自由追求",
-          "强调创作过程的价值，增强ISFP的创造力",
-          "帮助克服创作障碍，适合ISFP的敏感性格"
-        ]
-      },
-      {
-        "title": "当下的力量",
-        "author": "埃克哈特·托利",
-        "isbn": "1577314808",
-        "amazonUrl": "https://www.amazon.com/Power-Now-Guide-Spiritual-Enlightenment/dp/1577314808/",
-        "description": "帮助活在当下，适合ISFP的感受力。",
-        "rating": 4.7,
-        "reasons": [
-          "增强对当下体验的感知，契合ISFP的敏感性",
-          "提供内心平静的实践方法，符合ISFP的自由追求",
-          "帮助更真实地表达自我，增强ISFP的真实性",
-          "培养对生活美感的欣赏，适合ISFP的艺术特质"
-        ]
-      },
-      {
-        "title": "森林里的智慧",
-        "author": "彼得·渥雷本",
-        "isbn": "1771642483",
-        "amazonUrl": "https://www.amazon.com/Hidden-Life-Trees-Communicate-Discoveries/dp/1771642483/",
-        "description": "自然与生命之美的颂歌，唤醒 ISFP 对自然万物细腻的感知。",
-        "summary": "本书揭示了树木之间互相沟通、照料、感知的神奇现象，用科学和情感的语言重塑人类与自然的关系。",
-        "rating": 4.8,
-        "reasons": [
-          "贴合 ISFP 爱自然的本质",
-          "以温和语言讲述科学现象",
-          "引发生态意识与心灵感动",
-          "将大自然描绘得如艺术一般"
-       ]
-      },
-      {
-        "title": "慢生活",
-        "author": "卡尔·霍诺",
-        "isbn": "0061121479",
-        "amazonUrl": "https://www.amazon.com/Praise-Slowness-Challenging-Cult-Speed/dp/0061121479/",
-        "description": "倡导慢节奏生活，适合ISFP的自由追求。",
-        "rating": 4.4,
-        "reasons": [
-          "鼓励活在当下，契合ISFP的感受力",
-          "适合自由的生活方式，符合ISFP的自由追求",
-          "增强对生活的享受，增强ISFP的敏感性",
-          "提供平衡方法，适合ISFP的艺术特质"
-        ]
-      }
-    ]
-  },
-  "INFP": {
-    "books": [
-      {
-        "title": "小王子",
-        "author": "安东尼·德·圣-埃克苏佩里",
-        "isbn": "0156012197",
-        "amazonUrl": "https://www.amazon.com/Little-Prince-Antoine-Saint-Exup%C3%A9ry/dp/0156012197/",
-        "description": "探讨爱与生命的意义，适合INFP的理想主义。",
-        "rating": 4.8,
-        "reasons": [
-          "激发情感和哲学思考，契合INFP的理想主义",
-          "强调内在价值，符合INFP的价值观追求",
-          "适合追求意义的心态，增强INFP的自我探索",
-          "提供温暖的启示，适合INFP的同理心"
-        ]
-      },
-      {
-        "title": "追风筝的人",
-        "author": "卡勒德·胡赛尼",
-        "isbn": "1594480001",
-        "amazonUrl": "https://www.amazon.com/Kite-Runner-Khaled-Hosseini/dp/1594480001/",
-        "description": "讲述救赎与人性，适合INFP的同理心。",
-        "rating": 4.7,
-        "reasons": [
-          "激发深层情感共鸣，契合INFP的同理心",
-          "探讨人性与道德，符合INFP的理想主义",
-          "适合关怀他人，增强INFP的情感表达",
-          "提供意义深远的叙事，适合INFP的自我探索"
-        ]
-      },
-      {
-        "title": "岛上书店",
-        "author": "加布瑞埃拉·泽文",
-        "isbn": "1401341616",
-        "amazonUrl": "https://www.amazon.com/Storied-Life-A-J-Fikry-Novel/dp/1401341616/",
-        "description": "讲述爱与救赎的故事，适合INFP的情感深度。",
-        "rating": 4.6,
-        "reasons": [
-          "提供情感丰富的叙事，契合INFP的同理心",
-          "适合追求意义，符合INFP的理想主义",
-          "激发同理心，增强INFP的情感连接",
-          "增强对人性的理解，适合INFP的自我探索"
-        ]
-      },
-      {
-        "title": "霍比特人",
-        "author": "J.R.R.托尔金",
-        "isbn": "054792822X",
-        "amazonUrl": "https://www.amazon.com/Hobbit-J-R-Tolkien/dp/054792822X/",
-        "description": "奇幻冒险故事，适合INFP的想象力。",
-        "rating": 4.7,
-        "reasons": [
-          "激发创造力和想象，契合INFP的创造力",
-          "提供意义深远的冒险，符合INFP的理想主义",
-          "适合理想主义，增强INFP的自我表达",
-          "增强对价值的追求，适合INFP的内在探索"
-        ]
-      }
-    ]
-  },
-  "INTP": {
-    "books": [
-      {
-        "title": "哥德尔、艾舍尔、巴赫",
-        "author": "道格拉斯·霍夫施塔特",
-        "isbn": "0465026567",
-        "amazonUrl": "https://www.amazon.com/G%C3%B6del-Escher-Bach-Eternal-Golden/dp/0465026567/",
-        "description": "探索数学、艺术和音乐的交叉，适合INTP的逻辑思维。",
-        "rating": 4.5,
-        "reasons": [
-          "提供复杂的智力挑战，契合INTP的逻辑思维",
-          "探索抽象概念，符合INTP的理论兴趣",
-          "适合逻辑分析，增强INTP的分析能力",
-          "激发跨学科思考，适合INTP的好奇心"
-        ]
-      },
-      {
-        "title": "时间的秩序",
-        "author": "卡洛·罗韦利",
-        "isbn": "0735216118",
-        "amazonUrl": "https://www.amazon.com/Order-Time-Carlo-Rovelli/dp/0735216118/",
-        "description": "探讨时间本质，适合INTP的理论兴趣。",
-        "rating": 4.4,
-        "reasons": [
-          "提供深刻的科学洞见，契合INTP的理论兴趣",
-          "适合抽象思考，符合INTP的逻辑思维",
-          "激发好奇心，增强INTP的探索精神",
-          "探索宇宙奥秘，适合INTP的分析能力"
-        ]
-      },
-      {
-        "title": "逻辑的引擎",
-        "author": "马丁·戴维斯",
-        "isbn": "0393322297",
-        "amazonUrl": "https://www.amazon.com/Engines-Logic-Mathematicians-Computer-Revised/dp/0393322297/",
-        "description": "讲述计算理论的历史，适合INTP的逻辑兴趣。",
-        "rating": 4.5,
-        "reasons": [
-          "提供逻辑和计算洞见，契合INTP的逻辑思维",
-          "适合分析性思维，符合INTP的理论兴趣",
-          "激发理论探索，增强INTP的分析能力",
-          "增强智力挑战，适合INTP的好奇心"
-        ]
-      },
-      {
-        "title": "宇宙的结构",
-        "author": "布莱恩·格林",
-        "isbn": "0393339815",
-        "amazonUrl": "https://www.amazon.com/Fabric-Cosmos-Space-Texture-Reality/dp/0393339815/",
-        "description": "探讨宇宙的物理学，适合INTP的好奇心。",
-        "rating": 4.6,
-        "reasons": [
-          "提供科学的宇宙视角，契合INTP的理论兴趣",
-          "适合抽象理论，符合INTP的逻辑思维",
-          "激发探索精神，增强INTP的好奇心",
-          "增强逻辑思维，适合INTP的分析能力"
-        ]
-      }
-    ]
-  },
-  "ESTP": {
-    "books": [
-      {
-        "title": "精进：如何成为一个很厉害的人",
-        "author": "采铜",
-        "isbn": "7508684036",
-        "amazonUrl": "https://www.amazon.com/Atomic-Habits-Proven-Build-Break/dp/0735211299/",
-        "description": "提供快速成长的实用方法，适合ESTP的行动导向。",
-        "rating": 4.6,
-        "reasons": [
-          "提供快速行动的策略，契合ESTP的行动导向",
-          "适合动态环境，符合ESTP的适应能力",
-          "增强决策能力，增强ESTP的应变能力",
-          "激发冒险精神，适合ESTP的果断性格"
-        ]
-      },
-      {
-        "title": "影响力",
-        "author": "罗伯特·西奥迪尼",
-        "isbn": "006124189X",
-        "amazonUrl": "https://www.amazon.com/Influence-Psychology-Persuasion-Robert-Cialdini/dp/006124189X/",
-        "description": "揭示说服的心理学，适合ESTP的社交能力。",
-        "rating": 4.7,
-        "reasons": [
-          "提供说服技巧，契合ESTP的社交能力",
-          "适合快速决策，符合ESTP的行动导向",
-          "增强社交影响力，增强ESTP的应变能力",
-          "实用于动态场景，适合ESTP的果断性格"
-        ]
-      },
-      {
-        "title": "瞬变：如何引发变革",
-        "author": "奇普·希思",
-        "isbn": "0307593231",
-        "amazonUrl": "https://www.amazon.com/Switch-Change-Things-When-Hard/dp/0307593231/",
-        "description": "提供快速变革的方法，适合ESTP的果断性。",
-        "rating": 4.5,
-        "reasons": [
-          "提供变革的实用策略，契合ESTP的行动导向",
-          "适合快速行动，符合ESTP的适应能力",
-          "增强适应能力，增强ESTP的应变能力",
-          "激发创新思维，适合ESTP的果断性格"
-        ]
-      },
-      {
-        "title": "谈判的艺术",
-        "author": "克里斯·沃斯",
-        "isbn": "0062407805",
-        "amazonUrl": "https://www.amazon.com/Never-Split-Difference-Negotiating-Depended/dp/0062407805/",
-        "description": "提供谈判技巧，适合ESTP的应变能力。",
-        "rating": 4.8,
-        "reasons": [
-          "提供高效谈判方法，契合ESTP的社交能力",
-          "适合动态交互，符合ESTP的行动导向",
-          "增强说服力，增强ESTP的应变能力",
-          "激发即时决策，适合ESTP的果断性格"
-        ]
-      }
-    ]
-  },
-  "ESFP": {
-    "books": [
-      {
-        "title": "欢乐颂",
-        "author": "阿兰·卡尔",
-        "isbn": "0143126237",
-        "amazonUrl": "https://www.amazon.com/Easy-Way-Stop-Smoking-Allen/dp/0143126237/",
-        "description": "提供享受生活的实用方法，适合ESFP的热情。",
-        "rating": 4.5,
-        "reasons": [
-          "鼓励享受当下，契合ESFP的热情特质",
-          "提供积极生活方式，符合ESFP的社交能力",
-          "适合社交场景，增强ESFP的活力",
-          "激发热情活力，适合ESFP的表演天赋"
-        ]
-      },
-      {
-        "title": "即兴戏剧的艺术",
-        "author": "基斯·约翰斯通",
-        "isbn": "0878301178",
-        "amazonUrl": "https://www.amazon.com/Impro-Improvisation-Theatre-Keith-Johnstone/dp/0878301178/",
-        "description": "深入探索即兴表演的魅力，极大地激发ESFP的创造力与表现力。",
-        "rating": 4.8,
-        "reasons": [
-          "提升表演技巧，契合ESFP的外向性格",
-          "激发创意思维，增强即兴反应能力",
-          "适合团体互动，满足ESFP的社交需求",
-          "通过戏剧锻炼自我表达力，强化ESFP天赋"
-        ]
-      },
-      {
-        "title": "活出生命的意义",
-        "author": "维克多·弗兰克尔",
-        "isbn": "080701429X",
-        "amazonUrl": "https://www.amazon.com/Mans-Search-Meaning-Viktor-Frankl/dp/080701429X/",
-        "description": "从心理学角度探讨人生价值，对ESFP的人文关怀具有深远启发。",
-        "rating": 4.9,
-        "reasons": [
-          "激发对人生意义的思考，增强内在动力",
-          "鼓励真实表达与情感共鸣，符合ESFP倾向",
-          "帮助ESFP在娱乐与意义之间找到平衡",
-          "提供深度反思，提升情感深度与认知"
-         ]
-      },
-      {
-        "title": "给无名指的信",
-        "author": "幾米",
-        "isbn": "9573317242",
-        "amazonUrl": "https://www.amazon.com/Jimmy-Give-Finger-Letter/dp/B001P6WXG8/",
-        "description": "幾米的绘本充满细腻情感和唯美图像，深得 ISFP 的艺术气质与情感世界。",
-        "summary": "这本图文书用意象化的手法讲述成长与爱、孤独与期望之间的微妙联系，每一页都是心灵的画面。",
-        "rating": 4.9,
-        "reasons": [
-          "图像与诗意完美结合",
-          "视觉与情绪体验双重满足",
-          "非常适合富有艺术直觉的 ISFP",
-          "轻柔但深刻，引导情绪自我疗愈"
-        ]
-      },
-      {
-        "title": "海边的卡夫卡",
-        "author": "村上春树",
-        "isbn": "1400079276",
-        "amazonUrl": "https://www.amazon.com/Kafka-Shore-Haruki-Murakami/dp/1400079276/",
-        "description": "融合梦境、现实、音乐与孤独的奇幻小说，深契 ISFP 对感性与灵魂的探索。",
-        "summary": "卡夫卡少年逃离家庭，踏上一段探索与奇遇并存的旅程，在旅途中交织了哲学思考、音乐诗意与灵魂对话。",
-        "rating": 4.6,
-        "reasons": [
-          "丰富感官细节与梦幻意象",
-          "探索孤独、成长与内心冲突",
-          "适合 ISFP 喜欢的抽象而深邃",
-          "情感多层次，极具阅读深度"
-        ]
-      }
-    ]
-  }，
-"ENFP": {
-    "books": [
-      {
-        "title": "The Comprehensive ENFP Survival Guide",
-        "author": "Heidi Priebe",
-        "isbn": "0692431492",
-        "amazonUrl": "https://www.amazon.com/Comprehensive-ENFP-Survival-Guide/dp/0692431492/",
-        "description": "一本深入探讨 ENFP 性格类型的指南，提供实用建议以帮助 ENFP 更好地理解自己。",
-        "summary": "本书通过幽默而深刻的方式，帮助 ENFP 了解自己的思维模式、情感需求和人际关系，提供应对压力和实现自我成长的策略。",
-        "rating": 4.6,
-        "reasons": [
-          "深入解析 ENFP 的性格特质，增强自我认知",
-          "提供实用的生活和职业建议，助力个人发展",
-          "语言幽默风趣，符合 ENFP 的阅读偏好",
-          "帮助 ENFP 更好地管理情绪和人际关系"
-        ]
-      },
-      {
-        "title": "The Little Prince",
-        "author": "Antoine de Saint-Exupéry",
-        "isbn": "0156012197",
-        "amazonUrl": "https://www.amazon.com/Little-Prince-Antoine-Saint-Exupery/dp/0156012197/",
-        "description": "一部寓言式的童话故事，探讨人生的意义和人性的本质。",
-        "summary": "通过小王子的星际旅行，揭示成人世界的荒诞与孩子般纯真的价值，鼓励读者保持好奇心和同理心。",
-        "rating": 4.8,
-        "reasons": [
-          "激发 ENFP 的想象力和探索欲",
-          "强调情感连接和人际关系的重要性",
-          "寓意深刻，适合 ENFP 的哲思倾向",
-          "鼓励保持童心和对世界的好奇"
-        ]
-      },
-      {
-        "title": "Big Magic: Creative Living Beyond Fear",
-        "author": "Elizabeth Gilbert",
-        "isbn": "1594634726",
-        "amazonUrl": "https://www.amazon.com/Big-Magic-Creative-Living-Beyond/dp/1594634726/",
-        "description": "探索创造力的本质，鼓励读者勇敢追求创意生活。",
-        "summary": "作者分享了自己在创作过程中的经验和见解，鼓励读者克服恐惧，释放内在的创造力，过上充满激情和意义的生活。",
-        "rating": 4.5,
-        "reasons": [
-          "激励 ENFP 追求创意和激情",
-          "提供实用的创作建议，助力个人表达",
-          "鼓励面对恐惧，勇敢追梦",
-          "符合 ENFP 对自由和自我实现的追求"
-        ]
-      },
-      {
-        "title": "Start With Why: How Great Leaders Inspire Everyone to Take Action",
-        "author": "Simon Sinek",
-        "isbn": "1591846447",
-        "amazonUrl": "https://www.amazon.com/Start-Why-Leaders-Inspire-Everyone/dp/1591846447/",
-        "description": "探讨领导力的核心——找到“为什么”，激发他人行动的动力。",
-        "summary": "通过分析成功领导者的案例，作者提出“黄金圈”理论，强调明确目的对于激励团队和实现目标的重要性。",
-        "rating": 4.6,
-        "reasons": [
-          "帮助 ENFP 明确个人和职业目标",
-          "提供激励他人的策略，增强领导力",
-          "强调价值观和使命感，符合 ENFP 的核心驱动力",
-          "鼓励以意义为导向的生活方式"
-        ]
-      }
-    ]
-  },
-  "ENTP": {
-    "books": [
-      {
-        "title": "The Beginning of Infinity",
-        "author": "David Deutsch",
-        "isbn": "014312135X",
-        "amazonUrl": "https://www.amazon.com/Beginning-Infinity-Explanations-Transform-World/dp/014312135X/",
-        "description": "探讨科学解释的力量及其对人类未来的影响。",
-        "summary": "作者提出了科学解释的无限潜力，讨论了知识的增长如何推动人类文明的进步，激发读者对未来的想象。",
-        "rating": 4.7,
-        "reasons": [
-          "激发 ENTP 的好奇心和探索欲",
-          "提供跨学科的深度思考，符合 ENTP 的思维方式",
-          "挑战传统观念，鼓励创新思维",
-          "拓展视野，启发未来的可能性"
-        ]
-      },
-      {
-        "title": "Influence: The Psychology of Persuasion",
-        "author": "Robert B. Cialdini",
-        "isbn": "006124189X",
-        "amazonUrl": "https://www.amazon.com/Influence-Psychology-Persuasion-Robert-Cialdini/dp/006124189X/",
-        "description": "揭示影响力的六大原则，解析人类行为背后的心理机制。",
-        "summary": "通过实证研究和案例分析，作者总结了影响他人决策的关键因素，提供了在日常生活和商业中应用的策略。",
-        "rating": 4.8,
-        "reasons": [
-          "满足 ENTP 对人类行为的好奇心",
-          "提供实用的说服技巧，增强沟通能力",
-          "适合 ENTP 在社交和职业场合中应用",
-          "激发对心理学和行为科学的兴趣"
-        ]
-      },
-      {
-        "title": "Impro: Improvisation and the Theatre",
-        "author": "Keith Johnstone",
-        "isbn": "0878301178",
-        "amazonUrl": "https://www.amazon.com/Impro-Improvisation-Theatre-Keith-Johnstone/dp/0878301178/",
-        "description": "探讨即兴表演的艺术，激发创造力和表达力。",
-        "summary": "作者分享了即兴戏剧的技巧和理念，强调在表演中保持开放和真实，提升创造性思维和人际互动能力。",
-        "rating": 4.8,
-        "reasons": [
-          "激发 ENTP 的创造力和表达欲",
-          "提供实用的即兴技巧，增强适应能力",
-          "适合 ENTP 在多变环境中灵活应对",
-          "鼓励开放思维和团队协作"
-        ]
-      },
-      {
-        "title": "Trust Me, I'm Lying: Confessions of a Media Manipulator",
-        "author": "Ryan Holiday",
-        "isbn": "1591846285",
-        "amazonUrl": "https://www.amazon.com/Trust-Me-Lying-Confessions-Manipulator/dp/1591846285/",
-        "description": "揭示媒体操控的内幕，探讨信息传播的真相。",
-        "summary": "作者以亲身经历揭示了如何操纵媒体和公众舆论，警示读者在信息时代保持批判性思维的重要性。",
-        "rating": 4.5,
-        "reasons": [
-          "满足 ENTP 对媒体和传播机制的兴趣",
-          "提供对信息操控的深刻洞察",
-          "激发对社会现象的批判性思考",
-          "鼓励 ENTP 成为更有意识的信息消费者"
-        ]
-      }
-    ]
-  },
- "ESTJ": {
-    "books": [
-      {
-        "title": "The 7 Habits of Highly Effective People",
-        "author": "Stephen R. Covey",
-        "isbn": "0743269519",
-        "amazonUrl": "https://www.amazon.com/7-Habits-Highly-Effective-People/dp/0743269519/",
-        "description": "提供个人和职业成功的七个习惯，建立高效的生活方式。",
-        "summary": "作者提出了七个习惯，帮助读者在个人成长、时间管理和人际关系中实现卓越，建立以原则为中心的生活。",
-        "rating": 4.7,
-        "reasons": [
-          "符合 ESTJ 对结构和效率的追求",
-          "提供实用的时间管理和目标设定方法",
-          "强调责任感和自律，契合 ESTJ 的价值观",
-          "帮助建立稳定和高效的生活方式"
-        ]
-      },
-      {
-        "title": "Good to Great: Why Some Companies Make the Leap... and Others Don't",
-        "author": "Jim Collins",
-        "isbn": "0066620996",
-        "amazonUrl": "https://www.amazon.com/Good-Great-Some-Companies-Others/dp/0066620996/",
-        "description": "分析企业从优秀到卓越的转变过程，提供可复制的成功模式。",
-        "summary": "通过对多家公司的深入研究，作者总结了实现卓越的关键因素，如领导力、文化和战略，适用于组织和个人的发展。",
-        "rating": 4.6,
-        "reasons": [
-          "满足 ESTJ 对组织管理和效率的兴趣",
-          "提供实证研究支持的成功策略",
-          "强调纪律和系统性，契合 ESTJ 的思维方式",
-          "适合在职业发展中应用"
-        ]
-      },
-      {
-        "title": "An Essential Guide for the ESTJ Personality Type",
-        "author": "Nicole Zagorski",
-        "isbn": "153557013X",
-        "amazonUrl": "https://www.amazon.com/Essential-Guide-ESTJ-Personality-Type/dp/153557013X/",
-        "description": "深入了解 ESTJ 的性格特质，提供职业和人际关系的指导。",
-        "summary": "本书帮助 ESTJ 类型的人更好地理解自身的特点，提供在职业选择、人际交往和自我提升方面的实用建议，增强自我认知。",
-        "rating": 3.9,
-        "reasons": [
-          "提供针对 ESTJ 的实用建议，增强自我认知",
-          "帮助在职业和人际关系中发挥优势",
-          "适合希望深入了解自身性格的人士",
-          "内容简明易懂，便于快速阅读"
-        ]
-      },
-      {
-        "title": "ESTJ: Understanding & Relating with the Guardian",
-        "author": "Clayton Geoffreys",
-        "isbn": "1507727364",
-        "amazonUrl": "https://www.amazon.com/ESTJ-Understanding-Relating-Guardian-Personality/dp/1507727364/",
-        "description": "探索 ESTJ 的思维方式和行为模式，提升人际关系质量。",
-        "summary": "本书通过深入分析 ESTJ 的性格特征，帮助读者理解其决策方式、沟通风格和情感表达，提供改善人际关系的策略。",
-        "rating": 4.2,
-        "reasons": [
-          "深入剖析 ESTJ 的性格特点",
-          "提供改善人际关系的实用技巧",
-          "适合希望与 ESTJ 更好相处的人士",
-          "语言通俗易懂，适合各类读者"
-        ]
-      },
-      {
-        "title": "The Administrator: Your Guide to the ESTJ Personality Type",
-        "author": "Jaroslaw Jankowski",
-        "isbn": "8379810481",
-        "amazonUrl": "https://www.amazon.com/Administrator-Your-Guide-ESTJ-Personality/dp/8379810481/",
-        "description": "全面解析 ESTJ 的性格特质，提供职业发展和人际交往的指导。",
-        "summary": "本书涵盖 ESTJ 的核心特质、职业倾向、人际关系模式等方面，帮助读者全面了解并发挥 ESTJ 的优势。",
-        "rating": 5.0,
-        "reasons": [
-          "内容全面，涵盖 ESTJ 的各个方面",
-          "提供实际可行的职业和人际关系建议",
-          "适合希望深入了解 ESTJ 的读者",
-          "作者经验丰富，分析深入"
-        ]
-      },
-      {
-        "title": "Be Your Best Self: ESTJ Myers Briggs (MBTI) Personality Development Journal",
-        "author": "ISQ Books",
-        "isbn": "9798820164668",
-        "amazonUrl": "https://www.amazon.com/Your-Best-Self-Personality-Relationships/dp/B0B14BCXSQ/",
-        "description": "专为 ESTJ 设计的个性发展日记，助力自我提升。",
-        "summary": "本书结合 MBTI 理论，提供 ESTJ 的性格分析，并设有专属的自我发展记录区，帮助读者设定目标，追踪成长进程。",
-        "rating": 4.5,
-        "reasons": [
-          "结合理论与实践，促进自我成长",
-          "提供个性化的成长记录工具",
-          "适合希望系统提升自我的 ESTJ",
-          "设计精美，便于日常使用"
-        ]
-      }
-    ]
-  }，
-  "ENFJ": {
-    "books": [
-      {
-        "title": "ENFJ: Understanding & Relating with the Teacher",
-        "author": "Clayton Geoffreys",
-        "isbn": "1508786594",
-        "amazonUrl": "https://www.amazon.com/ENFJ-Understanding-Relating-Teacher-Personality/dp/1508786594/",
-        "description": "深入了解 ENFJ 的性格、情感与人际关系特征。",
-        "summary": "本书详细描述 ENFJ 的情感动力、领导特质、沟通风格及其在人际互动中的表现，是理解这一人格类型的全面指南。",
-        "rating": 4.4,
-        "reasons": [
-          "分析 ENFJ 的理想主义与影响力",
-          "帮助 ENFJ 增强人际关系管理能力",
-          "适合自我反思与职业发展需求",
-          "内容清晰实用，适合各年龄段读者"
-        ]
-      },
-      {
-        "title": "The Idealist: Your Guide to the ENFJ Personality Type",
-        "author": "Jaroslaw Jankowski",
-        "isbn": "8379810449",
-        "amazonUrl": "https://www.amazon.com/Idealist-Your-Guide-ENFJ-Personality/dp/8379810449/",
-        "description": "为理想主义的 ENFJ 量身打造的性格指南。",
-        "summary": "本书通过实例与心理模型，探索 ENFJ 的价值观、动机和社交行为，提供如何更好发挥其社会影响力的策略。",
-        "rating": 4.7,
-        "reasons": [
-          "深入刻画 ENFJ 的理想导向思维",
-          "提供在职场与家庭中的实际指导",
-          "语言精炼，适合系统学习与应用",
-          "结合 MBTI 理论与现实案例"
-        ]
-      },
-      {
-        "title": "An Essential Guide for the ENFJ Personality Type",
-        "author": "Nicole Zagorski",
-        "isbn": "1535566624",
-        "amazonUrl": "https://www.amazon.com/Essential-Guide-ENFJ-Personality-Type/dp/1535566624/",
-        "description": "ENFJ 的入门型格参考，助力发现自身潜力。",
-        "summary": "本书适合想要快速了解 ENFJ 性格的人群，提供简洁明了的特点分析及常见行为模式，帮助 ENFJ 更好理解自我。",
-        "rating": 4.0,
-        "reasons": [
-          "内容简洁，适合初学者阅读",
-          "鼓励 ENFJ 正面表达情感和理想",
-          "适合青少年和职场新手",
-          "结构清晰，便于对照查阅"
-        ]
-      },
-      {
-        "title": "The ENFJ Personality Guide: Understand yourself, reach your potential, and become your best you!",
-        "author": "Dan Johnston",
-        "isbn": "1988058329",
-        "amazonUrl": "https://www.amazon.com/ENFJ-Personality-Guide-Understand-yourself/dp/1988058329/",
-        "description": "探索 ENFJ 潜力，实现理想自我。",
-        "summary": "该书旨在帮助 ENFJ 类型的人理解自己的性格动因，并提供实践方法，使他们在人际关系和事业中发挥最大潜力。",
-        "rating": 4.6,
-        "reasons": [
-          "帮助 ENFJ 发挥天生的引导力和同理心",
-          "提供可操作的成长路径和练习",
-          "适合自我成长与心理辅导方向",
-          "引导 ENFJ 在生活中实现使命感"
-        ]
-      }
-    ]
-  }，
-  "ENTJ": {
-    "books": [
-      {
-        "title": "Mastermind: Unlocking the Power of the ENTJ Personality Type",
-        "author": "Daniel Pascal",
-        "isbn": "1532918057",
-        "amazonUrl": "https://www.amazon.com/Mastermind-Unlocking-Personality-Daniel-Pascal/dp/1532918057/",
-        "description": "一本深入探索 ENTJ 思维与战略天赋的指南。",
-        "summary": "本书解构 ENTJ 的决策逻辑、领导风格和沟通模式，揭示如何将这种人格的优势转化为事业成功和高效人际互动的利器。",
-        "rating": 4.6,
-        "reasons": [
-          "强化 ENTJ 的领导优势与规划能力",
-          "为职业成功提供清晰方向",
-          "强调战略思维与执行力并重",
-          "结合心理模型与现实案例，极具参考性"
-        ]
-      },
-      {
-        "title": "ENTJ: Understanding & Relating with the Commander",
-        "author": "Clayton Geoffreys",
-        "isbn": "1514658595",
-        "amazonUrl": "https://www.amazon.com/ENTJ-Understanding-Relating-Commander-Personality/dp/1514658595/",
-        "description": "系统分析 ENTJ 的行为模式和人际关系风格。",
-        "summary": "本书从心理类型出发，帮助读者理解 ENTJ 如何在领导和组织中发挥核心作用，同时也指出他们在亲密关系中的成长机会。",
-        "rating": 4.4,
-        "reasons": [
-          "提升 ENTJ 对自己行为动因的理解",
-          "有助于改善沟通与协作",
-          "适合在管理与领导岗位上的 ENTJ 阅读",
-          "书风简明，内容实用"
-        ]
-      },
-      {
-        "title": "The ENTJ: Understanding the Strategic Commander",
-        "author": "Jaroslaw Jankowski",
-        "isbn": "8379810260",
-        "amazonUrl": "https://www.amazon.com/ENTJ-Understanding-Strategic-Commander-Personality/dp/8379810260/",
-        "description": "一本从战略角度剖析 ENTJ 内在驱动力的作品。",
-        "summary": "结合认知心理学与人格理论，阐述 ENTJ 的目标导向型思维、如何激励他人以及在压力下保持高效的秘诀。",
-        "rating": 4.7,
-        "reasons": [
-          "深入探讨 ENTJ 追求成就的核心动机",
-          "帮助增强对权力和影响力的理解",
-          "为组织与创业型 ENTJ 提供实操策略",
-          "理论结合实际，适合长期收藏"
-        ]
-      },
-      {
-        "title": "Personality Hacker: Harness the Power of Your Personality Type to Transform Your Work, Relationships, and Life",
-        "author": "Joel Mark Witt & Antonia Dodge",
-        "isbn": "0062885816",
-        "amazonUrl": "https://www.amazon.com/Personality-Hacker-Personality-Relationships-Life/dp/0062885816/",
-        "description": "全类型指南，特别适合 ENTJ 理性驱动者理解和优化自我。",
-        "summary": "本书不仅涵盖了 ENTJ 的性格特质，还提供认知功能的实践应用，包括如何管理压力、优化决策与人际互动，是提高自我效能的实战手册。",
-        "rating": 4.8,
-        "reasons": [
-          "全面系统，适合高认知型读者",
-          "可帮助 ENTJ 在多个人生维度发力",
-          "内容兼顾理论与实际，非常实用",
-          "强调认知发展，贴合 ENTJ 成长需求"
-        ]
-      }
-    ]
-  }
+    }
 }
