@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head> 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>MBTI测试结果 - 智能MBTI</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/styles.css">
+  <script src="https://www.paypal.com/sdk/js?client-id=test&currency=CNY"></script>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+
+  <!-- 头部导航 -->
+  <header class="fixed w-full bg-white bg-opacity-95 shadow z-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <a href="index.html" class="flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="16" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12.01" y2="8" />
+          </svg>
+          <span class="ml-2 text-xl font-bold text-gray-900">智能MBTI</span>
+        </a>
+        <div class="hidden md:flex space-x-8">
+          <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
+          <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600">小问答</a>
+          <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600">冷知识</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每天一悟</a>
+          <a href="booksblog.html" class="text-gray-600 hover:text-blue-600">读书推荐</a>
+          <a href="price.html" class="text-gray-600 hover:text-blue-600">套餐价格</a>
+          <a href="aboutus.html" class="text-gray-600 hover:text-blue-600">关于我们</a>
+          <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">开始测试</a>
+        </div>
+        <button id="mobile-menu-button" class="md:hidden text-gray-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+      <div class="md:hidden hidden pb-4" id="mobile-menu">
+        <nav class="flex flex-col space-y-2">
+          <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
+          <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600">小问答</a>
+          <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600">冷知识</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每天一悟</a>
+          <a href="booksblog.html" class="text-gray-600 hover:text-blue-600">读书推荐</a>
+          <a href="price.html" class="text-gray-600 hover:text-blue-600">套餐价格</a>
+          <a href="aboutus.html" class="text-gray-600 hover:text-blue-600">关于我们</a>
+          <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">开始测试</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- 测试结果内容 -->
+  <main class="pt-32 pb-20 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-5xl">
+      <h1 id="result-title" class="text-3xl font-bold text-center mb-8">您的MBTI测试结果</h1>
+      
+      <!-- 基础测试结果 -->
+      <div id="basic-result-container" class="mb-12">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+          <div class="p-6 md:p-8">
+            <div class="flex items-center mb-6">
+              <span class="bg-green-500 text-white font-bold py-1 px-3 rounded-lg mr-3">基础体验</span>
+              <h2 class="text-2xl font-bold text-gray-900">您的MBTI类型是：<span class="text-green-600">XXXX</span></h2>
+            </div>
+            
+            <div class="mb-8">
+              <h3 class="text-xl font-semibold mb-3">类型简介</h3>
+              <p class="text-gray-600">这里是您的MBTI类型的简短描述，包含基本特征和倾向。</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div>
+                <h3 class="text-lg font-semibold mb-2">主要特点</h3>
+                <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                  <li>特点一</li>
+                  <li>特点二</li>
+                  <li>特点三</li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold mb-2">潜在挑战</h3>
+                <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                  <li>挑战一</li>
+                  <li>挑战二</li>
+                  <li>挑战三</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="bg-blue-50 p-4 rounded-lg">
+              <p class="text-blue-800">想要获取更详细的分析报告，包括职业匹配、人际关系建议和个人成长方向？</p>
+              <a href="price.html" class="inline-block mt-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">升级到专业版</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 专业测试支付提示 -->
+      <div id="payment-prompt-container" class="mb-12 hidden">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+          <div class="p-6 md:p-8 text-center">
+            <div class="mb-6">
+              <span class="inline-block bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mb-3">专业定制</span>
+              <h2 class="text-2xl font-bold text-gray-900 mb-4">解锁您的完整MBTI分析报告</h2>
+              <p class="text-gray-600 mb-6">您已完成专业测试的所有问题！现在只需支付¥50元，即可查看您的详细分析报告。</p>
+            </div>
+            
+            <div class="max-w-md mx-auto mb-8">
+              <div class="bg-gray-50 p-4 rounded-lg mb-6">
+                <h3 class="font-semibold text-gray-900 mb-3">专业报告包含：</h3>
+                <ul class="text-gray-600 text-left list-disc pl-5 space-y-2">
+                  <li>类型维度剖析</li>
+                  <li>全方位性格分析报告</li>
+                  <li>个性化成长、情感、沟通、社交建议</li>
+                  <li>职业、人际、情感配对推荐</li>
+                </ul>
+              </div>
+              
+              <div id="paypal-button-container" class="mb-4"></div>
+              <a href="index.html" class="inline-block text-gray-500 hover:text-gray-700">稍后再说</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 专业测试结果 -->
+      <div id="pro-result-container" class="mb-12 hidden">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+          <div class="p-6 md:p-8">
+            <div class="flex items-center mb-6">
+              <span class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">专业定制</span>
+              <h2 class="text-2xl font-bold text-gray-900">您的MBTI类型是：<span class="text-blue-600">XXXX</span></h2>
+            </div>
+            
+            <!-- 类型维度剖析 -->
+            <div class="mb-8">
+              <h3 class="text-xl font-semibold mb-4">类型维度剖析</h3>
+              
+              <div class="space-y-4">
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="font-medium">内向 (I)</span>
+                    <span class="font-medium">外向 (E)</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-4">
+                    <div class="bg-blue-600 h-4 rounded-full" style="width: 65%"></div>
+                  </div>
+                  <p class="text-sm text-gray-500 mt-1">65% 内向 / 35% 外向</p>
+                </div>
+                
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="font-medium">感觉 (S)</span>
+                    <span class="font-medium">直觉 (N)</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-4">
+                    <div class="bg-blue-600 h-4 rounded-full" style="width: 40%"></div>
+                  </div>
+                  <p class="text-sm text-gray-500 mt-1">40% 感觉 / 60% 直觉</p>
+                </div>
+                
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="font-medium">思考 (T)</span>
+                    <span class="font-medium">情感 (F)</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-4">
+                    <div class="bg-blue-600 h-4 rounded-full" style="width: 75%"></div>
+                  </div>
+                  <p class="text-sm text-gray-500 mt-1">75% 思考 / 25% 情感</p>
+                </div>
+                
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="font-medium">判断 (J)</span>
+                    <span class="font-medium">感知 (P)</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-4">
+                    <div class="bg-blue-600 h-4 rounded-full" style="width: 55%"></div>
+                  </div>
+                  <p class="text-sm text-gray-500 mt-1">55% 判断 / 45% 感知</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 全方位性格分析 -->
+            <div class="mb-8">
+              <h3 class="text-xl font-semibold mb-3">全方位性格分析</h3>
+              <p class="text-gray-600 mb-4">这里是您的MBTI类型的详细分析，包含认知功能、行为模式和思维方式。</p>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">核心特质</h4>
+                  <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                    <li>特质一的详细描述</li>
+                    <li>特质二的详细描述</li>
+                    <li>特质三的详细描述</li>
+                    <li>特质四的详细描述</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">思维方式</h4>
+                  <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                    <li>思维方式一的详细描述</li>
+                    <li>思维方式二的详细描述</li>
+                    <li>思维方式三的详细描述</li>
+                    <li>思维方式四的详细描述</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 个性化建议 -->
+            <div class="mb-8">
+              <h3 class="text-xl font-semibold mb-3">个性化建议</h3>
+              
+              <div class="space-y-6">
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">个人成长</h4>
+                  <p class="text-gray-600 mb-2">根据您的性格类型，以下是促进个人成长的建议：</p>
+                  <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                    <li>成长建议一</li>
+                    <li>成长建议二</li>
+                    <li>成长建议三</li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">情感关系</h4>
+                  <p class="text-gray-600 mb-2">在情感关系中，您可能会：</p>
+                  <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                    <li>情感特点一</li>
+                    <li>情感特点二</li>
+                    <li>情感特点三</li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">沟通与社交</h4>
+                  <p class="text-gray-600 mb-2">提升您沟通效率的建议：</p>
+                  <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                    <li>沟通建议一</li>
+                    <li>沟通建议二</li>
+                    <li>沟通建议三</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 配对推荐 -->
+            <div class="mb-8">
+              <h3 class="text-xl font-semibold mb-3">配对推荐</h3>
+              
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">职业匹配</h4>
+                  <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                    <li>最适合职业一</li>
+                    <li>最适合职业二</li>
+                    <li>最适合职业三</li>
+                    <li>最适合职业四</li>
+                    <li>最适合职业五</li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">人际关系</h4>
+                  <p class="text-gray-600 mb-2">最佳友谊类型：</p>
+                  <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                    <li>XXXX - 原因描述</li>
+                    <li>XXXX - 原因描述</li>
+                    <li>XXXX - 原因描述</li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">情感配对</h4>
+                  <p class="text-gray-600 mb-2">最佳伴侣类型：</p>
+                  <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                    <li>XXXX - 原因描述</li>
+                    <li>XXXX - 原因描述</li>
+                    <li>XXXX - 原因描述</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <a href="#" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">下载完整报告 PDF</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <div class="flex items-center justify-center mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span class="ml-2 text-lg font-bold">智能MBTI</span>
+      </div>
+      <p class="text-gray-400 mb-4">
+        探索自我，发现潜能，引领未来方向。
+      </p>
+      <div class="border-t border-gray-800 pt-4">
+        <div class="text-gray-400">
+          &copy; 2025 智能MBTI - 专业MBTI测试. 保留所有权利.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="src/js/main.js"></script>
+  <script src="src/js/test.js"></script>
+  <script src="src/js/test-packages.js"></script>
+  <script>
+    // 处理测试结果显示
+    document.addEventListener('DOMContentLoaded', function() {
+      // 获取URL参数
+      const urlParams = new URLSearchParams(window.location.search);
+      const testType = urlParams.get('type') || 'basic'; // 默认为基础测试
+      const isPaid = urlParams.get('paid') === 'true';
+      
+      // 获取结果容器
+      const basicResultContainer = document.getElementById('basic-result-container');
+      const proResultContainer = document.getElementById('pro-result-container');
+      const paymentPromptContainer = document.getElementById('payment-prompt-container');
+      
+      // 隐藏所有容器
+      if (basicResultContainer) basicResultContainer.classList.add('hidden');
+      if (proResultContainer) proResultContainer.classList.add('hidden');
+      if (paymentPromptContainer) paymentPromptContainer.classList.add('hidden');
+      
+      // 根据测试类型和支付状态显示相应内容
+      if (testType === 'basic') {
+        // 基础测试结果
+        if (basicResultContainer) {
+          basicResultContainer.classList.remove('hidden');
+        }
+      } else if (testType === 'pro') {
+        if (isPaid) {
+          // 已支付的专业测试结果
+          if (proResultContainer) {
+            proResultContainer.classList.remove('hidden');
+          }
+        } else {
+          // 未支付的专业测试结果，显示支付提示
+          if (paymentPromptContainer) {
+            paymentPromptContainer.classList.remove('hidden');
+            
+            // 初始化PayPal按钮
+            if(typeof paypal !== 'undefined' && document.getElementById('paypal-button-container')) {
+              paypal.Buttons({
+                createOrder: function(data, actions) {
+                  return actions.order.create({
+                    purchase_units: [{
+                      amount: {
+                        value: '50.00'
+                      }
+                    }]
+                  });
+                },
+                onApprove: function(data, actions) {
+                  return actions.order.capture().then(function(details) {
+                    // 支付成功后刷新页面，显示专业结果
+                    window.location.href = 'result.html?type=pro&paid=true';
+                  });
+                }
+              }).render('#paypal-button-container');
+            }
+          }
+        }
+      }
+      
+      // 更新结果页面标题
+      const titleElement = document.getElementById('result-title');
+      if (titleElement) {
+        if (testType === 'basic') {
+          titleElement.textContent = '您的MBTI基础测试结果';
+          titleElement.classList.add('text-green-600');
+        } else if (testType === 'pro') {
+          if (isPaid) {
+            titleElement.textContent = '您的MBTI专业分析报告';
+            titleElement.classList.add('text-blue-600');
+          } else {
+            titleElement.textContent = '解锁您的MBTI专业分析报告';
+            titleElement.classList.add('text-blue-600');
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
