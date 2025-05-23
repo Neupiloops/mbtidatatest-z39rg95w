@@ -1,0 +1,101 @@
+[
+    {
+      "type": "ISTJ",
+      "name": "检查员型人格",
+      "description": "ISTJ型人格（检查员型）的人通常可靠、注重细节、尊重传统，喜欢结构化的环境。",
+      "recommendation": "以下是我们为ISTJ人格类型精心挑选的四本精选书籍推荐。"
+    },
+    {
+      "type": "ISFJ",
+      "name": "保护者型人格",
+      "description": "ISFJ型人格（保护者型）的人通常温暖、关怀他人、诚实，喜欢为他人提供支持。",
+      "recommendation": "以下是我们为ISFJ人格类型精心挑选的四本精选书籍推荐。"
+    },
+    {
+      "type": "INFJ",
+      "name": "提倡者型人格",
+      "description": "INFJ型人格（提倡者型）的人通常有理想主义、洞察力强、重视深度关系，追求意义和真实性。",
+      "recommendation": "以下是我们为INFJ人格类型精心挑选的四本精选书籍推荐。"
+    },
+    {
+      "type": "INTJ",
+      "name": "建筑师型人格",
+      "description": "INTJ型人格（建筑师型）的人通常有战略眼光、创新思维，追求效率和长期目标。",
+      "recommendation": "以下是我们为INTJ人格类型精心挑选的四本精选书籍推荐。"
+    },
+    {
+      "type": "ISTP",
+      "name": "工匠型人格",
+      "description": "ISTP型人格（工匠型）的人通常独立、善于解决问题，喜欢动手实践和探索。",
+      "recommendation": "以下是我们为ISTP人格类型精心挑选的四本精选书籍推荐。"
+    },
+    {
+      "type": "ISFP",
+      "name": "艺术家型人格",
+      "description": "ISFP型人格（艺术家型）的人通常敏感、有创造力、欣赏美感，喜欢自由和真实表达。",
+      "recommendation": "以下是我们为ISFP人格类型精心挑选的四本精选书籍推荐。"
+    },
+    {
+      "type": "INFP",
+      "name": "调解者型人格",
+      "description": "INFP型人格（调解者型）的人通常理想主义、富有同理心，追求个人价值和意义。",
+      "recommendation": "以下是我们为INFP人格类型精心挑选的四本精选书籍推荐。"
+    },
+    {
+      "type": "INTP",
+      "name": "思考者型人格",
+      "description": "INTP型人格（思考者型）的人通常好奇、逻辑严密，喜欢探索抽象概念和理论。",
+      "recommendation": "以下是我们为INTP人格类型精心挑选的四本精选书籍推荐。"
+    },
+    {
+      "type": "ESTP",
+      "name": "企业家型人格",
+      "description": "ESTP型人格（企业家型）的人通常大胆、行动导向，喜欢冒险和即时决策。",
+      "recommendation": "以下是我们为ESTP人格类型精心挑选的四本精选书籍推荐。"
+    },
+    {
+      "type": "ESFP",
+      "name": "表演者型人格",
+      "description": "ESFP型人格（表演者型）的人通常热情、善于交际，喜欢享受当下和与人互动。",
+      "recommendation": "以下是我们为ESFP人格类型精心挑选的四本精选书籍推荐。"
+    },
+    {
+      "type": "ENFP",
+      "name": "竞选者型人格",
+      "description": "ENFP型人格（竞选者型）的人通常充满热情、富有创造力，喜欢探索可能性和激励他人。",
+      "recommendation": "以下是我们为ENFP人格类型精心挑选的四本精选书籍推荐。"
+    },
+    {
+      "type": "ENTP",
+      "name": "辩论者型人格",
+      "description": "ENTP型人格（辩论者型）的人通常机智、善于创新，喜欢挑战现状和探索新想法。",
+      "recommendation": "以下是我们为ENTP人格类型精心挑选的四本精选书籍推荐。"
+    },
+    {
+      "type": "ESTJ",
+      "name": "管理者型人格",
+      "description": "ESTJ型人格（管理者型）的人通常务实、注重细节、有组织能力，喜欢明确的规则和结构。",
+      "recommendation": "以下是我们为ESTJ人格类型精心挑选的四本精选书籍推荐。"
+    },
+    {
+      "type": "ESFJ",
+      "name": "领事型人格",
+      "description": "ESFJ型人格（领事型）的人通常友好、注重和谐，喜欢组织和帮助他人。",
+      "recommendation": "以下是我们为ESFJ人格类型精心挑选的四本精选书籍推荐。"
+    },
+    {
+      "type": "ENFJ",
+      "name": "主人公型人格",
+      "description": "ENFJ型人格（主人公型）的人通常有领导力、富有同理心，喜欢激励和帮助他人成长。",
+      "recommendation": "以下是我们为ENFJ人格类型精心挑选的四本精选书籍推荐。"
+    },
+    {
+      "type": "ENTJ",
+      "name": "指挥官型人格",
+      "description": "ENTJ型人格（指挥官型）的人通常有领导才能、果断、战略性思考，追求效率和成就。",
+      "recommendation": "以下是我们为ENTJ人格类型精心挑选的四本精选书籍推荐。"
+    }
+  ]
+
+
+
