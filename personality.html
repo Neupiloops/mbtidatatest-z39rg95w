@@ -218,121 +218,105 @@
 
 
   <script>
-    // 移动端菜单切换
-    document.getElementById('mobile-menu-button').addEventListener('click', function() {
-      const mobileMenu = document.getElementById('mobile-menu');
-      mobileMenu.classList.toggle('hidden');
+  // 移动端菜单切换
+  document.getElementById('mobile-menu-button').addEventListener('click', function () {
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // 加载MBTI类型数据
+  async function loadPersonalityData() {
+    try {
+      const response = await fetch('personality.json');
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('加载数据失败:', error);
+      return {};
+    }
+  }
+
+  // 生成类型选择器
+  function generateTypeSwitcher(data) {
+    const typeSwitcher = document.getElementById('type-switcher');
+    const types = Object.keys(data);
+
+    types.forEach(type => {
+      const typeLink = document.createElement('a');
+      typeLink.href = '#';
+      typeLink.textContent = type;
+      typeLink.dataset.type = type;
+      typeLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelectorAll('#type-switcher a').forEach(link => link.classList.remove('active'));
+        this.classList.add('active');
+        updatePersonalityContent(data[type]);
+      });
+      typeSwitcher.appendChild(typeLink);
     });
 
-    // 加载MBTI类型数据
-    async function loadPersonalityData() {
-      try {
-        const response = await fetch('personality.json');
-        const data = await response.json();
-        return data;
-      } catch (error) {
-        console.error('加载数据失败:', error);
-        return {};
-      }
+    // 默认选中 INFJ 或第一个类型
+    const defaultType = data['INFJ'] ? 'INFJ' : types[0];
+    const defaultLink = typeSwitcher.querySelector(`a[data-type="${defaultType}"]`);
+    if (defaultLink) {
+      defaultLink.classList.add('active');
+      updatePersonalityContent(data[defaultType]);
     }
+  }
 
-    // 生成类型选择器
-    function generateTypeSwitcher(data) {
-      const typeSwitcher = document.getElementById('type-switcher');
-      const types = Object.keys(data);
-      
-      types.forEach(type => {
-        const typeLink = document.createElement('a');
-        typeLink.href = '#';
-        typeLink.textContent = type;
-        typeLink.dataset.type = type;
-        typeLink.addEventListener('click', function(e) {
-          e.preventDefault();
-          // 移除所有active类
-          document.querySelectorAll('#type-switcher a').forEach(link => {
-            link.classList.remove('active');
-          });
-          // 添加active类到当前选中项
-          this.classList.add('active');
-          // 更新页面内容
-          updatePersonalityContent(data[type]);
-        });
-        typeSwitcher.appendChild(typeLink);
-      });
+  // 更新页面内容
+  function updatePersonalityContent(typeData) {
+    document.title = `${typeData.title} - 智能MBTI`;
+    document.getElementById('type-description').textContent = typeData.description;
 
-      // 默认选中第一个类型
-      if (types.length > 0) {
-        const firstType = types[0];
-        const firstLink = typeSwitcher.querySelector(`a[data-type="${firstType}"]`);
-        if (firstLink) {
-          firstLink.classList.add('active');
-          updatePersonalityContent(data[firstType]);
-        }
-      }
-    }
-
-
-    // 更新页面内容
-    function updatePersonalityContent(typeData) {
-      // 更新标题
-      document.title = `${typeData.title} - 智能MBTI`;
-      
-      // 更新基本信息
-      document.getElementById('type-description').textContent = typeData.description;
-      
-      // 更新特质列表
-      const traitsList = document.getElementById('traits-list');
-      traitsList.innerHTML = '';
-      typeData.traits.forEach(trait => {
-        const li = document.createElement('li');
-        li.textContent = trait;
-        traitsList.appendChild(li);
-      });
-      
-      // 更新优势列表
-      const advantagesList = document.getElementById('advantages-list');
-      advantagesList.innerHTML = '';
-      typeData.advantages.forEach(advantage => {
-        const li = document.createElement('li');
-        li.textContent = advantage;
-        advantagesList.appendChild(li);
-      });
-      
-      // 更新挑战列表
-      const challengesList = document.getElementById('challenges-list');
-      challengesList.innerHTML = '';
-      typeData.challenges.forEach(challenge => {
-        const li = document.createElement('li');
-        li.textContent = challenge;
-        challengesList.appendChild(li);
-      });
-  
-      // 更新人际关系描述
-      document.getElementById('relations-text').textContent = typeData.relations;
-      
-      // 更新职业列表
-      const careersList = document.getElementById('careers-list');
-      careersList.innerHTML = '';
-      typeData.careers.forEach(career => {
-        const li = document.createElement('li');
-        li.textContent = career;
-        careersList.appendChild(li);
-      });
-      
-      // 更新成长建议
-      document.getElementById('advice-text').textContent = typeData.advice;
-    }
-
-    // 页面加载完成后初始化
-    document.addEventListener('DOMContentLoaded', async function() {
-      const personalityData = await loadPersonalityData();
-      if (Object.keys(personalityData).length > 0) {
-        generateTypeSwitcher(personalityData);
-      } else {
-        document.getElementById('type-switcher').innerHTML = '<p class="text-red-500">无法加载MBTI类型数据</p>';
-      }
+    const traitsList = document.getElementById('traits-list');
+    traitsList.innerHTML = '';
+    typeData.traits.forEach(trait => {
+      const li = document.createElement('li');
+      li.textContent = trait;
+      traitsList.appendChild(li);
     });
-  </script>
+
+    const advantagesList = document.getElementById('advantages-list');
+    advantagesList.innerHTML = '';
+    typeData.advantages.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      advantagesList.appendChild(li);
+    });
+
+    const challengesList = document.getElementById('challenges-list');
+    challengesList.innerHTML = '';
+    typeData.challenges.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      challengesList.appendChild(li);
+    });
+
+    document.getElementById('relations-text').textContent = typeData.relations;
+
+    const careersList = document.getElementById('careers-list');
+    careersList.innerHTML = '';
+    typeData.careers.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      careersList.appendChild(li);
+    });
+
+    document.getElementById('advice-text').textContent = typeData.advice;
+  }
+
+  // 初始化
+  document.addEventListener('DOMContentLoaded', async function () {
+    const personalityData = await loadPersonalityData();
+    if (Object.keys(personalityData).length > 0) {
+      generateTypeSwitcher(personalityData);
+    } else {
+      document.getElementById('type-switcher').innerHTML = '<p class="text-red-500">无法加载MBTI类型数据</p>';
+    }
+  });
+</script>
+
   
 </body>
 </html>
