@@ -10,9 +10,6 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(function() {
-      // 全局变量存储书籍数据
-      let booksData = null;
-
       // Function to fetch book details from Google Books API
       function fetchBookCover(isbn, bookElement) {
         const query = isbn ? `isbn:${isbn}` : '';
@@ -36,76 +33,63 @@
         });
       }
 
-      // 加载特定MBTI类型的书籍数据
-      function loadBooksForType(mbtiType) {
-        if (!booksData) {
-          console.warn('Books data not loaded yet');
-          return;
-        }
-
-        const mbti = mbtiType.toUpperCase();
-        if (!booksData[mbti]) {
-          console.warn(`No book data found for ${mbti}`);
-          return;
-        }
-
-        const books = booksData[mbti].books;
-        const section = $(`#${mbtiType.toLowerCase()}`);
-        const grid = section.find('.book-grid');
-
-        // 清空现有内容
-        grid.empty();
-
-        // 添加新书籍卡片
-        books.forEach(book => {
-          const card = `
-            <div class="book-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row min-h-[450px]" data-isbn="${book.isbn || ''}">
-              <div class="md:w-1/3 bg-gray-200">
-                <img class="book-cover w-full h-full object-cover" src="https://via.placeholder.com/128x192.png?text=Loading..." alt="${book.title}">
-              </div>
-              <div class="md:w-2/3 p-6">
-                <h3 class="book-title text-xl font-bold text-gray-900 mb-2">${book.title}</h3>
-                <p class="book-author text-sm text-gray-500 mb-2">作者: ${book.author}</p>
-                <div class="mb-4">
-                  <span class="text-yellow-500">${'★'.repeat(Math.floor(book.rating))}${'☆'.repeat(5 - Math.floor(book.rating))}</span>
-                  <span class="text-sm text-gray-500 ml-1">${book.rating}/5分</span>
-                </div>
-                <p class="text-gray-600 mb-4 text-sm">${book.description}</p>
-                <div class="mb-4">
-                  <h4 class="font-semibold text-gray-900 mb-1">为什么适合${mbti}:</h4>
-                  <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
-                    ${book.reasons.map(reason => `<li>${reason}</li>`).join('')}
-                  </ul>
-                </div>
-                <div class="mt-auto">
-                  <a href="${book.amazonUrl}" target="_blank" class="buy-button inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">直接购买</a>
-                </div>
-              </div>
-            </div>`;
-          grid.append(card);
-
-          // 获取书籍封面
-          const cardElement = grid.find('.book-card').last();
-          if (book.isbn) {
-            fetchBookCover(book.isbn, cardElement);
-          }
-        });
-      }
-
-      // 获取所有书籍数据
+      // Fetch book data from JSON file for MBTI sections (excluding ESTJ)
       $.ajax({
         url: 'books.json',
         method: 'GET',
         dataType: 'json',
         success: function(data) {
-          // 保存数据到全局变量
-          booksData = data;
-
-          // 默认加载ESTJ书籍
-          loadBooksForType('estj');
+          // Populate book cards for each MBTI type except ESTJ
+          Object.keys(data).forEach(mbti => {
+            if (mbti.toLowerCase() === 'estj') return; // Skip ESTJ as it has hardcoded cards
+            const books = data[mbti].books;
+            const section = $(`#${mbti.toLowerCase()}`);
+            const grid = section.find('.book-grid');
+            
+            books.forEach(book => {
+              const card = `
+                <div class="book-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row min-h-[450px]" data-isbn="${book.isbn || ''}">
+                  <div class="md:w-1/3 bg-gray-200">
+                    <img class="book-cover w-full h-full object-cover" src="https://via.placeholder.com/128x192.png?text=Loading..." alt="${book.title}">
+                  </div>
+                  <div class="md:w-2/3 p-6">
+                    <h3 class="book-title text-xl font-bold text-gray-900 mb-2">${book.title}</h3>
+                    <p class="book-author text-sm text-gray-500 mb-2">作者: ${book.author}</p>
+                    <div class="mb-4">
+                      <span class="text-yellow-500">${'★'.repeat(Math.floor(book.rating))}${'☆'.repeat(5 - Math.floor(book.rating))}</span>
+                      <span class="text-sm text-gray-500 ml-1">${book.rating}/5分</span>
+                    </div>
+                    <p class="text-gray-600 mb-4 text-sm">${book.description}</p>
+                    <div class="mb-4">
+                      <h4 class="font-semibold text-gray-900 mb-1">为什么适合${mbti}:</h4>
+                      <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
+                        ${book.reasons.map(reason => `<li>${reason}</li>`).join('')}
+                      </ul>
+                    </div>
+                    <div class="mt-auto">
+                      <a href="${book.amazonUrl}" target="_blank" class="buy-button inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">直接购买</a>
+                    </div>
+                  </div>
+                </div>`;
+              grid.append(card);
+              // Fetch book cover
+              const cardElement = grid.find('.book-card').last();
+              if (book.isbn) {
+                fetchBookCover(book.isbn, cardElement);
+              }
+            });
+          });
         },
         error: function() {
           console.error('Error fetching books.json');
+        }
+      });
+
+      // Fetch covers for hardcoded ESTJ book cards
+      $('#estj .book-card').each(function() {
+        const isbn = $(this).data('isbn');
+        if (isbn) {
+          fetchBookCover(isbn, this);
         }
       });
     });
@@ -176,6 +160,7 @@
         </p>
       </div>
 
+      
       <!-- 分类导航 -->
       <div class="flex flex-wrap justify-center gap-2 mb-12">
         <div class="w-full flex justify-center gap-1.5 flex-wrap">
@@ -391,7 +376,124 @@
             </p>
           </div>
         </div>
-        <div class="book-grid grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+        <div class="book-grid grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- 书籍1 -->
+          <div class="book-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row min-h-[450px]" data-isbn="9781982137274">
+            <div class="md:w-1/3 bg-gray-200">
+              <img class="book-cover w-full h-full object-cover" src="https://via.placeholder.com/128x192.png?text=Loading..." alt="高效能人士的七个习惯">
+            </div>
+            <div class="md:w-2/3 p-6">
+              <h3 class="book-title text-xl font-bold text-gray-900 mb-2">高效能人士的七个习惯</h3>
+              <p class="book-author text-sm text-gray-500 mb-2">作者: 史蒂芬·柯维</p>
+              <div class="mb-4">
+                <span class="text-yellow-500">★★★★★</span>
+                <span class="text-sm text-gray-500 ml-1">4.8/5分</span>
+              </div>
+              <p class="text-gray-600 mb-4 text-sm">
+                这本书提供了系统化的方法来提高个人和职业效率，非常适合注重结构和效率的ESTJ。书中的七个习惯提供了明确的框架，帮助你建立有效的工作和生活系统。
+              </p>
+              <div class="mb-4">
+                <h4 class="font-semibold text-gray-900 mb-1">为什么适合ESTJ:</h4>
+                <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
+                  <li>提供清晰的行动步骤和框架</li>
+                  <li>强调责任感和高效执行</li>
+                  <li>帮助建立有序的生活和工作系统</li>
+                  <li>培养主动积极的领导思维</li>
+                </ul>
+              </div>
+              <div class="mt-auto">
+                <a href="https://www.amazon.com/Habits-Highly-Effective-People-Anniversary/dp/1982137274/" target="_blank" class="buy-button inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">直接购买</a>
+              </div>
+            </div>
+          </div>
+          <!-- 书籍2 -->
+          <div class="book-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row min-h-[450px]" data-isbn="9781501124020">
+            <div class="md:w-1/3 bg-gray-200">
+              <img class="book-cover w-full h-full object-cover" src="https://via.placeholder.com/128x192.png?text=Loading..." alt="原则：生活和工作">
+            </div>
+            <div class="md:w-2/3 p-6">
+              <h3 class="book-title text-xl font-bold text-gray-900 mb-2">原则：生活和工作</h3>
+              <p class="book-author text-sm text-gray-500 mb-2">作者: 雷·达里奥</p>
+              <div class="mb-4">
+                <span class="text-yellow-500">★★★★★</span>
+                <span class="text-sm text-gray-500 ml-1">4.7/5分</span>
+              </div>
+              <p class="text-gray-600 mb-4 text-sm">
+                桥水基金创始人雷·达里奥分享了他的成功原则，这本书提供了一套系统化的决策和管理方法，非常适合喜欢遵循规则和结构的ESTJ人格。
+              </p>
+              <div class="mb-4">
+                <h4 class="font-semibold text-gray-900 mb-1">为什么适合ESTJ:</h4>
+                <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
+                  <li>提供明确的决策框架</li>
+                  <li>强调基于事实的思考方式</li>
+                  <li>包含实用的管理和领导技巧</li>
+                  <li>培养系统化解决问题的能力</li>
+                </ul>
+              </div>
+              <div class="mt-auto">
+                <a href="https://www.amazon.com/Principles-Life-Work-Ray-Dalio/dp/1501124021/" target="_blank" class="buy-button inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">直接购买</a>
+              </div>
+            </div>
+          </div>
+          <!-- 书籍3 -->
+          <div class="book-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row min-h-[450px]" data-isbn="9780615648223">
+            <div class="md:w-1/3 bg-gray-200">
+              <img class="book-cover w-full h-full object-cover" src="https://via.placeholder.com/128x192.png?text=Loading..." alt="极简主义：活出生命的本质">
+            </div>
+            <div class="md:w-2/3 p-6">
+              <h3 class="book-title text-xl font-bold text-gray-900 mb-2">极简主义：活出生命的本质</h3>
+              <p class="book-author text-sm text-gray-500 mb-2">作者: 乔舒亚·贝克尔</p>
+              <div class="mb-4">
+                <span class="text-yellow-500">★★★★☆</span>
+                <span class="text-sm text-gray-500 ml-1">4.5/5分</span>
+              </div>
+              <p class="text-gray-600 mb-4 text-sm">
+                这本书教导如何通过减少干扰和聚焦于重要事物来提高生活质量，对于喜欢高效和条理的ESTJ来说，这是一本能帮助简化决策和优化生活的实用指南。
+              </p>
+              <div class="mb-4">
+                <h4 class="font-semibold text-gray-900 mb-1">为什么适合ESTJ:</h4>
+                <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
+                  <li>提供实用的简化生活方法</li>
+                  <li>帮助建立更高效的系统</li>
+                  <li>强调专注于真正重要的事物</li>
+                  <li>提升决策效率和执行力</li>
+                </ul>
+              </div>
+              <div class="mt-auto">
+                <a href="https://www.amazon.com/Minimalism-Live-Meaningful-Life-Millburn/dp/0615648223/" target="_blank" class="buy-button inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">直接购买</a>
+              </div>
+            </div>
+          </div>
+          <!-- 书籍4 -->
+          <div class="book-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row min-h-[450px]" data-isbn="9780544456235">
+            <div class="md:w-1/3 bg-gray-200">
+              <img class="book-cover w-full h-full object-cover" src="https://via.placeholder.com/128x192.png?text=Loading..." alt="刻意练习：如何从新手到大师">
+            </div>
+            <div class="md:w-2/3 p-6">
+              <h3 class="book-title text-xl font-bold text-gray-900 mb-2">刻意练习：如何从新手到大师</h3>
+              <p class="book-author text-sm text-gray-500 mb-2">作者: 安德斯·艾利克森</p>
+              <div class="mb-4">
+                <span class="text-yellow-500">★★★★★</span>
+                <span class="text-sm text-gray-500 ml-1">4.6/5分</span>
+              </div>
+              <p class="text-gray-600 mb-4 text-sm">
+                这本书揭示了如何通过有目的、有系统的练习达到卓越水平。对于注重效率和结果的ESTJ来说，这本书提供了清晰的方法来不断提升自己的技能和能力。
+              </p>
+              <div class="mb-4">
+                <h4 class="font-semibold text-gray-900 mb-1">为什么适合ESTJ:</h4>
+                <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
+                  <li>提供系统化的技能提升方法</li>
+                  <li>强调持续改进和可衡量的进步</li>
+                  <li>适合目标导向的学习风格</li>
+                  <li>培养结构化的自我提升能力</li>
+                </ul>
+              </div>
+              <div class="mt-auto">
+                <a href="https://www.amazon.com/Peak-Secrets-New-Science-Expertise/dp/0544456238/" target="_blank" class="buy-button inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">直接购买</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="esfj" class="mb-16 hidden mbti-content">
@@ -478,7 +580,7 @@
       const contents = document.querySelectorAll('.mbti-content');
       const pageTitle = document.querySelector('.text-center.mb-12');
       const typeSelection = document.querySelector('.flex.flex-wrap.justify-center.gap-2.mb-12');
-
+      
       // 默认显示ESTJ内容，隐藏其他内容，并高亮ESTJ标签
       contents.forEach(content => {
         content.classList.add('hidden');
@@ -490,38 +592,35 @@
       });
       document.querySelector('.mbti-tab[data-target="estj"]').classList.remove('bg-white', 'text-gray-700', 'border-gray-200');
       document.querySelector('.mbti-tab[data-target="estj"]').classList.add('bg-blue-600', 'text-white', 'border-blue-600');
-
+      
       // 为每个标签添加点击事件
       tabs.forEach(tab => {
         tab.addEventListener('click', function(e) {
           e.preventDefault();
-
+          
           // 获取目标内容区域ID
           const targetId = this.getAttribute('data-target');
-
+          
           // 隐藏所有内容区域
           contents.forEach(content => {
             content.classList.add('hidden');
           });
-
+          
           // 显示目标内容区域
           document.getElementById(targetId).classList.remove('hidden');
-
+          
           // 确保页面标题和类型选择按钮始终可见
           pageTitle.classList.remove('hidden');
           typeSelection.classList.remove('hidden');
-
+          
           // 更新标签样式
           tabs.forEach(t => {
             t.classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
             t.classList.add('bg-white', 'text-gray-700', 'border-gray-200');
           });
-
+          
           this.classList.remove('bg-white', 'text-gray-700', 'border-gray-200');
           this.classList.add('bg-blue-600', 'text-white', 'border-blue-600');
-
-          // 加载对应MBTI类型的书籍数据
-          loadBooksForType(targetId);
         });
       });
     });
