@@ -330,19 +330,20 @@
         ]
       },
       {
-        "title": "艺术的疗愈力",
-        "author": "阿兰·德波顿",
-        "isbn": "0307379248",
-        "amazonUrl": "https://www.amazon.com/Art-Travel-Alain-Botton/dp/0307379248/",
-        "description": "探讨艺术如何疗愈心灵，适合ISFP的敏感性。",
-        "rating": 4.5,
+        "title": "森林里的智慧",
+        "author": "彼得·渥雷本",
+        "isbn": "1771642483",
+        "amazonUrl": "https://www.amazon.com/Hidden-Life-Trees-Communicate-Discoveries/dp/1771642483/",
+        "description": "自然与生命之美的颂歌，唤醒 ISFP 对自然万物细腻的感知。",
+        "summary": "本书揭示了树木之间互相沟通、照料、感知的神奇现象，用科学和情感的语言重塑人类与自然的关系。",
+        "rating": 4.8,
         "reasons": [
-          "提供艺术的疗愈视角，契合ISFP的敏感性格",
-          "适合情感表达，符合ISFP的艺术特质",
-          "增强对美的感知，增强ISFP的创造力",
-          "激发创造力，适合ISFP的自由追求"
+          "贴合 ISFP 爱自然的本质",
+          "以温和语言讲述科学现象",
+          "引发生态意识与心灵感动",
+          "将大自然描绘得如艺术一般"
         ]
-      },
+      }，
       {
         "title": "慢生活",
         "author": "卡尔·霍诺",
@@ -595,6 +596,386 @@
           "通过旅行体验提升生活美感",
           "满足ESFP对感官体验的需求",
           "将日常体验提升为哲思之旅"
+        ]
+      }，
+      {
+        "title": "给无名指的信",
+        "author": "幾米",
+        "isbn": "9573317242",
+        "amazonUrl": "https://www.amazon.com/Jimmy-Give-Finger-Letter/dp/B001P6WXG8/",
+        "description": "幾米的绘本充满细腻情感和唯美图像，深得 ISFP 的艺术气质与情感世界。",
+        "summary": "这本图文书用意象化的手法讲述成长与爱、孤独与期望之间的微妙联系，每一页都是心灵的画面。",
+        "rating": 4.9,
+        "reasons": [
+          "图像与诗意完美结合",
+          "视觉与情绪体验双重满足",
+          "非常适合富有艺术直觉的 ISFP",
+          "轻柔但深刻，引导情绪自我疗愈"
+        ]
+      },
+      {
+        "title": "海边的卡夫卡",
+        "author": "村上春树",
+        "isbn": "1400079276",
+        "amazonUrl": "https://www.amazon.com/Kafka-Shore-Haruki-Murakami/dp/1400079276/",
+        "description": "融合梦境、现实、音乐与孤独的奇幻小说，深契 ISFP 对感性与灵魂的探索。",
+        "summary": "卡夫卡少年逃离家庭，踏上一段探索与奇遇并存的旅程，在旅途中交织了哲学思考、音乐诗意与灵魂对话。",
+        "rating": 4.6,
+        "reasons": [
+          "丰富感官细节与梦幻意象",
+          "探索孤独、成长与内心冲突",
+          "适合 ISFP 喜欢的抽象而深邃",
+          "情感多层次，极具阅读深度"
+        ]
+      }
+    ]
+  }，
+"ENFP": {
+    "books": [
+      {
+        "title": "The Comprehensive ENFP Survival Guide",
+        "author": "Heidi Priebe",
+        "isbn": "0692431492",
+        "amazonUrl": "https://www.amazon.com/Comprehensive-ENFP-Survival-Guide/dp/0692431492/",
+        "description": "一本深入探讨 ENFP 性格类型的指南，提供实用建议以帮助 ENFP 更好地理解自己。",
+        "summary": "本书通过幽默而深刻的方式，帮助 ENFP 了解自己的思维模式、情感需求和人际关系，提供应对压力和实现自我成长的策略。",
+        "rating": 4.6,
+        "reasons": [
+          "深入解析 ENFP 的性格特质，增强自我认知",
+          "提供实用的生活和职业建议，助力个人发展",
+          "语言幽默风趣，符合 ENFP 的阅读偏好",
+          "帮助 ENFP 更好地管理情绪和人际关系"
+        ]
+      },
+      {
+        "title": "The Little Prince",
+        "author": "Antoine de Saint-Exupéry",
+        "isbn": "0156012197",
+        "amazonUrl": "https://www.amazon.com/Little-Prince-Antoine-Saint-Exupery/dp/0156012197/",
+        "description": "一部寓言式的童话故事，探讨人生的意义和人性的本质。",
+        "summary": "通过小王子的星际旅行，揭示成人世界的荒诞与孩子般纯真的价值，鼓励读者保持好奇心和同理心。",
+        "rating": 4.8,
+        "reasons": [
+          "激发 ENFP 的想象力和探索欲",
+          "强调情感连接和人际关系的重要性",
+          "寓意深刻，适合 ENFP 的哲思倾向",
+          "鼓励保持童心和对世界的好奇"
+        ]
+      },
+      {
+        "title": "Big Magic: Creative Living Beyond Fear",
+        "author": "Elizabeth Gilbert",
+        "isbn": "1594634726",
+        "amazonUrl": "https://www.amazon.com/Big-Magic-Creative-Living-Beyond/dp/1594634726/",
+        "description": "探索创造力的本质，鼓励读者勇敢追求创意生活。",
+        "summary": "作者分享了自己在创作过程中的经验和见解，鼓励读者克服恐惧，释放内在的创造力，过上充满激情和意义的生活。",
+        "rating": 4.5,
+        "reasons": [
+          "激励 ENFP 追求创意和激情",
+          "提供实用的创作建议，助力个人表达",
+          "鼓励面对恐惧，勇敢追梦",
+          "符合 ENFP 对自由和自我实现的追求"
+        ]
+      },
+      {
+        "title": "Start With Why: How Great Leaders Inspire Everyone to Take Action",
+        "author": "Simon Sinek",
+        "isbn": "1591846447",
+        "amazonUrl": "https://www.amazon.com/Start-Why-Leaders-Inspire-Everyone/dp/1591846447/",
+        "description": "探讨领导力的核心——找到“为什么”，激发他人行动的动力。",
+        "summary": "通过分析成功领导者的案例，作者提出“黄金圈”理论，强调明确目的对于激励团队和实现目标的重要性。",
+        "rating": 4.6,
+        "reasons": [
+          "帮助 ENFP 明确个人和职业目标",
+          "提供激励他人的策略，增强领导力",
+          "强调价值观和使命感，符合 ENFP 的核心驱动力",
+          "鼓励以意义为导向的生活方式"
+        ]
+      }
+    ]
+  },
+  "ENTP": {
+    "books": [
+      {
+        "title": "The Beginning of Infinity",
+        "author": "David Deutsch",
+        "isbn": "014312135X",
+        "amazonUrl": "https://www.amazon.com/Beginning-Infinity-Explanations-Transform-World/dp/014312135X/",
+        "description": "探讨科学解释的力量及其对人类未来的影响。",
+        "summary": "作者提出了科学解释的无限潜力，讨论了知识的增长如何推动人类文明的进步，激发读者对未来的想象。",
+        "rating": 4.7,
+        "reasons": [
+          "激发 ENTP 的好奇心和探索欲",
+          "提供跨学科的深度思考，符合 ENTP 的思维方式",
+          "挑战传统观念，鼓励创新思维",
+          "拓展视野，启发未来的可能性"
+        ]
+      },
+      {
+        "title": "Influence: The Psychology of Persuasion",
+        "author": "Robert B. Cialdini",
+        "isbn": "006124189X",
+        "amazonUrl": "https://www.amazon.com/Influence-Psychology-Persuasion-Robert-Cialdini/dp/006124189X/",
+        "description": "揭示影响力的六大原则，解析人类行为背后的心理机制。",
+        "summary": "通过实证研究和案例分析，作者总结了影响他人决策的关键因素，提供了在日常生活和商业中应用的策略。",
+        "rating": 4.8,
+        "reasons": [
+          "满足 ENTP 对人类行为的好奇心",
+          "提供实用的说服技巧，增强沟通能力",
+          "适合 ENTP 在社交和职业场合中应用",
+          "激发对心理学和行为科学的兴趣"
+        ]
+      },
+      {
+        "title": "Impro: Improvisation and the Theatre",
+        "author": "Keith Johnstone",
+        "isbn": "0878301178",
+        "amazonUrl": "https://www.amazon.com/Impro-Improvisation-Theatre-Keith-Johnstone/dp/0878301178/",
+        "description": "探讨即兴表演的艺术，激发创造力和表达力。",
+        "summary": "作者分享了即兴戏剧的技巧和理念，强调在表演中保持开放和真实，提升创造性思维和人际互动能力。",
+        "rating": 4.8,
+        "reasons": [
+          "激发 ENTP 的创造力和表达欲",
+          "提供实用的即兴技巧，增强适应能力",
+          "适合 ENTP 在多变环境中灵活应对",
+          "鼓励开放思维和团队协作"
+        ]
+      },
+      {
+        "title": "Trust Me, I'm Lying: Confessions of a Media Manipulator",
+        "author": "Ryan Holiday",
+        "isbn": "1591846285",
+        "amazonUrl": "https://www.amazon.com/Trust-Me-Lying-Confessions-Manipulator/dp/1591846285/",
+        "description": "揭示媒体操控的内幕，探讨信息传播的真相。",
+        "summary": "作者以亲身经历揭示了如何操纵媒体和公众舆论，警示读者在信息时代保持批判性思维的重要性。",
+        "rating": 4.5,
+        "reasons": [
+          "满足 ENTP 对媒体和传播机制的兴趣",
+          "提供对信息操控的深刻洞察",
+          "激发对社会现象的批判性思考",
+          "鼓励 ENTP 成为更有意识的信息消费者"
+        ]
+      }
+    ]
+  },
+ "ESTJ": {
+    "books": [
+      {
+        "title": "The 7 Habits of Highly Effective People",
+        "author": "Stephen R. Covey",
+        "isbn": "0743269519",
+        "amazonUrl": "https://www.amazon.com/7-Habits-Highly-Effective-People/dp/0743269519/",
+        "description": "提供个人和职业成功的七个习惯，建立高效的生活方式。",
+        "summary": "作者提出了七个习惯，帮助读者在个人成长、时间管理和人际关系中实现卓越，建立以原则为中心的生活。",
+        "rating": 4.7,
+        "reasons": [
+          "符合 ESTJ 对结构和效率的追求",
+          "提供实用的时间管理和目标设定方法",
+          "强调责任感和自律，契合 ESTJ 的价值观",
+          "帮助建立稳定和高效的生活方式"
+        ]
+      },
+      {
+        "title": "Good to Great: Why Some Companies Make the Leap... and Others Don't",
+        "author": "Jim Collins",
+        "isbn": "0066620996",
+        "amazonUrl": "https://www.amazon.com/Good-Great-Some-Companies-Others/dp/0066620996/",
+        "description": "分析企业从优秀到卓越的转变过程，提供可复制的成功模式。",
+        "summary": "通过对多家公司的深入研究，作者总结了实现卓越的关键因素，如领导力、文化和战略，适用于组织和个人的发展。",
+        "rating": 4.6,
+        "reasons": [
+          "满足 ESTJ 对组织管理和效率的兴趣",
+          "提供实证研究支持的成功策略",
+          "强调纪律和系统性，契合 ESTJ 的思维方式",
+          "适合在职业发展中应用"
+        ]
+      },
+      {
+        "title": "An Essential Guide for the ESTJ Personality Type",
+        "author": "Nicole Zagorski",
+        "isbn": "153557013X",
+        "amazonUrl": "https://www.amazon.com/Essential-Guide-ESTJ-Personality-Type/dp/153557013X/",
+        "description": "深入了解 ESTJ 的性格特质，提供职业和人际关系的指导。",
+        "summary": "本书帮助 ESTJ 类型的人更好地理解自身的特点，提供在职业选择、人际交往和自我提升方面的实用建议，增强自我认知。",
+        "rating": 3.9,
+        "reasons": [
+          "提供针对 ESTJ 的实用建议，增强自我认知",
+          "帮助在职业和人际关系中发挥优势",
+          "适合希望深入了解自身性格的人士",
+          "内容简明易懂，便于快速阅读"
+        ]
+      },
+      {
+        "title": "ESTJ: Understanding & Relating with the Guardian",
+        "author": "Clayton Geoffreys",
+        "isbn": "1507727364",
+        "amazonUrl": "https://www.amazon.com/ESTJ-Understanding-Relating-Guardian-Personality/dp/1507727364/",
+        "description": "探索 ESTJ 的思维方式和行为模式，提升人际关系质量。",
+        "summary": "本书通过深入分析 ESTJ 的性格特征，帮助读者理解其决策方式、沟通风格和情感表达，提供改善人际关系的策略。",
+        "rating": 4.2,
+        "reasons": [
+          "深入剖析 ESTJ 的性格特点",
+          "提供改善人际关系的实用技巧",
+          "适合希望与 ESTJ 更好相处的人士",
+          "语言通俗易懂，适合各类读者"
+        ]
+      },
+      {
+        "title": "The Administrator: Your Guide to the ESTJ Personality Type",
+        "author": "Jaroslaw Jankowski",
+        "isbn": "8379810481",
+        "amazonUrl": "https://www.amazon.com/Administrator-Your-Guide-ESTJ-Personality/dp/8379810481/",
+        "description": "全面解析 ESTJ 的性格特质，提供职业发展和人际交往的指导。",
+        "summary": "本书涵盖 ESTJ 的核心特质、职业倾向、人际关系模式等方面，帮助读者全面了解并发挥 ESTJ 的优势。",
+        "rating": 5.0,
+        "reasons": [
+          "内容全面，涵盖 ESTJ 的各个方面",
+          "提供实际可行的职业和人际关系建议",
+          "适合希望深入了解 ESTJ 的读者",
+          "作者经验丰富，分析深入"
+        ]
+      },
+      {
+        "title": "Be Your Best Self: ESTJ Myers Briggs (MBTI) Personality Development Journal",
+        "author": "ISQ Books",
+        "isbn": "9798820164668",
+        "amazonUrl": "https://www.amazon.com/Your-Best-Self-Personality-Relationships/dp/B0B14BCXSQ/",
+        "description": "专为 ESTJ 设计的个性发展日记，助力自我提升。",
+        "summary": "本书结合 MBTI 理论，提供 ESTJ 的性格分析，并设有专属的自我发展记录区，帮助读者设定目标，追踪成长进程。",
+        "rating": 4.5,
+        "reasons": [
+          "结合理论与实践，促进自我成长",
+          "提供个性化的成长记录工具",
+          "适合希望系统提升自我的 ESTJ",
+          "设计精美，便于日常使用"
+        ]
+      }
+    ]
+  }，
+  "ENFJ": {
+    "books": [
+      {
+        "title": "ENFJ: Understanding & Relating with the Teacher",
+        "author": "Clayton Geoffreys",
+        "isbn": "1508786594",
+        "amazonUrl": "https://www.amazon.com/ENFJ-Understanding-Relating-Teacher-Personality/dp/1508786594/",
+        "description": "深入了解 ENFJ 的性格、情感与人际关系特征。",
+        "summary": "本书详细描述 ENFJ 的情感动力、领导特质、沟通风格及其在人际互动中的表现，是理解这一人格类型的全面指南。",
+        "rating": 4.4,
+        "reasons": [
+          "分析 ENFJ 的理想主义与影响力",
+          "帮助 ENFJ 增强人际关系管理能力",
+          "适合自我反思与职业发展需求",
+          "内容清晰实用，适合各年龄段读者"
+        ]
+      },
+      {
+        "title": "The Idealist: Your Guide to the ENFJ Personality Type",
+        "author": "Jaroslaw Jankowski",
+        "isbn": "8379810449",
+        "amazonUrl": "https://www.amazon.com/Idealist-Your-Guide-ENFJ-Personality/dp/8379810449/",
+        "description": "为理想主义的 ENFJ 量身打造的性格指南。",
+        "summary": "本书通过实例与心理模型，探索 ENFJ 的价值观、动机和社交行为，提供如何更好发挥其社会影响力的策略。",
+        "rating": 4.7,
+        "reasons": [
+          "深入刻画 ENFJ 的理想导向思维",
+          "提供在职场与家庭中的实际指导",
+          "语言精炼，适合系统学习与应用",
+          "结合 MBTI 理论与现实案例"
+        ]
+      },
+      {
+        "title": "An Essential Guide for the ENFJ Personality Type",
+        "author": "Nicole Zagorski",
+        "isbn": "1535566624",
+        "amazonUrl": "https://www.amazon.com/Essential-Guide-ENFJ-Personality-Type/dp/1535566624/",
+        "description": "ENFJ 的入门型格参考，助力发现自身潜力。",
+        "summary": "本书适合想要快速了解 ENFJ 性格的人群，提供简洁明了的特点分析及常见行为模式，帮助 ENFJ 更好理解自我。",
+        "rating": 4.0,
+        "reasons": [
+          "内容简洁，适合初学者阅读",
+          "鼓励 ENFJ 正面表达情感和理想",
+          "适合青少年和职场新手",
+          "结构清晰，便于对照查阅"
+        ]
+      },
+      {
+        "title": "The ENFJ Personality Guide: Understand yourself, reach your potential, and become your best you!",
+        "author": "Dan Johnston",
+        "isbn": "1988058329",
+        "amazonUrl": "https://www.amazon.com/ENFJ-Personality-Guide-Understand-yourself/dp/1988058329/",
+        "description": "探索 ENFJ 潜力，实现理想自我。",
+        "summary": "该书旨在帮助 ENFJ 类型的人理解自己的性格动因，并提供实践方法，使他们在人际关系和事业中发挥最大潜力。",
+        "rating": 4.6,
+        "reasons": [
+          "帮助 ENFJ 发挥天生的引导力和同理心",
+          "提供可操作的成长路径和练习",
+          "适合自我成长与心理辅导方向",
+          "引导 ENFJ 在生活中实现使命感"
+        ]
+      }
+    ]
+  }，
+  "ENTJ": {
+    "books": [
+      {
+        "title": "Mastermind: Unlocking the Power of the ENTJ Personality Type",
+        "author": "Daniel Pascal",
+        "isbn": "1532918057",
+        "amazonUrl": "https://www.amazon.com/Mastermind-Unlocking-Personality-Daniel-Pascal/dp/1532918057/",
+        "description": "一本深入探索 ENTJ 思维与战略天赋的指南。",
+        "summary": "本书解构 ENTJ 的决策逻辑、领导风格和沟通模式，揭示如何将这种人格的优势转化为事业成功和高效人际互动的利器。",
+        "rating": 4.6,
+        "reasons": [
+          "强化 ENTJ 的领导优势与规划能力",
+          "为职业成功提供清晰方向",
+          "强调战略思维与执行力并重",
+          "结合心理模型与现实案例，极具参考性"
+        ]
+      },
+      {
+        "title": "ENTJ: Understanding & Relating with the Commander",
+        "author": "Clayton Geoffreys",
+        "isbn": "1514658595",
+        "amazonUrl": "https://www.amazon.com/ENTJ-Understanding-Relating-Commander-Personality/dp/1514658595/",
+        "description": "系统分析 ENTJ 的行为模式和人际关系风格。",
+        "summary": "本书从心理类型出发，帮助读者理解 ENTJ 如何在领导和组织中发挥核心作用，同时也指出他们在亲密关系中的成长机会。",
+        "rating": 4.4,
+        "reasons": [
+          "提升 ENTJ 对自己行为动因的理解",
+          "有助于改善沟通与协作",
+          "适合在管理与领导岗位上的 ENTJ 阅读",
+          "书风简明，内容实用"
+        ]
+      },
+      {
+        "title": "The ENTJ: Understanding the Strategic Commander",
+        "author": "Jaroslaw Jankowski",
+        "isbn": "8379810260",
+        "amazonUrl": "https://www.amazon.com/ENTJ-Understanding-Strategic-Commander-Personality/dp/8379810260/",
+        "description": "一本从战略角度剖析 ENTJ 内在驱动力的作品。",
+        "summary": "结合认知心理学与人格理论，阐述 ENTJ 的目标导向型思维、如何激励他人以及在压力下保持高效的秘诀。",
+        "rating": 4.7,
+        "reasons": [
+          "深入探讨 ENTJ 追求成就的核心动机",
+          "帮助增强对权力和影响力的理解",
+          "为组织与创业型 ENTJ 提供实操策略",
+          "理论结合实际，适合长期收藏"
+        ]
+      },
+      {
+        "title": "Personality Hacker: Harness the Power of Your Personality Type to Transform Your Work, Relationships, and Life",
+        "author": "Joel Mark Witt & Antonia Dodge",
+        "isbn": "0062885816",
+        "amazonUrl": "https://www.amazon.com/Personality-Hacker-Personality-Relationships-Life/dp/0062885816/",
+        "description": "全类型指南，特别适合 ENTJ 理性驱动者理解和优化自我。",
+        "summary": "本书不仅涵盖了 ENTJ 的性格特质，还提供认知功能的实践应用，包括如何管理压力、优化决策与人际互动，是提高自我效能的实战手册。",
+        "rating": 4.8,
+        "reasons": [
+          "全面系统，适合高认知型读者",
+          "可帮助 ENTJ 在多个人生维度发力",
+          "内容兼顾理论与实际，非常实用",
+          "强调认知发展，贴合 ENTJ 成长需求"
         ]
       }
     ]
