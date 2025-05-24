@@ -102,14 +102,14 @@
           </div>
 
           <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <a href="test.html?type=basic" id="basic-test" class="bg-green-500 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-green-600 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+            <button id="free-test-btn" class="bg-green-500 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-green-600 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
               免费测试
               <span class="block text-sm mt-1 font-normal">40个问题</span>
-            </a>
-            <a href="test.html?type=pro" id="pro-test" class="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+            </button>
+            <button id="pro-test-btn" class="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
               付费测试
               <span class="block text-sm mt-1 font-normal">100个问题</span>
-            </a>
+            </button>
           </div>
 
           <div class="mt-8 max-w-4xl mx-auto px-4 text-left space-y-10">
@@ -459,10 +459,35 @@ document.addEventListener("DOMContentLoaded", rotateQuotes);
 </footer>
 
   <script src="src/js/main.js"></script>
-  <script src="src/js/test.js"></script>
-  <script src="src/js/share.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="src/js/test.js"></script>
+    <script src="src/js/share.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <script>
+    // 处理测试类型选择按钮
+    document.addEventListener('DOMContentLoaded', function() {
+        const freeTestBtn = document.getElementById('free-test-btn');
+        const proTestBtn = document.getElementById('pro-test-btn');
+        
+        if (freeTestBtn) {
+            freeTestBtn.addEventListener('click', function() {
+                // 设置测试类型并显示测试界面
+                const urlParams = new URLSearchParams();
+                urlParams.set('type', 'basic');
+                window.location.href = 'test.html?' + urlParams.toString();
+            });
+        }
+        
+        if (proTestBtn) {
+            proTestBtn.addEventListener('click', function() {
+                // 设置测试类型并显示测试界面
+                const urlParams = new URLSearchParams();
+                urlParams.set('type', 'pro');
+                window.location.href = 'test.html?' + urlParams.toString();
+            });
+        }
+    });
+    </script>
 </body>
 </html>
-               
