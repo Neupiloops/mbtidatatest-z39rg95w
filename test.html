@@ -101,9 +101,16 @@
             加载中...
           </div>
 
-          <button id="start-test" class="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
-            开始测试
-          </button>
+          <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <a href="test.html?type=basic" id="basic-test" class="bg-green-500 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-green-600 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+              免费测试
+              <span class="block text-sm mt-1 font-normal">40个问题</span>
+            </a>
+            <a href="test.html?type=pro" id="pro-test" class="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+              付费测试
+              <span class="block text-sm mt-1 font-normal">100个问题</span>
+            </a>
+          </div>
 
           <div class="mt-8 max-w-4xl mx-auto px-4 text-left space-y-10">
             <!-- 小贴士 -->
