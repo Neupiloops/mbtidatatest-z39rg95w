@@ -502,6 +502,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // 对问题进行分组和打乱
   function prepareQuestions() {
+    // 获取URL参数，确定测试类型
+    const urlParams = new URLSearchParams(window.location.search);
+    const testType = urlParams.get('type') || 'basic'; // 默认为基础测试
+    
+    // 根据测试类型设置每个维度的问题数量
+    const questionsPerDimension = testType === 'pro' ? 25 : 10; // 专业版每个维度25题，基础版每个维度10题
+    
     let groupedQuestions = {
       EI: questions.filter(q => q.dimension === 'EI'),
       SN: questions.filter(q => q.dimension === 'SN'),
@@ -514,10 +521,10 @@ document.addEventListener('DOMContentLoaded', function() {
       groupedQuestions[dimension] = shuffleArray(groupedQuestions[dimension]);
     }
 
-    // 从每个维度选择15个问题
+    // 从每个维度选择指定数量的问题
     let finalQuestions = [];
     for (let dimension in groupedQuestions) {
-      finalQuestions = finalQuestions.concat(groupedQuestions[dimension].slice(0, 15));
+      finalQuestions = finalQuestions.concat(groupedQuestions[dimension].slice(0, questionsPerDimension));
     }
 
     // 最后打乱所有问题的顺序
@@ -693,81 +700,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // 显示结果
   function displayResults(type, percentages) {
-    testQuestions.classList.add('hidden');
-    testResults.classList.remove('hidden');
-
-    // 设置MBTI类型和标题
-    document.getElementById('mbti-type').textContent = type;
-    document.getElementById('mbti-title').textContent = mbtiTypes[type].title;
-
-    // 设置百分比条
-    document.getElementById('e-i-bar').style.width = `${type[0] === 'I' ? percentages.eiPercentage : 100 - percentages.eiPercentage}%`;
-    document.getElementById('e-i-bar').parentElement.nextElementSibling.textContent = `${type[0] === 'I' ? percentages.eiPercentage : 100 - percentages.eiPercentage}% ${type[0] === 'I' ? '内向' : '外向'}`;
-
-    document.getElementById('s-n-bar').style.width = `${type[1] === 'N' ? percentages.snPercentage : 100 - percentages.snPercentage}%`;
-    document.getElementById('s-n-bar').parentElement.nextElementSibling.textContent = `${type[1] === 'N' ? percentages.snPercentage : 100 - percentages.snPercentage}% ${type[1] === 'N' ? '直觉' : '感觉'}`;
-
-    document.getElementById('t-f-bar').style.width = `${type[2] === 'F' ? percentages.tfPercentage : 100 - percentages.tfPercentage}%`;
-    document.getElementById('t-f-bar').parentElement.nextElementSibling.textContent = `${type[2] === 'F' ? percentages.tfPercentage : 100 - percentages.tfPercentage}% ${type[2] === 'F' ? '情感' : '思考'}`;
-
-    document.getElementById('j-p-bar').style.width = `${type[3] === 'J' ? percentages.jpPercentage : 100 - percentages.jpPercentage}%`;
-    document.getElementById('j-p-bar').parentElement.nextElementSibling.textContent = `${type[3] === 'J' ? percentages.jpPercentage : 100 - percentages.jpPercentage}% ${type[3] === 'J' ? '判断' : '感知'}`;
-
-    // 设置类型描述
-    document.getElementById('mbti-description').textContent = mbtiTypes[type].description;
-
-    // 设置优势
-    const strengthsList = document.getElementById('mbti-strengths');
-    strengthsList.innerHTML = '';
-    mbtiTypes[type].strengths.forEach(strength => {
-      const li = document.createElement('li');
-      li.textContent = strength;
-      strengthsList.appendChild(li);
-    });
-
-    // 设置成长空间
-    const weaknessesList = document.getElementById('mbti-weaknesses');
-    weaknessesList.innerHTML = '';
-    mbtiTypes[type].weaknesses.forEach(weakness => {
-      const li = document.createElement('li');
-      li.textContent = weakness;
-      weaknessesList.appendChild(li);
-    });
-
-    // 设置职业推荐
-    const careersDiv = document.getElementById('mbti-careers');
-    careersDiv.innerHTML = '';
-    mbtiTypes[type].careers.forEach(career => {
-      const div = document.createElement('div');
-      div.className = 'bg-gray-50 p-4 rounded-lg';
-      
-      const careerParts = career.split('/');
-      if (careerParts.length > 1) {
-        const mainDiv = document.createElement('div');
-        mainDiv.className = 'font-medium text-gray-900';
-        mainDiv.textContent = careerParts[0].trim();
-        
-        const subDiv = document.createElement('div');
-        subDiv.className = 'text-sm text-gray-600';
-        subDiv.textContent = careerParts[1].trim();
-        
-        div.appendChild(mainDiv);
-        div.appendChild(subDiv);
-      } else {
-        const mainDiv = document.createElement('div');
-        mainDiv.className = 'font-medium text-gray-900';
-        mainDiv.textContent = career;
-        
-        div.appendChild(mainDiv);
-      }
-      
-      careersDiv.appendChild(div);
-    });
-
-    // 设置人际关系描述
-    document.getElementById('mbti-relationships').textContent = mbtiTypes[type].relationships;
-
-    // 其他类型特定的设置
-    // ...根据类型选择适当的图片或特别信息
+    // 获取URL参数，确定测试类型
+    const urlParams = new URLSearchParams(window.location.search);
+    const testType = urlParams.get('type') || 'basic'; // 默认为基础测试
+    
+    // 将MBTI类型和百分比数据保存到localStorage
+    localStorage.setItem('mbtiType', type);
+    localStorage.setItem('mbtiPercentages', JSON.stringify(percentages));
+    
+    // 根据测试类型跳转到不同的结果页面
+    if (testType === 'pro') {
+      // 专业测试完成后，跳转到支付页面
+      window.location.href = 'price.html?showPayment=true';
+    } else {
+      // 基础测试直接显示结果
+      window.location.href = 'result.html?type=basic';
+    }
   }
 });
