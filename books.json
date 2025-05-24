@@ -18,8 +18,8 @@
             {
                 "title": "清单革命",
                 "author": "阿图·葛文德",
-                "isbn": "0805091742",
-                "amazonUrl": "https://www.amazon.com/Checklist-Manifesto-How-Get-Things/dp/0805091742/",
+                "isbn": "9780312430009",
+                "amazonUrl": "https://www.amazon.com/Checklist-Manifesto-How-Things-Right/dp/0312430000/",
                 "description": "探讨如何通过清单提高效率和减少错误，适合ISTJ的细节导向。",
                 "rating": 4.5,
                 "reasons": [
@@ -394,7 +394,7 @@
                 "title": "岛上书店",
                 "author": "加布瑞埃拉·泽文",
                 "isbn": "1401341616",
-                "amazonUrl": "https://www.amazon.com/Storied-Life-A-J-Fikry-Novel/dp/1401341616/",
+                "amazonUrl": https://https://www.amazon.com/%E5%B2%9B%E4%B8%8A%E4%B9%A6%E5%BA%97%E3%80%90%E8%8D%90%E4%B9%A6%E8%81%94%E7%9B%9F%E6%8E%A8%E8%8D%90%E3%80%91-%E7%BE%8E-%E5%8A%A0%C2%B7%E6%B3%BD%E6%96%87%EF%BC%88Gabrielle-Zevin%EF%BC%89/dp/B014QKMJPI/",
                 "description": "讲述爱与救赎的故事，适合INFP的情感深度。",
                 "rating": 4.6,
                 "reasons": [
@@ -622,7 +622,7 @@
                 "title": "The Comprehensive ENFP Survival Guide",
                 "author": "Heidi Priebe",
                 "isbn": "0692431492",
-                "amazonUrl": "https://www.amazon.com/Comprehensive-ENFP-Survival-Guide/dp/0692431492/",
+                "amazonUrl": "https://www.amazon.com/Comprehensive-ENFP-Survival-Guide/dp/0692532501",
                 "description": "一本深入探讨 ENFP 性格类型的指南，提供实用建议以帮助 ENFP 更好地理解自己。",
                 "summary": "本书通过幽默而深刻的方式，帮助 ENFP 了解自己的思维模式、情感需求和人际关系，提供应对压力和实现自我成长的策略。",
                 "rating": 4.6,
@@ -749,10 +749,10 @@
             {
                 "title": "The 7 Habits of Highly Effective People",
                 "author": "Stephen R. Covey",
-                "isbn": "0743269519",
-                "amazonUrl": "https://www.amazon.com/7-Habits-Highly-Effective-People/dp/0743269519/",
+                "isbn": "9781451639612",
+                "amazonUrl": "https://www.amazon.com/Habits-Highly-Effective-People-Powerful/dp/1451639619/",
                 "description": "提供个人和职业成功的七个习惯，建立高效的生活方式。",
-                "summary": "作者提出了七个习惯，帮助读者在个人成长、时间管理和人际关系中实现卓越，建立以原则为中心的生活。",
+                "summary":  "这本书提供了系统化的方法来提高个人和职业效率，非常适合注重结构和效率的ESTJ。书中的七个习惯提供了明确的框架，帮助你建立有效的工作和生活系统。",
                 "rating": 4.7,
                 "reasons": [
                     "符合 ESTJ 对结构和效率的追求",
@@ -777,36 +777,6 @@
                 ]
             },
             {
-                "title": "An Essential Guide for the ESTJ Personality Type",
-                "author": "Nicole Zagorski",
-                "isbn": "153557013X",
-                "amazonUrl": "https://www.amazon.com/Essential-Guide-ESTJ-Personality-Type/dp/153557013X/",
-                "description": "深入了解 ESTJ 的性格特质，提供职业和人际关系的指导。",
-                "summary": "本书帮助 ESTJ 类型的人更好地理解自身的特点，提供在职业选择、人际交往和自我提升方面的实用建议，增强自我认知。",
-                "rating": 3.9,
-                "reasons": [
-                    "提供针对 ESTJ 的实用建议，增强自我认知",
-                    "帮助在职业和人际关系中发挥优势",
-                    "适合希望深入了解自身性格的人士",
-                    "内容简明易懂，便于快速阅读"
-                ]
-            },
-            {
-                "title": "ESTJ: Understanding & Relating with the Guardian",
-                "author": "Clayton Geoffreys",
-                "isbn": "1507727364",
-                "amazonUrl": "https://www.amazon.com/ESTJ-Understanding-Relating-Guardian-Personality/dp/1507727364/",
-                "description": "探索 ESTJ 的思维方式和行为模式，提升人际关系质量。",
-                "summary": "本书通过深入分析 ESTJ 的性格特征，帮助读者理解其决策方式、沟通风格和情感表达，提供改善人际关系的策略。",
-                "rating": 4.2,
-                "reasons": [
-                    "深入剖析 ESTJ 的性格特点",
-                    "提供改善人际关系的实用技巧",
-                    "适合希望与 ESTJ 更好相处的人士",
-                    "语言通俗易懂，适合各类读者"
-                ]
-            },
-            {
                 "title": "The Administrator: Your Guide to the ESTJ Personality Type",
                 "author": "Jaroslaw Jankowski",
                 "isbn": "8379810481",
@@ -822,17 +792,17 @@
                 ]
             },
             {
-                "title": "Be Your Best Self: ESTJ Myers Briggs (MBTI) Personality Development Journal",
-                "author": "ISQ Books",
-                "isbn": "9798820164668",
-                "amazonUrl": "https://www.amazon.com/Your-Best-Self-Personality-Relationships/dp/B0B14BCXSQ/",
+                "title": "原则：生活和工作",
+                "author": "雷·达里奥",
+                "isbn": "1501124021",
+                "amazonUrl": "https://www.amazon.com/Principles-Life-Work-Ray-Dalio/dp/1501124021/",
                 "description": "专为 ESTJ 设计的个性发展日记，助力自我提升。",
-                "summary": "本书结合 MBTI 理论，提供 ESTJ 的性格分析，并设有专属的自我发展记录区，帮助读者设定目标，追踪成长进程。",
+                "summary": "桥水基金创始人雷·达里奥分享了他的成功原则，这本书提供了一套系统化的决策和管理方法，非常适合喜欢遵循规则和结构的ESTJ人格。",
                 "rating": 4.5,
                 "reasons": [
-                    "结合理论与实践，促进自我成长",
-                    "提供个性化的成长记录工具",
-                    "适合希望系统提升自我的 ESTJ",
+                    "提供明确的决策框架",
+                    "强调基于事实的思考方式",
+                    "包含实用的管理和领导技巧",
                     "设计精美，便于日常使用"
                 ]
             }
