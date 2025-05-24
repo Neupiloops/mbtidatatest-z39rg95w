@@ -324,6 +324,10 @@
   <script src="src/js/main.js"></script>
   <script src="src/js/test.js"></script>
   <script src="src/js/test-packages.js"></script>
+  <script src="src/js/share.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="src/js/pdf-generator.js"></script>
   <script>
     // 处理测试结果显示
     document.addEventListener('DOMContentLoaded', function() {
@@ -331,6 +335,10 @@
       const urlParams = new URLSearchParams(window.location.search);
       const testType = urlParams.get('type') || 'basic'; // 默认为基础测试
       const isPaid = urlParams.get('paid') === 'true';
+      
+      // 从localStorage获取MBTI类型和百分比数据
+      const mbtiType = localStorage.getItem('mbtiType');
+      const mbtiPercentages = JSON.parse(localStorage.getItem('mbtiPercentages') || '{}');
       
       // 获取结果容器
       const basicResultContainer = document.getElementById('basic-result-container');
@@ -341,6 +349,134 @@
       if (basicResultContainer) basicResultContainer.classList.add('hidden');
       if (proResultContainer) proResultContainer.classList.add('hidden');
       if (paymentPromptContainer) paymentPromptContainer.classList.add('hidden');
+      
+      // 如果有MBTI类型数据，更新页面内容
+      if (mbtiType) {
+        // 更新基础测试结果
+        if (basicResultContainer) {
+          const typeElement = basicResultContainer.querySelector('.text-green-600');
+          if (typeElement) typeElement.textContent = mbtiType;
+          
+          // 更新类型简介和特点
+          const descriptionElement = basicResultContainer.querySelector('p.text-gray-600');
+          if (descriptionElement && window.mbtiTypes && window.mbtiTypes[mbtiType]) {
+            descriptionElement.textContent = window.mbtiTypes[mbtiType].description || '暂无描述';
+          }
+          
+          // 更新主要特点和潜在挑战
+          if (window.mbtiTypes && window.mbtiTypes[mbtiType]) {
+            const strengthsList = basicResultContainer.querySelector('ul.text-gray-600:nth-of-type(1)');
+            const weaknessesList = basicResultContainer.querySelector('ul.text-gray-600:nth-of-type(2)');
+            
+            if (strengthsList && window.mbtiTypes[mbtiType].strengths) {
+              strengthsList.innerHTML = '';
+              window.mbtiTypes[mbtiType].strengths.slice(0, 3).forEach(strength => {
+                const li = document.createElement('li');
+                li.textContent = strength;
+                strengthsList.appendChild(li);
+              });
+            }
+            
+            if (weaknessesList && window.mbtiTypes[mbtiType].weaknesses) {
+              weaknessesList.innerHTML = '';
+              window.mbtiTypes[mbtiType].weaknesses.slice(0, 3).forEach(weakness => {
+                const li = document.createElement('li');
+                li.textContent = weakness;
+                weaknessesList.appendChild(li);
+              });
+            }
+          }
+        }
+        
+        // 更新专业测试结果
+        if (proResultContainer) {
+          const typeElement = proResultContainer.querySelector('.text-blue-600');
+          if (typeElement) typeElement.textContent = mbtiType;
+          
+          // 更新维度百分比条
+          if (mbtiPercentages) {
+            // 更新内向/外向维度
+            const eiBar = proResultContainer.querySelector('.bg-blue-600:nth-of-type(1)');
+            const eiText = proResultContainer.querySelector('.text-sm.text-gray-500:nth-of-type(1)');
+            if (eiBar && mbtiPercentages.eiPercentage !== undefined) {
+              const percentage = mbtiType[0] === 'I' ? mbtiPercentages.eiPercentage : 100 - mbtiPercentages.eiPercentage;
+              eiBar.style.width = `${percentage}%`;
+              if (eiText) eiText.textContent = `${percentage}% ${mbtiType[0] === 'I' ? '内向' : '外向'} / ${100 - percentage}% ${mbtiType[0] === 'I' ? '外向' : '内向'}`;
+            }
+            
+            // 更新感觉/直觉维度
+            const snBar = proResultContainer.querySelector('.bg-blue-600:nth-of-type(2)');
+            const snText = proResultContainer.querySelector('.text-sm.text-gray-500:nth-of-type(2)');
+            if (snBar && mbtiPercentages.snPercentage !== undefined) {
+              const percentage = mbtiType[1] === 'N' ? mbtiPercentages.snPercentage : 100 - mbtiPercentages.snPercentage;
+              snBar.style.width = `${percentage}%`;
+              if (snText) snText.textContent = `${percentage}% ${mbtiType[1] === 'N' ? '直觉' : '感觉'} / ${100 - percentage}% ${mbtiType[1] === 'N' ? '感觉' : '直觉'}`;
+            }
+            
+            // 更新思考/情感维度
+            const tfBar = proResultContainer.querySelector('.bg-blue-600:nth-of-type(3)');
+            const tfText = proResultContainer.querySelector('.text-sm.text-gray-500:nth-of-type(3)');
+            if (tfBar && mbtiPercentages.tfPercentage !== undefined) {
+              const percentage = mbtiType[2] === 'F' ? mbtiPercentages.tfPercentage : 100 - mbtiPercentages.tfPercentage;
+              tfBar.style.width = `${percentage}%`;
+              if (tfText) tfText.textContent = `${percentage}% ${mbtiType[2] === 'F' ? '情感' : '思考'} / ${100 - percentage}% ${mbtiType[2] === 'F' ? '思考' : '情感'}`;
+            }
+            
+            // 更新判断/感知维度
+            const jpBar = proResultContainer.querySelector('.bg-blue-600:nth-of-type(4)');
+            const jpText = proResultContainer.querySelector('.text-sm.text-gray-500:nth-of-type(4)');
+            if (jpBar && mbtiPercentages.jpPercentage !== undefined) {
+              const percentage = mbtiType[3] === 'J' ? mbtiPercentages.jpPercentage : 100 - mbtiPercentages.jpPercentage;
+              jpBar.style.width = `${percentage}%`;
+              if (jpText) jpText.textContent = `${percentage}% ${mbtiType[3] === 'J' ? '判断' : '感知'} / ${100 - percentage}% ${mbtiType[3] === 'J' ? '感知' : '判断'}`;
+            }
+          }
+          
+          // 更新全方位性格分析和个性化建议
+          if (window.mbtiTypes && window.mbtiTypes[mbtiType]) {
+            // 更新核心特质和思维方式
+            const coreTraits = proResultContainer.querySelector('ul.text-gray-600:nth-of-type(1)');
+            const thinkingStyle = proResultContainer.querySelector('ul.text-gray-600:nth-of-type(2)');
+            
+            if (coreTraits && window.mbtiTypes[mbtiType].strengths) {
+              coreTraits.innerHTML = '';
+              window.mbtiTypes[mbtiType].strengths.forEach(strength => {
+                const li = document.createElement('li');
+                li.textContent = strength + '的详细描述';
+                coreTraits.appendChild(li);
+              });
+            }
+            
+            // 更新个人成长、情感关系和沟通建议
+            const growthList = proResultContainer.querySelector('ul.text-gray-600:nth-of-type(3)');
+            const relationshipList = proResultContainer.querySelector('ul.text-gray-600:nth-of-type(4)');
+            const communicationList = proResultContainer.querySelector('ul.text-gray-600:nth-of-type(5)');
+            
+            if (growthList) {
+              growthList.innerHTML = '';
+              ['注重自我反思和内在成长', '培养更多实践经验', '学会在适当时候寻求他人帮助'].forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                growthList.appendChild(li);
+              });
+            }
+            
+            // 更新职业匹配、人际关系和情感配对
+            const careersList = proResultContainer.querySelector('ul.text-gray-600:nth-of-type(6)');
+            const friendsList = proResultContainer.querySelector('ul.text-gray-600:nth-of-type(7)');
+            const partnersList = proResultContainer.querySelector('ul.text-gray-600:nth-of-type(8)');
+            
+            if (careersList && window.mbtiTypes[mbtiType].careers) {
+              careersList.innerHTML = '';
+              window.mbtiTypes[mbtiType].careers.forEach(career => {
+                const li = document.createElement('li');
+                li.textContent = career.split('/')[0];
+                careersList.appendChild(li);
+              });
+            }
+          }
+        }
+      }
       
       // 根据测试类型和支付状态显示相应内容
       if (testType === 'basic') {
