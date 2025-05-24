@@ -533,7 +533,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const shuffledQuestions = prepareQuestions();
 
-  // 开始测试
+  // 检查URL参数，如果有测试类型，自动开始测试
+  const urlParams = new URLSearchParams(window.location.search);
+  const testType = urlParams.get('type');
+  
+  if (testType && (testType === 'basic' || testType === 'pro')) {
+    // 自动开始测试
+    if (testIntro) testIntro.classList.add('hidden');
+    if (testQuestions) testQuestions.classList.remove('hidden');
+    if (progressContainer) progressContainer.classList.remove('hidden');
+    displayQuestion(0);
+  }
+
+  // 开始测试按钮（用于手动开始）
   if (startButton) {
     startButton.addEventListener('click', function() {
       testIntro.classList.add('hidden');
@@ -711,7 +723,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 根据测试类型跳转到不同的结果页面
     if (testType === 'pro') {
       // 专业测试完成后，跳转到支付页面
-      window.location.href = 'price.html?showPayment=true';
+      window.location.href = 'payment.html';
     } else {
       // 基础测试直接显示结果
       window.location.href = 'result.html?type=basic';
