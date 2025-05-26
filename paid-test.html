@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>付费MBTI测试 - 智能MBTI</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+  <!-- 头部导航 -->
+  <header class="fixed w-full bg-white bg-opacity-95 shadow-sm z-50 transition duration-300">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center">
+          <a href="index.html" class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span class="ml-2 text-xl font-bold text-gray-900">智能MBTI</span>
+          </a>
+        </div>
+        
+        <!-- 移动端菜单按钮 -->
+        <div class="md:hidden">
+          <button type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none" id="mobile-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+        
+        <!-- 桌面端导航 -->
+        <nav class="hidden md:flex justify-center items-center space-x-8">
+          <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a> 
+          <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600 transition-colors">小问答</a>
+          <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600 transition-colors">冷知识</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600 transition-colors">每天一悟</a>
+          <a href="booksblog.html" class="text-gray-600 hover:text-blue-600 transition-colors">读书推荐</a>
+          <a href="price.html" class="text-gray-600 hover:text-blue-600 transition-colors">套餐价格</a>
+          <a href="aboutus.html" class="text-gray-600 hover:text-blue-600 transition-colors">关于我们</a>
+          <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">开始测试</a>
+        </nav>
+      </div>
+      
+      <!-- 移动端菜单 -->
+      <div class="md:hidden hidden bg-white pb-4" id="mobile-menu">
+        <nav class="flex flex-col space-y-4">
+          <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
+          <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600 transition-colors">小问答</a>
+          <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600 transition-colors">冷知识</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600 transition-colors">每天一悟</a>
+          <a href="booksblog.html" class="text-gray-600 hover:text-blue-600 transition-colors">读书推荐</a>
+          <a href="price.html" class="text-gray-600 hover:text-blue-600 transition-colors">套餐价格</a>
+          <a href="aboutus.html" class="text-gray-600 hover:text-blue-600 transition-colors">关于我们</a>
+          <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-center">开始测试</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主要内容 -->
+  <main class="pt-28 md:pt-32">
+    <section class="pt-8 pb-16">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- 测试介绍 -->
+        <div class="text-center mb-8" id="test-intro">
+          <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">付费专业MBTI性格测试</h1>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+            本测试包含100个精心设计的问题，大约需要25分钟完成。基于官方MBTI理论，提供更深入、更准确的性格分析。请根据您的第一反应选择最符合自己的选项，没有对错之分。测试完成后需要支付以查看详细的专业报告。
+          </p>
+
+          <div id="inspiration-quote" class="text-blue-600 text-xl font-semibold italic mb-8 min-h-[2.5rem] opacity-100 transition-opacity duration-1000">
+            加载中...
+          </div>
+
+          <button id="start-test-btn" class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-medium hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+            开始专业测试
+            <span class="block text-sm mt-1 font-normal">100个问题 · 约25分钟</span>
+          </button>
+
+          <div class="mt-8 max-w-4xl mx-auto px-4 text-left space-y-10">
+            <!-- 小贴士 -->
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded shadow-sm">
+              <h2 class="text-lg font-semibold text-blue-800 mb-2">🌟 专业测试特色</h2>
+              <ul class="list-disc list-inside text-blue-700">
+                <li>基于官方MBTI理论，100道精心设计的题目</li>
+                <li>提供详细的性格分析报告和职业建议</li>
+                <li>包含深度的人际关系和成长建议</li>
+                <li>测试完成后需支付查看完整专业报告</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 测试进度条 -->
+        <div class="hidden mb-8" id="test-progress-container">
+          <div class="flex justify-between text-sm text-gray-600 mb-2">
+            <span id="question-number">问题 1/100</span>
+            <span id="completion-percentage">1%</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2">
+            <div class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 1%" id="progress-bar"></div>
+          </div>
+        </div>
+
+        <!-- 测试问题区域 -->
+        <div class="hidden" id="test-questions">
+          <div class="max-w-3xl mx-auto">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+              <h2 class="text-xl font-semibold text-gray-900 mb-6" id="question-text">
+                加载问题中...
+              </h2>
+              
+              <div class="space-y-4">
+                <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
+                  <input type="radio" name="question" value="0" class="mt-1 text-blue-600 focus:ring-blue-500">
+                  <span class="flex-1">
+                    <span class="font-medium text-gray-900">选项A</span>
+                  </span>
+                </label>
+                
+                <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
+                  <input type="radio" name="question" value="1" class="mt-1 text-blue-600 focus:ring-blue-500">
+                  <span class="flex-1">
+                    <span class="font-medium text-gray-900">选项B</span>
+                  </span>
+                </label>
+              </div>
+              
+              <div class="flex justify-between mt-8">
+                <button id="prev-button" class="hidden bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors">
+                  上一题
+                </button>
+                <div class="flex-1"></div>
+                <button id="next-button" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                  下一题
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 小助手鼓励模块 -->
+        <div class="hidden mt-8" id="encouragement-section">
+          <div class="max-w-2xl mx-auto bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-lg font-semibold text-blue-900 mb-2">小助手提醒</h3>
+                <p class="text-blue-800" id="encouragement-text">
+                  您正在进行专业版MBTI测试，请保持专注，诚实回答每个问题。您的坚持将获得更准确的性格分析！
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <div class="flex items-center justify-center mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span class="ml-2 text-lg font-bold">智能MBTI</span>
+      </div>
+      <p class="text-gray-400 mb-4">
+        探索自我，发现潜能，引领未来方向。
+      </p>
+      <div class="border-t border-gray-800 pt-4">
+        <div class="text-gray-400">
+          &copy; 2025 智能MBTI - 专业MBTI测试. 保留所有权利.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="src/js/main.js"></script>
+  <script src="src/js/test.js"></script>
+  
+  <script>
+    // 励志名言轮播
+    const quotes = [
+      "专业的测试，专业的你。",
+      "深度了解自己，是成功的第一步。",
+      "投资自己的认知，是最好的投资。",
+      "每一个深入的了解，都是成长的开始。",
+      "专业的分析，助你发现更好的自己。",
+      "认识自己，是智慧的开端。",
+      "你的性格，就是你的超能力。",
+      "深度测试，深度成长。",
+      "了解自己，才能更好地了解世界。",
+      "专业测试，专业成长。"
+    ];
+
+    function rotateQuotes() {
+      const quoteEl = document.getElementById("inspiration-quote");
+      let index = 0;
+
+      const showQuote = () => {
+        quoteEl.style.opacity = 0;
+        setTimeout(() => {
+          quoteEl.textContent = quotes[index];
+          quoteEl.style.opacity = 1;
+          index = (index + 1) % quotes.length;
+        }, 1000);
+      };
+
+      showQuote();
+      setInterval(showQuote, 8000);
+    }
+
+    // 页面加载完成后初始化
+    document.addEventListener('DOMContentLoaded', function() {
+      rotateQuotes();
+      
+      // 设置测试类型为专业版
+      localStorage.setItem('testType', 'pro');
+      
+      const startButton = document.getElementById('start-test-btn');
+      const testIntro = document.getElementById('test-intro');
+      const testQuestions = document.getElementById('test-questions');
+      const progressContainer = document.getElementById('test-progress-container');
+      const encouragementSection = document.getElementById('encouragement-section');
+      
+      if (startButton) {
+        startButton.addEventListener('click', function() {
+          testIntro.classList.add('hidden');
+          testQuestions.classList.remove('hidden');
+          progressContainer.classList.remove('hidden');
+          encouragementSection.classList.remove('hidden');
+          
+          // 开始专业测试，传递pro参数
+          if (window.startMBTITest) {
+            window.startMBTITest('pro');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
