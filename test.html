@@ -4,13 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <title>MBTI测试 - 智能导航</title>
+  <title>MBTI测试 - 智能MBTI</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="src/css/styles.css">
 </head>
 <body class="font-sans text-gray-800 bg-gray-50">
   <!-- 头部导航 -->
-<body class="font-sans text-gray-800 bg-gray-50">
   <header class="fixed w-full bg-white bg-opacity-95 shadow-sm z-50 transition duration-300">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center py-4">
@@ -63,7 +62,7 @@
     </div>
   </header>
 
-  <!-- 测试页面主要内容 -->
+  <!-- 主要内容 -->
   <main class="pt-28 md:pt-32">
     <section class="text-center px-4 max-w-3xl mx-auto">
       <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">发现你的真实个性</h1>
@@ -76,7 +75,7 @@
     <section class="mt-8 px-4 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center mb-8">
       <div class="p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
         <h3 class="text-xl font-semibold text-blue-600 mb-2">科学可靠</h3>
-        <p class="text-gray-600">采用国际标准MBTI理论模型，测试准确率高达90%以上。</p>
+        <p class="text-gray-600">采用国际标准MBTI理论模型，测试准确率高达93%以上。</p>
       </div>
       <div class="p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
         <h3 class="text-xl font-semibold text-blue-600 mb-2">分析详尽</h3>
@@ -91,10 +90,10 @@
     <section class="pt-8 pb-16">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <!-- 测试介绍 -->
-        <div class="text-center mb-8" id="test-intro">
+        <div class="text-center mb-8">
           <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">MBTI 性格测试</h1>
           <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
-            本测试包含100个精心设计的问题，提供2个版本：免费版包含40个精心设计的问题大约需要10分钟完成；专业版包含100个问题大约需要25分钟完成。请根据您的第一反应选择最符合自己的选项，没有对错之分。测试结果将帮助您更好地了解自己的性格特质和潜能。
+            本测试提供2个版本：免费版包含40个精心设计的问题大约需要10分钟完成；专业版包含100个问题大约需要25分钟完成。请根据您的第一反应选择最符合自己的选项，没有对错之分。测试结果将帮助您更好地了解自己的性格特质和潜能。
           </p>
 
           <div id="inspiration-quote" class="text-blue-600 text-xl font-semibold italic mb-8 min-h-[2.5rem] opacity-100 transition-opacity duration-1000">
@@ -128,366 +127,91 @@
     </section>
   </main>
 
-<script>
-const quotes = [
-  "你已经比昨天的自己更进一步了。",
-  "不要小看每一次努力的力量。",
-  "你是独一无二的，世界因为你而更加美好。",
-  "每一个梦想的背后，都是不懈的坚持。",
-  "遇见困难时，记住：你已经战胜过很多次了。",
-  "你的存在本身就是一种意义。",
-  "再小的光也能照亮黑暗。",
-  "请勇敢地成为你自己。",
-  "坚持是最浪漫的告白。",
-  "心中有光，何惧前路。",
-  "不负热爱，不负自己。",
-  "你现在的努力，是未来的种子。",
-  "勇敢不是不害怕，而是即使害怕也继续向前。",
-  "你的付出一定会被看到。",
-  "不要着急，一切都在慢慢变好。",
-  "最美的风景，总在前方。",
-  "请相信，温柔和坚定可以并存。",
-  "成长的过程，也值得骄傲。",
-  "你已经很棒了，继续加油！",
-  "今天的坚持，是明天的成就。",
-  "你的存在，就是最好的证明。",
-  "只要方向对了，就不怕路远。",
-  "努力不一定成功，但放弃一定失败。",
-  "每一步都算数，每一次都重要。",
-  "你有无限的可能性。",
-  "你值得所有美好的事情。",
-  "未来由现在创造。",
-  "别忘了，你曾熬过的夜晚。",
-  "再黑的夜也会迎来黎明。",
-  "与其担心未来，不如认真过好现在。",
-  "内心的强大，来自于不断尝试。",
-  "梦想不在远方，它藏在你每一次选择里。",
-  "温柔待人，坚定待己。",
-  "你已经比你想象的更加勇敢。",
-  "你的努力，是你最亮的光。",
-  "活成你想成为的样子。",
-  "越努力，越幸运。",
-  "态度决定高度，行动成就未来。",
-  "你是自己的英雄。",
-  "用心生活，是对自己最好的回报。",
-  "真实的你，最迷人。",
-  "世界正在悄悄奖励努力的人。",
-  "就算跌倒，也要优雅地站起来。",
-  "现在的你，就是最好的你。",
-  "一切困难，终将过去。",
-  "只要你不放弃，就还有机会。",
-  "请相信：温柔的坚持会改变世界。",
-  "别急，你值得被耐心等待的好事。",
-  "你的努力不是白费，只是还没到结果的那一天。",
-  "慢一点也没关系，坚持下去就好。",
-  "阳光总在风雨后。",
-  "给自己一点掌声，你真的很棒。",
-  "不要羡慕别人，你也正在闪闪发光。",
-  "真正的力量，是在安静中积蓄。",
-  "向内探索，向外成长。",
-  "人生没有白走的路。",
-  "相信过程，接纳变化。",
-  "做自己的灯，照亮自己的路。",
-  "你已经很努力了，允许自己慢下来休息。",
-  "世界因你的温柔而更加完整。"
-];
-
-function rotateQuotes() {
-  const quoteEl = document.getElementById("inspiration-quote");
-  let index = 0;
-
-  const showQuote = () => {
-    quoteEl.style.opacity = 0;
-
-    setTimeout(() => {
-      quoteEl.textContent = quotes[index];
-      quoteEl.style.opacity = 1;
-      index = (index + 1) % quotes.length;
-    }, 1000); // 1s 淡出 + 更新
-  };
-
-  showQuote(); // 初始显示
-  setInterval(showQuote, 10000); // 每10秒更换
-}
-
-document.addEventListener("DOMContentLoaded", rotateQuotes);
-</script>
-
-      
-      <!-- 测试进度条 -->
-      <div class="hidden mb-8" id="test-progress-container">
-        <div class="flex justify-between text-sm text-gray-600 mb-2">
-          <span id="question-number">问题 1/60</span>
-          <span id="completion-percentage">2%</span>
-        </div>
-        <div class="h-2 bg-gray-200 rounded-full">
-          <div id="progress-bar" class="h-2 bg-blue-600 rounded-full" style="width: 2%;"></div>
-        </div>
-      </div>
-      
-      <!-- 测试问题 -->
-      <div class="hidden" id="test-questions">
-        <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md">
-          <h2 id="question-text" class="text-xl font-semibold text-gray-900 mb-6">1. 在社交场合中，您通常：</h2>
-          
-          <div class="space-y-4">
-            <label class="flex items-start p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors">
-              <input type="radio" name="question" value="A" class="mt-1 mr-3">
-              <div>
-                <span class="font-medium text-gray-900">主动与他人交谈，扩展社交圈</span>
-              </div>
-            </label>
-            
-            <label class="flex items-start p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors">
-              <input type="radio" name="question" value="B" class="mt-1 mr-3">
-              <div>
-                <span class="font-medium text-gray-900">倾向于与已认识的人交流，保持低调</span>
-              </div>
-            </label>
-          </div>
-          
-          <div class="flex justify-between mt-8">
-            <button id="prev-question" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors hidden">
-              上一题
-            </button>
-            <button id="next-question" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors ml-auto">
-              下一题
-            </button>
-          </div>
-        </div>
-      </div>
-
-  <!-- 小助手鼓励模块 -->
-  <div class="flex justify-center items-center w-full mt-3 mb-14">
-    <div class="text-center">
-      <p class="text-gray-800 text-lg font-bold">🤖 小助手提示：</p>
-      <p class="text-gray-700 text-base mt-2">加油！你正在一步步更了解自己～💪</p>
-    </div>
-  </div>
-     </div>
-      
-      <!-- 结果页面 -->
-      <div class="hidden" id="test-results">
-        <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-md">
-          <div class="text-center mb-8">
-            <h2 class="text-2xl font-bold text-gray-900 mb-2">您的MBTI类型是：<span id="mbti-type" class="text-blue-600">INFJ</span></h2>
-            <p class="text-lg text-gray-600" id="mbti-title">有远见的理想主义者</p>
-          </div>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div class="bg-blue-50 p-6 rounded-lg">
-              <h3 class="text-lg font-semibold text-gray-900 mb-3">您的四维度偏好</h3>
-              <div class="space-y-4">
-                <div>
-                  <div class="flex justify-between mb-1">
-                    <span>内向 (I)</span>
-                    <span>外向 (E)</span>
-                  </div>
-                  <div class="h-3 bg-gray-200 rounded-full">
-                    <div id="e-i-bar" class="h-3 bg-blue-600 rounded-full" style="width: 75%;"></div>
-                  </div>
-                  <div class="text-sm text-gray-500 mt-1">75% 内向</div>
-                </div>
-                
-                <div>
-                  <div class="flex justify-between mb-1">
-                    <span>感觉 (S)</span>
-                    <span>直觉 (N)</span>
-                  </div>
-                  <div class="h-3 bg-gray-200 rounded-full">
-                    <div id="s-n-bar" class="h-3 bg-blue-600 rounded-full" style="width: 82%;"></div>
-                  </div>
-                  <div class="text-sm text-gray-500 mt-1">82% 直觉</div>
-                </div>
-                
-                <div>
-                  <div class="flex justify-between mb-1">
-                    <span>思考 (T)</span>
-                    <span>情感 (F)</span>
-                  </div>
-                  <div class="h-3 bg-gray-200 rounded-full">
-                    <div id="t-f-bar" class="h-3 bg-blue-600 rounded-full" style="width: 68%;"></div>
-                  </div>
-                  <div class="text-sm text-gray-500 mt-1">68% 情感</div>
-                </div>
-                
-                <div>
-                  <div class="flex justify-between mb-1">
-                    <span>判断 (J)</span>
-                    <span>感知 (P)</span>
-                  </div>
-                  <div class="h-3 bg-gray-200 rounded-full">
-                    <div id="j-p-bar" class="h-3 bg-blue-600 rounded-full" style="width: 71%;"></div>
-                  </div>
-                  <div class="text-sm text-gray-500 mt-1">71% 判断</div>
-                </div>
-              </div>
-            </div>
-            
-            <div>
-              <img id="mbti-image" src="https://images.pexels.com/photos/7433822/pexels-photo-7433822.jpeg" alt="MBTI类型示意图" class="w-full h-auto rounded-lg shadow-sm">
-            </div>
-          </div>
-          
-          <div class="mb-8">
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">类型描述</h3>
-            <p id="mbti-description" class="text-gray-700 leading-relaxed">
-              INFJ是16种性格类型中最稀少的类型，约占人口的1-2%。他们拥有深刻的洞察力和直觉，能够看到事物背后的意义和可能性。INFJ通常非常理想主义，总是寻求使世界变得更好的方式。他们富有同情心和创造力，对他人的需求和感受非常敏感。虽然他们通常比较保留和私密，但与亲近的人相处时能够表现得很温暖和热情。INFJ重视深度和真实性，他们寻求的是有意义的关系和体验，而不是肤浅的社交互动。
-            </p>
-          </div>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            <div>
-              <h3 class="text-xl font-semibold text-gray-900 mb-4">优势</h3>
-              <ul id="mbti-strengths" class="list-disc pl-5 space-y-2 text-gray-700">
-                <li>富有创意和想象力</li>
-                <li>对他人需求敏感</li>
-                <li>善于洞察人际关系和动态</li>
-                <li>深思熟虑，注重深度</li>
-                <li>有决心和坚持不懈的精神</li>
-                <li>善于表达想法和概念</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 class="text-xl font-semibold text-gray-900 mb-4">成长空间</h3>
-              <ul id="mbti-weaknesses" class="list-disc pl-5 space-y-2 text-gray-700">
-                <li>可能过度理想化，对自己要求过高</li>
-                <li>有时难以接受批评和冲突</li>
-                <li>容易内耗和自我怀疑</li>
-                <li>可能过度牺牲自己以满足他人需求</li>
-                <li>完美主义倾向可能导致压力</li>
-                <li>偶尔会过度分析导致决策困难</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="mb-8">
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">职业推荐</h3>
-            <div id="mbti-careers" class="grid grid-cols-2 md:grid-cols-3 gap-4">
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <div class="font-medium text-gray-900">心理咨询师</div>
-                <div class="text-sm text-gray-600">发挥深度洞察力和同理心</div>
-              </div>
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <div class="font-medium text-gray-900">作家/编辑</div>
-                <div class="text-sm text-gray-600">表达创意和复杂概念</div>
-              </div>
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <div class="font-medium text-gray-900">教师/教育者</div>
-                <div class="text-sm text-gray-600">培养他人并传递价值观</div>
-              </div>
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <div class="font-medium text-gray-900">人力资源专家</div>
-                <div class="text-sm text-gray-600">理解和调和人际关系</div>
-              </div>
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <div class="font-medium text-gray-900">环保/非营利组织</div>
-                <div class="text-sm text-gray-600">实现理想主义价值观</div>
-              </div>
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <div class="font-medium text-gray-900">艺术家/设计师</div>
-                <div class="text-sm text-gray-600">创造性地表达内在视野</div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="mb-8">
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">人际关系</h3>
-            <p id="mbti-relationships" class="text-gray-700 leading-relaxed mb-4">
-              INFJ在人际关系中追求真实和深度。他们倾向于拥有少数几个亲密朋友，而不是广泛的社交圈。作为天生的倾听者和观察者，他们能够理解他人的情感和需求，常常被人寻求建议和支持。然而，他们也需要充分的独处时间来恢复能量和处理思绪。
-            </p>
-            <p class="text-gray-700 leading-relaxed">
-              在亲密关系中，INFJ寻求情感联系和共同的价值观。他们是诚实和投入的伴侣，渴望与伴侣建立深层次的理解和沟通。他们特别欣赏能够尊重他们内省需求的伴侣，同时鼓励他们走出舒适区。
-            </p>
-          </div>
-          
-          <div class="text-center">
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">分享您的结果</h3>
-            <div class="flex justify-center space-x-4 mb-6">
-              <button class="share-button bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition-colors" data-type="social">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                </svg>
-              </button>
-              <button class="share-button bg-green-500 text-white p-3 rounded-full hover:bg-green-600 transition-colors" data-type="wechat">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
-              </button>
-              <button class="share-button bg-red-500 text-white p-3 rounded-full hover:bg-red-600 transition-colors" data-type="email">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </button>
-            </div>
-            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <button id="download-pdf" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-                下载完整报告 (PDF)
-              </button>
-              <a href="index.html" class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
-                返回首页
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 页脚简化版 Footer -->
-
+  <!-- 页脚 -->
   <footer class="bg-gray-900 text-white py-8">
-  <div class="container mx-auto px-4 text-center">
-    <div class="flex items-center justify-center mb-4">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"></circle>
-        <line x1="12" y1="16" x2="12" y2="12"></line>
-        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-      </svg>
-      <span class="ml-2 text-lg font-bold">智能导航</span>
-    </div>
-    <p class="text-gray-400 mb-4">
-      探索自我，发现潜能，引领未来方向。
-    </p>
-    <div class="border-t border-gray-800 pt-4">
-      <div class="text-gray-400">
-        &copy; 2025 智能导航 - 专业MBTI测试. 保留所有权利.
+    <div class="container mx-auto px-4 text-center">
+      <div class="flex items-center justify-center mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span class="ml-2 text-lg font-bold">智能MBTI</span>
+      </div>
+      <p class="text-gray-400 mb-4">
+        探索自我，发现潜能，引领未来方向。
+      </p>
+      <div class="border-t border-gray-800 pt-4">
+        <div class="text-gray-400">
+          &copy; 2025 智能MBTI - 专业MBTI测试. 保留所有权利.
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
   <script src="src/js/main.js"></script>
-    <script src="src/js/test.js"></script>
-    <script src="src/js/share.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    
-    <script>
+  
+  <script>
+    // 励志名言轮播
+    const quotes = [
+      "你已经比昨天的自己更进一步了。",
+      "不要小看每一次努力的力量。",
+      "你是独一无二的，世界因为你而更加美好。",
+      "每一个梦想的背后，都是不懈的坚持。",
+      "遇见困难时，记住：你已经战胜过很多次了。",
+      "你的存在本身就是一种意义。",
+      "再小的光也能照亮黑暗。",
+      "请勇敢地成为你自己。",
+      "坚持是最浪漫的告白。",
+      "心中有光，何惧前路。",
+      "不负热爱，不负自己。",
+      "你现在的努力，是未来的种子。",
+      "勇敢不是不害怕，而是即使害怕也继续向前。",
+      "你的付出一定会被看到。",
+      "不要着急，一切都在慢慢变好。",
+      "最美的风景，总在前方。",
+      "请相信，温柔和坚定可以并存。",
+      "成长的过程，也值得骄傲。",
+      "你已经很棒了，继续加油！",
+      "今天的坚持，是明天的成就。"
+    ];
+
+    function rotateQuotes() {
+      const quoteEl = document.getElementById("inspiration-quote");
+      let index = 0;
+
+      const showQuote = () => {
+        quoteEl.style.opacity = 0;
+        setTimeout(() => {
+          quoteEl.textContent = quotes[index];
+          quoteEl.style.opacity = 1;
+          index = (index + 1) % quotes.length;
+        }, 1000);
+      };
+
+      showQuote();
+      setInterval(showQuote, 10000);
+    }
+
     // 处理测试类型选择按钮
     document.addEventListener('DOMContentLoaded', function() {
+        rotateQuotes();
+        
         const freeTestBtn = document.getElementById('free-test-btn');
         const proTestBtn = document.getElementById('pro-test-btn');
         
         if (freeTestBtn) {
             freeTestBtn.addEventListener('click', function() {
-                // 设置测试类型并显示测试界面
-                const urlParams = new URLSearchParams();
-                urlParams.set('type', 'basic');
-                window.location.href = 'test.html?' + urlParams.toString();
+                window.location.href = 'free-test.html';
             });
         }
         
         if (proTestBtn) {
             proTestBtn.addEventListener('click', function() {
-                // 设置测试类型并显示测试界面
-                const urlParams = new URLSearchParams();
-                urlParams.set('type', 'pro');
-                window.location.href = 'test.html?' + urlParams.toString();
+                window.location.href = 'paid-test.html';
             });
         }
     });
-    </script>
+  </script>
 </body>
 </html>
