@@ -192,6 +192,7 @@
 
   <script src="src/js/main.js"></script>
   <script src="src/js/test-packages.js"></script>
+  <script src="src/js/test.js"></script>
   
   <script>
     // 励志名言轮播
@@ -231,23 +232,212 @@
       
       // 设置测试类型为专业版
       localStorage.setItem('testType', 'pro');
+      localStorage.setItem('testConfig', JSON.stringify({
+        type: 'pro',
+        questionCount: 100
+      }));
       
       const startButton = document.getElementById('start-test-btn');
       const testIntro = document.getElementById('test-intro');
       const testQuestions = document.getElementById('test-questions');
       const progressContainer = document.getElementById('test-progress-container');
       const encouragementSection = document.getElementById('encouragement-section');
+      const questionText = document.getElementById('question-text');
+      const nextButton = document.getElementById('next-button');
+      const prevButton = document.getElementById('prev-button');
+      const questionNumber = document.getElementById('question-number');
+      const completionPercentage = document.getElementById('completion-percentage');
+      const progressBar = document.getElementById('progress-bar');
+      
+      let currentQuestionIndex = 0;
+      let answers = {};
+      let shuffledQuestions = [];
+      
+      // 获取所有测试题目（100道）
+      function getAllQuestions() {
+        if (typeof questions !== 'undefined' && questions.length > 0) {
+          return questions.concat(extendedQuestions || []);
+        }
+        return [];
+      }
+      
+      // 显示问题
+      function displayQuestion(index) {
+        const question = shuffledQuestions[index];
+        if (!question) return;
+        
+        questionText.textContent = question.text;
+        
+        // 更新选项文本
+        const labels = document.querySelectorAll('label span span');
+        if (labels.length >= 2) {
+          labels[0].textContent = question.options[0];
+          labels[1].textContent = question.options[1];
+        }
+        
+        // 清除之前的选择
+        const radioButtons = document.querySelectorAll('input[name="question"]');
+        radioButtons.forEach(radio => radio.checked = false);
+        
+        // 如果之前有答案，恢复选择
+        const dimension = question.dimension;
+        if (answers[dimension] && answers[dimension][index] !== undefined) {
+          const answerIndex = answers[dimension][index];
+          if (radioButtons[answerIndex]) {
+            radioButtons[answerIndex].checked = true;
+          }
+        }
+        
+        // 更新问题编号和进度条
+        questionNumber.textContent = `问题 ${index + 1}/${shuffledQuestions.length}`;
+        const percentage = Math.round((index + 1) / shuffledQuestions.length * 100);
+        completionPercentage.textContent = `${percentage}%`;
+        progressBar.style.width = `${percentage}%`;
+        
+        // 显示/隐藏上一题按钮
+        if (index > 0) {
+          prevButton.classList.remove('hidden');
+        } else {
+          prevButton.classList.add('hidden');
+        }
+        
+        // 更新下一题按钮文本
+        if (index === shuffledQuestions.length - 1) {
+          nextButton.textContent = '提交';
+        } else {
+          nextButton.textContent = '下一题';
+        }
+        
+        currentQuestionIndex = index;
+      }
+      
+      // 计算结果
+      function calculateResults() {
+        let scores = {
+          E: 0, I: 0,
+          S: 0, N: 0,
+          T: 0, F: 0,
+          J: 0, P: 0
+        };
+        
+        // 统计每个维度的分数
+        for (let dimension in answers) {
+          for (let i = 0; i < answers[dimension].length; i++) {
+            if (answers[dimension][i] !== undefined) {
+              if (dimension === 'EI') {
+                if (answers[dimension][i] === 0) scores.E++;
+                else scores.I++;
+              } else if (dimension === 'SN') {
+                if (answers[dimension][i] === 0) scores.S++;
+                else scores.N++;
+              } else if (dimension === 'TF') {
+                if (answers[dimension][i] === 0) scores.T++;
+                else scores.F++;
+              } else if (dimension === 'JP') {
+                if (answers[dimension][i] === 0) scores.J++;
+                else scores.P++;
+              }
+            }
+          }
+        }
+        
+        // 确定MBTI类型
+        let type = '';
+        type += scores.E > scores.I ? 'E' : 'I';
+        type += scores.S > scores.N ? 'S' : 'N';
+        type += scores.T > scores.F ? 'T' : 'F';
+        type += scores.J > scores.P ? 'J' : 'P';
+        
+        // 计算每个维度的百分比
+        const eiTotal = scores.E + scores.I;
+        const snTotal = scores.S + scores.N;
+        const tfTotal = scores.T + scores.F;
+        const jpTotal = scores.J + scores.P;
+        
+        const eiPercentage = Math.round((type[0] === 'I' ? scores.I : scores.E) / eiTotal * 100);
+        const snPercentage = Math.round((type[1] === 'N' ? scores.N : scores.S) / snTotal * 100);
+        const tfPercentage = Math.round((type[2] === 'F' ? scores.F : scores.T) / tfTotal * 100);
+        const jpPercentage = Math.round((type[3] === 'J' ? scores.J : scores.P) / jpTotal * 100);
+        
+        // 保存结果到localStorage
+        localStorage.setItem('mbtiType', type);
+        localStorage.setItem('mbtiPercentages', JSON.stringify({
+          eiPercentage,
+          snPercentage,
+          tfPercentage,
+          jpPercentage
+        }));
+        
+        // 跳转到支付页面
+        window.location.href = 'payment.html';
+      }
       
       if (startButton) {
         startButton.addEventListener('click', function() {
+          // 获取所有题目
+          const allQuestions = getAllQuestions();
+          if (allQuestions.length === 0) {
+            alert('测试题目加载失败，请刷新页面重试');
+            return;
+          }
+          
+          // 使用所有100道题目
+          shuffledQuestions = allQuestions.slice(0, 100);
+          
           testIntro.classList.add('hidden');
           testQuestions.classList.remove('hidden');
           progressContainer.classList.remove('hidden');
           encouragementSection.classList.remove('hidden');
           
-          // 开始专业测试，传递pro参数
-          if (window.startMBTITest) {
-            window.startMBTITest('pro');
+          // 显示第一个问题
+          displayQuestion(0);
+        });
+      }
+      
+      // 下一题按钮
+      if (nextButton) {
+        nextButton.addEventListener('click', function() {
+          const radioButtons = document.querySelectorAll('input[name="question"]');
+          let selected = false;
+          let selectedValue;
+          
+          radioButtons.forEach((radio, index) => {
+            if (radio.checked) {
+              selected = true;
+              selectedValue = index;
+            }
+          });
+          
+          if (!selected) {
+            alert('请选择一个选项');
+            return;
+          }
+          
+          // 保存答案
+          const question = shuffledQuestions[currentQuestionIndex];
+          const dimension = question.dimension;
+          
+          // 初始化维度数组如果不存在
+          if (!answers[dimension]) {
+            answers[dimension] = [];
+          }
+          
+          // 保存答案（0表示第一个选项，1表示第二个选项）
+          answers[dimension][currentQuestionIndex] = selectedValue;
+          
+          if (currentQuestionIndex < shuffledQuestions.length - 1) {
+            displayQuestion(currentQuestionIndex + 1);
+          } else {
+            calculateResults();
+          }
+        });
+      }
+      
+      // 上一题按钮
+      if (prevButton) {
+        prevButton.addEventListener('click', function() {
+          if (currentQuestionIndex > 0) {
+            displayQuestion(currentQuestionIndex - 1);
           }
         });
       }
