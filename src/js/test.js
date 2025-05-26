@@ -179,173 +179,493 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   ];
 
-  // 扩展问题以达到60个
-  const extendedQuestions = [
-    // 额外的E-I维度问题
-    {
-      text: "您更愿意：",
-      options: [
-        "在热闹的派对中成为焦点",
-        "与一两个好友深入交谈"
-      ],
-      dimension: "EI"
-    },
-    {
-      text: "在陌生环境中，您通常：",
-      options: [
-        "很快融入并结交新朋友",
-        "需要时间观察和适应"
-      ],
-      dimension: "EI"
-    },
-    {
-      text: "长时间的社交活动后，您通常感到：",
-      options: [
-        "精力充沛，情绪高涨",
-        "需要独处时间恢复精力"
-      ],
-      dimension: "EI"
-    },
-    {
-      text: "您更喜欢哪种交流方式：",
-      options: [
-        "面对面交谈",
-        "文字交流（如短信、邮件）"
-      ],
-      dimension: "EI"
-    },
-    {
-      text: "您对以下哪项感到更舒适：",
-      options: [
-        "参加多人聚会和活动",
-        "在家享受宁静时光"
-      ],
-      dimension: "EI"
-    },
-    // 额外的S-N维度问题
-    {
-      text: "读说明书时，您通常：",
-      options: [
-        "按部就班地按照步骤操作",
-        "快速浏览后尝试自己摸索"
-      ],
-      dimension: "SN"
-    },
-    {
-      text: "您更看重：",
-      options: [
-        "当下的现实需求",
-        "未来的潜在机会"
-      ],
-      dimension: "SN"
-    },
-    {
-      text: "您更喜欢的老师是：",
-      options: [
-        "讲授具体知识和实例的老师",
-        "探讨理论和概念的老师"
-      ],
-      dimension: "SN"
-    },
-    {
-      text: "您认为更重要的能力是：",
-      options: [
-        "实际解决问题的能力",
-        "发现新思路的能力"
-      ],
-      dimension: "SN"
-    },
-    {
-      text: "您更喜欢的工作是：",
-      options: [
-        "有明确标准和程序的工作",
-        "需要创意和想象力的工作"
-      ],
-      dimension: "SN"
-    },
-    // 额外的T-F维度问题
-    {
-      text: "在冲突中，您更注重：",
-      options: [
-        "找出真相和事实",
-        "维护关系和感受"
-      ],
-      dimension: "TF"
-    },
-    {
-      text: "您更欣赏他人的：",
-      options: [
-        "清晰的思维和专业知识",
-        "同理心和人际智慧"
-      ],
-      dimension: "TF"
-    },
-    {
-      text: "在团队中，您更倾向于：",
-      options: [
-        "质疑假设，提出改进建议",
-        "支持团队成员，促进和谐"
-      ],
-      dimension: "TF"
-    },
-    {
-      text: "面对道德两难问题，您更看重：",
-      options: [
-        "公平和客观的标准",
-        "特定情况和人道考量"
-      ],
-      dimension: "TF"
-    },
-    {
-      text: "您认为最好的领导者应该：",
-      options: [
-        "果断、客观，能做出艰难决策",
-        "体贴、包容，关注团队氛围"
-      ],
-      dimension: "TF"
-    },
-    // 额外的J-P维度问题
-    {
-      text: "您更倾向于：",
-      options: [
-        "按时完成任务，避免拖延",
-        "在临近截止日期时爆发创意"
-      ],
-      dimension: "JP"
-    },
-    {
-      text: "对于规则和流程，您通常：",
-      options: [
-        "认为它们提供有价值的结构",
-        "认为它们限制了灵活性和创造力"
-      ],
-      dimension: "JP"
-    },
-    {
-      text: "您更喜欢：",
-      options: [
-        "有条理的生活和明确的计划",
-        "自由、自发的生活方式"
-      ],
-      dimension: "JP"
-    },
-    {
-      text: "当计划改变时，您通常：",
-      options: [
-        "感到烦恼并尝试重新计划",
-        "轻松接受并找到新的机会"
-      ],
-      dimension: "JP"
-    },
-    {
-      text: "您更看重：",
-      options: [
-        "决定和结束",
-        "保持选项开放"
-      ],
-      dimension: "JP"
-    }
-  ];
+  // 扩展问题以达到100个     
+const extendedQuestions = [
+  // E-I Dimension 额外的E-I维度问题 
+  {
+    text: "您更享受的社交方式是：",
+    options: [
+      "与多人互动，气氛活跃",
+      "与少数人深入交流"
+    ],
+    dimension: "EI"
+  },
+  {
+    text: "当有空闲时间时，您更可能：",
+    options: [
+      "联系他人一起活动",
+      "独自从事个人兴趣"
+    ],
+    dimension: "EI"
+  },
+  {
+    text: "在团队中，您更倾向于：",
+    options: [
+      "积极推动讨论",
+      "在幕后默默贡献"
+    ],
+    dimension: "EI"
+  },
+  {
+    text: "您对公开表达的看法是：",
+    options: [
+      "感到兴奋，乐于分享",
+      "感到谨慎，倾向低调"
+    ],
+    dimension: "EI"
+  },
+  {
+    text: "您更倾向于：",
+    options: [
+      "与他人共同解决问题",
+      "独自思考解决方案"
+    ],
+    dimension: "EI"
+  },
+  {
+    text: "在社交场合中，您更关注：",
+    options: [
+      "拓展新的人际关系",
+      "维护现有关系"
+    ],
+    dimension: "EI"
+  },
+  {
+    text: "您更喜欢的活动节奏是：",
+    options: [
+      "快节奏，多人参与",
+      "慢节奏，个人专注"
+    ],
+    dimension: "EI"
+  },
+  {
+    text: "当感到压力时，您更倾向于：",
+    options: [
+      "通过与他人交流缓解",
+      "通过独处恢复平静"
+    ],
+    dimension: "EI"
+  },
+  {
+    text: "您更倾向于：",
+    options: [
+      "快速适应新群体",
+      "逐渐熟悉新环境"
+    ],
+    dimension: "EI"
+  },
+  {
+    text: "您更喜欢的娱乐方式是：",
+    options: [
+      "热闹的集体活动",
+      "安静的个人爱好"
+    ],
+    dimension: "EI"
+  },
+  {
+    text: "在选择活动时，您更倾向于：",
+    options: [
+      "参与需要与他人合作的活动",
+      "从事可以独自完成的活动"
+    ],
+    dimension: "EI"
+  },
+  {
+    text: "您更倾向于在以下场合表达意见：",
+    options: [
+      "大型会议或公开场合",
+      "小型私人讨论"
+    ],
+    dimension: "EI"
+  },
+  {
+    text: "您更喜欢的工作环境是：",
+    options: [
+      "充满互动和团队合作",
+      "安静且适合独立工作"
+    ],
+    dimension: "EI"
+  },
+  {
+    text: "您更倾向于通过以下方式获取信息：",
+    options: [
+      "与他人讨论和交流",
+      "独自研究和阅读"
+    ],
+    dimension: "EI"
+  },
+  {
+    text: "在社交活动中，您更倾向于：",
+    options: [
+      "主动结识新朋友",
+      "与熟悉的人互动"
+    ],
+    dimension: "EI"
+  },
+  // S-N Dimension  
+  {
+    text: "您更喜欢的学习方式是：",
+    options: [
+      "掌握具体技能和细节",
+      "理解概念和趋势"
+    ],
+    dimension: "SN"
+  },
+  {
+    text: "在观察事物时，您更注重：",
+    options: [
+      "实际的、可见的细节",
+      "抽象的、潜在的联系"
+    ],
+    dimension: "SN"
+  },
+  {
+    text: "您更感兴趣的是：",
+    options: [
+      "现实中的实用方案",
+      "创新性的未来构想"
+    ],
+    dimension: "SN"
+  },
+  {
+    text: "在解决问题时，您更倾向于：",
+    options: [
+      "使用已验证的方法",
+      "尝试新的可能性"
+    ],
+    dimension: "SN"
+  },
+  {
+    text: "您更喜欢的讨论主题是：",
+    options: [
+      "具体的事实和案例",
+      "抽象的理论和想法"
+    ],
+    dimension: "SN"
+  },
+  {
+    text: "在处理新任务时，您更关注：",
+    options: [
+      "当前的实际需求",
+      "长远的潜在机会"
+    ],
+    dimension: "SN"
+  },
+  {
+    text: "在描述事物时，您更倾向于：",
+    options: [
+      "提供具体细节",
+      "表达整体概念"
+    ],
+    dimension: "SN"
+  },
+  {
+    text: "您更喜欢的计划方式是：",
+    options: [
+      "基于现有资源的规划",
+      "基于未来可能性的规划"
+    ],
+    dimension: "SN"
+  },
+  {
+    text: "您更关注：",
+    options: [
+      "眼前的实际情况",
+      "背后的深层意义"
+    ],
+    dimension: "SN"
+  },
+  {
+    text: "在学习新事物时，您更倾向于：",
+    options: [
+      "循序渐进的实践",
+      "探索整体概念"
+    ],
+    dimension: "SN"
+  },
+  {
+    text: "您更感兴趣的职业是：",
+    options: [
+      "基于现实需求的职业",
+      "基于创新构想的职业"
+    ],
+    dimension: "SN"
+  },
+  {
+    text: "您更倾向于：",
+    options: [
+      "关注已知的信息",
+      "探索未知的可能性"
+    ],
+    dimension: "SN"
+  },
+  {
+    text: "在分析问题时，您更倾向于：",
+    options: [
+      "关注当前的实际情况",
+      "思考未来的潜在趋势"
+    ],
+    dimension: "SN"
+  },
+  {
+    text: "您更喜欢的思考方式是：",
+    options: [
+      "基于具体证据的分析",
+      "基于创意联想的探索"
+    ],
+    dimension: "SN"
+  },
+  {
+    text: "您更关注的信息类型是：",
+    options: [
+      "直接可观察的事实",
+      "潜在的模式和含义"
+    ],
+    dimension: "SN"
+  },
+  // T-F Dimension  
+  {
+    text: "您更看重的品质是：",
+    options: [
+      "理性和公正",
+      "同理心和关怀"
+    ],
+    dimension: "TF"
+  },
+  {
+    text: "在团队中，您更倾向于：",
+    options: [
+      "追求效率和结果",
+      "促进和谐和合作"
+    ],
+    dimension: "TF"
+  },
+  {
+    text: "面对分歧时，您更倾向于：",
+    options: [
+      "分析问题根源",
+      "考虑情感影响"
+    ],
+    dimension: "TF"
+  },
+  {
+    text: "在评价他人时，您更注重：",
+    options: [
+      "能力和客观表现",
+      "动机和情感态度"
+    ],
+    dimension: "TF"
+  },
+  {
+    text: "在给出反馈时，您更倾向于：",
+    options: [
+      "直截了当，指出问题",
+      "温和委婉，避免伤害"
+    ],
+    dimension: "TF"
+  },
+  {
+    text: "您更看重的决策依据是：",
+    options: [
+      "客观的数据和逻辑",
+      "主观的价值观"
+    ],
+    dimension: "TF"
+  },
+  {
+    text: "在团队合作中，您更关注：",
+    options: [
+      "任务的逻辑完成",
+      "团队的情感氛围"
+    ],
+    dimension: "TF"
+  },
+  {
+    text: "您更欣赏的领导风格是：",
+    options: [
+      "果断且注重结果",
+      "关怀且注重士气"
+    ],
+    dimension: "TF"
+  },
+  {
+    text: "在处理冲突时，您更倾向于：",
+    options: [
+      "以事实为基础解决",
+      "以和谐为目标妥协"
+    ],
+    dimension: "TF"
+  },
+  {
+    text: "您更倾向于：",
+    options: [
+      "保持客观和公正",
+      "考虑具体情况和人情"
+    ],
+    dimension: "TF"
+  },
+  {
+    text: "在选择朋友时，您更看重：",
+    options: [
+      "理性交流和共同目标",
+      "情感支持和亲密联系"
+    ],
+    dimension: "TF"
+  },
+  {
+    text: "您更关注的奖励是：",
+    options: [
+      "基于成就的认可",
+      "基于人际的赞赏"
+    ],
+    dimension: "TF"
+  },
+  {
+    text: "在评估选择时，您更倾向于：",
+    options: [
+      "分析利弊和数据",
+      "考虑个人信念和感受"
+    ],
+    dimension: "TF"
+  },
+  {
+    text: "在与他人合作时，您更注重：",
+    options: [
+      "任务的客观完成",
+      "团队的情感支持"
+    ],
+    dimension: "TF"
+  },
+  {
+    text: "您更倾向于的决策风格是：",
+    options: [
+      "基于逻辑的冷静分析",
+      "基于情感的温暖考量"
+    ],
+    dimension: "TF"
+  },
+  // J-P Dimension  
+  {
+    text: "在组织事务时，您更倾向于：",
+    options: [
+      "保持整齐和规律",
+      "允许灵活和随意"
+    ],
+    dimension: "JP"
+  },
+  {
+    text: "在规划活动时，您更喜欢：",
+    options: [
+      "制定详细的安排",
+      "根据情况即兴决定"
+    ],
+    dimension: "JP"
+  },
+  {
+    text: "您对规则的态度是：",
+    options: [
+      "认为规则提供秩序",
+      "认为规则限制自由"
+    ],
+    dimension: "JP"
+  },
+  {
+    text: "在团队工作中，您更倾向于：",
+    options: [
+      "明确分工和计划",
+      "灵活协作和调整"
+    ],
+    dimension: "JP"
+  },
+  {
+    text: "您更喜欢的日程安排是：",
+    options: [
+      "有明确的计划",
+      "保持开放和灵活"
+    ],
+    dimension: "JP"
+  },
+  {
+    text: "在完成任务时，您更倾向于：",
+    options: [
+      "按步骤逐一完成",
+      "同时处理多项任务"
+    ],
+    dimension: "JP"
+  },
+  {
+    text: "您更倾向于：",
+    options: [
+      "有固定习惯和流程",
+      "根据情况随机应变"
+    ],
+    dimension: "JP"
+  },
+  {
+    text: "在规划未来时，您更倾向于：",
+    options: [
+      "设定明确目标",
+      "探索多种可能性"
+    ],
+    dimension: "JP"
+  },
+  {
+    text: "您更倾向于：",
+    options: [
+      "事情确定后放松",
+      "保持开放以自由"
+    ],
+    dimension: "JP"
+  },
+  {
+    text: "在处理新项目时，您更倾向于：",
+    options: [
+      "制定清晰的步骤",
+      "根据进展灵活调整"
+    ],
+    dimension: "JP"
+  },
+  {
+    text: "您更喜欢的工作方式是：",
+    options: [
+      "有条理且系统化",
+      "自由且富有创意"
+    ],
+    dimension: "JP"
+  },
+  {
+    text: "在安排时间时，您更倾向于：",
+    options: [
+      "制定详细的时间表",
+      "根据当天情况调整"
+    ],
+    dimension: "JP"
+  },
+  {
+    text: "您更倾向于处理任务的方式是：",
+    options: [
+      "按优先级逐步完成",
+      "根据灵感随机处理"
+    ],
+    dimension: "JP"
+  },
+  {
+    text: "您更倾向于的生活节奏是：",
+    options: [
+      "规律且有计划",
+      "灵活且随性"
+    ],
+    dimension: "JP"
+  },
+  {
+    text: "在面对选择时，您更倾向于：",
+    options: [
+      "快速决定以推进",
+      "延迟决定以观察"
+    ],
+    dimension: "JP"
+  }
+];
 
   // 将额外问题添加到原有问题中
   questions.push(...extendedQuestions);
