@@ -255,10 +255,70 @@
       
       // 获取所有测试题目（100道）
       function getAllQuestions() {
-        if (typeof questions !== 'undefined' && questions.length > 0) {
-          return questions.concat(extendedQuestions || []);
+        // 从test.js获取题目数据
+        if (typeof window.questions !== 'undefined' && window.questions.length > 0) {
+          const allQuestions = window.questions.concat(window.extendedQuestions || []);
+          return allQuestions;
         }
-        return [];
+        
+        // 如果无法从test.js获取，使用备用题目数据
+        return getBackupQuestions();
+      }
+      
+      // 备用题目数据（确保至少有基本的测试题目）
+      function getBackupQuestions() {
+        return [
+          {
+            text: "在社交场合中，您通常：",
+            options: ["主动与他人交谈，扩展社交圈", "倾向于与已认识的人交流，保持低调"],
+            dimension: "EI"
+          },
+          {
+            text: "您更喜欢的工作环境是：",
+            options: ["开放、互动、有团队协作的环境", "安静、独立、能够专注的空间"],
+            dimension: "EI"
+          },
+          {
+            text: "当您需要恢复精力时，您会选择：",
+            options: ["与朋友一起外出活动", "独自安静地阅读或放松"],
+            dimension: "EI"
+          },
+          {
+            text: "当解决问题时，您更倾向于：",
+            options: ["关注具体事实和细节", "关注整体模式和可能性"],
+            dimension: "SN"
+          },
+          {
+            text: "您更相信：",
+            options: ["实际经验和观察到的事物", "直觉和灵感"],
+            dimension: "SN"
+          },
+          {
+            text: "做决定时，您更倾向于基于：",
+            options: ["逻辑分析和客观因素", "个人价值观和对他人的影响"],
+            dimension: "TF"
+          },
+          {
+            text: "当朋友向您倾诉问题时，您通常会：",
+            options: ["提供解决方案和分析", "提供情感支持和共情"],
+            dimension: "TF"
+          },
+          {
+            text: "关于计划，您更倾向于：",
+            options: ["提前安排，按计划行事", "保持灵活，视情况而定"],
+            dimension: "JP"
+          },
+          {
+            text: "您的工作区域通常是：",
+            options: ["井然有序，物品各归其位", "创意性混乱，随手可及"],
+            dimension: "JP"
+          },
+          {
+            text: "面对deadline，您更可能：",
+            options: ["提前完成，避免压力", "临近截止日期才完成，受压力驱动"],
+            dimension: "JP"
+          }
+        ];
       }
       
       // 显示问题
@@ -376,13 +436,18 @@
         startButton.addEventListener('click', function() {
           // 获取所有题目
           const allQuestions = getAllQuestions();
-          if (allQuestions.length === 0) {
-            alert('测试题目加载失败，请刷新页面重试');
-            return;
-          }
           
-          // 使用所有100道题目
-          shuffledQuestions = allQuestions.slice(0, 100);
+          // 使用所有可用题目，如果少于100道则重复使用
+          if (allQuestions.length >= 100) {
+            shuffledQuestions = allQuestions.slice(0, 100);
+          } else {
+            // 如果题目不足100道，重复使用现有题目
+            shuffledQuestions = [];
+            while (shuffledQuestions.length < 100) {
+              shuffledQuestions = shuffledQuestions.concat(allQuestions);
+            }
+            shuffledQuestions = shuffledQuestions.slice(0, 100);
+          }
           
           testIntro.classList.add('hidden');
           testQuestions.classList.remove('hidden');
@@ -409,7 +474,7 @@
           });
           
           if (!selected) {
-            alert('请选择一个选项');
+            alert('无法加载测试题目，请稍后再试！');
             return;
           }
           
