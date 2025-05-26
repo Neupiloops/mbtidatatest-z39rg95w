@@ -7,6 +7,81 @@
   <title>免费MBTI测试 - 智能MBTI</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="src/css/styles.css">
+  <style>
+    /* Circular Progress Indicator */
+    .progress-circle-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .progress-circle {
+      position: relative;
+      width: 120px;
+      height: 120px;
+    }
+    .progress-circle svg {
+      transform: rotate(-90deg);
+    }
+    .progress-circle .background-circle {
+      fill: none;
+      stroke: #e5e7eb;
+      stroke-width: 10;
+    }
+    .progress-circle .progress-ring {
+      fill: none;
+      stroke: #10b981;
+      stroke-width: 10;
+      stroke-linecap: round;
+      transition: stroke-dasharray 0.5s ease;
+    }
+    .progress-circle .progress-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1f2937;
+    }
+    .progress-info {
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      color: #4b5563;
+      text-align: center;
+    }
+    /* Consistent Card Styling */
+    .card {
+      background-color: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .assistant-card {
+      background-color: #ecfdf5;
+      border-left: 4px solid #10b981;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .card h2, .assistant-card h2 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #1e40af;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+    .card p, .assistant-card p {
+      color: #1e40af;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+    .card p + p, .assistant-card p + p {
+      margin-top: 0.5rem;
+    }
+  </style>
 </head>
 <body class="font-sans text-gray-800 bg-gray-50">
   <!-- 头部导航 -->
@@ -82,32 +157,36 @@
             <span class="block text-sm mt-1 font-normal">40个问题 · 约10分钟</span>
           </button>
 
-          <div class="mt-8 max-w-4xl mx-auto px-4 text-left space-y-10">
+          <div class="mt-8 max-w-3xl mx-auto px-4 text-left space-y-10">
             <!-- 小贴士 -->
-            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded shadow-sm">
-              <h2 class="text-lg font-semibold text-blue-800 mb-2">🌟 小贴士：如何开始 MBTI 测试</h2>
-              <ul class="list-disc list-inside text-blue-700">
-                <li>请放松心情，第一反应往往最准确。</li>
-                <li>没有"对"或"错"的答案，每个人都独一无二。</li>
-                <li>请尽量独立完成，不要过度参考他人建议。</li>
+            <div class="card max-w-3xl mx-auto">
+              <h2>🌟 专业测试特色</h2>
+              <ul class="list-disc list-inside">
+                <li>基于官方MBTI理论，40道精选题目</li>
+                <li>测试完成后可免费查看</li>
+                <li>包含基础的初步类型识别</li>
+                <li>快速简单的性格结果展示</li>
               </ul>
             </div>
           </div>
         </div>
         
-        <!-- 测试进度条 -->
-        <div class="hidden mb-8" id="test-progress-container">
-          <div class="flex justify-between text-sm text-gray-600 mb-2">
-            <span id="question-number">问题 1/40</span>
-            <span id="completion-percentage">2.5%</span>
-          </div>
-          <div class="h-2 bg-gray-200 rounded-full">
-            <div id="progress-bar" class="h-2 bg-green-600 rounded-full" style="width: 2.5%;"></div>
-          </div>
-        </div>
-        
         <!-- 测试问题 -->
         <div class="hidden" id="test-questions">
+          <!-- 测试进度 -->
+          <div class="hidden progress-circle-container" id="test-progress-container">
+            <div class="progress-info">
+              <span id="question-number">问题 1/40</span>
+            </div>
+            <div class="progress-circle">
+              <svg width="120" height="120">
+                <circle class="background-circle" cx="60" cy="60" r="50"></circle>
+                <circle class="progress-ring" cx="60" cy="60" r="50" stroke-dasharray="0 314"></circle>
+              </svg>
+              <div class="progress-text" id="completion-percentage">2.5%</div>
+            </div>
+          </div>
+          
           <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md">
             <h2 id="question-text" class="text-xl font-semibold text-gray-900 mb-6">1. 在社交场合中，您通常：</h2>
             
@@ -139,10 +218,11 @@
         </div>
 
         <!-- 小助手鼓励模块 -->
-        <div class="hidden justify-center items-center w-full mt-3 mb-14" id="encouragement">
-          <div class="text-center">
-            <p class="text-gray-800 text-lg font-bold">🤖 小助手提示：</p>
-            <p class="text-gray-700 text-base mt-2">加油！你正在一步步更了解自己～💪</p>
+        <div class="hidden mt-12 max-w-3xl mx-auto px-4 text-left" id="encouragement">
+          <div class="assistant-card">
+            <h2>🤖 小助手提醒</h2>
+            <p>加油！你正在一步步更了解自己～💪</p>
+            <p>您正在进行免费版MBTI测试。您的诚实回答将获得更准确的性格分析！</p>
           </div>
         </div>
       </div>
@@ -165,7 +245,7 @@
       </p>
       <div class="border-t border-gray-800 pt-4">
         <div class="text-gray-400">
-          &copy; 2025 智能MBTI - 专业MBTI测试. 保留所有权利.
+          © 2025 智能MBTI - 专业MBTI测试. 保留所有权利.
         </div>
       </div>
     </div>
@@ -181,7 +261,7 @@
       "你已经比昨天的自己更进一步了。",
       "不要小看每一次努力的力量。",
       "你是独一无二的，世界因为你而更加美好。",
-      "每一个梦想Backgrounds，都是不懈的坚持。",
+      "每一个梦想的背后，都是不懈的坚持。",
       "遇见困难时，记住：你已经战胜过很多次了。",
       "你的存在本身就是一种意义。",
       "再小的光也能照亮黑暗。",
@@ -263,18 +343,18 @@
         document.getElementById('test-progress-container').classList.remove('hidden');
         document.getElementById('test-questions').classList.remove('hidden');
         document.getElementById('encouragement').classList.remove('hidden');
-        document.getElementById('encouragement').classList.add('flex');
-
+        
         // 加载测试题目（前40题）
-        if (typeof questions !== 'undefined') {
-            testQuestions = questions.slice(0, 40);
+        if (typeof mbtiQuestions !== 'undefined' && mbtiQuestions.length >= 40) {
+            testQuestions = mbtiQuestions.slice(0, 40);
         } else {
-            // 如果test.js没有加载，使用默认题目
-            testQuestions = getDefaultQuestions();
+            console.error('Error: mbtiQuestions is not defined or does not contain enough questions.');
+            alert('无法加载测试题目，请稍后再试！');
+            return;
         }
-
+        
         currentQuestion = 0;
-        answers = [];
+        answers = new Array(testQuestions.length).fill(null); // 初始化答案数组
         showQuestion();
     }
 
@@ -332,21 +412,29 @@
 
     function updateProgress() {
         const progress = ((currentQuestion + 1) / testQuestions.length) * 100;
+        const circumference = 2 * Math.PI * 50; // SVG circle circumference (r=50)
+        const offset = circumference * (1 - progress / 100);
         document.getElementById('question-number').textContent = `问题 ${currentQuestion + 1}/${testQuestions.length}`;
         document.getElementById('completion-percentage').textContent = `${Math.round(progress)}%`;
-        document.getElementById('progress-bar').style.width = `${progress}%`;
+        document.querySelector('.progress-ring').setAttribute('stroke-dasharray', `${circumference * progress / 100} ${offset}`);
     }
 
     function nextQuestion() {
+        // 检查是否有选中的答案
         const selectedAnswer = document.querySelector('input[name="question"]:checked');
         if (!selectedAnswer) {
             alert('请选择一个答案后再继续');
             return;
         }
-
+        
+        // 保存答案
         answers[currentQuestion] = selectedAnswer.value;
         currentQuestion++;
-
+        
+        // 重置单选按钮状态
+        const radios = document.querySelectorAll('input[name="question"]');
+        radios.forEach(radio => radio.checked = false);
+        
         if (currentQuestion >= testQuestions.length) {
             completeTest();
         } else {
@@ -362,6 +450,14 @@
     }
 
     function completeTest() {
+        // 验证所有问题是否都已回答
+        if (answers.some(answer => answer === null)) {
+            alert('请确保回答所有问题后再提交！');
+            currentQuestion = answers.findIndex(answer => answer === null);
+            showQuestion();
+            return;
+        }
+        
         // 计算结果
         const result = calculateMBTI(answers, testQuestions);
         
@@ -389,60 +485,21 @@
         
         // 确定类型
         const type = 
-            (scores.E > scores.I ? 'E' : 'I') +
-            (scores.S > scores.N ? 'S' : 'N') +
-            (scores.T > scores.F ? 'T' : 'F') +
-            (scores.J > scores.P ? 'J' : 'P');
+            (scores.E >= scores.I ? 'E' : 'I') +
+            (scores.S >= scores.N ? 'S' : 'N') +
+            (scores.T >= scores.F ? 'T' : 'F') +
+            (scores.J >= scores.P ? 'J' : 'P');
         
         return {
             type: type,
             scores: scores,
             percentages: {
-                EI: scores.E > scores.I ? Math.round((scores.E / (scores.E + scores.I)) * 100) : Math.round((scores.I / (scores.E + scores.I)) * 100),
-                SN: scores.S > scores.N ? Math.round((scores.S / (scores.S + scores.N)) * 100) : Math.round((scores.N / (scores.S + scores.N)) * 100),
-                TF: scores.T > scores.F ? Math.round((scores.T / (scores.T + scores.F)) * 100) : Math.round((scores.F / (scores.T + scores.F)) * 100),
-                JP: scores.J > scores.P ? Math.round((scores.J / (scores.J + scores.P)) * 100) : Math.round((scores.P / (scores.J + scores.P)) * 100)
+                EI: scores.E >= scores.I ? Math.round((scores.E / (scores.E + scores.I)) * 100) : Math.round((scores.I / (scores.E + scores.I)) * 100),
+                SN: scores.S >= scores.N ? Math.round((scores.S / (scores.S + scores.N)) * 100) : Math.round((scores.N / (scores.S + scores.N)) * 100),
+                TF: scores.T >= scores.F ? Math.round((scores.T / (scores.T + scores.F)) * 100) : Math.round((scores.F / (scores.T + scores.F)) * 100),
+                JP: scores.J >= scores.P ? Math.round((scores.J / (scores.J + scores.P)) * 100) : Math.round((scores.P / (scores.J + scores.P)) * 100)
             }
         };
-    }
-
-    function getDefaultQuestions() {
-        // 默认40题（如果test.js没有加载）
-        return [
-            {
-                question: "在社交场合中，您通常：",
-                options: {
-                    A: "主动与他人交谈，扩展社交圈",
-                    B: "倾向于与已认识的人交流，保持低调"
-                },
-                scoring: { A: "E", B: "I" }
-            },
-            {
-                question: "当面对新信息时，您更倾向于：",
-                options: {
-                    A: "关注具体的事实和细节",
-                    B: "寻找潜在的模式和可能性"
-                },
-                scoring: { A: "S", B: "N" }
-            },
-            {
-                question: "在做决定时，您更重视：",
-                options: {
-                    A: "逻辑分析和客观标准",
-                    B: "个人价值观和他人感受"
-                },
-                scoring: { A: "T", B: "F" }
-            },
-            {
-                question: "您更喜欢：",
-                options: {
-                    A: "制定计划并按计划执行",
-                    B: "保持灵活性，随机应变"
-                },
-                scoring: { A: "J", B: "P" }
-            }
-            // 这里应该有36题，为了简化只显示4题
-        ];
     }
   </script>
 </body>
