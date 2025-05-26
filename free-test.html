@@ -172,6 +172,7 @@
   </footer>
 
   <script src="src/js/main.js"></script>
+  <script src="src/js/test-packages.js"></script>
   <script src="src/js/test.js"></script>
   
   <script>
@@ -180,7 +181,7 @@
       "你已经比昨天的自己更进一步了。",
       "不要小看每一次努力的力量。",
       "你是独一无二的，世界因为你而更加美好。",
-      "每一个梦想的背后，都是不懈的坚持。",
+      "每一个梦想Backgrounds，都是不懈的坚持。",
       "遇见困难时，记住：你已经战胜过很多次了。",
       "你的存在本身就是一种意义。",
       "再小的光也能照亮黑暗。",
@@ -263,15 +264,15 @@
         document.getElementById('test-questions').classList.remove('hidden');
         document.getElementById('encouragement').classList.remove('hidden');
         document.getElementById('encouragement').classList.add('flex');
-        
+
         // 加载测试题目（前40题）
-        if (typeof mbtiQuestions !== 'undefined') {
-            testQuestions = mbtiQuestions.slice(0, 40);
+        if (typeof questions !== 'undefined') {
+            testQuestions = questions.slice(0, 40);
         } else {
             // 如果test.js没有加载，使用默认题目
             testQuestions = getDefaultQuestions();
         }
-        
+
         currentQuestion = 0;
         answers = [];
         showQuestion();
@@ -342,10 +343,10 @@
             alert('请选择一个答案后再继续');
             return;
         }
-        
+
         answers[currentQuestion] = selectedAnswer.value;
         currentQuestion++;
-        
+
         if (currentQuestion >= testQuestions.length) {
             completeTest();
         } else {
