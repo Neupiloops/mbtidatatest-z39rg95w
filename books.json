@@ -851,18 +851,18 @@
     },
     "ESFJ": {
         "books": [
-        {
-            "title": "幸福计划",
-            "author": "格雷琴·鲁宾",
-            "isbn": "通过实用步骤提升幸福的旅程个人。",
-            "summary": "9780062888747",
-            "amazonUrl": "https://www.amazon.com/Happiness-Project-Revised-Anniversary-Aristotle/dp/0062888749/",
-            "rating": 4.3,
-            "reasons": [
-            "培养幸福的社交环境，适合 ESFJ 的关怀特质",
-            "帮助更积极地生活，增强 ESFJ 的幸福感",
-            "提供实用的幸福方法，符合 ESFJ 的和谐追求",
-            "增强对幸福的认知，契合 ESFJ 的温暖性"
+{
+          "title": "情商：为什么它比智商更重要",
+          "author": "丹尼尔·戈尔曼",
+          "isbn": "9780553383713",
+          "amazonUrl": "https://www.amazon.com/Emotional-Intelligence-Matter-More-Than/dp/055338371X/",
+          "description": "探讨情商在个人和职业成功中的关键作用。",
+          "rating": 4.5,
+          "reasons": [
+            "培养深厚的社交智慧，适合 ESFJ 的关怀特质",
+            "帮助更真诚地连接他人，增强 ESFJ 的同理心",
+            "提供情商的实践方法，符合 ESFJ 的和谐追求",
+            "增强对情感的认知，契合 ESFJ 的温暖性"
           ]
         },
             {
