@@ -7,7 +7,7 @@
   <title>免费MBTI测试 - 智能MBTI</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="src/css/styles.css">
-   <style>
+  <style>
     .progress-circle-container {
       display: flex;
       flex-direction: column;
@@ -24,12 +24,12 @@
     }
     .progress-circle .background-circle {
       fill: none;
-      stroke: #ede9fe; /* 浅紫色 */
+      stroke: #e5e7eb;
       stroke-width: 10;
     }
     .progress-circle .progress-ring {
       fill: none;
-      stroke: #a78bfa; /* 浅紫色 */
+      stroke: #10b981;
       stroke-width: 10;
       stroke-linecap: round;
       transition: stroke-dashoffset 0.5s ease;
@@ -41,43 +41,43 @@
       transform: translate(-50%, -50%);
       font-size: 1.5rem;
       font-weight: 600;
-      color: #7c3aed; /* 深一点的紫色 */
+      color: #1f2937;
     }
     .progress-info {
       margin-top: 0.5rem;
       font-size: 0.875rem;
-      color: #7c3aed;
+      color: #4b5563;
       text-align: center;
     }
     .card {
-      background-color: #f3e8ff;
-      border-left: 4px solid #a78bfa;
+      background-color: #d1fae5;
+      border-left: 4px solid #10b981;
       padding: 1rem;
       border-radius: 0.5rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
     .assistant-card {
-      background-color: #f3e8ff;
-      border-left: 4px solid #a78bfa;
+      background-color: #d1fae5;
+      border-left: 4px solid #10b981;
       padding: 1rem;
       border-radius: 0.5rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
     .card h2, .assistant-card h2 {
       font-size: 1.125rem;
       font-weight: 600;
-      color: #7c3aed;
+      color: #059669;
       margin-bottom: 0.5rem;
       display: flex;
       align-items: center;
     }
     .card p, .assistant-card p {
-      color: #7c3aed;
-      font-size: 0.875rem;
+      color: #065f46;
+      font-size: 0.95rem;
       line-height: 1.5;
     }
     .card ul {
-      color: #7c3aed;
+      color: #065f46;
       font-size: 0.95rem;
       line-height: 1.5;
       margin-left: 1.5rem;
@@ -85,19 +85,6 @@
     }
     .card p + p, .assistant-card p + p {
       margin-top: 0.5rem;
-    }
-    /* 按钮紫色 */
-    .btn-purple {
-      background-color: #a78bfa;
-      color: #fff;
-    }
-    .btn-purple:hover, .btn-purple:focus {
-      background-color: #7c3aed;
-      color: #fff;
-    }
-    /* 单选框选中为紫色 */
-    input[type="radio"]:checked {
-      accent-color: #a78bfa;
     }
   </style>
 </head>
@@ -180,7 +167,7 @@
           </div>
         </div>
         
-        <!-- 测试进度条（圆形紫色） -->
+        <!-- 测试进度条（圆形） -->
         <div class="hidden mb-8" id="test-progress-container">
           <div class="progress-circle-container">
             <div class="progress-circle">
@@ -227,7 +214,7 @@
                 </button>
               </div>
             </div>
-            <!-- 小助手提醒卡片，格式与paid-test.html一致，内容如下，间隔两行 -->
+            <!-- 小助手提醒卡片，浅绿色，格式与paid-test.html一致，内容如下，间隔两行 -->
             <div id="encouragement" class="mt-16">
               <div class="rounded-lg border-l-4 border-green-400 bg-green-50 p-6 shadow flex items-start">
                 <div class="flex-shrink-0">
