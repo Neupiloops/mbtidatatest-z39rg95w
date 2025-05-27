@@ -1,236 +1,328 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh">
+<head> 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <title>免费MBTI测试 - 智能MBTI</title>
+  <title>MBTI测试结果 - 智能MBTI</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="src/css/styles.css">
-  <style>
-    .progress-circle-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 2rem;
-    }
-    .progress-circle {
-      position: relative;
-      width: 120px;
-      height: 120px;
-    }
-    .progress-circle svg {
-      transform: rotate(-90deg);
-    }
-    .progress-circle .background-circle {
-      fill: none;
-      stroke: #e5e7eb;
-      stroke-width: 10;
-    }
-    .progress-circle .progress-ring {
-      fill: none;
-      stroke: #10b981;
-      stroke-width: 10;
-      stroke-linecap: round;
-      transition: stroke-dasharray 0.5s ease;
-    }
-    .progress-circle .progress-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #1f2937;
-    }
-    .progress-info {
-      margin-top: 0.5rem;
-      font-size: 0.875rem;
-      color: #4b5563;
-      text-align: center;
-    }
-    .card {
-      background-color: #d1fae5;
-      border-left: 4px solid #10b981;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    }
-    .assistant-card {
-      background-color: #d1fae5;
-      border-left: 4px solid #10b981;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    }
-    .card h2, .assistant-card h2 {
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: #059669;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-    }
-    .card p, .assistant-card p {
-      color: #065f46;
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-    .card ul {
-      color: #065f46;
-      font-size: 0.95rem;
-      line-height: 1.5;
-      margin-left: 1.5rem;
-      list-style-type: disc;
-    }
-    .card p + p, .assistant-card p + p {
-      margin-top: 0.5rem;
-    }
-  </style>
+  <script src="https://www.paypal.com/sdk/js?client-id=test&currency=CNY"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body class="font-sans text-gray-800 bg-gray-50">
+
   <!-- 头部导航 -->
-  <header class="fixed w-full bg-white bg-opacity-95 shadow-sm z-50 transition duration-300">
+  <header class="fixed w-full bg-white bg-opacity-95 shadow z-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center py-4">
-        <div class="flex items-center">
-          <a href="index.html" class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="12" y1="16" x2="12" y2="12"></line>
-              <line x1="12" y1="8" x2="12.01" y2="8"></line>
-            </svg>
-            <span class="ml-2 text-xl font-bold text-gray-900">智能MBTI</span>
-          </a>
-        </div>
-        <div class="md:hidden">
-          <button type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none" id="mobile-menu-button">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
-        <nav class="hidden md:flex justify-center items-center space-x-8">
-          <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a> 
-          <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600 transition-colors">小问答</a>
-          <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600 transition-colors">冷知识</a>
-          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600 transition-colors">每天觉悟</a>
-          <a href="booksblog.html" class="text-gray-600 hover:text-blue-600 transition-colors">读书推荐</a>
-          <a href="price.html" class="text-gray-600 hover:text-blue-600 transition-colors">套餐价格</a>
-          <a href="aboutus.html" class="text-gray-600 hover:text-blue-600 transition-colors">关于我们</a>
-          <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">开始测试</a>
-        </nav>
-      </div>
-      <div class="md:hidden hidden bg-white pb-4" id="mobile-menu">
-        <nav class="flex flex-col space-y-4">
+        <a href="index.html" class="flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="16" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12.01" y2="8" />
+          </svg>
+          <span class="ml-2 text-xl font-bold text-gray-900">智能MBTI</span>
+        </a>
+        <div class="hidden md:flex space-x-8">
           <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
-          <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600 transition-colors">小问答</a>
-          <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600 transition-colors">冷知识</a>
-          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600 transition-colors">每天觉悟</a>
-          <a href="booksblog.html" class="text-gray-600 hover:text-blue-600 transition-colors">读书推荐</a>
-          <a href="price.html" class="text-gray-600 hover:text-blue-600 transition-colors">套餐价格</a>
-          <a href="aboutus.html" class="text-gray-600 hover:text-blue-600 transition-colors">关于我们</a>
-          <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-center">开始测试</a>
+          <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600">小问答</a>
+          <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600">冷知识</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每天一悟</a>
+          <a href="booksblog.html" class="text-gray-600 hover:text-blue-600">读书推荐</a>
+          <a href="price.html" class="text-gray-600 hover:text-blue-600">套餐价格</a>
+          <a href="aboutus.html" class="text-gray-600 hover:text-blue-600">关于我们</a>
+          <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">开始测试</a>
+        </div>
+        <button id="mobile-menu-button" class="md:hidden text-gray-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+      <div class="md:hidden hidden pb-4" id="mobile-menu">
+        <nav class="flex flex-col space-y-2">
+          <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
+          <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600">小问答</a>
+          <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600">冷知识</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每天一悟</a>
+          <a href="booksblog.html" class="text-gray-600 hover:text-blue-600">读书推荐</a>
+          <a href="price.html" class="text-gray-600 hover:text-blue-600">套餐价格</a>
+          <a href="aboutus.html" class="text-gray-600 hover:text-blue-600">关于我们</a>
+          <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">开始测试</a>
         </nav>
       </div>
     </div>
   </header>
 
-  <!-- 主要内容 -->
-  <main class="pt-28 md:pt-32">
-    <section class="pt-8 pb-16">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- 测试介绍 -->
-        <div class="text-center mb-8" id="test-intro">
-          <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">免费MBTI性格测试</h1>
-          <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
-            本测试包含40个精心设计的问题，大约需要10分钟完成。请根据您的第一反应选择最符合自己的选项，没有对错之分。测试结果将帮助您更好地了解自己的性格特质和潜能。
-          </p>
-          <div id="inspiration-quote" class="text-blue-600 text-xl font-semibold italic mb-8 min-h-[2.5rem] opacity-100 transition-opacity duration-1000">
-            加载中...
-          </div>
-          <button id="start-test" class="bg-green-500 text-white px-8 py-4 rounded-lg text-lg font-medium hover:bg-green-600 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
-            开始免费测试
-            <span class="block text-sm mt-1 font-normal">40个问题 · 约10分钟</span>
-          </button>
-          <div class="mt-8 max-w-3xl mx-auto px-4 text-left space-y-10">
-            <!-- 小贴士（免费测试特色，浅绿色卡片，内容参考paid-test.html） -->
-            <div class="card max-w-3xl mx-auto">
-              <h2>🌟 免费测试特色</h2>
-              <ul class="list-disc list-inside">
-                <li>基于官方MBTI理论，40题涵盖MBTI全部八大维度</li>
-                <li>测试过程简洁，题目分布均衡</li>
-                <li>测试结果免费查看，助你初步了解自我</li>
-                <li>如需更深入分析，可升级至专业版</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <!-- 测试进度条 -->
-        <div class="hidden mb-8" id="test-progress-container">
-          <div class="flex justify-between text-sm text-gray-600 mb-2">
-            <span id="question-number">问题 1/40</span>
-            <span id="completion-percentage">1%</span>
-          </div>
-          <div class="w-full bg-gray-200 rounded-full h-2">
-            <div class="bg-green-600 h-2 rounded-full transition-all duration-300" style="width: 1%" id="progress-bar"></div>
-          </div>
-        </div>
+  <!-- 测试结果内容 -->
+  <main class="pt-32 pb-20 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-5xl">
+      <h1 id="result-title" class="text-3xl font-bold text-center mb-8">您的MBTI测试结果</h1>
 
-        <!-- 测试问题区域 -->
-        <div class="hidden" id="test-questions">
-          <div class="max-w-3xl mx-auto">
-            <div class="bg-white rounded-lg shadow-lg p-8">
-              <h2 class="text-xl font-semibold text-gray-900 mb-6" id="question-text">
-                加载问题中...
-              </h2>
-              <div class="space-y-4" id="question-options">
-                <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
-                  <input type="radio" name="question" value="0" class="mt-1 text-green-600 focus:ring-green-500">
-                  <span class="flex-1">
-                    <span class="font-medium text-gray-900"></span>
-                  </span>
-                </label>
-                <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
-                  <input type="radio" name="question" value="1" class="mt-1 text-green-600 focus:ring-green-500">
-                  <span class="flex-1">
-                    <span class="font-medium text-gray-900"></span>
-                  </span>
-                </label>
+      <!-- 新增：操作按钮区 -->
+      <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
+        <button id="save-pdf-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition duration-200 flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+          </svg>
+          保存为PDF
+        </button>
+        <button id="share-wechat-btn" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-2 rounded-lg shadow transition duration-200 flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01"/>
+          </svg>
+          分享到微信
+        </button>
+        <button id="share-weibo-btn" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-2 rounded-lg shadow transition duration-200 flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 8a6 6 0 11-12 0 6 6 0 0112 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 14v7m-4-4h8"/>
+          </svg>
+          分享到微博
+        </button>
+      </div>
+
+      <!-- 基础测试结果 -->
+      <div id="basic-result-container" class="mb-12">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+          <div class="p-6 md:p-8">
+            <div class="flex items-center mb-6">
+              <span class="bg-green-500 text-white font-bold py-1 px-3 rounded-lg mr-3">基础体验</span>
+              <h2 class="text-2xl font-bold text-gray-900">您的MBTI类型是：<span class="text-green-600">XXXX</span></h2>
+            </div>
+            
+            <div class="mb-8">
+              <h3 class="text-xl font-semibold mb-3">类型简介</h3>
+              <p class="text-gray-600">这里是您的MBTI类型的简短描述，包含基本特征和倾向。</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div>
+                <h3 class="text-lg font-semibold mb-2">主要特点</h3>
+                <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                  <li>特点一</li>
+                  <li>特点二</li>
+                  <li>特点三</li>
+                </ul>
               </div>
-              <div class="flex justify-between mt-8">
-                <button id="prev-question" class="hidden bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors">
-                  上一题
-                </button>
-                <div class="flex-1"></div>
-                <button id="next-question" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
-                  下一题
-                </button>
+              <div>
+                <h3 class="text-lg font-semibold mb-2">潜在挑战</h3>
+                <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                  <li>挑战一</li>
+                  <li>挑战二</li>
+                  <li>挑战三</li>
+                </ul>
               </div>
             </div>
-            <!-- 小助手提醒卡片，浅绿色，格式与paid-test.html一致，内容如下，间隔两行 -->
-            <div id="encouragement" class="mt-16">
-              <div class="rounded-lg border-l-4 border-green-400 bg-green-50 p-6 shadow flex items-start">
-                <div class="flex-shrink-0">
-                  <svg class="h-8 w-8 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <path d="M9.09 9a3 3 0 1 1 5.82 0c0 1.657-1.343 3-3 3s-3-1.343-3-3z"></path>
-                    <path d="M12 17v.01"></path>
-                  </svg>
-                </div>
-                <div class="ml-4">
-                  <h2 class="text-green-700 font-semibold text-lg mb-1 flex items-center">
-                    🤖 小助手提醒
-                  </h2>
-                  <p class="text-green-800 mb-1">您正在进行免费版MBTI测试，请保持专注，诚实回答每个问题。</p>
-                  <p class="text-green-800">您的坚持将获得更准确的性格分析！</p>
-                </div>
-              </div>
+            
+            <div class="bg-blue-50 p-4 rounded-lg">
+              <p class="text-blue-800">想要获取更详细的分析报告，包括职业匹配、人际关系建议和个人成长方向？</p>
+              <a href="price.html" class="inline-block mt-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">升级到专业版</a>
             </div>
           </div>
         </div>
-    </section>
+      </div>
+      
+      <!-- 专业测试支付提示 -->
+      <div id="payment-prompt-container" class="mb-12 hidden">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+          <div class="p-6 md:p-8 text-center">
+            <div class="mb-6">
+              <span class="inline-block bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mb-3">专业定制</span>
+              <h2 class="text-2xl font-bold text-gray-900 mb-4">解锁您的完整MBTI分析报告</h2>
+              <p class="text-gray-600 mb-6">您已完成专业测试的所有问题！现在只需支付¥50元，即可查看您的详细分析报告。</p>
+            </div>
+            
+            <div class="max-w-md mx-auto mb-8">
+              <div class="bg-gray-50 p-4 rounded-lg mb-6">
+                <h3 class="font-semibold text-gray-900 mb-3">专业报告包含：</h3>
+                <ul class="text-gray-600 text-left list-disc pl-5 space-y-2">
+                  <li>类型维度剖析</li>
+                  <li>全方位性格分析报告</li>
+                  <li>个性化成长、情感、沟通、社交建议</li>
+                  <li>职业、人际、情感配对推荐</li>
+                </ul>
+              </div>
+              
+              <div id="paypal-button-container" class="mb-4"></div>
+              <a href="index.html" class="inline-block text-gray-500 hover:text-gray-700">稍后再说</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 专业测试结果 -->
+      <div id="pro-result-container" class="mb-12 hidden">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+          <div class="p-6 md:p-8">
+            <div class="flex items-center mb-6">
+              <span class="bg-blue-600 text-white font-bold py-1 px-3 rounded-lg mr-3">专业定制</span>
+              <h2 class="text-2xl font-bold text-gray-900">您的MBTI类型是：<span class="text-blue-600">XXXX</span></h2>
+            </div>
+            
+            <!-- 类型维度剖析 -->
+            <div class="mb-8">
+              <h3 class="text-xl font-semibold mb-4">类型维度剖析</h3>
+              
+              <div class="space-y-4">
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="font-medium">内向 (I)</span>
+                    <span class="font-medium">外向 (E)</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-4">
+                    <div class="bg-blue-600 h-4 rounded-full" style="width: 65%"></div>
+                  </div>
+                  <p class="text-sm text-gray-500 mt-1">65% 内向 / 35% 外向</p>
+                </div>
+                
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="font-medium">感觉 (S)</span>
+                    <span class="font-medium">直觉 (N)</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-4">
+                    <div class="bg-blue-600 h-4 rounded-full" style="width: 40%"></div>
+                  </div>
+                  <p class="text-sm text-gray-500 mt-1">40% 感觉 / 60% 直觉</p>
+                </div>
+                
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="font-medium">思考 (T)</span>
+                    <span class="font-medium">情感 (F)</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-4">
+                    <div class="bg-blue-600 h-4 rounded-full" style="width: 75%"></div>
+                  </div>
+                  <p class="text-sm text-gray-500 mt-1">75% 思考 / 25% 情感</p>
+                </div>
+                
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="font-medium">判断 (J)</span>
+                    <span class="font-medium">感知 (P)</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-4">
+                    <div class="bg-blue-600 h-4 rounded-full" style="width: 55%"></div>
+                  </div>
+                  <p class="text-sm text-gray-500 mt-1">55% 判断 / 45% 感知</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 全方位性格分析 -->
+            <div class="mb-8">
+              <h3 class="text-xl font-semibold mb-3">全方位性格分析</h3>
+              <p class="text-gray-600 mb-4">这里是您的MBTI类型的详细分析，包含认知功能、行为模式和思维方式。</p>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">核心特质</h4>
+                  <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                    <li>特质一的详细描述</li>
+                    <li>特质二的详细描述</li>
+                    <li>特质三的详细描述</li>
+                    <li>特质四的详细描述</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">思维方式</h4>
+                  <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                    <li>思维方式一的详细描述</li>
+                    <li>思维方式二的详细描述</li>
+                    <li>思维方式三的详细描述</li>
+                    <li>思维方式四的详细描述</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 个性化建议 -->
+            <div class="mb-8">
+              <h3 class="text-xl font-semibold mb-3">个性化建议</h3>
+              
+              <div class="space-y-6">
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">个人成长</h4>
+                  <p class="text-gray-600 mb-2">根据您的性格类型，以下是促进个人成长的建议：</p>
+                  <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                    <li>成长建议一</li>
+                    <li>成长建议二</li>
+                    <li>成长建议三</li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">情感关系</h4>
+                  <p class="text-gray-600 mb-2">在情感关系中，您可能会：</p>
+                  <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                    <li>情感特点一</li>
+                    <li>情感特点二</li>
+                    <li>情感特点三</li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">沟通与社交</h4>
+                  <p class="text-gray-600 mb-2">提升您沟通效率的建议：</p>
+                  <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                    <li>沟通建议一</li>
+                    <li>沟通建议二</li>
+                    <li>沟通建议三</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 配对推荐 -->
+            <div class="mb-8">
+              <h3 class="text-xl font-semibold mb-3">配对推荐</h3>
+              
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">职业匹配</h4>
+                  <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                    <li>最适合职业一</li>
+                    <li>最适合职业二</li>
+                    <li>最适合职业三</li>
+                    <li>最适合职业四</li>
+                    <li>最适合职业五</li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">人际关系</h4>
+                  <p class="text-gray-600 mb-2">最佳友谊类型：</p>
+                  <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                    <li>XXXX - 原因描述</li>
+                    <li>XXXX - 原因描述</li>
+                    <li>XXXX - 原因描述</li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">情感配对</h4>
+                  <p class="text-gray-600 mb-2">最佳伴侣类型：</p>
+                  <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                    <li>XXXX - 原因描述</li>
+                    <li>XXXX - 原因描述</li>
+                    <li>XXXX - 原因描述</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <a href="#" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">下载完整报告 PDF</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 
   <!-- 页脚 -->
@@ -249,229 +341,258 @@
       </p>
       <div class="border-t border-gray-800 pt-4">
         <div class="text-gray-400">
-          © 2025 智能MBTI - 专业MBTI测试. 保留所有权利.
+          &copy; 2025 智能MBTI - 专业MBTI测试. 保留所有权利.
         </div>
       </div>
     </div>
   </footer>
 
-<script src="src/js/main.js"></script>
-<script src="src/js/test-packages.js"></script>
-<script src="src/js/test.js"></script>
-<script>
-    // 励志名言轮播
-    const quotes = [
-      "你已经比昨天的自己更进一步了。",
-      "不要小看每一次努力的力量。",
-      "因为你的个人责任与积极行动，世界变得更加美好",
-      "每一个梦想的背后，都是不懈的坚持。",
-      "遇见困难时，记住：你已经战胜过很多次了。",
-      "你的存在本身就是一种意义。",
-      "再小的光也能照亮黑暗。",
-      "请勇敢地成为你自己。",
-      "坚持是最浪漫的告白。",
-      "不负热爱，不负自己。",
-      "你现在的努力，是未来的种子。",
-      "勇敢不是不害怕，而是即使害怕也继续向前。",
-      "你的付出一定会被看到。",
-      "不要着急，一切都在慢慢变好。",
-      "最美的风景，总在前方。",
-      "请相信，温柔和坚定可以并存。",
-      "成长的过程，也值得骄傲。",
-      "你已经很棒了，继续加油！",
-      "今天的坚持，是明天的成就。"
-    ];
-    function rotateQuotes() {
-      const quoteEl = document.getElementById("inspiration-quote");
-      let index = 0;
-      const showQuote = () => {
-        quoteEl.style.opacity = 0;
-        setTimeout(() => {
-          quoteEl.textContent = quotes[index];
-          quoteEl.style.opacity = 1;
-          index = (index + 1) % quotes.length;
-        }, 1000);
-      };
-      showQuote();
-      setInterval(showQuote, 10000);
-    }
+  <script src="src/js/main.js"></script>
+  <script src="src/js/test.js"></script>
+  <script src="src/js/test-packages.js"></script>
+  <script src="src/js/share.js"></script>
+  <script src="src/js/pdf-generator.js"></script>
+  <script>
+    // 处理测试结果显示
+    document.addEventListener('DOMContentLoaded', function() {
+      // 获取URL参数
+      const urlParams = new URLSearchParams(window.location.search);
+      const testType = urlParams.get('type') || 'basic'; // 默认为基础测试
+      const isPaid = urlParams.get('paid') === 'true';
+      
+      // 从localStorage获取MBTI类型和百分比数据
+      const mbtiType = localStorage.getItem('mbtiType');
+      const mbtiPercentages = JSON.parse(localStorage.getItem('mbtiPercentages') || '{}');
+      
+      // 获取结果容器
+      const basicResultContainer = document.getElementById('basic-result-container');
+      const proResultContainer = document.getElementById('pro-result-container');
+      const paymentPromptContainer = document.getElementById('payment-prompt-container');
+      
+      // 隐藏所有容器
+      if (basicResultContainer) basicResultContainer.classList.add('hidden');
+      if (proResultContainer) proResultContainer.classList.add('hidden');
+      if (paymentPromptContainer) paymentPromptContainer.classList.add('hidden');
+      
+      // 如果有MBTI类型数据，更新页面内容
+      if (mbtiType) {
+        // 更新基础测试结果
+        if (basicResultContainer) {
+          const typeElement = basicResultContainer.querySelector('.text-green-600');
+          if (typeElement) typeElement.textContent = mbtiType;
+          
+          // 更新类型简介和特点
+          const descriptionElement = basicResultContainer.querySelector('p.text-gray-600');
+          if (descriptionElement && window.mbtiTypes && window.mbtiTypes[mbtiType]) {
+            descriptionElement.textContent = window.mbtiTypes[mbtiType].description || '暂无描述';
+          }
+          
+          // 更新主要特点和潜在挑战
+          if (window.mbtiTypes && window.mbtiTypes[mbtiType]) {
+            const strengthsList = basicResultContainer.querySelector('ul.text-gray-600:nth-of-type(1)');
+            const weaknessesList = basicResultContainer.querySelector('ul.text-gray-600:nth-of-type(2)');
+            
+            if (strengthsList && window.mbtiTypes[mbtiType].strengths) {
+              strengthsList.innerHTML = '';
+              window.mbtiTypes[mbtiType].strengths.slice(0, 3).forEach(strength => {
+                const li = document.createElement('li');
+                li.textContent = strength;
+                strengthsList.appendChild(li);
+              });
+            }
+            
+            if (weaknessesList && window.mbtiTypes[mbtiType].weaknesses) {
+              weaknessesList.innerHTML = '';
+              window.mbtiTypes[mbtiType].weaknesses.slice(0, 3).forEach(weakness => {
+                const li = document.createElement('li');
+                li.textContent = weakness;
+                weaknessesList.appendChild(li);
+              });
+            }
+          }
+        }
+        
+        // 更新专业测试结果
+        if (proResultContainer) {
+          const typeElement = proResultContainer.querySelector('.text-blue-600');
+          if (typeElement) typeElement.textContent = mbtiType;
+          
+          // 更新维度百分比条
+          if (mbtiPercentages) {
+            // 更新内向/外向维度
+            const eiBar = proResultContainer.querySelector('.bg-blue-600:nth-of-type(1)');
+            const eiText = proResultContainer.querySelector('.text-sm.text-gray-500:nth-of-type(1)');
+            if (eiBar && mbtiPercentages.eiPercentage !== undefined) {
+              const percentage = mbtiType[0] === 'I' ? mbtiPercentages.eiPercentage : 100 - mbtiPercentages.eiPercentage;
+              eiBar.style.width = `${percentage}%`;
+              if (eiText) eiText.textContent = `${percentage}% ${mbtiType[0] === 'I' ? '内向' : '外向'} / ${100 - percentage}% ${mbtiType[0] === 'I' ? '外向' : '内向'}`;
+            }
+            
+            // 更新感觉/直觉维度
+            const snBar = proResultContainer.querySelector('.bg-blue-600:nth-of-type(2)');
+            const snText = proResultContainer.querySelector('.text-sm.text-gray-500:nth-of-type(2)');
+            if (snBar && mbtiPercentages.snPercentage !== undefined) {
+              const percentage = mbtiType[1] === 'N' ? mbtiPercentages.snPercentage : 100 - mbtiPercentages.snPercentage;
+              snBar.style.width = `${percentage}%`;
+              if (snText) snText.textContent = `${percentage}% ${mbtiType[1] === 'N' ? '直觉' : '感觉'} / ${100 - percentage}% ${mbtiType[1] === 'N' ? '感觉' : '直觉'}`;
+            }
+            
+            // 更新思考/情感维度
+            const tfBar = proResultContainer.querySelector('.bg-blue-600:nth-of-type(3)');
+            const tfText = proResultContainer.querySelector('.text-sm.text-gray-500:nth-of-type(3)');
+            if (tfBar && mbtiPercentages.tfPercentage !== undefined) {
+              const percentage = mbtiType[2] === 'F' ? mbtiPercentages.tfPercentage : 100 - mbtiPercentages.tfPercentage;
+              tfBar.style.width = `${percentage}%`;
+              if (tfText) tfText.textContent = `${percentage}% ${mbtiType[2] === 'F' ? '情感' : '思考'} / ${100 - percentage}% ${mbtiType[2] === 'F' ? '思考' : '情感'}`;
+            }
+            
+            // 更新判断/感知维度
+            const jpBar = proResultContainer.querySelector('.bg-blue-600:nth-of-type(4)');
+            const jpText = proResultContainer.querySelector('.text-sm.text-gray-500:nth-of-type(4)');
+            if (jpBar && mbtiPercentages.jpPercentage !== undefined) {
+              const percentage = mbtiType[3] === 'J' ? mbtiPercentages.jpPercentage : 100 - mbtiPercentages.jpPercentage;
+              jpBar.style.width = `${percentage}%`;
+              if (jpText) jpText.textContent = `${percentage}% ${mbtiType[3] === 'J' ? '判断' : '感知'} / ${100 - percentage}% ${mbtiType[3] === 'J' ? '感知' : '判断'}`;
+            }
+          }
+          
+          // 更新全方位性格分析和个性化建议
+          if (window.mbtiTypes && window.mbtiTypes[mbtiType]) {
+            // 更新核心特质和思维方式
+            const coreTraits = proResultContainer.querySelector('ul.text-gray-600:nth-of-type(1)');
+            const thinkingStyle = proResultContainer.querySelector('ul.text-gray-600:nth-of-type(2)');
+            
+            if (coreTraits && window.mbtiTypes[mbtiType].strengths) {
+              coreTraits.innerHTML = '';
+              window.mbtiTypes[mbtiType].strengths.forEach(strength => {
+                const li = document.createElement('li');
+                li.textContent = strength + '的详细描述';
+                coreTraits.appendChild(li);
+              });
+            }
+            
+            // 更新个人成长、情感关系和沟通建议
+            const growthList = proResultContainer.querySelector('ul.text-gray-600:nth-of-type(3)');
+            const relationshipList = proResultContainer.querySelector('ul.text-gray-600:nth-of-type(4)');
+            const communicationList = proResultContainer.querySelector('ul.text-gray-600:nth-of-type(5)');
+            
+            if (growthList) {
+              growthList.innerHTML = '';
+              ['注重自我反思和内在成长', '培养更多实践经验', '学会在适当时候寻求他人帮助'].forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                growthList.appendChild(li);
+              });
+            }
+            
+            // 更新职业匹配、人际关系和情感配对
+            const careersList = proResultContainer.querySelector('ul.text-gray-600:nth-of-type(6)');
+            const friendsList = proResultContainer.querySelector('ul.text-gray-600:nth-of-type(7)');
+            const partnersList = proResultContainer.querySelector('ul.text-gray-600:nth-of-type(8)');
+            
+            if (careersList && window.mbtiTypes[mbtiType].careers) {
+              careersList.innerHTML = '';
+              window.mbtiTypes[mbtiType].careers.forEach(career => {
+                const li = document.createElement('li');
+                li.textContent = career.split('/')[0];
+                careersList.appendChild(li);
+              });
+            }
+          }
+        }
+      }
+      
+      // 根据测试类型和支付状态显示相应内容
+      if (testType === 'basic') {
+        // 基础测试结果
+        if (basicResultContainer) {
+          basicResultContainer.classList.remove('hidden');
+        }
+      } else if (testType === 'pro') {
+        if (isPaid) {
+          // 已支付的专业测试结果
+          if (proResultContainer) {
+            proResultContainer.classList.remove('hidden');
+          }
+        } else {
+          // 未支付的专业测试结果，显示支付提示
+          if (paymentPromptContainer) {
+            paymentPromptContainer.classList.remove('hidden');
+            
+            // 初始化PayPal按钮
+            if(typeof paypal !== 'undefined' && document.getElementById('paypal-button-container')) {
+              paypal.Buttons({
+                createOrder: function(data, actions) {
+                  return actions.order.create({
+                    purchase_units: [{
+                      amount: {
+                        value: '50.00'
+                      }
+                    }]
+                  });
+                },
+                onApprove: function(data, actions) {
+                  return actions.order.capture().then(function(details) {
+                    // 支付成功后刷新页面，显示专业结果
+                    window.location.href = 'result.html?type=pro&paid=true';
+                  });
+                }
+              }).render('#paypal-button-container');
+            }
+          }
+        }
+      }
+      
+      // 更新结果页面标题
+      const titleElement = document.getElementById('result-title');
+      if (titleElement) {
+        if (testType === 'basic') {
+          titleElement.textContent = '您的MBTI基础测试结果';
+          titleElement.classList.add('text-green-600');
+        } else if (testType === 'pro') {
+          if (isPaid) {
+            titleElement.textContent = '您的MBTI专业分析报告';
+            titleElement.classList.add('text-blue-600');
+          } else {
+            titleElement.textContent = '解锁您的MBTI专业分析报告';
+            titleElement.classList.add('text-blue-600');
+          }
+        }
+      }
 
-    // 获取40题，确保各维度均衡
-    function get40QuestionsFromTestJS() {
-      let allQuestions = [];
-      if (Array.isArray(window.questions)) allQuestions = allQuestions.concat(window.questions);
-      if (Array.isArray(window.extendedQuestions)) allQuestions = allQuestions.concat(window.extendedQuestions);
-
-      const dims = { EI: [], SN: [], TF: [], JP: [] };
-      allQuestions.forEach(q => {
-        if (dims[q.dimension]) dims[q.dimension].push(q);
+      // 保存为PDF功能
+      document.getElementById('save-pdf-btn')?.addEventListener('click', function() {
+        const mainContent = document.querySelector('main');
+        html2canvas(mainContent).then(canvas => {
+          const imgData = canvas.toDataURL('image/png');
+          const pdf = new window.jspdf.jsPDF('p', 'mm', 'a4');
+          const pageWidth = pdf.internal.pageSize.getWidth();
+          const pageHeight = pdf.internal.pageSize.getHeight();
+          const imgProps = pdf.getImageProperties(imgData);
+          const pdfWidth = pageWidth;
+          const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+          pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          pdf.save('MBTI测试报告.pdf');
+        });
       });
 
-      let selected = [];
-      for (const dim in dims) {
-        selected = selected.concat(dims[dim].slice(0, 10));
-      }
-      if (selected.length < 40) {
-        const rest = allQuestions.filter(q => !selected.includes(q));
-        selected = selected.concat(rest.slice(0, 40 - selected.length));
-      }
-      return selected.slice(0, 40);
-    }
-
-    let currentQuestionIndex = 0;
-    let answers = [];
-    let testQuestions = [];
-
-    document.addEventListener('DOMContentLoaded', function() {
-      rotateQuotes();
-      localStorage.setItem('testConfig', JSON.stringify({
-        type: 'basic',
-        questionCount: 40
-      }));
-
-      const startBtn = document.getElementById('start-test');
-      const testIntro = document.getElementById('test-intro');
-      const testQuestionsDiv = document.getElementById('test-questions');
-      const progressContainer = document.getElementById('test-progress-container');
-      const encouragement = document.getElementById('encouragement');
-      const questionText = document.getElementById('question-text');
-      const questionOptions = document.getElementById('question-options');
-      const nextBtn = document.getElementById('next-question');
-      const prevBtn = document.getElementById('prev-question');
-      const questionNumber = document.getElementById('question-number');
-      const completionPercentage = document.getElementById('completion-percentage');
-      const progressBar = document.getElementById('progress-bar');
-
-      if (startBtn) {
-        startBtn.addEventListener('click', function() {
-          let selected = get40QuestionsFromTestJS();
-          // 修正1：只有在没有题目时才弹alert
-          if (!selected || selected.length === 0) {
-            alert('无法加载测试题目，请稍后再试！');
-            return;
-          }
-          testQuestions = selected.map(q => ({
-            text: q.text,
-            options: q.options,
-            dimension: q.dimension
-          }));
-          currentQuestionIndex = 0;
-          answers = new Array(testQuestions.length).fill(null);
-          testIntro.classList.add('hidden');
-          testQuestionsDiv.classList.remove('hidden');
-          progressContainer.classList.remove('hidden');
-          encouragement.classList.remove('hidden');
-          showQuestion();
-        });
-      }
-
-      if (nextBtn) {
-        nextBtn.addEventListener('click', function() {
-          const radios = questionOptions.querySelectorAll('input[name="question"]');
-          let selectedValue = null;
-          radios.forEach((radio, idx) => {
-            if (radio.checked) {
-              selectedValue = idx;
-            }
-          });
-          // 修正2：只有在未选择时才弹alert
-          if (selectedValue === null) {
-            alert('请选择一个选项');
-            return;
-          }
-          answers[currentQuestionIndex] = selectedValue;
-          if (currentQuestionIndex < testQuestions.length - 1) {
-            currentQuestionIndex++;
-            showQuestion();
-          } else if (currentQuestionIndex === testQuestions.length - 1) {
-            completeTest();
-          }
-        });
-      }
-
-      if (prevBtn) {
-        prevBtn.addEventListener('click', function() {
-          if (currentQuestionIndex > 0) {
-            currentQuestionIndex--;
-            showQuestion();
-          }
-        });
-      }
-
-      function showQuestion() {
-        const q = testQuestions[currentQuestionIndex];
-        if (!q) return;
-        questionText.textContent = `${currentQuestionIndex + 1}. ${q.text}`;
-        questionOptions.innerHTML = `
-          <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
-            <input type="radio" name="question" value="0" class="mt-1 text-green-600 focus:ring-green-500">
-            <span class="flex-1">
-              <span class="font-medium text-gray-900">${q.options[0]}</span>
-            </span>
-          </label>
-          <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
-            <input type="radio" name="question" value="1" class="mt-1 text-green-600 focus:ring-green-500">
-            <span class="flex-1">
-              <span class="font-medium text-gray-900">${q.options[1]}</span>
-            </span>
-          </label>
-        `;
-        // 恢复之前的选择
-        if (answers[currentQuestionIndex] !== null) {
-          const radios = document.querySelectorAll('input[name="question"]');
-          if (radios[answers[currentQuestionIndex]]) {
-            radios[answers[currentQuestionIndex]].checked = true;
-          }
-        }
-        questionNumber.textContent = `问题 ${currentQuestionIndex + 1}/${testQuestions.length}`;
-        const percent = Math.round((currentQuestionIndex + 1) / testQuestions.length * 100);
-        completionPercentage.textContent = `${percent}%`;
-        progressBar.style.width = `${percent}%`;
-        if (currentQuestionIndex === 0) {
-          prevBtn.classList.add('hidden');
-          nextBtn.textContent = '下一题';
-        } else if (currentQuestionIndex === testQuestions.length - 1) {
-          prevBtn.classList.remove('hidden');
-          nextBtn.textContent = '完成测试';
+      // 分享到微信
+      document.getElementById('share-wechat-btn')?.addEventListener('click', function() {
+        const url = encodeURIComponent(window.location.href);
+        if (window.innerWidth < 768) {
+          window.location.href = `weixin://dl/moments?text=${url}`;
         } else {
-          prevBtn.classList.remove('hidden');
-          nextBtn.textContent = '下一题';
+          window.open(`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${url}`, '_blank');
         }
-      }
+      });
 
-      function completeTest() {
-        if (answers.some(a => a === null)) {
-          alert('请确保回答所有问题后再提交！');
-          currentQuestionIndex = answers.findIndex(a => a === null);
-          showQuestion();
-          return;
-        }
-        let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
-        for (let i = 0; i < answers.length; i++) {
-          const q = testQuestions[i];
-          const ans = answers[i];
-          if (q.dimension === 'EI') {
-            if (ans === 0) scores.E++; else scores.I++;
-          } else if (q.dimension === 'SN') {
-            if (ans === 0) scores.S++; else scores.N++;
-          } else if (q.dimension === 'TF') {
-            if (ans === 0) scores.T++; else scores.F++;
-          } else if (q.dimension === 'JP') {
-            if (ans === 0) scores.J++; else scores.P++;
-          }
-        }
-        const type =
-          (scores.E >= scores.I ? 'E' : 'I') +
-          (scores.S >= scores.N ? 'S' : 'N') +
-          (scores.T >= scores.F ? 'T' : 'F') +
-          (scores.J >= scores.P ? 'J' : 'P');
-        localStorage.setItem('mbtiType', type);
-        localStorage.setItem('mbtiScores', JSON.stringify(scores));
-        localStorage.setItem('testAnswers', JSON.stringify(answers));
-        localStorage.setItem('testCompleted', 'true');
-        window.location.href = 'result.html?type=basic';
-      }
+      // 分享到微博
+      document.getElementById('share-weibo-btn')?.addEventListener('click', function() {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent('我的MBTI测试结果，快来测一测你的吧！');
+        window.open(`https://service.weibo.com/share/share.php?url=${url}&title=${title}`, '_blank');
+      });
     });
-</script>
+  </script>
 </body>
 </html>
