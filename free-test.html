@@ -242,10 +242,10 @@
     </div>
   </footer>
 
-  <script src="src/js/main.js"></script>
-  <script src="src/js/test-packages.js"></script>
-  <script src="src/js/test.js"></script>
-  <script>
+<script src="src/js/main.js"></script>
+<script src="src/js/test-packages.js"></script>
+<script src="src/js/test.js"></script>
+<script>
     // 励志名言轮播
     const quotes = [
       "你已经比昨天的自己更进一步了。",
@@ -402,7 +402,24 @@
           }
         });
       }
-      
+
+  function renderQuestionOptions() {
+    questionOptions.innerHTML = `
+      <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+        <input type="radio" name="question" value="0" class="mt-1 text-green-600 focus:ring-green-500">
+        <span class="flex-1">
+          <span class="font-medium text-gray-900"></span>
+        </span>
+      </label>
+      <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+        <input type="radio" name="question" value="1" class="mt-1 text-green-600 focus:ring-green-500">
+        <span class="flex-1">
+          <span class="font-medium text-gray-900"></span>
+        </span>
+      </label>
+    `;
+  }
+
   function showQuestion() {
     const q = testQuestions[currentQuestionIndex];
     if (!q) {
@@ -410,27 +427,36 @@
       return;
     }
     questionText.textContent = `${currentQuestionIndex + 1}. ${q.text}`;
-    // 动态渲染 options
-    questionOptions.innerHTML = q.options.map((opt, idx) => `
-      <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
-        <input type="radio" name="question" value="${idx}" class="mt-1 text-green-600 focus:ring-green-500">
-        <span class="flex-1">
-          <span class="font-medium text-gray-900">${opt}</span>
-        </span>
-      </label>
-    `).join('');
+
+    // 只在第一次渲染结构
+    if (questionOptions.innerHTML.trim() === '' || questionOptions.querySelectorAll('input').length !== 2) {
+      renderQuestionOptions();
+    }
+
+    // 更新选项文本
+    const labels = questionOptions.querySelectorAll('label span span');
+    if (labels.length >= 2) {
+      labels[0].textContent = q.options[0];
+      labels[1].textContent = q.options[1];
+    }
+
+    // 清除之前的选择
+    const radios = questionOptions.querySelectorAll('input[name="question"]');
+    radios.forEach(radio => radio.checked = false);
+
     // 恢复之前的选择
     if (answers[currentQuestionIndex] !== null) {
-      const radios = document.querySelectorAll('input[name="question"]');
       if (radios[answers[currentQuestionIndex]]) {
         radios[answers[currentQuestionIndex]].checked = true;
       }
     }
+
     // 更新进度条
     questionNumber.textContent = `问题 ${currentQuestionIndex + 1}/${testQuestions.length}`;
     const percent = Math.round((currentQuestionIndex + 1) / testQuestions.length * 100);
     completionPercentage.textContent = `${percent}%`;
     progressBar.style.width = `${percent}%`;
+
     // 按钮显示逻辑
     if (currentQuestionIndex === 0) {
       prevBtn.classList.add('hidden');
