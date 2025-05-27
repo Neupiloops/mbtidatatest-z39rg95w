@@ -345,7 +345,7 @@
       if (startBtn) {
         startBtn.addEventListener('click', function() {
           let selected = get40QuestionsFromTestJS();
-          // 只有在没有题目时才弹alert
+          // 修正1：只有在没有题目时才弹alert
           if (!selected || selected.length === 0) {
             alert('无法加载测试题目，请稍后再试！');
             return;
@@ -374,7 +374,7 @@
               selectedValue = idx;
             }
           });
-          // 只有在未选择时才弹alert
+          // 修正2：只有在未选择时才弹alert
           if (selectedValue === null) {
             alert('请选择一个选项');
             return;
