@@ -149,16 +149,16 @@
           <div id="inspiration-quote" class="text-blue-600 text-xl font-semibold italic mb-8 min-h-[2.5rem] opacity-100 transition-opacity duration-1000">
             加载中...
           </div>
-       <button id="start-test" class="bg-green-500 text-white px-8 py-4 rounded-lg text-lg font-medium hover:bg-green-600 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
-  开始免费测试
-       <span class="block text-sm mt-1 font-normal">40个问题 · 约10分钟</span>
-       </button>
+          <button id="start-test" class="bg-green-500 text-white px-8 py-4 rounded-lg text-lg font-medium hover:bg-green-600 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+            开始免费测试
+            <span class="block text-sm mt-1 font-normal">40个问题 · 约10分钟</span>
+          </button>
           <div class="mt-8 max-w-3xl mx-auto px-4 text-left space-y-10">
             <!-- 小贴士（免费测试特色，浅绿色卡片，内容参考paid-test.html） -->
             <div class="card max-w-3xl mx-auto">
               <h2>🌟 免费测试特色</h2>
               <ul class="list-disc list-inside">
-                <li>基于官方MBTI理论，40题涵盖MBTI全部八大维度  </li>
+                <li>基于官方MBTI理论，40题涵盖MBTI全部八大维度</li>
                 <li>测试过程简洁，题目分布均衡</li>
                 <li>测试结果免费查看，助你初步了解自我</li>
                 <li>如需更深入分析，可升级至专业版</li>
@@ -180,43 +180,56 @@
 
         <!-- 测试问题区域 -->
         <div class="hidden" id="test-questions">
-  <div class="max-w-3xl mx-auto">
-    <div class="bg-white rounded-lg shadow-lg p-8">
-      <h2 class="text-xl font-semibold text-gray-900 mb-6" id="question-text">
-        加载问题中...
-      </h2>
-      <div class="space-y-4" id="question-options"></div>
-      <div class="flex justify-between mt-8">
-        <button id="prev-question" class="hidden bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors">
-          上一题
-        </button>
-        <div class="flex-1"></div>
-        <button id="next-question" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
-          下一题
-        </button>
-      </div>
-    </div>
-    <!-- 小助手提醒卡片，浅绿色，格式与paid-test.html一致，内容如下，间隔两行 -->
-    <div id="encouragement" class="mt-16">
-      <div class="rounded-lg border-l-4 border-green-400 bg-green-50 p-6 shadow flex items-start">
-        <div class="flex-shrink-0">
-          <svg class="h-8 w-8 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M9.09 9a3 3 0 1 1 5.82 0c0 1.657-1.343 3-3 3s-3-1.343-3-3z"></path>
-            <path d="M12 17v.01"></path>
-          </svg>
+          <div class="max-w-3xl mx-auto">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+              <h2 class="text-xl font-semibold text-gray-900 mb-6" id="question-text">
+                加载问题中...
+              </h2>
+              <div class="space-y-4" id="question-options">
+                <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+                  <input type="radio" name="question" value="0" class="mt-1 text-green-600 focus:ring-green-500">
+                  <span class="flex-1">
+                    <span class="font-medium text-gray-900"></span>
+                  </span>
+                </label>
+                <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+                  <input type="radio" name="question" value="1" class="mt-1 text-green-600 focus:ring-green-500">
+                  <span class="flex-1">
+                    <span class="font-medium text-gray-900"></span>
+                  </span>
+                </label>
+              </div>
+              <div class="flex justify-between mt-8">
+                <button id="prev-question" class="hidden bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors">
+                  上一题
+                </button>
+                <div class="flex-1"></div>
+                <button id="next-question" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                  下一题
+                </button>
+              </div>
+            </div>
+            <!-- 小助手提醒卡片，浅绿色，格式与paid-test.html一致，内容如下，间隔两行 -->
+            <div id="encouragement" class="mt-16">
+              <div class="rounded-lg border-l-4 border-green-400 bg-green-50 p-6 shadow flex items-start">
+                <div class="flex-shrink-0">
+                  <svg class="h-8 w-8 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 1 1 5.82 0c0 1.657-1.343 3-3 3s-3-1.343-3-3z"></path>
+                    <path d="M12 17v.01"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <h2 class="text-green-700 font-semibold text-lg mb-1 flex items-center">
+                    🤖 小助手提醒
+                  </h2>
+                  <p class="text-green-800 mb-1">您正在进行免费版MBTI测试，请保持专注，诚实回答每个问题。</p>
+                  <p class="text-green-800">您的坚持将获得更准确的性格分析！</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="ml-4">
-          <h2 class="text-green-700 font-semibold text-lg mb-1 flex items-center">
-            🤖 小助手提醒
-          </h2>
-          <p class="text-green-800 mb-1">您正在进行免费版MBTI测试，请保持专注，诚实回答每个问题。</p>
-          <p class="text-green-800">您的坚持将获得更准确的性格分析！</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
     </section>
   </main>
 
@@ -285,7 +298,6 @@
 
     // 获取40题，确保各维度均衡
     function get40QuestionsFromTestJS() {
-      // paid-test.html的做法是直接用window.questions和window.extendedQuestions拼接
       let allQuestions = [];
       if (Array.isArray(window.questions)) allQuestions = allQuestions.concat(window.questions);
       if (Array.isArray(window.extendedQuestions)) allQuestions = allQuestions.concat(window.extendedQuestions);
@@ -298,26 +310,16 @@
 
       // 每个维度10题，不足则补齐
       let selected = [];
-      let minCount = Math.min(dims.EI.length, dims.SN.length, dims.TF.length, dims.JP.length, 10);
-      if (minCount < 10) minCount = Math.min(dims.EI.length, dims.SN.length, dims.TF.length, dims.JP.length);
-
-      function shuffle(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-      }
       for (const dim in dims) {
-        selected = selected.concat(shuffle(dims[dim]).slice(0, 10));
+        selected = selected.concat(dims[dim].slice(0, 10));
       }
       // 如果不足40题，补齐
       if (selected.length < 40) {
         const rest = allQuestions.filter(q => !selected.includes(q));
-        selected = selected.concat(shuffle(rest).slice(0, 40 - selected.length));
+        selected = selected.concat(rest.slice(0, 40 - selected.length));
       }
       // 最终只取40题
-      return shuffle(selected).slice(0, 40);
+      return selected.slice(0, 40);
     }
 
     let currentQuestionIndex = 0;
@@ -331,7 +333,7 @@
         questionCount: 40
       }));
 
-      const startBtn = document.getElementById('start-test-btn');
+      const startBtn = document.getElementById('start-test');
       const testIntro = document.getElementById('test-intro');
       const testQuestionsDiv = document.getElementById('test-questions');
       const progressContainer = document.getElementById('test-progress-container');
@@ -346,7 +348,6 @@
 
       if (startBtn) {
         startBtn.addEventListener('click', function() {
-          // 直接用test.js的window.questions和window.extendedQuestions
           let selected = get40QuestionsFromTestJS();
           if (!selected || selected.length < 40) {
             alert('无法加载测试题目，请稍后再试！');
@@ -403,72 +404,50 @@
         });
       }
 
-  function renderQuestionOptions() {
-    questionOptions.innerHTML = `
-      <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
-        <input type="radio" name="question" value="0" class="mt-1 text-green-600 focus:ring-green-500">
-        <span class="flex-1">
-          <span class="font-medium text-gray-900"></span>
-        </span>
-      </label>
-      <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
-        <input type="radio" name="question" value="1" class="mt-1 text-green-600 focus:ring-green-500">
-        <span class="flex-1">
-          <span class="font-medium text-gray-900"></span>
-        </span>
-      </label>
-    `;
-  }
+      function showQuestion() {
+        const q = testQuestions[currentQuestionIndex];
+        if (!q) {
+          alert('无法加载测试题目，请稍后再试！');
+          return;
+        }
+        questionText.textContent = `${currentQuestionIndex + 1}. ${q.text}`;
 
-  function showQuestion() {
-    const q = testQuestions[currentQuestionIndex];
-    if (!q) {
-      alert('无法加载测试题目，请稍后再试！');
-      return;
-    }
-    questionText.textContent = `${currentQuestionIndex + 1}. ${q.text}`;
+        // 更新选项文本
+        const labels = questionOptions.querySelectorAll('label span.font-medium');
+        if (labels.length >= 2) {
+          labels[0].textContent = q.options[0];
+          labels[1].textContent = q.options[1];
+        }
 
-    // 只在第一次渲染结构
-    if (questionOptions.innerHTML.trim() === '' || questionOptions.querySelectorAll('input').length !== 2) {
-      renderQuestionOptions();
-    }
+        // 清除之前的选择
+        const radios = questionOptions.querySelectorAll('input[name="question"]');
+        radios.forEach(radio => radio.checked = false);
 
-    // 更新选项文本
-    const labels = questionOptions.querySelectorAll('label span span');
-    if (labels.length >= 2) {
-      labels[0].textContent = q.options[0];
-      labels[1].textContent = q.options[1];
-    }
+        // 恢复之前的选择
+        if (answers[currentQuestionIndex] !== null) {
+          if (radios[answers[currentQuestionIndex]]) {
+            radios[answers[currentQuestionIndex]].checked = true;
+          }
+        }
 
-    // 清除之前的选择
-    const radios = questionOptions.querySelectorAll('input[name="question"]');
-    radios.forEach(radio => radio.checked = false);
+        // 更新进度条
+        questionNumber.textContent = `问题 ${currentQuestionIndex + 1}/${testQuestions.length}`;
+        const percent = Math.round((currentQuestionIndex + 1) / testQuestions.length * 100);
+        completionPercentage.textContent = `${percent}%`;
+        progressBar.style.width = `${percent}%`;
 
-    // 恢复之前的选择
-    if (answers[currentQuestionIndex] !== null) {
-      if (radios[answers[currentQuestionIndex]]) {
-        radios[answers[currentQuestionIndex]].checked = true;
+        // 按钮显示逻辑
+        if (currentQuestionIndex === 0) {
+          prevBtn.classList.add('hidden');
+          nextBtn.textContent = '下一题';
+        } else if (currentQuestionIndex === testQuestions.length - 1) {
+          prevBtn.classList.remove('hidden');
+          nextBtn.textContent = '完成测试';
+        } else {
+          prevBtn.classList.remove('hidden');
+          nextBtn.textContent = '下一题';
+        }
       }
-    }
-
-    // 更新进度条
-    questionNumber.textContent = `问题 ${currentQuestionIndex + 1}/${testQuestions.length}`;
-    const percent = Math.round((currentQuestionIndex + 1) / testQuestions.length * 100);
-    completionPercentage.textContent = `${percent}%`;
-    progressBar.style.width = `${percent}%`;
-
-    // 按钮显示逻辑
-    if (currentQuestionIndex === 0) {
-      prevBtn.classList.add('hidden');
-      nextBtn.textContent = '下一题';
-    } else if (currentQuestionIndex === testQuestions.length - 1) {
-      prevBtn.classList.remove('hidden');
-      nextBtn.textContent = '完成测试';
-    } else {
-      prevBtn.classList.remove('hidden');
-      nextBtn.textContent = '下一题';
-    }
-  }
 
       function completeTest() {
         if (answers.some(a => a === null)) {
@@ -504,6 +483,6 @@
         window.location.href = 'result.html?type=basic';
       }
     });
-  </script>
+</script>
 </body>
 </html>
