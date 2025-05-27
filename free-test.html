@@ -235,6 +235,7 @@
     </div>
   </footer>
 
+  <!-- ...existing code above... -->
   <script src="src/js/main.js"></script>
   <script src="src/js/test-packages.js"></script>
   <script src="src/js/test.js"></script>
@@ -261,11 +262,9 @@
       "你已经很棒了，继续加油！",
       "今天的坚持，是明天的成就。"
     ];
-
     function rotateQuotes() {
       const quoteEl = document.getElementById("inspiration-quote");
       let index = 0;
-
       const showQuote = () => {
         quoteEl.style.opacity = 0;
         setTimeout(() => {
@@ -274,7 +273,6 @@
           index = (index + 1) % quotes.length;
         }, 1000);
       };
-
       showQuote();
       setInterval(showQuote, 10000);
     }
@@ -338,20 +336,23 @@
 
       if (startBtn) {
         startBtn.addEventListener('click', function() {
-          // 获取所有题目
+          // 获取所有题目（优先test.js导出的questions，兼容test-packages.js的mbtiQuestions）
           let rawQuestions = [];
           if (typeof window.questions !== 'undefined' && Array.isArray(window.questions) && window.questions.length >= 40) {
             rawQuestions = window.questions;
-          } else if (typeof mbtiQuestions !== 'undefined' && Array.isArray(mbtiQuestions) && mbtiQuestions.length >= 40) {
-            rawQuestions = mbtiQuestions;
+          } else if (typeof window.mbtiQuestions !== 'undefined' && Array.isArray(window.mbtiQuestions) && window.mbtiQuestions.length >= 40) {
+            rawQuestions = window.mbtiQuestions;
           }
           // 按维度随机抽取每个维度10题
           const selected = getRandomQuestionsByDimension(rawQuestions, 10);
           if (selected && selected.length === 40) {
             testQuestions = transformQuestions(selected);
-          } else {
+          } else if (rawQuestions.length >= 40) {
             // fallback: 随机抽取40题
             testQuestions = transformQuestions(rawQuestions.slice(0, 40));
+          } else {
+            alert('无法加载测试题目，请稍后再试！');
+            return;
           }
           currentQuestionIndex = 0;
           answers = new Array(testQuestions.length).fill(null);
@@ -433,15 +434,15 @@
         const percent = Math.round((currentQuestionIndex + 1) / testQuestions.length * 100);
         completionPercentage.textContent = `${percent}%`;
         progressBar.style.width = `${percent}%`;
-        // 按钮显示
+        // 按钮显示逻辑
         if (currentQuestionIndex === 0) {
           prevBtn.classList.add('hidden');
-        } else {
+          nextBtn.textContent = '下一题';
+        } else if (currentQuestionIndex === testQuestions.length - 1) {
           prevBtn.classList.remove('hidden');
-        }
-        if (currentQuestionIndex === testQuestions.length - 1) {
           nextBtn.textContent = '完成测试';
         } else {
+          prevBtn.classList.remove('hidden');
           nextBtn.textContent = '下一题';
         }
       }
