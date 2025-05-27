@@ -296,15 +296,26 @@
       setInterval(showQuote, 10000);
     }
 
-    // 最小回退测试题目（1道）
-    function getMinimalFallbackQuestion() {
-      return [
-        {
-          question: "在社交场合中，您通常：",
-          options: { A: "主动与他人交谈，扩展社交圈", B: "倾向于与已认识的人交流，保持低调" },
-          scoring: { A: "E", B: "I" }
+    // 随机抽取每个维度的题目
+    function getRandomQuestionsByDimension(questions, countPerDim = 10) {
+      const dims = { EI: [], SN: [], TF: [], JP: [] };
+      questions.forEach(q => {
+        if (dims[q.dimension]) dims[q.dimension].push(q);
+      });
+      // 随机抽取每个维度的题目
+      function shuffle(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
         }
-      ];
+        return arr;
+      }
+      let selected = [];
+      for (const dim in dims) {
+        if (dims[dim].length < countPerDim) return null;
+        selected = selected.concat(shuffle(dims[dim]).slice(0, countPerDim));
+      }
+      return shuffle(selected);
     }
 
     // 转换test.js问题格式
@@ -376,15 +387,29 @@
         document.getElementById('encouragement').classList.remove('hidden');
         
         // 加载测试题目
+        let rawQuestions = [];
         if (typeof mbtiQuestions !== 'undefined' && Array.isArray(mbtiQuestions) && mbtiQuestions.length >= 40) {
-            testQuestions = mbtiQuestions.slice(0, 40);
+            rawQuestions = mbtiQuestions;
         } else if (typeof questions !== 'undefined' && Array.isArray(questions) && questions.length >= 40) {
-            testQuestions = transformQuestions(questions.slice(0, 40));
-        } else {
-            console.error('Error: Neither mbtiQuestions nor questions are defined or contain enough questions. Using minimal fallback.');
-            testQuestions = getMinimalFallbackQuestion();
+            rawQuestions = questions;
         }
-        
+        if (rawQuestions.length >= 40) {
+            // 按维度随机抽取每个维度10题
+            const selected = getRandomQuestionsByDimension(rawQuestions, 10);
+            if (selected && selected.length === 40) {
+                testQuestions = transformQuestions(selected);
+            } else {
+                // fallback: 随机抽取40题
+                testQuestions = transformQuestions(rawQuestions.slice(0, 40));
+            }
+        } else {
+            // fallback: 只用1题
+            testQuestions = [{
+              question: "在社交场合中，您通常：",
+              options: { A: "主动与他人交谈，扩展社交圈", B: "倾向于与已认识的人交流，保持低调" },
+              scoring: { A: "E", B: "I" }
+            }];
+        }
         currentQuestion = 0;
         answers = new Array(testQuestions.length).fill(null); // 初始化答案数组
         showQuestion();
@@ -455,7 +480,7 @@
         // 检查是否有选中的答案
         const selectedAnswer = document.querySelector('input[name="question"]:checked');
         if (!selectedAnswer) {
-            alert('无法加载测试题目，请稍后再试！');
+            alert('请选择一个答案后再继续');
             return;
         }
         
@@ -469,6 +494,8 @@
         
         if (currentQuestion >= testQuestions.length) {
             completeTest();
+        } else if (!testQuestions[currentQuestion]) {
+            alert('无法加载测试题目，请稍后再试！');
         } else {
             showQuestion();
         }
