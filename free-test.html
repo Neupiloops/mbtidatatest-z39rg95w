@@ -158,7 +158,7 @@
             <div class="card max-w-3xl mx-auto">
               <h2>🌟 免费测试特色</h2>
               <ul class="list-disc list-inside">
-                <li>基于官方MBTI理论，40道题涵盖MBTI全部八大维度  </li>
+                <li>基于官方MBTI理论，40题涵盖MBTI全部八大维度  </li>
                 <li>测试过程简洁，题目分布均衡</li>
                 <li>测试结果免费查看，助你初步了解自我</li>
                 <li>如需更深入分析，可升级至专业版</li>
@@ -180,31 +180,43 @@
 
         <!-- 测试问题区域 -->
         <div class="hidden" id="test-questions">
-          <div class="max-w-3xl mx-auto">
-            <div class="bg-white rounded-lg shadow-lg p-8">
-              <h2 class="text-xl font-semibold text-gray-900 mb-6" id="question-text">
-                加载问题中...
-              </h2>
-              <div class="space-y-4" id="question-options"></div>
-              <div class="flex justify-between mt-8">
-                <button id="prev-question" class="hidden bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors">
-                  上一题
-                </button>
-                <div class="flex-1"></div>
-                <button id="next-question" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
-                  下一题
-                </button>
-              </div>
-            </div>
-            <!-- 小助手提醒卡片，浅绿色，与测试卡片间隔两行 -->
-            <div class="assistant-card mt-16" id="encouragement" style="display:none;">
-              <h2>🤖 小助手提醒</h2>
-              <p>加油！你正在一步步更了解自己～💪</p>
-              <p>您的诚实回答将获得更准确的性格分析！</p>
-            </div>
-          </div>
+  <div class="max-w-3xl mx-auto">
+    <div class="bg-white rounded-lg shadow-lg p-8">
+      <h2 class="text-xl font-semibold text-gray-900 mb-6" id="question-text">
+        加载问题中...
+      </h2>
+      <div class="space-y-4" id="question-options"></div>
+      <div class="flex justify-between mt-8">
+        <button id="prev-question" class="hidden bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors">
+          上一题
+        </button>
+        <div class="flex-1"></div>
+        <button id="next-question" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
+          下一题
+        </button>
+      </div>
+    </div>
+    <!-- 小助手提醒卡片，浅绿色，格式与paid-test.html一致，内容如下，间隔两行 -->
+    <div id="encouragement" class="mt-16">
+      <div class="rounded-lg border-l-4 border-green-400 bg-green-50 p-6 shadow flex items-start">
+        <div class="flex-shrink-0">
+          <svg class="h-8 w-8 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 1 1 5.82 0c0 1.657-1.343 3-3 3s-3-1.343-3-3z"></path>
+            <path d="M12 17v.01"></path>
+          </svg>
+        </div>
+        <div class="ml-4">
+          <h2 class="text-green-700 font-semibold text-lg mb-1 flex items-center">
+            🤖 小助手提醒
+          </h2>
+          <p class="text-green-800 mb-1">您正在进行免费版MBTI测试，请保持专注，诚实回答每个问题。</p>
+          <p class="text-green-800">您的坚持将获得更准确的性格分析！</p>
         </div>
       </div>
+    </div>
+  </div>
+</div>
     </section>
   </main>
 
@@ -391,51 +403,47 @@
         });
       }
 
-      function showQuestion() {
-        const q = testQuestions[currentQuestionIndex];
-        if (!q) {
-          alert('无法加载测试题目，请稍后再试！');
-          return;
-        }
-        questionText.textContent = `${currentQuestionIndex + 1}. ${q.text}`;
-        questionOptions.innerHTML = `
-          <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
-            <input type="radio" name="question" value="0" class="mt-1 text-green-600 focus:ring-green-500">
-            <span class="flex-1">
-              <span class="font-medium text-gray-900">${q.options[0]}</span>
-            </span>
-          </label>
-          <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
-            <input type="radio" name="question" value="1" class="mt-1 text-green-600 focus:ring-green-500">
-            <span class="flex-1">
-              <span class="font-medium text-gray-900">${q.options[1]}</span>
-            </span>
-          </label>
-        `;
-        // 恢复之前的选择
-        if (answers[currentQuestionIndex] !== null) {
-          const radios = document.querySelectorAll('input[name="question"]');
-          if (radios[answers[currentQuestionIndex]]) {
-            radios[answers[currentQuestionIndex]].checked = true;
-          }
-        }
-        // 更新进度条
-        questionNumber.textContent = `问题 ${currentQuestionIndex + 1}/${testQuestions.length}`;
-        const percent = Math.round((currentQuestionIndex + 1) / testQuestions.length * 100);
-        completionPercentage.textContent = `${percent}%`;
-        progressBar.style.width = `${percent}%`;
-        // 按钮显示逻辑
-        if (currentQuestionIndex === 0) {
-          prevBtn.classList.add('hidden');
-          nextBtn.textContent = '下一题';
-        } else if (currentQuestionIndex === testQuestions.length - 1) {
-          prevBtn.classList.remove('hidden');
-          nextBtn.textContent = '完成测试';
-        } else {
-          prevBtn.classList.remove('hidden');
-          nextBtn.textContent = '下一题';
-        }
+     // 只需修正 showQuestion 函数，确保 options 正确显示
+  function showQuestion() {
+    const q = testQuestions[currentQuestionIndex];
+    if (!q) {
+      alert('无法加载测试题目，请稍后再试！');
+      return;
+    }
+    questionText.textContent = `${currentQuestionIndex + 1}. ${q.text}`;
+    // 修正：动态渲染 options
+    questionOptions.innerHTML = q.options.map((opt, idx) => `
+      <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+        <input type="radio" name="question" value="${idx}" class="mt-1 text-green-600 focus:ring-green-500">
+        <span class="flex-1">
+          <span class="font-medium text-gray-900">${opt}</span>
+        </span>
+      </label>
+    `).join('');
+    // 恢复之前的选择
+    if (answers[currentQuestionIndex] !== null) {
+      const radios = document.querySelectorAll('input[name="question"]');
+      if (radios[answers[currentQuestionIndex]]) {
+        radios[answers[currentQuestionIndex]].checked = true;
       }
+    }
+        // 更新进度条      
+    questionNumber.textContent = `问题 ${currentQuestionIndex + 1}/${testQuestions.length}`;
+    const percent = Math.round((currentQuestionIndex + 1) / testQuestions.length * 100);
+    completionPercentage.textContent = `${percent}%`;
+    progressBar.style.width = `${percent}%`;
+    // 按钮显示逻辑
+    if (currentQuestionIndex === 0) {
+      prevBtn.classList.add('hidden');
+      nextBtn.textContent = '下一题';
+    } else if (currentQuestionIndex === testQuestions.length - 1) {
+      prevBtn.classList.remove('hidden');
+      nextBtn.textContent = '完成测试';
+    } else {
+      prevBtn.classList.remove('hidden');
+      nextBtn.textContent = '下一题';
+    }
+  }
 
       function completeTest() {
         if (answers.some(a => a === null)) {
