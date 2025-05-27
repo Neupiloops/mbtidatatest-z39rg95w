@@ -8,6 +8,8 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="src/css/styles.css">
   <script src="https://www.paypal.com/sdk/js?client-id=test&currency=CNY"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body class="font-sans text-gray-800 bg-gray-50">
 
@@ -27,7 +29,7 @@
           <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
           <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600">小问答</a>
           <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600">冷知识</a>
-          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每天觉悟</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每天一悟</a>
           <a href="booksblog.html" class="text-gray-600 hover:text-blue-600">读书推荐</a>
           <a href="price.html" class="text-gray-600 hover:text-blue-600">套餐价格</a>
           <a href="aboutus.html" class="text-gray-600 hover:text-blue-600">关于我们</a>
@@ -44,7 +46,7 @@
           <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
           <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600">小问答</a>
           <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600">冷知识</a>
-          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每天觉悟</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每天一悟</a>
           <a href="booksblog.html" class="text-gray-600 hover:text-blue-600">读书推荐</a>
           <a href="price.html" class="text-gray-600 hover:text-blue-600">套餐价格</a>
           <a href="aboutus.html" class="text-gray-600 hover:text-blue-600">关于我们</a>
@@ -58,7 +60,31 @@
   <main class="pt-32 pb-20 bg-gray-50">
     <div class="container mx-auto px-4 max-w-5xl">
       <h1 id="result-title" class="text-3xl font-bold text-center mb-8">您的MBTI测试结果</h1>
-      
+
+      <!-- 新增：操作按钮区 -->
+      <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
+        <button id="save-pdf-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition duration-200 flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+          </svg>
+          保存为PDF
+        </button>
+        <button id="share-wechat-btn" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-2 rounded-lg shadow transition duration-200 flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01"/>
+          </svg>
+          分享到微信
+        </button>
+        <button id="share-weibo-btn" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-2 rounded-lg shadow transition duration-200 flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 8a6 6 0 11-12 0 6 6 0 0112 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 14v7m-4-4h8"/>
+          </svg>
+          分享到微博
+        </button>
+      </div>
+
       <!-- 基础测试结果 -->
       <div id="basic-result-container" class="mb-12">
         <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
@@ -325,8 +351,6 @@
   <script src="src/js/test.js"></script>
   <script src="src/js/test-packages.js"></script>
   <script src="src/js/share.js"></script>
-  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="src/js/pdf-generator.js"></script>
   <script>
     // 处理测试结果显示
@@ -535,6 +559,39 @@
           }
         }
       }
+
+      // 保存为PDF功能
+      document.getElementById('save-pdf-btn')?.addEventListener('click', function() {
+        const mainContent = document.querySelector('main');
+        html2canvas(mainContent).then(canvas => {
+          const imgData = canvas.toDataURL('image/png');
+          const pdf = new window.jspdf.jsPDF('p', 'mm', 'a4');
+          const pageWidth = pdf.internal.pageSize.getWidth();
+          const pageHeight = pdf.internal.pageSize.getHeight();
+          const imgProps = pdf.getImageProperties(imgData);
+          const pdfWidth = pageWidth;
+          const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+          pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          pdf.save('MBTI测试报告.pdf');
+        });
+      });
+
+      // 分享到微信
+      document.getElementById('share-wechat-btn')?.addEventListener('click', function() {
+        const url = encodeURIComponent(window.location.href);
+        if (window.innerWidth < 768) {
+          window.location.href = `weixin://dl/moments?text=${url}`;
+        } else {
+          window.open(`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${url}`, '_blank');
+        }
+      });
+
+      // 分享到微博
+      document.getElementById('share-weibo-btn')?.addEventListener('click', function() {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent('我的MBTI测试结果，快来测一测你的吧！');
+        window.open(`https://service.weibo.com/share/share.php?url=${url}&title=${title}`, '_blank');
+      });
     });
   </script>
 </body>
