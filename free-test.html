@@ -8,7 +8,6 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="src/css/styles.css">
   <style>
-    /* Circular Progress Indicator */
     .progress-circle-container {
       display: flex;
       flex-direction: column;
@@ -50,7 +49,6 @@
       color: #4b5563;
       text-align: center;
     }
-    /* Consistent Card Styling */
     .card {
       background-color: #eff6ff;
       border-left: 4px solid #3b82f6;
@@ -171,48 +169,34 @@
           </div>
         </div>
         
-        <!-- 测试问题 -->
-        <div class="hidden" id="test-questions">
-          <!-- 测试进度 -->
-          <div class="hidden progress-circle-container" id="test-progress-container">
-            <div class="progress-info">
-              <span id="question-number">问题 1/40</span>
-            </div>
-            <div class="progress-circle">
-              <svg width="120" height="120">
-                <circle class="background-circle" cx="60" cy="60" r="50"></circle>
-                <circle class="progress-ring" cx="60" cy="60" r="50" stroke-dasharray="0 314"></circle>
-              </svg>
-              <div class="progress-text" id="completion-percentage">2.5%</div>
-            </div>
+        <!-- 测试进度条 -->
+        <div class="hidden mb-8" id="test-progress-container">
+          <div class="flex justify-between text-sm text-gray-600 mb-2">
+            <span id="question-number">问题 1/40</span>
+            <span id="completion-percentage">1%</span>
           </div>
-          
-          <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md">
-            <h2 id="question-text" class="text-xl font-semibold text-gray-900 mb-6">1. 在社交场合中，您通常：</h2>
-            
-            <div class="space-y-4" id="question-options">
-              <label class="flex items-start p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors">
-                <input type="radio" name="question" value="A" class="mt-1 mr-3">
-                <div>
-                  <span class="font-medium text-gray-900">主动与他人交谈，扩展社交圈</span>
-                </div>
-              </label>
-              
-              <label class="flex items-start p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors">
-                <input type="radio" name="question" value="B" class="mt-1 mr-3">
-                <div>
-                  <span class="font-medium text-gray-900">倾向于与已认识的人交流，保持低调</span>
-                </div>
-              </label>
-            </div>
-            
-            <div class="flex justify-between mt-8">
-              <button id="prev-question" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors hidden">
-                上一题
-              </button>
-              <button id="next-question" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors ml-auto">
-                下一题
-              </button>
+          <div class="w-full bg-gray-200 rounded-full h-2">
+            <div class="bg-green-600 h-2 rounded-full transition-all duration-300" style="width: 1%" id="progress-bar"></div>
+          </div>
+        </div>
+
+        <!-- 测试问题区域 -->
+        <div class="hidden" id="test-questions">
+          <div class="max-w-3xl mx-auto">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+              <h2 class="text-xl font-semibold text-gray-900 mb-6" id="question-text">
+                加载问题中...
+              </h2>
+              <div class="space-y-4" id="question-options"></div>
+              <div class="flex justify-between mt-8">
+                <button id="prev-question" class="hidden bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors">
+                  上一题
+                </button>
+                <div class="flex-1"></div>
+                <button id="next-question" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                  下一题
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -254,7 +238,6 @@
   <script src="src/js/main.js"></script>
   <script src="src/js/test-packages.js"></script>
   <script src="src/js/test.js"></script>
-  
   <script>
     // 励志名言轮播
     const quotes = [
@@ -302,7 +285,6 @@
       questions.forEach(q => {
         if (dims[q.dimension]) dims[q.dimension].push(q);
       });
-      // 随机抽取每个维度的题目
       function shuffle(arr) {
         for (let i = arr.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
@@ -321,245 +303,183 @@
     // 转换test.js问题格式
     function transformQuestions(rawQuestions) {
       return rawQuestions.map(q => {
-        const dimensionMap = {
-          'EI': { A: 'E', B: 'I' },
-          'SN': { A: 'S', B: 'N' },
-          'TF': { A: 'T', B: 'F' },
-          'JP': { A: 'J', B: 'P' }
-        };
         return {
-          question: q.text,
-          options: {
-            A: q.options[0],
-            B: q.options[1]
-          },
-          scoring: dimensionMap[q.dimension] || { A: 'E', B: 'I' } // 默认EI如果dimension无效
+          text: q.text,
+          options: q.options,
+          dimension: q.dimension
         };
       });
     }
 
-    // 免费测试逻辑
-    let currentQuestion = 0;
+    let currentQuestionIndex = 0;
     let answers = [];
     let testQuestions = [];
 
     document.addEventListener('DOMContentLoaded', function() {
-        rotateQuotes();
-        
-        // 设置测试配置
-        const testConfig = {
-            type: 'basic',
-            totalQuestions: 40,
-            redirectUrl: 'result.html?type=basic'
-        };
-        localStorage.setItem('testConfig', JSON.stringify(testConfig));
-        
-        // 开始测试按钮
-        const startBtn = document.getElementById('start-test-btn');
-        if (startBtn) {
-            startBtn.addEventListener('click', function() {
-                startTest();
-            });
-        }
-        
-        // 导航按钮
-        const nextBtn = document.getElementById('next-question');
-        const prevBtn = document.getElementById('prev-question');
-        
-        if (nextBtn) {
-            nextBtn.addEventListener('click', function() {
-                nextQuestion();
-            });
-        }
-        
-        if (prevBtn) {
-            prevBtn.addEventListener('click', function() {
-                prevQuestion();
-            });
-        }
-    });
+      rotateQuotes();
+      // 设置测试配置
+      localStorage.setItem('testConfig', JSON.stringify({
+        type: 'basic',
+        questionCount: 40
+      }));
 
-    function startTest() {
-        // 隐藏介绍，显示测试
-        document.getElementById('test-intro').classList.add('hidden');
-        document.getElementById('test-progress-container').classList.remove('hidden');
-        document.getElementById('test-questions').classList.remove('hidden');
-        document.getElementById('encouragement').classList.remove('hidden');
-        
-        // 加载测试题目
-        let rawQuestions = [];
-        if (typeof mbtiQuestions !== 'undefined' && Array.isArray(mbtiQuestions) && mbtiQuestions.length >= 40) {
+      const startBtn = document.getElementById('start-test-btn');
+      const testIntro = document.getElementById('test-intro');
+      const testQuestionsDiv = document.getElementById('test-questions');
+      const progressContainer = document.getElementById('test-progress-container');
+      const encouragement = document.getElementById('encouragement');
+      const questionText = document.getElementById('question-text');
+      const questionOptions = document.getElementById('question-options');
+      const nextBtn = document.getElementById('next-question');
+      const prevBtn = document.getElementById('prev-question');
+      const questionNumber = document.getElementById('question-number');
+      const completionPercentage = document.getElementById('completion-percentage');
+      const progressBar = document.getElementById('progress-bar');
+
+      if (startBtn) {
+        startBtn.addEventListener('click', function() {
+          // 获取所有题目
+          let rawQuestions = [];
+          if (typeof window.questions !== 'undefined' && Array.isArray(window.questions) && window.questions.length >= 40) {
+            rawQuestions = window.questions;
+          } else if (typeof mbtiQuestions !== 'undefined' && Array.isArray(mbtiQuestions) && mbtiQuestions.length >= 40) {
             rawQuestions = mbtiQuestions;
-        } else if (typeof questions !== 'undefined' && Array.isArray(questions) && questions.length >= 40) {
-            rawQuestions = questions;
-        }
-        if (rawQuestions.length >= 40) {
-            // 按维度随机抽取每个维度10题
-            const selected = getRandomQuestionsByDimension(rawQuestions, 10);
-            if (selected && selected.length === 40) {
-                testQuestions = transformQuestions(selected);
-            } else {
-                // fallback: 随机抽取40题
-                testQuestions = transformQuestions(rawQuestions.slice(0, 40));
+          }
+          // 按维度随机抽取每个维度10题
+          const selected = getRandomQuestionsByDimension(rawQuestions, 10);
+          if (selected && selected.length === 40) {
+            testQuestions = transformQuestions(selected);
+          } else {
+            // fallback: 随机抽取40题
+            testQuestions = transformQuestions(rawQuestions.slice(0, 40));
+          }
+          currentQuestionIndex = 0;
+          answers = new Array(testQuestions.length).fill(null);
+          testIntro.classList.add('hidden');
+          testQuestionsDiv.classList.remove('hidden');
+          progressContainer.classList.remove('hidden');
+          encouragement.classList.remove('hidden');
+          showQuestion();
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+          const radios = document.querySelectorAll('input[name="question"]');
+          let selected = false;
+          let selectedValue = null;
+          radios.forEach((radio, idx) => {
+            if (radio.checked) {
+              selected = true;
+              selectedValue = idx;
             }
-        } else {
-            // fallback: 只用1题
-            testQuestions = [{
-              question: "在社交场合中，您通常：",
-              options: { A: "主动与他人交谈，扩展社交圈", B: "倾向于与已认识的人交流，保持低调" },
-              scoring: { A: "E", B: "I" }
-            }];
-        }
-        currentQuestion = 0;
-        answers = new Array(testQuestions.length).fill(null); // 初始化答案数组
-        showQuestion();
-    }
-
-    function showQuestion() {
-        if (currentQuestion >= testQuestions.length || !testQuestions[currentQuestion]) {
-            completeTest();
-            return;
-        }
-        
-        const question = testQuestions[currentQuestion];
-        document.getElementById('question-text').textContent = `${currentQuestion + 1}. ${question.question || '问题加载失败'}`;
-        
-        // 更新选项
-        const optionsContainer = document.getElementById('question-options');
-        optionsContainer.innerHTML = `
-            <label class="flex items-start p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors">
-                <input type="radio" name="question" value="A" class="mt-1 mr-3">
-                <div>
-                    <span class="font-medium text-gray-900">${question.options?.A || '选项 A'}</span>
-                </div>
-            </label>
-            <label class="flex items-start p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors">
-                <input type="radio" name="question" value="B" class="mt-1 mr-3">
-                <div>
-                    <span class="font-medium text-gray-900">${question.options?.B || '选项 B'}</span>
-                </div>
-            </label>
-        `;
-        
-        // 恢复之前的答案
-        if (answers[currentQuestion]) {
-            const radio = document.querySelector(`input[name="question"][value="${answers[currentQuestion]}"]`);
-            if (radio) radio.checked = true;
-        }
-        
-        // 更新进度
-        updateProgress();
-        
-        // 更新按钮状态
-        const prevBtn = document.getElementById('prev-question');
-        const nextBtn = document.getElementById('next-question');
-        
-        if (currentQuestion === 0) {
-            prevBtn.classList.add('hidden');
-        } else {
-            prevBtn.classList.remove('hidden');
-        }
-        
-        if (currentQuestion === testQuestions.length - 1) {
-            nextBtn.textContent = '完成测试';
-        } else {
-            nextBtn.textContent = '下一题';
-        }
-    }
-
-    function updateProgress() {
-        const progress = ((currentQuestion + 1) / testQuestions.length) * 100;
-        const circumference = 2 * Math.PI * 50; // SVG circle circumference (r=50)
-        const offset = circumference * (1 - progress / 100);
-        document.getElementById('question-number').textContent = `问题 ${currentQuestion + 1}/${testQuestions.length}`;
-        document.getElementById('completion-percentage').textContent = `${Math.round(progress)}%`;
-        document.querySelector('.progress-ring').setAttribute('stroke-dasharray', `${circumference * progress / 100} ${offset}`);
-    }
-
-    function nextQuestion() {
-        // 检查是否有选中的答案
-        const selectedAnswer = document.querySelector('input[name="question"]:checked');
-        if (!selectedAnswer) {
+          });
+          if (!selected) {
             alert('请选择一个答案后再继续');
             return;
-        }
-        
-        // 保存答案
-        answers[currentQuestion] = selectedAnswer.value;
-        currentQuestion++;
-        
-        // 重置单选按钮状态
-        const radios = document.querySelectorAll('input[name="question"]');
-        radios.forEach(radio => radio.checked = false);
-        
-        if (currentQuestion >= testQuestions.length) {
+          }
+          answers[currentQuestionIndex] = selectedValue;
+          if (currentQuestionIndex < testQuestions.length - 1) {
+            currentQuestionIndex++;
+            showQuestion();
+          } else if (currentQuestionIndex === testQuestions.length - 1) {
+            // 完成测试
             completeTest();
-        } else if (!testQuestions[currentQuestion]) {
+          } else {
             alert('无法加载测试题目，请稍后再试！');
+          }
+        });
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+          if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            showQuestion();
+          }
+        });
+      }
+
+      function showQuestion() {
+        const q = testQuestions[currentQuestionIndex];
+        if (!q) {
+          alert('无法加载测试题目，请稍后再试！');
+          return;
+        }
+        questionText.textContent = `${currentQuestionIndex + 1}. ${q.text}`;
+        questionOptions.innerHTML = `
+          <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+            <input type="radio" name="question" value="0" class="mt-1 text-green-600 focus:ring-green-500">
+            <span class="flex-1">
+              <span class="font-medium text-gray-900">${q.options[0]}</span>
+            </span>
+          </label>
+          <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+            <input type="radio" name="question" value="1" class="mt-1 text-green-600 focus:ring-green-500">
+            <span class="flex-1">
+              <span class="font-medium text-gray-900">${q.options[1]}</span>
+            </span>
+          </label>
+        `;
+        // 恢复之前的选择
+        if (answers[currentQuestionIndex] !== null) {
+          const radios = document.querySelectorAll('input[name="question"]');
+          if (radios[answers[currentQuestionIndex]]) {
+            radios[answers[currentQuestionIndex]].checked = true;
+          }
+        }
+        // 更新进度条
+        questionNumber.textContent = `问题 ${currentQuestionIndex + 1}/${testQuestions.length}`;
+        const percent = Math.round((currentQuestionIndex + 1) / testQuestions.length * 100);
+        completionPercentage.textContent = `${percent}%`;
+        progressBar.style.width = `${percent}%`;
+        // 按钮显示
+        if (currentQuestionIndex === 0) {
+          prevBtn.classList.add('hidden');
         } else {
-            showQuestion();
+          prevBtn.classList.remove('hidden');
         }
-    }
+        if (currentQuestionIndex === testQuestions.length - 1) {
+          nextBtn.textContent = '完成测试';
+        } else {
+          nextBtn.textContent = '下一题';
+        }
+      }
 
-    function prevQuestion() {
-        if (currentQuestion > 0) {
-            currentQuestion--;
-            showQuestion();
+      function completeTest() {
+        if (answers.some(a => a === null)) {
+          alert('请确保回答所有问题后再提交！');
+          currentQuestionIndex = answers.findIndex(a => a === null);
+          showQuestion();
+          return;
         }
-    }
-
-    function completeTest() {
-        // 验证所有问题是否都已回答
-        if (answers.some(answer => answer === null)) {
-            alert('请确保回答所有问题后再提交！');
-            currentQuestion = answers.findIndex(answer => answer === null);
-            showQuestion();
-            return;
+        // 计算分数
+        let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+        for (let i = 0; i < answers.length; i++) {
+          const q = testQuestions[i];
+          const ans = answers[i];
+          if (q.dimension === 'EI') {
+            if (ans === 0) scores.E++; else scores.I++;
+          } else if (q.dimension === 'SN') {
+            if (ans === 0) scores.S++; else scores.N++;
+          } else if (q.dimension === 'TF') {
+            if (ans === 0) scores.T++; else scores.F++;
+          } else if (q.dimension === 'JP') {
+            if (ans === 0) scores.J++; else scores.P++;
+          }
         }
-        
-        // 计算结果
-        const result = calculateMBTI(answers, testQuestions);
-        
-        // 保存结果
-        localStorage.setItem('mbtiResult', JSON.stringify(result));
+        const type =
+          (scores.E >= scores.I ? 'E' : 'I') +
+          (scores.S >= scores.N ? 'S' : 'N') +
+          (scores.T >= scores.F ? 'T' : 'F') +
+          (scores.J >= scores.P ? 'J' : 'P');
+        localStorage.setItem('mbtiType', type);
+        localStorage.setItem('mbtiScores', JSON.stringify(scores));
         localStorage.setItem('testAnswers', JSON.stringify(answers));
         localStorage.setItem('testCompleted', 'true');
-        
-        // 跳转到结果页面
         window.location.href = 'result.html?type=basic';
-    }
-
-    function calculateMBTI(answers, questions) {
-        let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
-        
-        for (let i = 0; i < answers.length; i++) {
-            const question = questions[i] || {};
-            const answer = answers[i];
-            
-            if (question.scoring && question.scoring[answer]) {
-                const dimension = question.scoring[answer];
-                scores[dimension]++;
-            }
-        }
-        
-        // 确定类型
-        const type = 
-            (scores.E >= scores.I ? 'E' : 'I') +
-            (scores.S >= scores.N ? 'S' : 'N') +
-            (scores.T >= scores.F ? 'T' : 'F') +
-            (scores.J >= scores.P ? 'J' : 'P');
-        
-        return {
-            type: type,
-            scores: scores,
-            percentages: {
-                EI: scores.E >= scores.I ? Math.round((scores.E / (scores.E + scores.I || 1)) * 100) : Math.round((scores.I / (scores.E + scores.I || 1)) * 100),
-                SN: scores.S >= scores.N ? Math.round((scores.S / (scores.S + scores.N || 1)) * 100) : Math.round((scores.N / (scores.S + scores.N || 1)) * 100),
-                TF: scores.T >= scores.F ? Math.round((scores.T / (scores.T + scores.F || 1)) * 100) : Math.round((scores.F / (scores.T + scores.F || 1)) * 100),
-                JP: scores.J >= scores.P ? Math.round((scores.J / (scores.J + scores.P || 1)) * 100) : Math.round((scores.P / (scores.J + scores.P || 1)) * 100)
-            }
-        };
-    }
+      }
+    });
   </script>
 </body>
 </html>
