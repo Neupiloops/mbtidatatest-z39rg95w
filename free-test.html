@@ -276,7 +276,7 @@
       setInterval(showQuote, 10000);
     }
 
-    // 随机抽取每个维度的题目
+    // 按维度随机抽取题目
     function getRandomQuestionsByDimension(questions, countPerDim = 10) {
       const dims = { EI: [], SN: [], TF: [], JP: [] };
       questions.forEach(q => {
@@ -299,13 +299,11 @@
 
     // 转换test.js问题格式
     function transformQuestions(rawQuestions) {
-      return rawQuestions.map(q => {
-        return {
-          text: q.text,
-          options: q.options,
-          dimension: q.dimension
-        };
-      });
+      return rawQuestions.map(q => ({
+        text: q.text,
+        options: q.options,
+        dimension: q.dimension
+      }));
     }
 
     let currentQuestionIndex = 0;
@@ -314,7 +312,6 @@
 
     document.addEventListener('DOMContentLoaded', function() {
       rotateQuotes();
-      // 设置测试配置
       localStorage.setItem('testConfig', JSON.stringify({
         type: 'basic',
         questionCount: 40
@@ -335,7 +332,7 @@
 
       if (startBtn) {
         startBtn.addEventListener('click', function() {
-          // 明确只用 test.js 的 window.questions
+          // 只用 test.js 的 window.questions
           let rawQuestions = [];
           if (window.questions && Array.isArray(window.questions) && window.questions.length >= 40) {
             rawQuestions = window.questions;
@@ -381,7 +378,6 @@
             currentQuestionIndex++;
             showQuestion();
           } else if (currentQuestionIndex === testQuestions.length - 1) {
-            // 完成测试
             completeTest();
           } else {
             alert('无法加载测试题目，请稍后再试！');
