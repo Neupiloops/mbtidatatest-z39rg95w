@@ -345,7 +345,7 @@
       if (startBtn) {
         startBtn.addEventListener('click', function() {
           let selected = get40QuestionsFromTestJS();
-          // 修正1：只要有题目就不弹alert
+          // 只有在没有题目时才弹alert
           if (!selected || selected.length === 0) {
             alert('无法加载测试题目，请稍后再试！');
             return;
@@ -360,7 +360,7 @@
           testIntro.classList.add('hidden');
           testQuestionsDiv.classList.remove('hidden');
           progressContainer.classList.remove('hidden');
-          encouragement.style.display = '';
+          encouragement.classList.remove('hidden');
           showQuestion();
         });
       }
@@ -374,9 +374,9 @@
               selectedValue = idx;
             }
           });
-          // 修正2：只有未选择时才弹alert
+          // 只有在未选择时才弹alert
           if (selectedValue === null) {
-            alert('请选择一个答案后再继续');
+            alert('请选择一个选项');
             return;
           }
           answers[currentQuestionIndex] = selectedValue;
@@ -402,14 +402,23 @@
         const q = testQuestions[currentQuestionIndex];
         if (!q) return;
         questionText.textContent = `${currentQuestionIndex + 1}. ${q.text}`;
-        const labels = questionOptions.querySelectorAll('label span.font-medium');
-        if (labels.length >= 2) {
-          labels[0].textContent = q.options[0];
-          labels[1].textContent = q.options[1];
-        }
-        const radios = questionOptions.querySelectorAll('input[name="question"]');
-        radios.forEach(radio => radio.checked = false);
+        questionOptions.innerHTML = `
+          <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+            <input type="radio" name="question" value="0" class="mt-1 text-green-600 focus:ring-green-500">
+            <span class="flex-1">
+              <span class="font-medium text-gray-900">${q.options[0]}</span>
+            </span>
+          </label>
+          <label class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+            <input type="radio" name="question" value="1" class="mt-1 text-green-600 focus:ring-green-500">
+            <span class="flex-1">
+              <span class="font-medium text-gray-900">${q.options[1]}</span>
+            </span>
+          </label>
+        `;
+        // 恢复之前的选择
         if (answers[currentQuestionIndex] !== null) {
+          const radios = document.querySelectorAll('input[name="question"]');
           if (radios[answers[currentQuestionIndex]]) {
             radios[answers[currentQuestionIndex]].checked = true;
           }
