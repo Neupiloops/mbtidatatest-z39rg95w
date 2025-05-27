@@ -302,23 +302,19 @@
       if (Array.isArray(window.questions)) allQuestions = allQuestions.concat(window.questions);
       if (Array.isArray(window.extendedQuestions)) allQuestions = allQuestions.concat(window.extendedQuestions);
 
-      // 按维度分组
       const dims = { EI: [], SN: [], TF: [], JP: [] };
       allQuestions.forEach(q => {
         if (dims[q.dimension]) dims[q.dimension].push(q);
       });
 
-      // 每个维度10题，不足则补齐
       let selected = [];
       for (const dim in dims) {
         selected = selected.concat(dims[dim].slice(0, 10));
       }
-      // 如果不足40题，补齐
       if (selected.length < 40) {
         const rest = allQuestions.filter(q => !selected.includes(q));
         selected = selected.concat(rest.slice(0, 40 - selected.length));
       }
-      // 最终只取40题
       return selected.slice(0, 40);
     }
 
@@ -349,7 +345,8 @@
       if (startBtn) {
         startBtn.addEventListener('click', function() {
           let selected = get40QuestionsFromTestJS();
-          if (!selected || selected.length < 40) {
+          // 修正1：只要有题目就不弹alert
+          if (!selected || selected.length === 0) {
             alert('无法加载测试题目，请稍后再试！');
             return;
           }
@@ -370,16 +367,15 @@
 
       if (nextBtn) {
         nextBtn.addEventListener('click', function() {
-          const radios = document.querySelectorAll('input[name="question"]');
-          let selected = false;
+          const radios = questionOptions.querySelectorAll('input[name="question"]');
           let selectedValue = null;
           radios.forEach((radio, idx) => {
             if (radio.checked) {
-              selected = true;
               selectedValue = idx;
             }
           });
-          if (!selected) {
+          // 修正2：只有未选择时才弹alert
+          if (selectedValue === null) {
             alert('请选择一个答案后再继续');
             return;
           }
@@ -389,8 +385,6 @@
             showQuestion();
           } else if (currentQuestionIndex === testQuestions.length - 1) {
             completeTest();
-          } else {
-            alert('无法加载测试题目，请稍后再试！');
           }
         });
       }
@@ -406,37 +400,24 @@
 
       function showQuestion() {
         const q = testQuestions[currentQuestionIndex];
-        if (!q) {
-          alert('无法加载测试题目，请稍后再试！');
-          return;
-        }
+        if (!q) return;
         questionText.textContent = `${currentQuestionIndex + 1}. ${q.text}`;
-
-        // 更新选项文本
         const labels = questionOptions.querySelectorAll('label span.font-medium');
         if (labels.length >= 2) {
           labels[0].textContent = q.options[0];
           labels[1].textContent = q.options[1];
         }
-
-        // 清除之前的选择
         const radios = questionOptions.querySelectorAll('input[name="question"]');
         radios.forEach(radio => radio.checked = false);
-
-        // 恢复之前的选择
         if (answers[currentQuestionIndex] !== null) {
           if (radios[answers[currentQuestionIndex]]) {
             radios[answers[currentQuestionIndex]].checked = true;
           }
         }
-
-        // 更新进度条
         questionNumber.textContent = `问题 ${currentQuestionIndex + 1}/${testQuestions.length}`;
         const percent = Math.round((currentQuestionIndex + 1) / testQuestions.length * 100);
         completionPercentage.textContent = `${percent}%`;
         progressBar.style.width = `${percent}%`;
-
-        // 按钮显示逻辑
         if (currentQuestionIndex === 0) {
           prevBtn.classList.add('hidden');
           nextBtn.textContent = '下一题';
@@ -456,7 +437,6 @@
           showQuestion();
           return;
         }
-        // 计算分数
         let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
         for (let i = 0; i < answers.length; i++) {
           const q = testQuestions[i];
