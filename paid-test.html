@@ -7,6 +7,50 @@
   <title>付费MBTI测试 - 智能MBTI</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="src/css/styles.css">
+  <style>
+    .circle-progress-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .circle-progress {
+      position: relative;
+      width: 112px;
+      height: 112px;
+    }
+    .circle-progress svg {
+      transform: rotate(-90deg);
+    }
+    .circle-progress .progress-bg {
+      stroke: #e5e7eb;
+      stroke-width: 10;
+      fill: none;
+    }
+    .circle-progress .progress-bar {
+      stroke: #2563eb;
+      stroke-width: 10;
+      fill: none;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.5s;
+    }
+    .circle-progress .progress-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2563eb;
+      text-align: center;
+    }
+    .circle-progress .progress-label {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      color: #4b5563;
+      text-align: center;
+    }
+  </style>
 </head>
 <body class="font-sans text-gray-800 bg-gray-50">
   <!-- 头部导航 -->
@@ -23,7 +67,6 @@
             <span class="ml-2 text-xl font-bold text-gray-900">智能MBTI</span>
           </a>
         </div>
-        
         <!-- 移动端菜单按钮 -->
         <div class="md:hidden">
           <button type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none" id="mobile-menu-button">
@@ -32,27 +75,25 @@
             </svg>
           </button>
         </div>
-        
         <!-- 桌面端导航 -->
         <nav class="hidden md:flex justify-center items-center space-x-8">
           <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a> 
           <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600 transition-colors">小问答</a>
           <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600 transition-colors">冷知识</a>
-          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600 transition-colors">每天觉悟</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600 transition-colors">每天一悟</a>
           <a href="booksblog.html" class="text-gray-600 hover:text-blue-600 transition-colors">读书推荐</a>
           <a href="price.html" class="text-gray-600 hover:text-blue-600 transition-colors">套餐价格</a>
           <a href="aboutus.html" class="text-gray-600 hover:text-blue-600 transition-colors">关于我们</a>
           <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">开始测试</a>
         </nav>
       </div>
-      
       <!-- 移动端菜单 -->
       <div class="md:hidden hidden bg-white pb-4" id="mobile-menu">
         <nav class="flex flex-col space-y-4">
           <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
           <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600 transition-colors">小问答</a>
           <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600 transition-colors">冷知识</a>
-          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600 transition-colors">每天觉悟</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600 transition-colors">每天一悟</a>
           <a href="booksblog.html" class="text-gray-600 hover:text-blue-600 transition-colors">读书推荐</a>
           <a href="price.html" class="text-gray-600 hover:text-blue-600 transition-colors">套餐价格</a>
           <a href="aboutus.html" class="text-gray-600 hover:text-blue-600 transition-colors">关于我们</a>
@@ -72,16 +113,13 @@
           <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
             本测试包含100个精心设计的问题，大约需要25分钟完成。基于官方MBTI理论，提供更深入、更准确的性格分析。请根据您的第一反应选择最符合自己的选项，没有对错之分。测试完成后需要支付以查看详细的专业报告。
           </p>
-
           <div id="inspiration-quote" class="text-blue-600 text-xl font-semibold italic mb-8 min-h-[2.5rem] opacity-100 transition-opacity duration-1000">
             加载中...
           </div>
-
           <button id="start-test-btn" class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-medium hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
             开始专业测试
             <span class="block text-sm mt-1 font-normal">100个问题 · 约25分钟</span>
           </button>
-
           <div class="mt-8 max-w-4xl mx-auto px-4 text-left space-y-10">
             <!-- 小贴士 -->
             <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded shadow-sm">
@@ -96,14 +134,25 @@
           </div>
         </div>
         
-        <!-- 测试进度条 -->
+        <!-- 测试进度条（圆形进度条样式） -->
         <div class="hidden mb-8" id="test-progress-container">
-          <div class="flex justify-between text-sm text-gray-600 mb-2">
-            <span id="question-number">问题 1/100</span>
-            <span id="completion-percentage">1%</span>
-          </div>
-          <div class="w-full bg-gray-200 rounded-full h-2">
-            <div class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 1%" id="progress-bar"></div>
+          <div class="circle-progress-container">
+            <div class="circle-progress">
+              <svg width="112" height="112" viewBox="0 0 112 112">
+                <circle class="progress-bg" cx="56" cy="56" r="50" />
+                <circle
+                  class="progress-bar"
+                  id="progress-circle"
+                  cx="56"
+                  cy="56"
+                  r="50"
+                  stroke-dasharray="314.159"
+                  stroke-dashoffset="314.159"
+                />
+              </svg>
+              <div class="progress-text" id="completion-percentage">1%</div>
+            </div>
+            <div class="progress-label" id="question-number">问题 1/100</div>
           </div>
         </div>
 
@@ -226,6 +275,18 @@
       setInterval(showQuote, 8000);
     }
 
+    // 圆形进度条更新
+    function updateCircleProgress(current, total) {
+      const circle = document.getElementById('progress-circle');
+      const percent = Math.round((current + 1) / total * 100);
+      const radius = 50;
+      const circumference = 2 * Math.PI * radius;
+      const offset = circumference * (1 - percent / 100);
+      circle.style.strokeDashoffset = offset;
+      document.getElementById('completion-percentage').textContent = percent + '%';
+      document.getElementById('question-number').textContent = `问题 ${current + 1}/${total}`;
+    }
+
     // 页面加载完成后初始化
     document.addEventListener('DOMContentLoaded', function() {
       rotateQuotes();
@@ -245,27 +306,23 @@
       const questionText = document.getElementById('question-text');
       const nextButton = document.getElementById('next-button');
       const prevButton = document.getElementById('prev-button');
+      // 新增圆形进度条相关
       const questionNumber = document.getElementById('question-number');
       const completionPercentage = document.getElementById('completion-percentage');
-      const progressBar = document.getElementById('progress-bar');
-      
+      // const progressBar = document.getElementById('progress-bar'); // 不再需要
+
       let currentQuestionIndex = 0;
       let answers = {};
       let shuffledQuestions = [];
       
       // 获取所有测试题目（100道）
       function getAllQuestions() {
-        // 从test.js获取题目数据
         if (typeof window.questions !== 'undefined' && window.questions.length > 0) {
           const allQuestions = window.questions.concat(window.extendedQuestions || []);
           return allQuestions;
         }
-        
-        // 如果无法从test.js获取，使用备用题目数据
         return getBackupQuestions();
       }
-      
-      // 备用题目数据（确保至少有基本的测试题目）
       function getBackupQuestions() {
         return [
           {
@@ -320,26 +377,18 @@
           }
         ];
       }
-      
       // 显示问题
       function displayQuestion(index) {
         const question = shuffledQuestions[index];
         if (!question) return;
-        
         questionText.textContent = question.text;
-        
-        // 更新选项文本
         const labels = document.querySelectorAll('label span span');
         if (labels.length >= 2) {
           labels[0].textContent = question.options[0];
           labels[1].textContent = question.options[1];
         }
-        
-        // 清除之前的选择
         const radioButtons = document.querySelectorAll('input[name="question"]');
         radioButtons.forEach(radio => radio.checked = false);
-        
-        // 如果之前有答案，恢复选择
         const dimension = question.dimension;
         if (answers[dimension] && answers[dimension][index] !== undefined) {
           const answerIndex = answers[dimension][index];
@@ -347,31 +396,20 @@
             radioButtons[answerIndex].checked = true;
           }
         }
-        
-        // 更新问题编号和进度条
-        questionNumber.textContent = `问题 ${index + 1}/${shuffledQuestions.length}`;
-        const percentage = Math.round((index + 1) / shuffledQuestions.length * 100);
-        completionPercentage.textContent = `${percentage}%`;
-        progressBar.style.width = `${percentage}%`;
-        
-        // 显示/隐藏上一题按钮
+        // 更新圆形进度条
+        updateCircleProgress(index, shuffledQuestions.length);
         if (index > 0) {
           prevButton.classList.remove('hidden');
         } else {
           prevButton.classList.add('hidden');
         }
-        
-        // 更新下一题按钮文本
         if (index === shuffledQuestions.length - 1) {
           nextButton.textContent = '提交';
         } else {
           nextButton.textContent = '下一题';
         }
-        
         currentQuestionIndex = index;
       }
-      
-      // 计算结果
       function calculateResults() {
         let scores = {
           E: 0, I: 0,
@@ -379,8 +417,6 @@
           T: 0, F: 0,
           J: 0, P: 0
         };
-        
-        // 统计每个维度的分数
         for (let dimension in answers) {
           for (let i = 0; i < answers[dimension].length; i++) {
             if (answers[dimension][i] !== undefined) {
@@ -400,26 +436,19 @@
             }
           }
         }
-        
-        // 确定MBTI类型
         let type = '';
         type += scores.E > scores.I ? 'E' : 'I';
         type += scores.S > scores.N ? 'S' : 'N';
         type += scores.T > scores.F ? 'T' : 'F';
         type += scores.J > scores.P ? 'J' : 'P';
-        
-        // 计算每个维度的百分比
         const eiTotal = scores.E + scores.I;
         const snTotal = scores.S + scores.N;
         const tfTotal = scores.T + scores.F;
         const jpTotal = scores.J + scores.P;
-        
         const eiPercentage = Math.round((type[0] === 'I' ? scores.I : scores.E) / eiTotal * 100);
         const snPercentage = Math.round((type[1] === 'N' ? scores.N : scores.S) / snTotal * 100);
         const tfPercentage = Math.round((type[2] === 'F' ? scores.F : scores.T) / tfTotal * 100);
         const jpPercentage = Math.round((type[3] === 'J' ? scores.J : scores.P) / jpTotal * 100);
-        
-        // 保存结果到localStorage
         localStorage.setItem('mbtiType', type);
         localStorage.setItem('mbtiPercentages', JSON.stringify({
           eiPercentage,
@@ -427,69 +456,48 @@
           tfPercentage,
           jpPercentage
         }));
-        
-        // 跳转到支付页面
         window.location.href = 'payment.html';
       }
-      
       if (startButton) {
         startButton.addEventListener('click', function() {
-          // 获取所有题目
           const allQuestions = getAllQuestions();
-          
-          // 使用所有可用题目，如果少于100道则重复使用
           if (allQuestions.length >= 100) {
             shuffledQuestions = allQuestions.slice(0, 100);
           } else {
-            // 如果题目不足100道，重复使用现有题目
             shuffledQuestions = [];
             while (shuffledQuestions.length < 100) {
               shuffledQuestions = shuffledQuestions.concat(allQuestions);
             }
             shuffledQuestions = shuffledQuestions.slice(0, 100);
           }
-          
           testIntro.classList.add('hidden');
           testQuestions.classList.remove('hidden');
           progressContainer.classList.remove('hidden');
           encouragementSection.classList.remove('hidden');
-          
-          // 显示第一个问题
           displayQuestion(0);
         });
       }
-      
-      // 下一题按钮
       if (nextButton) {
         nextButton.addEventListener('click', function() {
           const radioButtons = document.querySelectorAll('input[name="question"]');
           let selected = false;
           let selectedValue;
-          
           radioButtons.forEach((radio, index) => {
             if (radio.checked) {
               selected = true;
               selectedValue = index;
             }
           });
-          
           if (!selected) {
-            alert('无法加载测试题目，请稍后再试！');
+            alert('请选择一个选项');
             return;
           }
-          
-          // 保存答案
           const question = shuffledQuestions[currentQuestionIndex];
           const dimension = question.dimension;
-          
-          // 初始化维度数组如果不存在
           if (!answers[dimension]) {
             answers[dimension] = [];
           }
-          
-          // 保存答案（0表示第一个选项，1表示第二个选项）
           answers[dimension][currentQuestionIndex] = selectedValue;
-          
           if (currentQuestionIndex < shuffledQuestions.length - 1) {
             displayQuestion(currentQuestionIndex + 1);
           } else {
@@ -497,8 +505,6 @@
           }
         });
       }
-      
-      // 上一题按钮
       if (prevButton) {
         prevButton.addEventListener('click', function() {
           if (currentQuestionIndex > 0) {
