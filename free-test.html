@@ -239,7 +239,7 @@
     const quotes = [
       "你已经比昨天的自己更进一步了。",
       "不要小看每一次努力的力量。",
-      "你是独一无二的，世界因为你而更加美好。",
+      "因为你的个人责任与积极行动，世界变得更加美好",
       "每一个梦想的背后，都是不懈的坚持。",
       "遇见困难时，记住：你已经战胜过很多次了。",
       "你的存在本身就是一种意义。",
@@ -272,32 +272,24 @@
       setInterval(showQuote, 10000);
     }
 
-    // 合并test.js的questions和extendedQuestions，确保40题
-    function getAll40Questions() {
-      let base = [];
-      if (window.questions && Array.isArray(window.questions)) base = window.questions;
-      let ext = [];
-      if (window.extendedQuestions && Array.isArray(window.extendedQuestions)) ext = window.extendedQuestions;
-      // 合并并去重（假设每题有唯一text）
-      const all = [...base, ...ext];
-      const seen = new Set();
-      const unique = [];
-      for (const q of all) {
-        if (!seen.has(q.text)) {
-          unique.push(q);
-          seen.add(q.text);
-        }
-        if (unique.length === 40) break;
-      }
-      return unique;
-    }
+    // 获取40题，确保各维度均衡
+    function get40QuestionsFromTestJS() {
+      // paid-test.html的做法是直接用window.questions和window.extendedQuestions拼接
+      let allQuestions = [];
+      if (Array.isArray(window.questions)) allQuestions = allQuestions.concat(window.questions);
+      if (Array.isArray(window.extendedQuestions)) allQuestions = allQuestions.concat(window.extendedQuestions);
 
-    // 随机抽取每个维度的题目，保证每个维度都有
-    function getRandomQuestionsByDimension(questions, countPerDim = 10) {
+      // 按维度分组
       const dims = { EI: [], SN: [], TF: [], JP: [] };
-      questions.forEach(q => {
+      allQuestions.forEach(q => {
         if (dims[q.dimension]) dims[q.dimension].push(q);
       });
+
+      // 每个维度10题，不足则补齐
+      let selected = [];
+      let minCount = Math.min(dims.EI.length, dims.SN.length, dims.TF.length, dims.JP.length, 10);
+      if (minCount < 10) minCount = Math.min(dims.EI.length, dims.SN.length, dims.TF.length, dims.JP.length);
+
       function shuffle(arr) {
         for (let i = arr.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
@@ -305,21 +297,16 @@
         }
         return arr;
       }
-      let selected = [];
       for (const dim in dims) {
-        if (dims[dim].length < countPerDim) return null;
-        selected = selected.concat(shuffle(dims[dim]).slice(0, countPerDim));
+        selected = selected.concat(shuffle(dims[dim]).slice(0, 10));
       }
-      return shuffle(selected);
-    }
-
-    // 转换问题格式
-    function transformQuestions(rawQuestions) {
-      return rawQuestions.map(q => ({
-        text: q.text,
-        options: q.options,
-        dimension: q.dimension
-      }));
+      // 如果不足40题，补齐
+      if (selected.length < 40) {
+        const rest = allQuestions.filter(q => !selected.includes(q));
+        selected = selected.concat(shuffle(rest).slice(0, 40 - selected.length));
+      }
+      // 最终只取40题
+      return shuffle(selected).slice(0, 40);
     }
 
     let currentQuestionIndex = 0;
@@ -348,20 +335,17 @@
 
       if (startBtn) {
         startBtn.addEventListener('click', function() {
-          // 合并两组题目
-          let allQuestions = getAll40Questions();
-          if (allQuestions.length < 40) {
+          // 直接用test.js的window.questions和window.extendedQuestions
+          let selected = get40QuestionsFromTestJS();
+          if (!selected || selected.length < 40) {
             alert('无法加载测试题目，请稍后再试！');
             return;
           }
-          // 按维度随机抽取每个维度10题
-          const selected = getRandomQuestionsByDimension(allQuestions, 10);
-          if (selected && selected.length === 40) {
-            testQuestions = transformQuestions(selected);
-          } else {
-            // fallback: 直接取前40题
-            testQuestions = transformQuestions(allQuestions.slice(0, 40));
-          }
+          testQuestions = selected.map(q => ({
+            text: q.text,
+            options: q.options,
+            dimension: q.dimension
+          }));
           currentQuestionIndex = 0;
           answers = new Array(testQuestions.length).fill(null);
           testIntro.classList.add('hidden');
