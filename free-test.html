@@ -235,7 +235,6 @@
     </div>
   </footer>
 
-  <!-- ...existing code above... -->
   <script src="src/js/main.js"></script>
   <script src="src/js/test-packages.js"></script>
   <script src="src/js/test.js"></script>
@@ -336,20 +335,18 @@
 
       if (startBtn) {
         startBtn.addEventListener('click', function() {
-          // 获取所有题目（优先test.js导出的questions，兼容test-packages.js的mbtiQuestions）
+          // 明确只用 test.js 的 window.questions
           let rawQuestions = [];
-          if (typeof window.questions !== 'undefined' && Array.isArray(window.questions) && window.questions.length >= 40) {
+          if (window.questions && Array.isArray(window.questions) && window.questions.length >= 40) {
             rawQuestions = window.questions;
-          } else if (typeof window.mbtiQuestions !== 'undefined' && Array.isArray(window.mbtiQuestions) && window.mbtiQuestions.length >= 40) {
-            rawQuestions = window.mbtiQuestions;
+          } else {
+            alert('无法加载测试题目，请稍后再试！');
+            return;
           }
           // 按维度随机抽取每个维度10题
           const selected = getRandomQuestionsByDimension(rawQuestions, 10);
           if (selected && selected.length === 40) {
             testQuestions = transformQuestions(selected);
-          } else if (rawQuestions.length >= 40) {
-            // fallback: 随机抽取40题
-            testQuestions = transformQuestions(rawQuestions.slice(0, 40));
           } else {
             alert('无法加载测试题目，请稍后再试！');
             return;
