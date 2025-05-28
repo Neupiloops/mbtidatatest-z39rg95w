@@ -32,7 +32,7 @@
       stroke: #10b981;
       stroke-width: 10;
       stroke-linecap: round;
-      transition: stroke-dashoffset 0.5s ease;
+      transition: stroke-dasharray 0.5s ease;
     }
     .progress-circle .progress-text {
       position: absolute;
@@ -114,7 +114,7 @@
           <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a> 
           <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600 transition-colors">小问答</a>
           <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600 transition-colors">冷知识</a>
-          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600 transition-colors">每天觉悟</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600 transition-colors">每天一悟</a>
           <a href="booksblog.html" class="text-gray-600 hover:text-blue-600 transition-colors">读书推荐</a>
           <a href="price.html" class="text-gray-600 hover:text-blue-600 transition-colors">套餐价格</a>
           <a href="aboutus.html" class="text-gray-600 hover:text-blue-600 transition-colors">关于我们</a>
@@ -126,7 +126,7 @@
           <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">首页</a>
           <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600 transition-colors">小问答</a>
           <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600 transition-colors">冷知识</a>
-          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600 transition-colors">每天觉悟</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600 transition-colors">每天一悟</a>
           <a href="booksblog.html" class="text-gray-600 hover:text-blue-600 transition-colors">读书推荐</a>
           <a href="price.html" class="text-gray-600 hover:text-blue-600 transition-colors">套餐价格</a>
           <a href="aboutus.html" class="text-gray-600 hover:text-blue-600 transition-colors">关于我们</a>
@@ -167,19 +167,14 @@
           </div>
         </div>
         
-        <!-- 测试进度条（圆形） -->
+        <!-- 测试进度条 -->
         <div class="hidden mb-8" id="test-progress-container">
-          <div class="progress-circle-container">
-            <div class="progress-circle">
-              <svg width="120" height="120">
-                <circle class="background-circle" cx="60" cy="60" r="50" />
-                <circle class="progress-ring" cx="60" cy="60" r="50" stroke-dasharray="314" stroke-dashoffset="314" />
-              </svg>
-              <div class="progress-text" id="progress-circle-text">1%</div>
-            </div>
-            <div class="progress-info">
-              <span id="question-number">问题 1/40</span>
-            </div>
+          <div class="flex justify-between text-sm text-gray-600 mb-2">
+            <span id="question-number">问题 1/40</span>
+            <span id="completion-percentage">1%</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2">
+            <div class="bg-green-600 h-2 rounded-full transition-all duration-300" style="width: 1%" id="progress-bar"></div>
           </div>
         </div>
 
@@ -323,22 +318,6 @@
       return selected.slice(0, 40);
     }
 
-    // 圆形进度条更新
-    function updateProgressCircle(percent, current, total) {
-      const circle = document.querySelector('.progress-ring');
-      const text = document.getElementById('progress-circle-text');
-      const questionNumber = document.getElementById('question-number');
-      const radius = 50;
-      const circumference = 2 * Math.PI * radius;
-      const offset = circumference - (percent / 100) * circumference;
-      if (circle) {
-        circle.style.strokeDasharray = `${circumference}`;
-        circle.style.strokeDashoffset = `${offset}`;
-      }
-      if (text) text.textContent = `${percent}%`;
-      if (questionNumber) questionNumber.textContent = `问题 ${current}/${total}`;
-    }
-
     let currentQuestionIndex = 0;
     let answers = [];
     let testQuestions = [];
@@ -359,15 +338,21 @@
       const questionOptions = document.getElementById('question-options');
       const nextBtn = document.getElementById('next-question');
       const prevBtn = document.getElementById('prev-question');
-      // 不再直接用questionNumber和completionPercentage和progressBar
+      const questionNumber = document.getElementById('question-number');
+      const completionPercentage = document.getElementById('completion-percentage');
+      const progressBar = document.getElementById('progress-bar');
 
       if (startBtn) {
         startBtn.addEventListener('click', function() {
           let selected = get40QuestionsFromTestJS();
-          // 只有在没有题目时才弹alert
-          if (!selected || selected.length === 0) {
-            alert('无法加载测试题目，请稍后再试！');
-            return;
+          // 修复：检查题目是否成功加载，只有在真正无法获取题目时才弹alert
+          if (!selected || selected.length < 40) {
+            console.log('题目加载状态:', selected ? selected.length : 0, '个题目');
+            // 只有在完全无法获取题目时才显示错误
+            if (!selected || selected.length === 0) {
+              alert('无法加载测试题目，请稍后再试！');
+              return;
+            }
           }
           testQuestions = selected.map(q => ({
             text: q.text,
@@ -393,10 +378,16 @@
               selectedValue = idx;
             }
           });
-          // 只有在未选择时才弹alert
-          if (selectedValue === null) {
-            alert('请选择一个选项');
-            return;
+          // 修复：更准确地检查是否已选择答案
+          if (selectedValue === null || selectedValue === undefined) {
+            // 再次检查确保没有选中的选项
+            const checkedRadio = questionOptions.querySelector('input[name="question"]:checked');
+            if (!checkedRadio) {
+              alert('请选择一个选项');
+              return;
+            } else {
+              selectedValue = parseInt(checkedRadio.value);
+            }
           }
           answers[currentQuestionIndex] = selectedValue;
           if (currentQuestionIndex < testQuestions.length - 1) {
@@ -442,10 +433,10 @@
             radios[answers[currentQuestionIndex]].checked = true;
           }
         }
-        // 更新圆形进度条
+        questionNumber.textContent = `问题 ${currentQuestionIndex + 1}/${testQuestions.length}`;
         const percent = Math.round((currentQuestionIndex + 1) / testQuestions.length * 100);
-        updateProgressCircle(percent, currentQuestionIndex + 1, testQuestions.length);
-        // 按钮显示
+        completionPercentage.textContent = `${percent}%`;
+        progressBar.style.width = `${percent}%`;
         if (currentQuestionIndex === 0) {
           prevBtn.classList.add('hidden');
           nextBtn.textContent = '下一题';
