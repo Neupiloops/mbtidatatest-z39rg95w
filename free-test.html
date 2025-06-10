@@ -82,6 +82,8 @@
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <!-- 测试介绍 -->
         <div class="text-center mb-8" id="test-intro">
+          <!-- 正能量 quotes 区域 -->
+          <div id="free-quotes" class="mb-8 min-h-[2.5rem] text-base text-blue-600 font-semibold transition-all duration-500 ease-in-out"></div>
           <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">免费MBTI性格测试</h1>
           <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
             本测试包含40个精心设计的问题，大约需要10分钟完成。请根据您的第一反应选择最符合自己的选项，没有对错之分。测试结果将帮助您更好地了解自我。
@@ -182,7 +184,40 @@
   <script src="src/js/free-test.js"></script>
   <!-- 主流程逻辑 -->
   <script>
-    // 获取题库
+    // 免费测试正能量 quotes
+    const freeQuotesArr = [
+      "认识自己，是一切成长的开始。",
+      "每个人都拥有独特的闪光点，勇敢发现它！",
+      "自我探索，是最值得的投资。",
+      "相信自己能成为更好的自己。",
+      "你的性格没有对错，只有不同的精彩。",
+      "勇于面对内心，才能遇见真正的自己。",
+      "每一次选择，都是自我了解的一步。",
+      "接纳自己，世界也会温柔以待。",
+      "成长，就是不断认识和完善自我。",
+      "发掘潜力，让未来充满无限可能。",
+      "了解自己，才能走更远的路。",
+      "现在的你，就是最好的起点。"
+    ];
+
+    function showFreeQuote() {
+      const quoteBox = document.getElementById('free-quotes');
+      if (!quoteBox) return;
+      let lastIdx = -1;
+      function setQuote() {
+        let idx;
+        do {
+          idx = Math.floor(Math.random() * freeQuotesArr.length);
+        } while (idx === lastIdx && freeQuotesArr.length > 1);
+        lastIdx = idx;
+        quoteBox.textContent = freeQuotesArr[idx];
+      }
+      setQuote();
+      setInterval(setQuote, 10000); // 每10秒切换
+    }
+    showFreeQuote();
+
+    // 题库
     const questions = window.freeQuestions;
     let currentQuestionIndex = 0;
     let answers = new Array(questions.length).fill(null);
@@ -288,7 +323,7 @@
             showQuestion();
             return;
           }
-          // 计算结果并跳转
+          // 计算结果并跳转 —— 逻辑与test.html一致
           let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
           for (let i = 0; i < answers.length; i++) {
             const q = questions[i];
@@ -312,7 +347,6 @@
           localStorage.setItem('mbtiScores', JSON.stringify(scores));
           localStorage.setItem('testAnswers', JSON.stringify(answers));
           localStorage.setItem('testCompleted', 'true');
-          // 跳转到免费测试结果页
           window.location.href = 'free-test-result.html';
         }
       });
