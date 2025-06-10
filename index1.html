@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>智能MBTI性格测试 - 探索真实自我</title>
+  <meta name="description" content="科学、专业、权威的MBTI性格测试，帮你认识自我、成长自我。"/>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/styles.css">
+  <style>
+    #mobile-menu {
+      transition: all .25s;
+      z-index: 9999;
+    }
+    body.menu-open {
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="fixed w-full bg-white bg-opacity-95 shadow-sm z-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <a href="index.html" class="flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="16" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12.01" y2="8" />
+          </svg>
+          <span class="ml-2 text-xl font-bold text-gray-900">智能MBTI</span>
+        </a>
+        <!-- 电脑版菜单 -->
+        <nav class="hidden md:flex justify-center items-center space-x-8">
+          <a href="index.html" class="text-gray-600 hover:text-blue-600">首页</a>
+          <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600">小问答</a>
+          <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600">冷知识</a>
+          <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每天一悟</a>
+          <a href="booksblog.html" class="text-gray-600 hover:text-blue-600">读书推荐</a>
+          <a href="price.html" class="text-gray-600 hover:text-blue-600">套餐价格</a>
+          <a href="aboutus.html" class="text-gray-600 hover:text-blue-600">关于我们</a>
+          <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">开始测试</a>
+        </nav>
+        <!-- 手机版菜单按钮 -->
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded text-gray-600 hover:text-blue-600 focus:outline-none">
+          <svg class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <!-- 移动端菜单 -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black bg-opacity-40 hidden">
+      <div class="absolute right-0 top-0 w-64 h-full bg-white shadow-lg pt-8 px-8 flex flex-col space-y-6 z-50">
+        <button id="mobile-menu-close" class="absolute top-3 right-3 p-2 text-gray-400 hover:text-red-500">
+          <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <a href="index.html" class="text-gray-800 hover:text-blue-600 text-lg">首页</a>
+        <a href="mbtiqa.html" class="text-gray-800 hover:text-blue-600 text-lg">小问答</a>
+        <a href="mbtifacts.html" class="text-gray-800 hover:text-blue-600 text-lg">冷知识</a>
+        <a href="dailytips.html" class="text-gray-800 hover:text-blue-600 text-lg">每天一悟</a>
+        <a href="booksblog.html" class="text-gray-800 hover:text-blue-600 text-lg">读书推荐</a>
+        <a href="price.html" class="text-gray-800 hover:text-blue-600 text-lg">套餐价格</a>
+        <a href="aboutus.html" class="text-gray-800 hover:text-blue-600 text-lg">关于我们</a>
+        <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-center hover:bg-blue-700">开始测试</a>
+      </div>
+    </div>
+  </header>
+  <!-- Main -->
+  <main class="flex-1 pt-28 md:pt-36 pb-12">
+    <section class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Banner -->
+      <div class="text-center mt-10 mb-8">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">智能MBTI性格测试</h1>
+        <!-- 两行副标题（内容位置修改：分成两行） -->
+        <div class="text-xl md:text-2xl text-gray-700 font-semibold leading-snug">
+          <div>探索真实的自我</div>
+          <div>找到人生方向</div>
+        </div>
+      </div>
+      <!-- 介绍区 -->
+      <div class="mx-auto max-w-2xl text-center mb-12">
+        <p class="text-base md:text-lg text-gray-600 mb-3">
+          基于国际主流MBTI理论与心理学研究，科学、专业、权威。<span class="hidden sm:inline"> 适合初次探索和深度自我成长。</span>
+        </p>
+        <p class="text-sm md:text-base text-gray-500">
+          手机、平板、电脑全端适配，免费&专业版多种选择，助你了解自己，提升人际沟通、职业发展与自信成长。
+        </p>
+      </div>
+      <!-- CTA & 特色 -->
+      <div class="flex flex-col md:flex-row md:space-x-10 items-center justify-center">
+        <div class="flex-1 mb-8 md:mb-0 bg-white rounded-lg shadow p-6 w-full md:w-auto">
+          <div class="flex items-center mb-4">
+            <svg class="h-8 w-8 text-green-500 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-lg md:text-xl font-bold text-green-700">免费快速测试</span>
+          </div>
+          <p class="text-gray-700 mb-4">40题基础测评，10分钟了解你的MBTI类型。简洁流畅，立即体验！</p>
+          <a href="free-test.html" class="block w-full bg-green-500 text-white text-lg font-semibold py-3 rounded-lg shadow hover:bg-green-600 transition">
+            免费开始
+          </a>
+        </div>
+        <div class="flex-1 bg-white rounded-lg shadow p-6 w-full md:w-auto">
+          <div class="flex items-center mb-4">
+            <svg class="h-8 w-8 text-blue-500 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-lg md:text-xl font-bold text-blue-700">专业深度测评</span>
+          </div>
+          <p class="text-gray-700 mb-4">60题深度测评，报告包含性格成长建议、职业方向、人际沟通分析等实用内容。</p>
+          <a href="paid-test.html" class="block w-full bg-blue-600 text-white text-lg font-semibold py-3 rounded-lg shadow hover:bg-blue-700 transition">
+            升级专业版
+          </a>
+        </div>
+      </div>
+      <!-- 新增 webcard 区块：为什么MBTI测试对您的人生和成长至关重要 -->
+      <section class="mb-10 mt-12">
+        <div class="max-w-3xl mx-auto">
+          <div class="bg-white rounded-xl shadow-lg p-7 md:p-10 mb-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-blue-700 mb-4 text-center">为什么MBTI测试对您的人生和成长至关重要</h2>
+            <div class="text-gray-700 text-lg mb-3 font-semibold text-center">了解自己的性格类型对个人成长的重要性</div>
+            <ul class="space-y-3 mt-6">
+              <li class="flex items-start">
+                <span class="inline-block mt-1 mr-3 text-blue-500">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <div>
+                  <span class="font-bold text-gray-900">深入了解自我</span><br>
+                  <span class="text-gray-600">帮助您更好地认识自己，发现潜力。</span>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <span class="inline-block mt-1 mr-3 text-blue-500">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <div>
+                  <span class="font-bold text-gray-900">做出更明智的职业选择</span><br>
+                  <span class="text-gray-600">根据性格类型选择适合的职业方向。</span>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <span class="inline-block mt-1 mr-3 text-blue-500">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <div>
+                  <span class="font-bold text-gray-900">改善人际关系</span><br>
+                  <span class="text-gray-600">了解如何与不同性格类型的人沟通。</span>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <span class="inline-block mt-1 mr-3 text-blue-500">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <div>
+                  <span class="font-bold text-gray-900">个人成长与发展</span><br>
+                  <span class="text-gray-600">提供个性化的自我提升建议。</span>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <span class="inline-block mt-1 mr-3 text-blue-500">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <div>
+                  <span class="font-bold text-gray-900">提高自信与幸福感</span><br>
+                  <span class="text-gray-600">增强自信心，提升幸福感。</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!-- 优势 -->
+      <div class="mt-14 grid gap-7 sm:grid-cols-2 md:grid-cols-4">
+        <div class="bg-white rounded-lg shadow p-6 text-center">
+          <div class="mb-2">
+            <svg class="mx-auto h-8 w-8 text-purple-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="12" cy="12" r="10"/>
+            </svg>
+          </div>
+          <div class="text-base font-semibold text-gray-900 mb-1">科学严谨</div>
+          <div class="text-gray-500 text-sm">基于国际权威MBTI体系，题库多轮专家校验。</div>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6 text-center">
+          <div class="mb-2">
+            <svg class="mx-auto h-8 w-8 text-yellow-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M12 20l9-5-9-5-9 5 9 5z"/>
+              <path d="M12 12V4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="text-base font-semibold text-gray-900 mb-1">报告实用</div>
+          <div class="text-gray-500 text-sm">结果报告简明易懂，助力自我认知与成长。</div>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6 text-center">
+          <div class="mb-2">
+            <svg class="mx-auto h-8 w-8 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="text-base font-semibold text-gray-900 mb-1">隐私安全</div>
+          <div class="text-gray-500 text-sm">数据加密存储，尊重用户隐私，结果仅本人可见。</div>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6 text-center">
+          <div class="mb-2">
+            <svg class="mx-auto h-8 w-8 text-pink-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 8v4l3 3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="text-base font-semibold text-gray-900 mb-1">多端适配</div>
+          <div class="text-gray-500 text-sm">手机、平板、电脑均可流畅体验。</div>
+        </div>
+      </div>
+      <!-- 信任背书 -->
+      <div class="mt-16 text-center text-xs text-gray-400">
+        <span>智能MBTI已累计服务超 <span class="text-blue-600 font-bold">100,000</span> 用户 | 2025</span>
+      </div>
+    </section>
+  </main>
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-8 mt-auto">
+    <div class="container mx-auto px-4 text-center">
+      <div class="flex items-center justify-center mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span class="ml-2 text-lg font-bold">智能MBTI</span>
+      </div>
+      <p class="text-gray-400 mb-4">
+        探索自我，发现潜能，引领未来方向。
+      </p>
+      <div class="border-t border-gray-800 pt-4">
+        <div class="text-gray-400">
+          © 2025 智能MBTI - 专业MBTI测试. 保留所有权利.
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // 移动端菜单控制
+    const openBtn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const closeBtn = document.getElementById('mobile-menu-close');
+    if (openBtn && menu && closeBtn) {
+      openBtn.onclick = () => {
+        menu.classList.remove('hidden');
+        document.body.classList.add('menu-open');
+      };
+      closeBtn.onclick = () => {
+        menu.classList.add('hidden');
+        document.body.classList.remove('menu-open');
+      };
+      menu.addEventListener('click', function(e) {
+        if (e.target === menu) {
+          menu.classList.add('hidden');
+          document.body.classList.remove('menu-open');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
