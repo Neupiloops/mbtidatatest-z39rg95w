@@ -312,7 +312,8 @@
           localStorage.setItem('mbtiScores', JSON.stringify(scores));
           localStorage.setItem('testAnswers', JSON.stringify(answers));
           localStorage.setItem('testCompleted', 'true');
-          window.location.href = 'result.html?type=basic';
+          // 跳转到免费测试结果页
+          window.location.href = 'free-test-result.html';
         }
       });
     }
