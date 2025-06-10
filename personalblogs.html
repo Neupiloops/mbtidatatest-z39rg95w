@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>个人博客内容管理 - 智能MBTI</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body { background: #f9fafb; }
+    .blog-card {
+      background: #fff;
+      border-radius: 0.75rem;
+      box-shadow: 0 2px 16px #0001;
+      margin-bottom: 2rem;
+      padding: 2rem 1.5rem 1.5rem 1.5rem;
+      transition: box-shadow .2s;
+      position: relative;
+    }
+    .blog-card:hover { box-shadow: 0 4px 32px #0002; }
+    .blog-card h3 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 0.75rem;
+      color: #1e293b;
+    }
+    .blog-card .mbti-category {
+      display: inline-block;
+      font-size: 0.93em;
+      padding: 0.17em 1em;
+      border-radius: 1em;
+      background: #eff6ff;
+      color: #2563eb;
+      margin-bottom: 0.5em;
+      margin-right: 0.8em;
+    }
+    .blog-card .blog-time {
+      font-size: 0.94em;
+      color: #64748b;
+      margin-bottom: 1.1em;
+      display: block;
+    }
+    .media-preview img, .media-preview video, .media-preview audio {
+      max-width: 100%;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      background: #f3f4f6;
+      display: block;
+      object-fit: contain;
+    }
+    .media-preview .embed-video, .media-preview .video-box {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto 1rem auto;
+      background: #000;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .media-preview .embed-video iframe {
+      display: block;
+      width: 100%;
+      min-height: 340px;
+      aspect-ratio: 16/9;
+      border: none;
+      background: #000;
+      max-height: 70vh;
+    }
+    .media-preview .webpage-info {
+      background: #f3f4f6;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      padding: 0.7rem 1rem;
+      font-size: 0.98rem;
+    }
+    .draft-label {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #fff5f5;
+      color: #e11d48;
+      border-radius: 4px;
+      font-size: 0.95em;
+      border: 1px solid #fb7185;
+      margin-left: .5em;
+      margin-bottom: 3px;
+    }
+    .published-label {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #f0fdf4;
+      color: #16a34a;
+      border-radius: 4px;
+      font-size: 0.95em;
+      border: 1px solid #4ade80;
+      margin-left: .5em;
+      margin-bottom: 3px;
+    }
+    .blog-content-show {
+      color: #374151;
+      margin-bottom: 1.2rem;
+      font-size: 1.04rem;
+      line-height: 1.85;
+      word-break: break-all;
+    }
+    .blog-card .media-preview audio {
+      background: linear-gradient(90deg,#2563eb 25%,#60a5fa 100%);
+    }
+    .emptymsg {
+      color: #aaa;
+      text-align: center;
+      padding: 3em 0 2em 0;
+      font-size: 1.15rem;
+    }
+    .editor-content {
+      min-height: 120px;
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      font-size: 1.05rem;
+      background: #f9fafb;
+      margin-bottom: 1rem;
+      outline: none;
+      color: #e11d48 !important;
+    }
+    .editor-content * { color: #e11d48 !important; }
+    .editor-content:empty:before {
+      content: attr(placeholder);
+      color: #d1d5db;
+    }
+    .editor-toolbar button, .editor-toolbar input[type="color"] {
+      color: #2563eb;
+      font-size: 1rem;
+      padding: 0.3rem 0.5rem;
+      border: none;
+      background: transparent;
+      border-radius: 0.2rem;
+      margin-right: 0.1rem;
+      cursor: pointer;
+      transition: background .2s;
+      vertical-align: middle;
+    }
+    .editor-toolbar button.active,
+    .editor-toolbar button:focus {
+      background: #e0e7ff;
+    }
+    .editor-toolbar select {
+      font-size: 1rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.2rem;
+      border: 1px solid #e5e7eb;
+      margin-right: 0.2rem;
+      background: #f1f5f9;
+      color: #2563eb;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans text-gray-900">
+
+  <header class="bg-white shadow-sm fixed w-full z-40">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="index.html" class="flex items-center">
+        <svg class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="16" x2="12" y2="12"/>
+          <line x1="12" y1="8" x2="12.01" y2="8"/>
+        </svg>
+        <span class="ml-2 text-xl font-bold">智能MBTI</span>
+      </a>
+      <nav class="space-x-6 hidden md:block">
+        <a href="index.html" class="text-gray-600 hover:text-blue-600">首页</a>
+        <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600">有趣问答</a>
+        <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600">趣味知识</a>
+        <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每天觉悟</a>
+        <a href="booksblog.html" class="text-gray-600 hover:text-blue-600">读书推荐</a>
+        <a href="price.html" class="text-gray-600 hover:text-blue-600">套餐价格</a>
+        <a href="aboutus.html" class="text-gray-600 hover:text-blue-600">关于我们</a>
+        <a href="personalblogs.html" class="text-blue-600 font-semibold">我的博客管理</a>
+        <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">开始测试</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 pt-28 pb-16 max-w-3xl">
+    <h1 class="text-3xl font-bold mb-8 text-center">个人博客内容管理</h1>
+    <section class="mb-10">
+      <form id="blog-form" class="bg-white rounded-xl shadow p-6 mb-4" autocomplete="off">
+        <input type="hidden" id="blog-id">
+        <div class="mb-4">
+          <label class="block text-gray-700 mb-1" for="blog-title">标题</label>
+          <input type="text" id="blog-title" class="w-full border rounded px-3 py-2" placeholder="请输入文章标题" required>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 mb-1" for="blog-category">类别</label>
+          <select id="blog-category" class="w-full border rounded px-3 py-2">
+            <option value="">其他</option>
+            <option value="情感">情感</option>
+            <option value="家庭">家庭</option>
+            <option value="爱情">爱情</option>
+            <option value="友情">友情</option>
+            <option value="工作">工作</option>
+            <option value="学习">学习</option>
+            <option value="生活">生活</option>
+            <option value="创新">创新</option>
+            <option value="音乐">音乐</option>
+            <option value="视频">视频</option>
+            <option value="图片">图片</option>
+          </select>
+        </div>
+        <div class="mb-2">
+          <label class="block text-gray-700 mb-1">内容格式设置</label>
+          <div class="editor-toolbar flex flex-wrap gap-1 mb-2">
+            <select id="font-family">
+              <option value="">字体</option>
+              <option value="Arial">Arial</option>
+              <option value="Microsoft Yahei">微软雅黑</option>
+              <option value="Tahoma">Tahoma</option>
+              <option value="Times New Roman">Times New Roman</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Courier New">Courier New</option>
+              <option value="Roboto">Roboto</option>
+              <option value="Lato">Lato</option>
+              <option value="Source Sans Pro">Source Sans Pro</option>
+              <option value="Merriweather">Merriweather</option>
+              <option value="Pacifico">Pacifico</option>
+              <option value="Merienda">Merienda</option>
+              <option value="Cookie">Cookie</option>
+              <option value="SimSun">宋体</option>
+              <option value="DengXian">等线</option>
+              <option value="KaiTi">楷体</option>
+              <option value="STLiti">篆体</option>
+            </select>
+            <select id="font-size">
+              <option value="">字号</option>
+              <option value="12px">12px</option>
+              <option value="14px">14px</option>
+              <option value="16px">16px</option>
+              <option value="20px">20px</option>
+              <option value="26px">26px</option>
+              <option value="30px">30px</option>
+              <option value="34px">34px</option>
+              <option value="36px">36px</option>
+              <option value="40px">40px</option>
+              <option value="42px">42px</option>
+              <option value="46px">46px</option>
+            </select>
+            <button type="button" data-cmd="bold" title="加粗"><b>B</b></button>
+            <button type="button" data-cmd="italic" title="斜体"><i>I</i></button>
+            <button type="button" data-cmd="underline" title="下划线"><u>U</u></button>
+            <button type="button" data-cmd="strikeThrough" title="删除线"><s>S</s></button>
+            <button type="button" data-cmd="justifyLeft" title="左对齐">左</button>
+            <button type="button" data-cmd="justifyCenter" title="居中">中</button>
+            <button type="button" data-cmd="justifyRight" title="右对齐">右</button>
+            <input type="color" id="font-color" title="字体颜色" style="vertical-align:middle;width:2em;height:2em;padding:0;">
+          </div>
+        </div>
+        <div class="mb-4">
+          <div id="blog-content" class="editor-content" contenteditable="true" placeholder="请输入文章内容"></div>
+        </div>
+        <div class="media-uploader mb-4">
+          <label>插入图片（可多选, 支持JPG/PNG/GIF/SVG）：</label>
+          <div class="flex items-center gap-2 mt-1 mb-2">
+            <input type="file" id="blog-images" accept="image/*" multiple class="block px-3 py-2 rounded-lg border border-gray-300 bg-gray-100 text-gray-700 cursor-pointer file:bg-gray-300 file:border-none file:rounded-md file:px-3 file:py-2 file:text-gray-700 file:cursor-pointer mr-2" style="max-width:230px;">
+            <button type="button" id="add-more-images" class="px-3 py-2 bg-gray-200 text-gray-700 rounded-lg border border-gray-300 hover:bg-gray-300 transition">添加更多图片</button>
+          </div>
+          <div id="image-preview" class="media-preview flex flex-wrap gap-4"></div>
+          <label class="block mt-4">插入音频（支持MP3/WAV）：</label>
+          <input type="file" id="blog-audio" accept="audio/*">
+          <div id="audio-preview" class="media-preview"></div>
+          <label class="block mt-4">插入视频（支持MP4/WebM）：</label>
+          <input type="file" id="blog-video" accept="video/*">
+          <div id="video-preview" class="media-preview"></div>
+          <label class="block mt-4">插入外链视频（YouTube/B站/抖音等）URL：</label>
+          <input type="url" id="blog-embed-video-url" class="w-full border rounded px-3 py-2" placeholder="粘贴视频URL">
+          <div id="embed-video-preview" class="media-preview"></div>
+          <label class="block mt-4">插入网页文章URL：</label>
+          <input type="url" id="blog-embed-page-url" class="w-full border rounded px-3 py-2" placeholder="粘贴网页文章URL">
+          <div id="embed-page-preview" class="media-preview"></div>
+        </div>
+        <div class="flex gap-2 flex-wrap">
+          <button type="button" id="save-draft" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">保存</button>
+          <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">发布</button>
+          <button type="button" id="cancel-edit" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 transition hidden">取消编辑</button>
+          <button type="button" onclick="exportBlogsToFile()" class="ml-2 px-4 py-2 bg-gray-300 rounded">导出到JSON</button>
+        </div>
+      </form>
+    </section>
+    <section>
+      <h2 class="text-2xl font-semibold mb-4 text-gray-700">所有文章</h2>
+      <div id="blogs-list"></div>
+      <div id="no-blogs" class="emptymsg hidden">暂无博客文章，快来发表你的第一篇博客吧！</div>
+    </section>
+  </main>
+  <footer class="bg-gray-900 text-white py-6">
+    <div class="container mx-auto px-4 text-center">
+      <div class="flex items-center justify-center mb-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span class="ml-2 text-lg font-bold">智能MBTI</span>
+      </div>
+      <p class="text-gray-400 mb-1">探索自我，发现潜能，引领未来方向。</p>
+      <div class="text-gray-400 text-sm">&copy; 2025 智能MBTI - 专业MBTI测试. 保留所有权利.</div>
+    </div>
+  </footer>
+  <script>
+    let allImagesArr = [];
+    function getChinaTimeString(ts = Date.now()) {
+      const date = new Date(ts);
+      date.setMinutes(date.getMinutes() + (date.getTimezoneOffset() + 480));
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const d = String(date.getDate()).padStart(2, '0');
+      const h = String(date.getHours()).padStart(2, '0');
+      const min = String(date.getMinutes()).padStart(2, '0');
+      const s = String(date.getSeconds()).padStart(2, '0');
+      return `${y}-${m}-${d} ${h}:${min}:${s}（中国时间）`;
+    }
+    function getBlogs() {
+      let blogs = JSON.parse(localStorage.getItem('personalblogs') || '[]');
+      return blogs;
+    }
+    function saveBlogs(blogs) {
+      localStorage.setItem('personalblogs', JSON.stringify(blogs));
+    }
+    function renderBlogs() {
+      const blogs = getBlogs().sort((a, b) => b.timestamp - a.timestamp);
+      const list = document.getElementById('blogs-list');
+      list.innerHTML = '';
+      let shown = 0;
+      blogs.forEach(blog => {
+        shown++;
+        let imagesHtml = "";
+        if (blog.images && blog.images.length) {
+          imagesHtml = blog.images.map(img =>
+            `<img src="${img.url}" alt="${img.name}" loading="lazy">`
+          ).join("");
+        }
+        let audioHtml = "";
+        if (blog.audio) {
+          audioHtml = `<audio controls controlsList="nodownload" src="${blog.audio.url}" preload="none"></audio>`;
+        }
+        let videoHtml = "";
+        if (blog.video) {
+          videoHtml = `<div class="video-box"><video controls controlsList="nodownload" src="${blog.video.url}" preload="none"></video></div>`;
+        }
+        let embedVideoHtml = "";
+        if (blog.embedVideoUrl) {
+          embedVideoHtml = renderEmbedVideoHtml(blog.embedVideoUrl);
+        }
+        let embedPageHtml = "";
+        if (blog.embedPageUrl) {
+          embedPageHtml = renderEmbedPageHtml(blog.embedPageUrl, blog.embedPageMeta);
+        }
+        let statusLabel = blog.status === 'draft'
+          ? `<span class="draft-label">未发布</span>`
+          : `<span class="published-label">已发布</span>`;
+        let category = blog.category && blog.category.trim() ? blog.category : "其他";
+        const card = document.createElement('div');
+        card.className = 'blog-card';
+        card.innerHTML = `
+          <span class="mbti-category">${category}</span>
+          <span class="blog-time">${blog.timeStr}</span>
+          <h3>${blog.title}${statusLabel}</h3>
+          <div class="blog-content-show">${blog.content}</div>
+          <div class="media-preview">${imagesHtml}${audioHtml}${videoHtml}${embedVideoHtml}${embedPageHtml}</div>
+          <div class="flex gap-4 mt-1">
+            <button class="text-blue-500 hover:text-blue-600 underline text-sm" data-edit="${blog.id}">编辑</button>
+            <button class="text-red-400 hover:text-red-600 underline text-sm" data-delete="${blog.id}">删除</button>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+      if (shown === 0) {
+        document.getElementById('no-blogs').classList.remove('hidden');
+      } else {
+        document.getElementById('no-blogs').classList.add('hidden');
+      }
+    }
+    function renderEmbedVideoHtml(url) {
+      url = url.trim();
+      if (/youtube\.com|youtu\.be/.test(url)) {
+        let vid = "";
+        let match = url.match(/(?:v=|\/)([0-9A-Za-z_-]{11})(?:\?|&|$)/) || url.match(/youtu\.be\/([0-9A-Za-z_-]{11})/);
+        if (match) vid = match[1];
+        if (vid) return `<div class="embed-video"><iframe src="https://www.youtube.com/embed/${vid}" allowfullscreen></iframe></div>`;
+      }
+      if (/bilibili\.com\/video\/([A-Za-z0-9]+)/.test(url)) {
+        let bv = url.match(/bilibili\.com\/video\/([A-Za-z0-9]+)/)[1];
+        return `<div class="embed-video"><iframe src="https://player.bilibili.com/player.html?bvid=${bv}&page=1" allowfullscreen="true"></iframe></div>`;
+      }
+      if (/douyin\.com\/video\/(\d+)/.test(url)) {
+        let vid = url.match(/douyin\.com\/video\/(\d+)/)[1];
+        return `<div class="embed-video"><iframe src="https://www.douyin.com/video/${vid}" allowfullscreen></iframe></div>`;
+      }
+      return '';
+    }
+    function renderEmbedPageHtml(url, meta) {
+      if (meta && meta.title) {
+        return `<div class="webpage-info">
+          <div><strong>${meta.title}</strong></div>
+          <div class="text-gray-600">${meta.site || ''}${meta.date ? ' · ' + meta.date : ''}</div>
+        </div>`;
+      }
+      return '';
+    }
+    function execCommandOnContent(cmd, value = null) {
+      document.getElementById('blog-content').focus();
+      if (cmd === 'foreColor') {
+        document.execCommand('styleWithCSS', false, true);
+        document.execCommand(cmd, false, value);
+        document.execCommand('styleWithCSS', false, false);
+      } else if (cmd === "fontSize") {
+        document.execCommand('fontSize', false, 7);
+        let sel = window.getSelection();
+        if (!sel.rangeCount) return;
+        let el = sel.anchorNode.parentNode;
+        el.removeAttribute('size');
+        el.style.fontSize = value;
+      } else if (cmd === "fontName") {
+        document.execCommand("fontName", false, value);
+      } else {
+        document.execCommand(cmd, false, value);
+      }
+    }
+    document.querySelectorAll('.editor-toolbar button[data-cmd]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        execCommandOnContent(this.getAttribute('data-cmd'));
+      });
+    });
+    document.getElementById('font-family').onchange = function() {
+      if(this.value) execCommandOnContent("fontName", this.value);
+    };
+    document.getElementById('font-size').onchange = function() {
+      if(this.value) execCommandOnContent("fontSize", this.value);
+    };
+    document.getElementById('font-color').oninput = function() {
+      execCommandOnContent('foreColor', this.value);
+    };
+    document.getElementById('blog-images').addEventListener('change', function() {
+      const files = Array.from(this.files);
+      if (!files.length) return;
+      let finished = 0;
+      let addArr = [];
+      files.forEach(file => {
+        let reader = new FileReader();
+        reader.onload = e => {
+          let img = new window.Image();
+          img.onload = function() {
+            addArr.push({
+              name: file.name,
+              url: e.target.result,
+              width: img.width,
+              height: img.height
+            });
+            finished++;
+            if (finished === files.length) {
+              allImagesArr = allImagesArr.concat(addArr);
+              previewImages(allImagesArr);
+            }
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+    document.getElementById('add-more-images').onclick = function() {
+      document.getElementById('blog-images').value = "";
+      document.getElementById('blog-images').click();
+    };
+    function previewImages(imagesArr) {
+      const preview = document.getElementById('image-preview');
+      preview.innerHTML = '';
+      imagesArr.forEach(img => {
+        let el = document.createElement('img');
+        el.src = img.url;
+        el.alt = img.name || '';
+        preview.appendChild(el);
+      });
+    }
+    function previewAudio(audioObj) {
+      const preview = document.getElementById('audio-preview');
+      preview.innerHTML = '';
+      if (audioObj && audioObj.url) {
+        let el = document.createElement('audio');
+        el.controls = true;
+        el.controlsList = "nodownload";
+        el.src = audioObj.url;
+        preview.appendChild(el);
+      }
+    }
+    document.getElementById('blog-audio').addEventListener('change', function() {
+      const file = this.files[0];
+      if (file) {
+        let reader = new FileReader();
+        reader.onload = e => {
+          previewAudio({name: file.name, url: e.target.result});
+        };
+        reader.readAsDataURL(file);
+      } else {
+        previewAudio(null);
+      }
+    });
+    function previewVideo(videoObj) {
+      const preview = document.getElementById('video-preview');
+      preview.innerHTML = '';
+      if (videoObj && videoObj.url) {
+        let box = document.createElement('div');
+        box.className = 'video-box';
+        let el = document.createElement('video');
+        el.controls = true;
+        el.controlsList = "nodownload";
+        el.src = videoObj.url;
+        el.style.width = "100%";
+        el.style.height = "340px";
+        el.style.maxWidth = "100%";
+        el.style.objectFit = "contain";
+        box.appendChild(el);
+        preview.appendChild(box);
+      }
+    }
+    document.getElementById('blog-video').addEventListener('change', function() {
+      const file = this.files[0];
+      if (file) {
+        let reader = new FileReader();
+        reader.onload = e => {
+          previewVideo({name: file.name, url: e.target.result});
+        };
+        reader.readAsDataURL(file);
+      } else {
+        previewVideo(null);
+      }
+    });
+    function previewEmbedVideoUrl(url) {
+      document.getElementById('embed-video-preview').innerHTML = url ? renderEmbedVideoHtml(url) : "";
+    }
+    document.getElementById('blog-embed-video-url').addEventListener('blur', function() {
+      previewEmbedVideoUrl(this.value.trim());
+    });
+    function previewEmbedPageUrl(url, meta) {
+      document.getElementById('embed-page-preview').innerHTML = url ? renderEmbedPageHtml(url, meta) : "";
+    }
+    document.getElementById('blog-embed-page-url').addEventListener('blur', async function() {
+      const url = this.value.trim();
+      let meta = null;
+      if (url) {
+        try { meta = await fetchMetaInfo(url); } catch {}
+      }
+      previewEmbedPageUrl(url, meta);
+    });
+    async function fetchMetaInfo(url) {
+      const resp = await fetch(url, {mode: 'cors'});
+      const html = await resp.text();
+      const m = html.match(/<title.*?>(.*?)<\/title>/i);
+      const t = m ? m[1].replace(/\s+/g, ' ').trim() : url;
+      let site = '';
+      if (html.match(/<meta[^>]+property=["']og:site_name["'][^>]+content=["']([^"']+)["']/i)) {
+        site = RegExp.$1;
+      } else if (html.match(/<meta[^>]+name=["']source["'][^>]+content=["']([^"']+)["']/i)) {
+        site = RegExp.$1;
+      }
+      let date = '';
+      if (html.match(/<meta[^>]+property=["']article:published_time["'][^>]+content=["']([^"']+)["']/i)) {
+        date = RegExp.$1.substr(0, 10);
+      }
+      return {title: t, site, date};
+    }
+    document.getElementById('blog-form').onsubmit = async function(e){
+      e.preventDefault();
+      await addBlog('published');
+    };
+    document.getElementById('save-draft').onclick = async function(){
+      await addBlog('draft');
+    };
+    async function addBlog(status) {
+      const id = document.getElementById('blog-id').value;
+      const title = document.getElementById('blog-title').value.trim();
+      let category = document.getElementById('blog-category').value;
+      if (!category) category = "其他";
+      const content = document.getElementById('blog-content').innerHTML.trim();
+      let images = allImagesArr;
+      const audioFile = document.getElementById('blog-audio').files[0];
+      let audio = null;
+      if (audioFile) {
+        audio = await new Promise(resolve => {
+          let reader = new FileReader();
+          reader.onload = e => resolve({name: audioFile.name, url: e.target.result});
+          reader.readAsDataURL(audioFile);
+        });
+      }
+      const videoFile = document.getElementById('blog-video').files[0];
+      let video = null;
+      if (videoFile) {
+        video = await new Promise(resolve => {
+          let reader = new FileReader();
+          reader.onload = e => resolve({name: videoFile.name, url: e.target.result});
+          reader.readAsDataURL(videoFile);
+        });
+      }
+      const embedVideoUrl = document.getElementById('blog-embed-video-url').value.trim();
+      const embedPageUrl = document.getElementById('blog-embed-page-url').value.trim();
+      let embedPageMeta = null;
+      if (embedPageUrl) {
+        try { embedPageMeta = await fetchMetaInfo(embedPageUrl); } catch {}
+      }
+      let blogs = getBlogs();
+      if (id) {
+        blogs = blogs.map(b => b.id === id ? {
+          ...b, title, content, category, timeStr: getChinaTimeString(), timestamp: Date.now(),
+          images, audio, video, embedVideoUrl, embedPageUrl, embedPageMeta, status
+        } : b);
+      } else {
+        blogs.push({
+          id: Math.random().toString(36).slice(2),
+          title,
+          content,
+          category,
+          timeStr: getChinaTimeString(),
+          timestamp: Date.now(),
+          images,
+          audio,
+          video,
+          embedVideoUrl,
+          embedPageUrl,
+          embedPageMeta,
+          status
+        });
+      }
+      saveBlogs(blogs);
+      renderBlogs();
+      document.getElementById('blog-form').reset();
+      document.getElementById('blog-id').value = '';
+      allImagesArr = [];
+      previewImages([]);
+      previewAudio(null);
+      previewVideo(null);
+      previewEmbedVideoUrl('');
+      previewEmbedPageUrl('', null);
+      document.getElementById('blog-content').innerHTML = '';
+      document.getElementById('cancel-edit').classList.add('hidden');
+      if (status === 'draft') alert('草稿已保存！');
+    }
+    document.getElementById('cancel-edit').onclick = function(){
+      document.getElementById('blog-form').reset();
+      document.getElementById('blog-id').value = '';
+      allImagesArr = [];
+      previewImages([]);
+      previewAudio(null);
+      previewVideo(null);
+      previewEmbedVideoUrl('');
+      previewEmbedPageUrl('', null);
+      document.getElementById('blog-content').innerHTML = '';
+      this.classList.add('hidden');
+    };
+    document.getElementById('blogs-list').onclick = function(e) {
+      const target = e.target.closest('button');
+      if (!target) return;
+      if (target.dataset.edit) {
+        const id = target.dataset.edit;
+        const blog = getBlogs().find(b => b.id === id);
+        if (blog) {
+          document.getElementById('blog-id').value = blog.id;
+          document.getElementById('blog-title').value = blog.title;
+          document.getElementById('blog-category').value = blog.category || '';
+          document.getElementById('blog-content').innerHTML = blog.content;
+          allImagesArr = blog.images || [];
+          previewImages(allImagesArr);
+          previewAudio(blog.audio);
+          previewVideo(blog.video);
+          document.getElementById('blog-embed-video-url').value = blog.embedVideoUrl || '';
+          previewEmbedVideoUrl(blog.embedVideoUrl || '');
+          document.getElementById('blog-embed-page-url').value = blog.embedPageUrl || '';
+          previewEmbedPageUrl(blog.embedPageUrl || '', blog.embedPageMeta || null);
+          document.getElementById('cancel-edit').classList.remove('hidden');
+          window.scrollTo({top:0,behavior:'smooth'});
+        }
+      }
+      if (target.dataset.delete) {
+        if (!confirm('确定要删除这篇博客吗？')) return;
+        const id = target.dataset.delete;
+        let blogs = getBlogs();
+        blogs = blogs.filter(b => b.id !== id);
+        saveBlogs(blogs);
+        renderBlogs();
+      }
+    };
+    // 导出到JSON功能
+    function exportBlogsToFile() {
+      const blogs = localStorage.getItem('personalblogs') || '[]';
+      const blob = new Blob([blogs], {type: 'application/json'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'blogs.json';
+      a.click();
+    }
+    // 初始化
+    renderBlogs();
+  </script>
+</body>
+</html>
