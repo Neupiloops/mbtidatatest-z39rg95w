@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MBTI 博客广场</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body { background: #f9fafb; }
+    .blog-card, .mini-card {
+      background: #fff;
+      border-radius: 0.75rem;
+      box-shadow: 0 2px 16px #0001;
+      transition: box-shadow .2s;
+      position: relative;
+    }
+    .blog-card:hover, .mini-card:hover { box-shadow: 0 4px 32px #0002; }
+    .blog-card {
+      padding: 2rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .mini-card {
+      padding: 1rem 1.2rem;
+      margin-bottom: 1rem;
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      min-width: 0;
+    }
+    .mini-card .mini-img {
+      width: 80px;
+      min-width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: .5rem;
+      background: #f3f4f6;
+      margin-right: .5rem;
+      display: block;
+    }
+    .mini-card .mini-img.noimg {
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #cbd5e1;
+      font-size: 2.2rem;
+      font-weight: bold;
+      font-style: italic;
+      min-width: 80px;
+    }
+    .mini-card .minicontent {
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .mini-card .minititle {
+      font-size: 1.04rem;
+      font-weight: 600;
+      color: #1e293b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: .3em;
+    }
+    .mini-card .mbti-category {
+      font-size: 0.88em;
+      padding: .12em .8em;
+      border-radius: 1em;
+      background: #eff6ff;
+      color: #2563eb;
+      margin-bottom: .2em;
+    }
+    .mini-card .mini-time {
+      font-size: .92em;
+      color: #64748b;
+      margin-bottom: .3em;
+    }
+    .blog-card h3 {
+      font-size: 1.35rem;
+      font-weight: bold;
+      margin-bottom: 0.75rem;
+      color: #1e293b;
+    }
+    .blog-card .mbti-category {
+      display: inline-block;
+      font-size: 0.93em;
+      padding: 0.17em 1em;
+      border-radius: 1em;
+      background: #eff6ff;
+      color: #2563eb;
+      margin-bottom: 0.5em;
+      margin-right: 0.8em;
+    }
+    .blog-card .blog-time {
+      font-size: 0.94em;
+      color: #64748b;
+      margin-bottom: 1.1em;
+      display: block;
+    }
+    .media-preview img, .media-preview video, .media-preview audio {
+      max-width: 100%;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      background: #f3f4f6;
+      display: block;
+      object-fit: contain;
+    }
+    .media-preview .embed-video, .media-preview .video-box {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto 1rem auto;
+      background: #000;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .media-preview .embed-video iframe {
+      display: block;
+      width: 100%;
+      min-height: 340px;
+      aspect-ratio: 16/9;
+      border: none;
+      background: #000;
+      max-height: 70vh;
+    }
+    .media-preview .webpage-info {
+      background: #f3f4f6;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      padding: 0.7rem 1rem;
+      font-size: 0.98rem;
+    }
+    .draft-label {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #fff5f5;
+      color: #e11d48;
+      border-radius: 4px;
+      font-size: 0.95em;
+      border: 1px solid #fb7185;
+      margin-left: .5em;
+      margin-bottom: 3px;
+    }
+    .published-label {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #f0fdf4;
+      color: #16a34a;
+      border-radius: 4px;
+      font-size: 0.95em;
+      border: 1px solid #4ade80;
+      margin-left: .5em;
+      margin-bottom: 3px;
+    }
+    .blog-content-show {
+      color: #374151;
+      margin-bottom: 1.2rem;
+      font-size: 1.04rem;
+      line-height: 1.85;
+      word-break: break-all;
+    }
+    .blog-card .media-preview audio {
+      background: linear-gradient(90deg,#2563eb 25%,#60a5fa 100%);
+    }
+    .emptymsg {
+      color: #aaa;
+      text-align: center;
+      padding: 3em 0 2em 0;
+      font-size: 1.15rem;
+    }
+    .side-box {
+      background: #f8fafc;
+      border-radius: 0.75rem;
+      box-shadow: 0 1px 6px #0001;
+      padding: 1.2rem 1rem 0.7rem 1rem;
+      margin-bottom: 1.6rem;
+    }
+    .side-box h4 {
+      font-size: 1.07rem;
+      font-weight: bold;
+      color: #2563eb;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+    .side-box .mini-list {
+      display: flex;
+      flex-direction: column;
+      gap: .7rem;
+    }
+    .category-bar, .date-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      background: #fff;
+      border-radius: 0.75rem;
+      box-shadow: 0 1px 4px #0001;
+      padding: 1rem;
+      min-width: 0;
+      margin-bottom: .8rem;
+    }
+    .category-btn, .date-btn {
+      cursor: pointer;
+      background: #f1f5f9;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      transition: background .15s;
+      display: inline-block;
+      font-size: 0.95rem;
+      color: #2563eb;
+      border: none;
+    }
+    .category-btn.active, .date-btn.active {
+      background: #2563eb;
+      color: #fff;
+    }
+    .category-btn:hover, .date-btn:hover {
+      background: #c7d2fe;
+    }
+    @media (max-width: 1023px) {
+      .blog-grid-main {
+        display: block !important;
+      }
+      .side-box {
+        margin-left: 0 !important;
+      }
+      .left-filters {
+        margin-bottom: 1.5rem !important;
+      }
+      .main-content-area {
+        margin-bottom: 2rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .blog-card, .mini-card, .side-box, .category-bar, .date-bar {
+        padding-left: 0.7rem !important;
+        padding-right: 0.7rem !important;
+      }
+      .mini-card { flex-direction: column; gap: 0.3rem; align-items: flex-start; }
+      .mini-card .mini-img { margin-right: 0; margin-bottom: .6em;}
+    }
+    /* 自定义布局 */
+    .blog-content-layout {
+      display: grid;
+      grid-template-columns: 220px 2.2fr 1.2fr;
+      gap: 2.2rem;
+      align-items: start;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 900px) {
+      .blog-content-layout {
+        grid-template-columns: 1fr;
+      }
+      .left-filters, .side-box {
+        margin-bottom: 1.7rem !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans text-gray-900">
+  <header class="bg-white shadow-sm fixed w-full z-40">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="index.html" class="flex items-center">
+        <svg class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="16" x2="12" y2="12"/>
+          <line x1="12" y1="8" x2="12.01" y2="8"/>
+        </svg>
+        <span class="ml-2 text-xl font-bold">智能MBTI</span>
+      </a>
+      <nav class="space-x-6 hidden md:block">
+        <a href="index.html" class="text-gray-600 hover:text-blue-600">首页</a>
+        <a href="mbtiqa.html" class="text-gray-600 hover:text-blue-600">有趣问答</a>
+        <a href="mbtifacts.html" class="text-gray-600 hover:text-blue-600">趣味知识</a>
+        <a href="dailytips.html" class="text-gray-600 hover:text-blue-600">每天觉悟</a>
+        <a href="booksblog.html" class="text-gray-600 hover:text-blue-600">读书推荐</a>
+        <a href="price.html" class="text-gray-600 hover:text-blue-600">套餐价格</a>
+        <a href="aboutus.html" class="text-gray-600 hover:text-blue-600">关于我们</a>
+        <a href="mbtiblogs.html" class="text-blue-600 font-semibold">博客</a>
+        <a href="test.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">开始测试</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container mx-auto px-4 pt-28 pb-16 max-w-7xl">
+    <h1 class="text-3xl font-bold mb-10 text-center">MBTI 博客广场</h1>
+    <div class="blog-content-layout">
+      <!-- 左侧筛选栏 -->
+      <div class="left-filters" style="margin-bottom: 2rem;">
+        <div class="category-bar" id="category-bar"></div>
+        <div class="date-bar" id="date-bar"></div>
+      </div>
+      <!-- 主内容区 -->
+      <div class="main-content-area">
+        <div id="filter-info" class="mb-4 text-sm text-blue-700 hidden"></div>
+        <div id="main-latest"></div>
+        <div id="no-blogs" class="emptymsg hidden">暂无博客文章，欢迎大家分享自己的MBTI故事和观点！</div>
+      </div>
+      <!-- 右侧热门推荐 -->
+      <div>
+        <div class="side-box">
+          <h4>Top Posts</h4>
+          <div class="mini-list" id="top-posts"></div>
+        </div>
+        <div class="side-box">
+          <h4>Latest Posts</h4>
+          <div class="mini-list" id="latest-posts"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="bg-gray-900 text-white py-6">
+    <div class="container mx-auto px-4 text-center">
+      <div class="flex items-center justify-center mb-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span class="ml-2 text-lg font-bold">智能MBTI</span>
+      </div>
+      <p class="text-gray-400 mb-1">探索自我，发现潜能，引领未来方向。</p>
+      <div class="text-gray-400 text-sm">
+        &copy; 2025 智能MBTI - 专业MBTI测试. 保留所有权利.
+        <span class="ml-4">
+          <a href="mbtiblogs.html" class="underline text-blue-400 hover:text-blue-300">博客</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // ---- 筛选与数据 ----
+    let allBlogs = [];
+    let filter = { category: undefined, date: undefined };
+
+    // 类别与日期栏相关
+    const defaultCategories = ["情感", "家庭", "爱情", "友情", "工作", "学习", "生活", "创新", "音乐", "视频", "图片", "其他"];
+    function getDateDay(ts) {
+      const date = new Date(ts);
+      date.setMinutes(date.getMinutes() + (date.getTimezoneOffset() + 480));
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const d = String(date.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+    function setFilter(obj = {}) {
+      filter = obj;
+      renderCategoryBar(filter.category);
+      renderDateBar(filter.date);
+      renderBlogs();
+      const info = document.getElementById('filter-info');
+      if (filter.category || filter.date) {
+        info.classList.remove('hidden');
+        info.innerHTML = '筛选条件：' +
+          (filter.category ? '<span class="text-blue-800 font-bold">类别：' + filter.category + '</span> ' : '') +
+          (filter.date ? '<span class="text-blue-800 font-bold">日期：' + filter.date + '</span>' : '') +
+          ' <button onclick="setFilter({})" class="ml-2 px-2 py-1 text-xs bg-gray-200 rounded text-gray-600 hover:bg-gray-300">清除筛选</button>';
+      } else {
+        info.classList.add('hidden');
+      }
+    }
+    function renderCategoryBar(selected) {
+      const bar = document.getElementById('category-bar');
+      bar.innerHTML = '';
+      const blogs = allBlogs;
+      const usedCats = new Set(blogs.map(b => b.category && b.category.trim() ? b.category : "其他"));
+      const allCats = Array.from(new Set([...defaultCategories, ...usedCats]));
+      const allBtn = document.createElement('button');
+      allBtn.className = 'category-btn' + (!selected ? ' active' : '');
+      allBtn.textContent = '全部';
+      allBtn.onclick = () => setFilter({...filter, category: undefined});
+      bar.appendChild(allBtn);
+      allCats.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'category-btn' + (selected === cat ? ' active' : '');
+        btn.textContent = cat;
+        btn.onclick = () => setFilter({...filter, category: cat});
+        bar.appendChild(btn);
+      });
+    }
+    function renderDateBar(selected) {
+      const bar = document.getElementById('date-bar');
+      bar.innerHTML = '';
+      const blogs = allBlogs;
+      const daysSet = new Set(blogs.map(b => getDateDay(b.timestamp)));
+      const days = Array.from(daysSet).sort((a, b) => b.localeCompare(a));
+      const allBtn = document.createElement('button');
+      allBtn.className = 'date-btn' + (!selected ? ' active' : '');
+      allBtn.textContent = '全部';
+      allBtn.onclick = () => setFilter({...filter, date: undefined});
+      bar.appendChild(allBtn);
+      days.forEach(day => {
+        const btn = document.createElement('button');
+        btn.className = 'date-btn' + (selected === day ? ' active' : '');
+        btn.textContent = day;
+        btn.onclick = () => setFilter({...filter, date: day});
+        bar.appendChild(btn);
+      });
+    }
+
+    // ---- 数据加载 ----
+    function fetchBlogs(callback) {
+      fetch('mbtiblogs.json')
+        .then(res => res.json())
+        .then(blogs => {
+          blogs = blogs.filter(b => b.status === "published");
+          allBlogs = blogs.sort((a, b) => b.timestamp - a.timestamp);
+          callback && callback();
+        }).catch(()=> {
+          document.getElementById('main-latest').innerHTML = '';
+          document.getElementById('top-posts').innerHTML = '';
+          document.getElementById('latest-posts').innerHTML = '';
+          document.getElementById('no-blogs').classList.remove('hidden');
+        });
+    }
+    // ---- 渲染 ----
+    function renderEmbedVideoHtml(url) {
+      url = url.trim();
+      if (/youtube\.com|youtu\.be/.test(url)) {
+        let vid = "";
+        let match = url.match(/(?:v=|\/)([0-9A-Za-z_-]{11})(?:\?|&|$)/) || url.match(/youtu\.be\/([0-9A-Za-z_-]{11})/);
+        if (match) vid = match[1];
+        if (vid) return `<div class="embed-video"><iframe src="https://www.youtube.com/embed/${vid}" allowfullscreen></iframe></div>`;
+      }
+      if (/bilibili\.com\/video\/([A-Za-z0-9]+)/.test(url)) {
+        let bv = url.match(/bilibili\.com\/video\/([A-Za-z0-9]+)/)[1];
+        return `<div class="embed-video"><iframe src="https://player.bilibili.com/player.html?bvid=${bv}&page=1" allowfullscreen="true"></iframe></div>`;
+      }
+      if (/douyin\.com\/video\/(\d+)/.test(url)) {
+        let vid = url.match(/douyin\.com\/video\/(\d+)/)[1];
+        return `<div class="embed-video"><iframe src="https://www.douyin.com/video/${vid}" allowfullscreen></iframe></div>`;
+      }
+      return '';
+    }
+    function renderEmbedPageHtml(url, meta) {
+      if (meta && meta.title) {
+        return `<div class="webpage-info">
+          <div><strong>${meta.title}</strong></div>
+          <div class="text-gray-600">${meta.site || ''}${meta.date ? ' · ' + meta.date : ''}</div>
+        </div>`;
+      }
+      return '';
+    }
+    function getFirstImage(blog) {
+      if (blog.images && blog.images.length) return blog.images[0].url;
+      if (blog.video) return null;
+      if (blog.embedVideoUrl) return null;
+      return null;
+    }
+    function stripHtml(html) {
+      let div = document.createElement("div");
+      div.innerHTML = html;
+      return div.textContent || div.innerText || "";
+    }
+    function renderMiniCard(blog) {
+      let imgUrl = getFirstImage(blog);
+      let category = blog.category && blog.category.trim() ? blog.category : "其他";
+      let imgTag = imgUrl
+        ? `<img src="${imgUrl}" class="mini-img" alt="缩略图">`
+        : `<span class="mini-img noimg">${(blog.title || "B")[0]}</span>`;
+      return `
+        <div class="mini-card">
+          ${imgTag}
+          <div class="minicontent min-w-0">
+            <div class="minititle" title="${blog.title}">${blog.title}</div>
+            <div class="mbti-category">${category}</div>
+            <div class="mini-time">${blog.timeStr}</div>
+            <div class="text-gray-500 text-xs truncate">${stripHtml(blog.content).slice(0, 34)}${stripHtml(blog.content).length>34 ? '...' : ''}</div>
+          </div>
+        </div>
+      `;
+    }
+    function renderMainLatest(blog) {
+      let imagesHtml = "";
+      if (blog.images && blog.images.length) {
+        imagesHtml = blog.images.map(img =>
+          `<img src="${img.url}" alt="${img.name}" loading="lazy">`
+        ).join("");
+      }
+      let audioHtml = "";
+      if (blog.audio) {
+        audioHtml = `<audio controls controlsList="nodownload" src="${blog.audio.url}" preload="none"></audio>`;
+      }
+      let videoHtml = "";
+      if (blog.video) {
+        videoHtml = `<div class="video-box"><video controls controlsList="nodownload" src="${blog.video.url}" preload="none"></video></div>`;
+      }
+      let embedVideoHtml = "";
+      if (blog.embedVideoUrl) {
+        embedVideoHtml = renderEmbedVideoHtml(blog.embedVideoUrl);
+      }
+      let embedPageHtml = "";
+      if (blog.embedPageUrl) {
+        embedPageHtml = renderEmbedPageHtml(blog.embedPageUrl, blog.embedPageMeta);
+      }
+      let category = blog.category && blog.category.trim() ? blog.category : "其他";
+      return `
+        <div class="blog-card">
+          <span class="mbti-category">${category}</span>
+          <span class="blog-time">${blog.timeStr}</span>
+          <h3>${blog.title}<span class="published-label">已发布</span></h3>
+          <div class="blog-content-show">${blog.content}</div>
+          <div class="media-preview">${imagesHtml}${audioHtml}${videoHtml}${embedVideoHtml}${embedPageHtml}</div>
+        </div>
+      `;
+    }
+    function renderBlogs() {
+      let blogs = allBlogs;
+      // 应用筛选
+      if (filter.category) {
+        blogs = blogs.filter(b => (b.category && b.category.trim() ? b.category : "其他") === filter.category);
+      }
+      if (filter.date) {
+        blogs = blogs.filter(b => getDateDay(b.timestamp) === filter.date);
+      }
+      if (!blogs.length) {
+        document.getElementById('main-latest').innerHTML = '';
+        document.getElementById('top-posts').innerHTML = '';
+        document.getElementById('latest-posts').innerHTML = '';
+        document.getElementById('no-blogs').classList.remove('hidden');
+        return;
+      }
+      document.getElementById('no-blogs').classList.add('hidden');
+      // 最新文章
+      const latestBlog = blogs[0];
+      document.getElementById('main-latest').innerHTML = renderMainLatest(latestBlog);
+      // Top Posts: 以内容长度+图片数排序（示例），取前4篇
+      let topBlogs = blogs.slice(0).sort((a,b) => {
+        let alen = (stripHtml(a.content).length||0)+(a.images?a.images.length*20:0)+(a.video?30:0)+(a.embedVideoUrl?30:0);
+        let blen = (stripHtml(b.content).length||0)+(b.images?b.images.length*20:0)+(b.video?30:0)+(b.embedVideoUrl?30:0);
+        return blen - alen;
+      }).slice(0,4);
+      document.getElementById('top-posts').innerHTML = topBlogs.map(renderMiniCard).join("");
+      // Latest Posts: 最新4篇，不含已在主区展示的那篇
+      let latestList = blogs.slice(1,5);
+      document.getElementById('latest-posts').innerHTML = latestList.length ? latestList.map(renderMiniCard).join("") : '<div class="text-gray-400 px-2">暂无更多文章</div>';
+    }
+    // ---- 初始化 ----
+    fetchBlogs(function() {
+      renderCategoryBar();
+      renderDateBar();
+      renderBlogs();
+    });
+  </script>
+</body>
+</html>
