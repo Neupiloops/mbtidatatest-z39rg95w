@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MBTI免费测试结果</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .share-btn {
+      @apply flex items-center border rounded-lg px-4 py-2 mr-2 mb-2 font-medium transition hover:shadow;
+    }
+    .share-btn img {
+      width: 22px;
+      height: 22px;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div class="max-w-xl mx-auto py-8">
+    <!-- 分享按钮区 -->
+    <div class="flex flex-wrap justify-center mb-8">
+      <button id="download-pdf" class="share-btn bg-white border-gray-300 hover:bg-gray-100 text-gray-800">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/adobeacrobatreader.svg" alt="PDF" style="filter: invert(32%) sepia(90%) saturate(3677%) hue-rotate(345deg) brightness(104%) contrast(101%);">
+        保存为PDF
+      </button>
+      <button id="share-wechat" class="share-btn bg-green-50 border-green-200 hover:bg-green-100 text-green-700">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/wechat.svg" alt="微信" />
+        微信好友
+      </button>
+      <button id="share-weibo" class="share-btn bg-pink-50 border-pink-200 hover:bg-pink-100 text-pink-700">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/sinaweibo.svg" alt="微博" />
+        微博动态
+      </button>
+    </div>
+    <h1 class="text-3xl font-bold text-center mb-8">MBTI基础测试结果</h1>
+    <div id="result-block" class="bg-white rounded-lg shadow p-8">
+      <!-- 测试类型与描述将在脚本中自动填充 -->
+    </div>
+    <div class="mt-8 text-center">
+      <a href="free-test.html" class="text-blue-600 underline">重新测试</a>
+    </div>
+  </div>
+  <script>
+    // 16型人格数据
+    const mbtiProfiles = {
+      ISTJ: {
+        name: "ISTJ - 责任感强的现实主义者",
+        description: "严谨、踏实、可靠，重视规则和承诺，喜欢有序的生活和工作环境。",
+        features: [
+          "注重细节，执行力强",
+          "做事有条理，有计划",
+          "追求稳定，尊重传统"
+        ],
+        challenges: [
+          "有时过于固执",
+          "对新变化适应慢",
+          "忽视情感表达"
+        ]
+      },
+      ISFJ: {
+        name: "ISFJ - 忠诚的守护者",
+        description: "温和、乐于助人，关注他人感受，擅长照顾身边人。",
+        features: [
+          "责任心强，值得信赖",
+          "富有同理心，乐于服务",
+          "做事细致周到"
+        ],
+        challenges: [
+          "容易忽视自己需求",
+          "对批评敏感",
+          "害怕冲突"
+        ]
+      },
+      INFJ: {
+        name: "INFJ - 有远见的理想主义者",
+        description: "追求意义和目标，对人性和世界有深刻洞察。",
+        features: [
+          "理想主义，富有洞察力",
+          "关心他人，善于倾听",
+          "有创造力和愿景"
+        ],
+        challenges: [
+          "容易理想化他人",
+          "容易自我怀疑",
+          "不善于表达需求"
+        ]
+      },
+      INTJ: {
+        name: "INTJ - 战略规划者",
+        description: "独立、理性，善于制定长期目标和战略，追求卓越。",
+        features: [
+          "思维缜密，善于规划",
+          "自主性强",
+          "追求创新"
+        ],
+        challenges: [
+          "容易显得高冷",
+          "忽视他人感受",
+          "不喜欢琐碎事务"
+        ]
+      },
+      ISTP: {
+        name: "ISTP - 实干型探索者",
+        description: "冷静客观，喜欢动手实践，善于解决实际问题。",
+        features: [
+          "动手能力强",
+          "适应力高",
+          "喜欢独立探索"
+        ],
+        challenges: [
+          "情感表达不多",
+          "有时显得疏远",
+          "不喜欢被约束"
+        ]
+      },
+      ISFP: {
+        name: "ISFP - 温柔的艺术家",
+        description: "随和、感性，乐于体验生活，重视个人表达。",
+        features: [
+          "富有美感",
+          "性格温和",
+          "乐于助人"
+        ],
+        challenges: [
+          "容易回避冲突",
+          "缺乏长远规划",
+          "情绪化"
+        ]
+      },
+      INFP: {
+        name: "INFP - 理想主义的调停者",
+        description: "理想主义，忠于自我价值观，追求和谐与意义。",
+        features: [
+          "富有同情心",
+          "想象力丰富",
+          "追求真诚"
+        ],
+        challenges: [
+          "情绪易波动",
+          "害怕被误解",
+          "有时理想化事物"
+        ]
+      },
+      INTP: {
+        name: "INTP - 分析型思想家",
+        description: "善于逻辑分析和理论思考，喜欢探索新知。",
+        features: [
+          "逻辑思维强",
+          "好奇心旺盛",
+          "独立自主"
+        ],
+        challenges: [
+          "行动力不强",
+          "不善于表达情感",
+          "有拖延倾向"
+        ]
+      },
+      ESTP: {
+        name: "ESTP - 精力充沛的冒险家",
+        description: "喜欢尝试新鲜事物，擅长应对突发状况，行动果断。",
+        features: [
+          "适应力强",
+          "喜欢挑战",
+          "善于交际"
+        ],
+        challenges: [
+          "不喜欢规则",
+          "容易冲动",
+          "忽略长远规划"
+        ]
+      },
+      ESFP: {
+        name: "ESFP - 活力四射的表演者",
+        description: "热情、外向，喜欢与人互动，享受当下。",
+        features: [
+          "乐观开朗",
+          "善于表达",
+          "喜欢为他人制造欢乐"
+        ],
+        challenges: [
+          "易分心",
+          "不善于规划未来",
+          "逃避冲突"
+        ]
+      },
+      ENFP: {
+        name: "ENFP - 富有激情的创新者",
+        description: "充满创造力，善于启发他人，追求自由和成长。",
+        features: [
+          "富有感染力",
+          "善于社交",
+          "有创新精神"
+        ],
+        challenges: [
+          "注意力易分散",
+          "情绪波动大",
+          "容易过度理想化"
+        ]
+      },
+      ENTP: {
+        name: "ENTP - 思维敏捷的辩论家",
+        description: "善于提出新观点和解决方案，喜欢智力挑战。",
+        features: [
+          "头脑灵活",
+          "喜欢创新",
+          "辩论能力强"
+        ],
+        challenges: [
+          "不喜欢重复工作",
+          "有时冲动",
+          "容易分心"
+        ]
+      },
+      ESTJ: {
+        name: "ESTJ - 实干的管理者",
+        description: "务实、高效，擅长组织和管理事务。",
+        features: [
+          "有组织能力",
+          "原则性强",
+          "注重效率"
+        ],
+        challenges: [
+          "过于固执",
+          "忽略他人感受",
+          "难以适应变化"
+        ]
+      },
+      ESFJ: {
+        name: "ESFJ - 热心的协作者",
+        description: "关心他人，乐于服务，重视团队合作。",
+        features: [
+          "善于沟通",
+          "关心集体",
+          "乐于帮助他人"
+        ],
+        challenges: [
+          "对批评敏感",
+          "容易忽略自身需求",
+          "害怕冲突"
+        ]
+      },
+      ENFJ: {
+        name: "ENFJ - 富有魅力的引导者",
+        description: "善于激励他人，关注他人感受，具有领导才能。",
+        features: [
+          "感染力强",
+          "善于沟通",
+          "关注团队氛围"
+        ],
+        challenges: [
+          "对自我要求高",
+          "容易忽略自身需求",
+          "过于理想化"
+        ]
+      },
+      ENTJ: {
+        name: "ENTJ - 果断的领导者",
+        description: "目标导向，决策果断，善于规划和管理。",
+        features: [
+          "有领导力",
+          "善于战略规划",
+          "执行力强"
+        ],
+        challenges: [
+          "有时显得强势",
+          "忽视情感需求",
+          "不耐烦"
+        ]
+      }
+    };
+
+    // 读取测试结果
+    const mbtiType = localStorage.getItem('mbtiType');
+    const resultBlock = document.getElementById('result-block');
+
+    if (mbtiType && mbtiProfiles[mbtiType]) {
+      const profile = mbtiProfiles[mbtiType];
+      resultBlock.innerHTML = `
+        <h2 class="text-2xl font-bold mb-2 text-green-600">${profile.name}</h2>
+        <p class="mb-6 text-gray-700">${profile.description}</p>
+        <h3 class="font-bold text-lg mt-4 mb-2 text-gray-800">主要特点</h3>
+        <ul class="list-disc list-inside text-gray-700 mb-4">
+          ${profile.features.map(f => `<li>${f}</li>`).join('')}
+        </ul>
+        <h3 class="font-bold text-lg mt-6 mb-2 text-gray-800">潜在挑战</h3>
+        <ul class="list-disc list-inside text-gray-700">
+          ${profile.challenges.map(f => `<li>${f}</li>`).join('')}
+        </ul>
+      `;
+    } else {
+      resultBlock.innerHTML = `<p class="text-red-600 text-center">未检测到有效的测试结果，请先完成测试。</p>`;
+    }
+
+    // 保存为PDF功能
+    document.getElementById('download-pdf').onclick = function () {
+      window.print();
+    };
+
+    // 微信分享
+    document.getElementById('share-wechat').onclick = function () {
+      alert('请点击浏览器底部的“···”菜单，选择“分享到微信”');
+      // 或集成微信JSSDK等更高级功能
+    };
+
+    // 微博分享
+    document.getElementById('share-weibo').onclick = function () {
+      const shareTitle = `我的MBTI基础测试结果：${mbtiType}，快来测一测你是什么类型吧！`;
+      const shareUrl = location.origin + location.pathname;
+      const shareText = encodeURIComponent(shareTitle + ' ' + shareUrl);
+      const weiboUrl = `https://service.weibo.com/share/share.php?title=${shareText}`;
+      window.open(weiboUrl, '_blank');
+    };
+  </script>
+</body>
+</html>
