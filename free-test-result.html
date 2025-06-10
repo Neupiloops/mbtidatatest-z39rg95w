@@ -63,13 +63,13 @@
       <!-- 测试类型与描述将在脚本中自动填充 -->
     </div>
     <div class="mt-8 flex flex-col items-center gap-4">
-      <a href="free-test.html" class="inline-block w-full sm:w-auto text-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow transition">重新测试</a>
+      <a href="free-test.html" class="inline-block w-full sm:w-auto text-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow transition">重新测试</a>
       <div class="w-full sm:w-auto flex flex-col items-center gap-2">
-        <div class="text-gray-500 text-sm mb-2">想获得更精准、更详细、更专业，更有效的人格分析和建议？</div>
-        <a href="paid-test.html" class="inline-block w-full sm:w-auto text-center px-6 py-3 bg-gradient-to-r from-orange-400 via-orange-500 to-pink-500 hover:from-orange-500 hover:to-pink-600 text-white font-bold rounded-lg shadow transition">
-          升级进入专业付费版MBTI测试
+        <div class="text-gray-500 text-sm mb-2">想获得更精准、更详细、更专业更有效的人格分析和建议？</div>
+        <a href="paid-test.html" class="inline-block w-full sm:w-auto text-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow transition">
+          升级进入专业版MBTI测试
         </a>
-        <span class="text-xs text-gray-400 mt-1">专业付费版包含100题深度测评及个性化成长建议</span>
+        <span class="text-xs text-gray-400 mt-1">专业版包含100题深度测评及个性化成长建议</span>
       </div>
     </div>
   </div>
@@ -353,7 +353,23 @@
 
     // 微信分享
     document.getElementById('share-wechat').onclick = function () {
-      alert('请点击浏览器底部的“···”菜单，选择“分享到微信”');
+      // 弹出一个自定义的浮层而不是alert
+      let wxDialog = document.createElement('div');
+      wxDialog.innerHTML = `
+        <div id="wx-modal-mask" style="position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;">
+          <div style="background:white;border-radius:1rem;box-shadow:0 2px 24px #0002;padding:2rem 1.5rem;max-width:90vw;text-align:center;">
+            <div class="mb-4">
+              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/wechat.svg" alt="微信" style="width:44px;height:44px;margin-bottom:1rem;">
+            </div>
+            <div class="text-lg text-gray-700 mb-4">请点击浏览器底部的“···”菜单，选择“分享到微信”</div>
+            <button id="wx-modal-close" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold transition">我知道了</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(wxDialog);
+      document.getElementById('wx-modal-close').onclick = function() {
+        document.getElementById('wx-modal-mask').parentNode.remove();
+      };
     };
 
     // 微博分享
